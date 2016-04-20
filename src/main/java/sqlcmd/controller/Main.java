@@ -8,7 +8,7 @@ import sqlcmd.view.View;
 /**
  * Created by indigo on 25.08.2015.
  */
-public class Main {
+public class Main {     // connect|sqlcmd|postgres|postgres
 
     public static void main(String[] args) {
         View view = new Console();

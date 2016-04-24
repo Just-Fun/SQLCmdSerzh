@@ -18,10 +18,12 @@ public class Main {
         System.out.println(Arrays.toString(set.getNames()));
         System.out.println(Arrays.toString(set.getValues()));*/
 
-        String string = "Petia";
-        boolean b = string.startsWith("Pe");
-        boolean b1 = string.startsWith("Pe1");
-        System.out.println(b);
-        System.out.println(b1);
+        String s = "Vasia123";
+        s = s.format("%s, = :", s);
+        System.out.println(s);
+
+
+
+
     }
 }

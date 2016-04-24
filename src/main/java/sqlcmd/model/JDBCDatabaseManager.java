@@ -112,15 +112,6 @@ public class JDBCDatabaseManager implements DatabaseManager {
         }
     }
 
-    private String getValuesFormated(DataSet input, String format) {
-        String values = "";
-        for (Object value: input.getValues()) {
-            values += String.format(format, value);
-        }
-        values = values.substring(0, values.length() - 1);
-        return values;
-    }
-
     @Override
     public void update(String tableName, int id, DataSet newValue) {
         String tableNames = getNameFormated(newValue, "%s = ?,");
@@ -171,5 +162,14 @@ public class JDBCDatabaseManager implements DatabaseManager {
         }
         string = string.substring(0, string.length() - 1);
         return string;
+    }
+
+    private String getValuesFormated(DataSet input, String format) {
+        String values = "";
+        for (Object value: input.getValues()) {
+            values += String.format(format, value);
+        }
+        values = values.substring(0, values.length() - 1);
+        return values;
     }
 }

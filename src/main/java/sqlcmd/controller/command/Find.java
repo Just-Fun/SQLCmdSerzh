@@ -34,6 +34,16 @@ public class Find implements Command {
         printTable(tableData);
     }
 
+    private void printHeader(String[] tableColumns) {
+        String result = "|";
+        for (String name : tableColumns) {
+            result += name + "|";
+        }
+        view.write("--------------------");
+        view.write(result);
+        view.write("--------------------");
+    }
+
     private void printTable(DataSet[] tableData) {
         for (DataSet row : tableData) {
             printRow(row);
@@ -48,15 +58,5 @@ public class Find implements Command {
             result += value + "|";
         }
         view.write(result);
-    }
-
-    private void printHeader(String[] tableColumns) {
-        String result = "|";
-        for (String name : tableColumns) {
-            result += name + "|";
-        }
-        view.write("--------------------");
-        view.write(result);
-        view.write("--------------------");
     }
 }

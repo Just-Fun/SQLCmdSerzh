@@ -6,7 +6,7 @@ import java.util.Scanner;
 /**
  * Created by serzh on 2/2/16.
  */
-public class Main3 {
+public class Main3 { // не помню что это за...
     public static void main(String[] args) throws Exception { //C:\Windows\system32\cmd.exe
         ProcessBuilder pb = new ProcessBuilder("/usr/bin/mate-terminal"); // /usr/bin/mate-terminal
         pb.redirectErrorStream(true);

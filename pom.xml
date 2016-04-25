@@ -26,6 +26,12 @@
             <artifactId>junit</artifactId>
             <version>4.12</version>
         </dependency>
+        <!-- Table format -->
+        <dependency>
+            <groupId>org.ow2.sirocco</groupId>
+            <artifactId>sirocco-text-table-formatter</artifactId>
+            <version>1.0</version>
+        </dependency>
     </dependencies>
 
 </project>

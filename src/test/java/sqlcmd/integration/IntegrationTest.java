@@ -20,6 +20,8 @@ public class IntegrationTest {
     private ConfigurableInputStream in;
     private ByteArrayOutputStream out;
     private DatabaseManager databaseManager;
+    private final String pleaseConnect = "Введите имя базы данных, имя пользователя и пароль в формате: " +
+            "connect|database|userName|password\n";
 
     @Before
     public void setup() {
@@ -41,7 +43,7 @@ public class IntegrationTest {
         Main.main(new String[0]);
 
         // then
-        assertEquals("Введи, пожалуйста имя базы данных, имя пользователя и пароль в формате: connect|database|userName|password\n" +
+        assertEquals(pleaseConnect +
                 // help
                 "Существующие команды:\n" +
                 "\tconnect|databaseName|userName|password\n" +
@@ -82,7 +84,7 @@ public class IntegrationTest {
         Main.main(new String[0]);
 
         // then
-        assertEquals("Введи, пожалуйста имя базы данных, имя пользователя и пароль в формате: connect|database|userName|password\n" +
+        assertEquals(pleaseConnect +
                 // exit
                 "До скорой встречи!\n", getData());
     }
@@ -97,7 +99,7 @@ public class IntegrationTest {
         Main.main(new String[0]);
 
         // then
-        assertEquals("Введи, пожалуйста имя базы данных, имя пользователя и пароль в формате: connect|database|userName|password\n" +
+        assertEquals(pleaseConnect +
                 // list
                 "Вы не можете пользоваться командой 'list' пока не подключитесь с помощью комманды connect|databaseName|userName|password\n" +
                 "Введи команду (или help для помощи):\n" +
@@ -115,7 +117,7 @@ public class IntegrationTest {
         Main.main(new String[0]);
 
         // then
-        assertEquals("Введи, пожалуйста имя базы данных, имя пользователя и пароль в формате: connect|database|userName|password\n" +
+        assertEquals(pleaseConnect +
                 // find|user
                 "Вы не можете пользоваться командой 'find|user' пока не подключитесь с помощью комманды connect|databaseName|userName|password\n" +
                 "Введи команду (или help для помощи):\n" +
@@ -133,7 +135,7 @@ public class IntegrationTest {
         Main.main(new String[0]);
 
         // then
-        assertEquals("Введи, пожалуйста имя базы данных, имя пользователя и пароль в формате: connect|database|userName|password\n" +
+        assertEquals(pleaseConnect +
                 // unsupported
                 "Вы не можете пользоваться командой 'unsupported' пока не подключитесь с помощью комманды connect|databaseName|userName|password\n" +
                 "Введи команду (или help для помощи):\n" +
@@ -152,7 +154,7 @@ public class IntegrationTest {
         Main.main(new String[0]);
 
         // then
-        assertEquals("Введи, пожалуйста имя базы данных, имя пользователя и пароль в формате: connect|database|userName|password\n" +
+        assertEquals(pleaseConnect +
                 // connect
                 "Успех!\n" +
                 "Введи команду (или help для помощи):\n" +
@@ -174,7 +176,7 @@ public class IntegrationTest {
         Main.main(new String[0]);
 
         // then
-        assertEquals("Введи, пожалуйста имя базы данных, имя пользователя и пароль в формате: connect|database|userName|password\n" +
+        assertEquals(pleaseConnect +
                 // connect
                 "Успех!\n" +
                 "Введи команду (или help для помощи):\n" +
@@ -196,13 +198,14 @@ public class IntegrationTest {
         Main.main(new String[0]);
 
         // then
-        assertEquals("Введи, пожалуйста имя базы данных, имя пользователя и пароль в формате: connect|database|userName|password\n" +
+        assertEquals(pleaseConnect +
                 "Успех!\n" +
                 "Введи команду (или help для помощи):\n" +
-                "--------------------\n" +
+                "+----+--------+--+\n" +
                 "|name|password|id|\n" +
-                "--------------------\n" +
-                "--------------------\n" +
+                "+----+--------+--+\n" +
+                "|Pup |pass2   |13|\n" +
+                "+----+--------+--+\n" +
                 "Введи команду (или help для помощи):\n" +
                 "До скорой встречи!\n", getData());
     }
@@ -220,7 +223,7 @@ public class IntegrationTest {
         Main.main(new String[0]);
 
         // then
-        assertEquals("Введи, пожалуйста имя базы данных, имя пользователя и пароль в формате: connect|database|userName|password\n" +
+        assertEquals(pleaseConnect +
                 // connect sqlcmd
                 "Успех!\n" +
                 "Введи команду (или help для помощи):\n" +
@@ -247,7 +250,7 @@ public class IntegrationTest {
         Main.main(new String[0]);
 
         // then
-        assertEquals("Введи, пожалуйста имя базы данных, имя пользователя и пароль в формате: connect|database|userName|password\n" +
+        assertEquals(pleaseConnect +
                 // connect sqlcmd
                 "Неудача! по причине: Неверно количество параметров разделенных знаком '|', ожидается 4, но есть: 2\n" +
                 "Повтори попытку.\n" +
@@ -286,7 +289,7 @@ public class IntegrationTest {
         Main.main(new String[0]);
 
         // then
-        assertEquals("Введи, пожалуйста имя базы данных, имя пользователя и пароль в формате: connect|database|userName|password\n" +
+        assertEquals(pleaseConnect +
                 // connect
                 "Успех!\n" +
                 "Введи команду (или help для помощи):\n" +
@@ -300,12 +303,13 @@ public class IntegrationTest {
                 "Запись {names:[id, name, password], values:[14, Eva, +++++]} была успешно создана в таблице 'user'.\n" +
                 "Введи команду (или help для помощи):\n" +
                 // find|user
-                "--------------------\n" +
-                "|name|password|id|\n" +
-                "--------------------\n" +
-                "|Stiven|*****|13|\n" +
-                "|Eva|+++++|14|\n" +
-                "--------------------\n" +
+                "+------+--------+--+\n" +
+                "|name  |password|id|\n" +
+                "+------+--------+--+\n" +
+                "|Stiven|*****   |13|\n" +
+                "+------+--------+--+\n" +
+                "|Eva   |+++++   |14|\n" +
+                "+------+--------+--+\n" +
                 "Введи команду (или help для помощи):\n" +
                 // exit
                 "До скорой встречи!\n", getData());
@@ -322,7 +326,8 @@ public class IntegrationTest {
         Main.main(new String[0]);
 
         // then
-        assertEquals("Введи, пожалуйста имя базы данных, имя пользователя и пароль в формате: connect|database|userName|password\n" +
+
+        assertEquals(pleaseConnect +
                 // connect
                 "Успех!\n" +
                 "Введи команду (или help для помощи):\n" +
@@ -345,7 +350,7 @@ public class IntegrationTest {
         Main.main(new String[0]);
 
         // then
-        assertEquals("Введи, пожалуйста имя базы данных, имя пользователя и пароль в формате: connect|database|userName|password\n" +
+        assertEquals(pleaseConnect +
                 // connect
                 "Успех!\n" +
                 "Введи команду (или help для помощи):\n" +

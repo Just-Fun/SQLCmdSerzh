@@ -12,11 +12,13 @@ import sqlcmd.view.View;
 /**
  * Created by indigo on 25.08.2015.
  */
-public class Main {     // connect|sqlcmd|postgres|postgres
+public class Main {
 
     public static void main(String[] args) {
+        // Стащил у Жени, надо спросить что это, без этих строк выкидывало какую-то...
         BasicConfigurator.configure();
         Logger.getRootLogger().setLevel(Level.OFF); //Disable log4j from text table formatter
+
         View view = new Console();
         DatabaseManager manager = new JDBCDatabaseManager();
 

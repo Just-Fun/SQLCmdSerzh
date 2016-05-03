@@ -276,6 +276,7 @@ public class IntegrationTest {
 //        user2.put("password", "+++++");
 //        databaseManager.create("user", user2);
 
+
         in.add("connect|sqlcmd|postgres|postgres");
         in.add("clear|user");
         in.add("create|user|id|13|name|Stiven|password|*****");

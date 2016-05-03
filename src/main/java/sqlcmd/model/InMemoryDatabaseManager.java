@@ -1,6 +1,9 @@
 package sqlcmd.model;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * Created by indigo on 25.08.2015.
@@ -12,17 +15,22 @@ public class InMemoryDatabaseManager implements DatabaseManager {
     private DataSet[] data = new DataSet[1000];
     private int freeIndex = 0;
 
-    @Override
+    /*@Override
     public DataSet[] getTableData(String tableName) {
         validateTable(tableName);
 
         return Arrays.copyOf(data, freeIndex);
-    }
+    }*/
 
     private void validateTable(String tableName) {
         if (!"user".equals(tableName)) {
             throw new UnsupportedOperationException("Only for 'user' table, but you try to work with: " + tableName);
         }
+    }
+
+    @Override
+    public List<Map<String, Object>> getTableData(String tableName) {
+        return null;
     }
 
     @Override
@@ -73,9 +81,14 @@ public class InMemoryDatabaseManager implements DatabaseManager {
     }
 
     @Override
+    public Set<String> getTableColumns(String tableName) {
+        return null;
+    }
+
+    /*@Override
     public String[] getTableColumns(String tableName) {
         return new String[] {"name", "password", "id"};
-    }
+    }*/
 
     @Override
     public boolean isConnected() {

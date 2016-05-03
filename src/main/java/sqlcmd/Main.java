@@ -1,5 +1,8 @@
 package sqlcmd;
 
+import org.apache.log4j.BasicConfigurator;
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
 import sqlcmd.controller.MainController;
 import sqlcmd.model.DatabaseManager;
 import sqlcmd.model.JDBCDatabaseManager;
@@ -12,6 +15,8 @@ import sqlcmd.view.View;
 public class Main {     // connect|sqlcmd|postgres|postgres
 
     public static void main(String[] args) {
+        BasicConfigurator.configure();
+        Logger.getRootLogger().setLevel(Level.OFF); //Disable log4j from text table formatter
         View view = new Console();
         DatabaseManager manager = new JDBCDatabaseManager();
 

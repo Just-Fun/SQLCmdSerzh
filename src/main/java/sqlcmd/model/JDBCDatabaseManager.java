@@ -1,7 +1,7 @@
 package sqlcmd.model;
 
 import java.sql.*;
-import java.util.Arrays;
+import java.util.*;
 
 /**
  * Created by indigo on 21.08.2015.
@@ -31,25 +31,28 @@ public class JDBCDatabaseManager implements DatabaseManager {
     }
 
     @Override
-    public DataSet[] getTableData(String tableName) {
-        int size = getSize(tableName);
+    public List<Map<String, Object>> getTableData(String tableName) {
+//        int size = getSize(tableName);
 
         try (Statement stmt = connection.createStatement();
              ResultSet rs = stmt.executeQuery("SELECT * FROM public." + tableName)) {
             ResultSetMetaData rsmd = rs.getMetaData();
-            DataSet[] result = new DataSet[size];
-            int index = 0;
+            List<Map<String, Object>> result = new LinkedList<>();
+//            DataSet[] result = new DataSet[size];
+//            int index = 0;
             while (rs.next()) {
-                DataSet dataSet = new DataSet();
-                result[index++] = dataSet;
+                Map<String, Object> data = new LinkedHashMap<>();
+//                DataSet dataSet = new DataSet();
+//                result[index++] = dataSet;
                 for (int i = 1; i <= rsmd.getColumnCount(); i++) {
-                    dataSet.put(rsmd.getColumnName(i), rs.getObject(i));
+                    data.put(rsmd.getColumnName(i), rs.getObject(i));
                 }
+                result.add(data);
             }
             return result;
         } catch (SQLException e) {
             e.printStackTrace();
-            return new DataSet[0];
+            return new LinkedList<>();
         }
     }
 
@@ -147,19 +150,21 @@ public class JDBCDatabaseManager implements DatabaseManager {
     }
 
     @Override
-    public String[] getTableColumns(String tableName) {
+    public Set<String> getTableColumns(String tableName) {
         try (Statement stmt = connection.createStatement();
-             ResultSet rs = stmt.executeQuery("SELECT * FROM information_schema.columns WHERE table_schema = 'public' AND table_name = '" + tableName + "'")) {
-            String[] tables = new String[100];
-            int index = 0;
+             ResultSet rs = stmt.executeQuery("SELECT * FROM information_schema.columns WHERE " +
+                     "table_schema = 'public' AND table_name = '" + tableName + "'")) {
+            Set<String> tables = new LinkedHashSet<>();
+//            int index = 0;
             while (rs.next()) {
-                tables[index++] = rs.getString("column_name");
+                tables.add(rs.getString("column_name"));
             }
-            tables = Arrays.copyOf(tables, index, String[].class);
+//            tables = Arrays.copyOf(tables, index, String[].class);
             return tables;
         } catch (SQLException e) {
             e.printStackTrace();
-            return new String[0];
+//            return new String[0];
+        return new LinkedHashSet<>();
         }
     }
 

@@ -2,7 +2,10 @@ package sqlcmd.controller.command;
 
 import sqlcmd.model.DataSet;
 import sqlcmd.model.DatabaseManager;
+import sqlcmd.model.TableConstructor;
 import sqlcmd.view.View;
+
+import java.util.*;
 
 /**
  * Created by indigo on 28.08.2015.
@@ -27,14 +30,17 @@ public class Find implements Command {
         String[] data = command.split("\\|");
         String tableName = data[1]; // TODO to add validation
 
-        String[] tableColumns = manager.getTableColumns(tableName);
-        printHeader(tableColumns);
 
-        DataSet[] tableData = manager.getTableData(tableName);
-        printTable(tableData);
+        Set<String> tableColumns = manager.getTableColumns(tableName);
+//        printHeader(tableColumns);
+
+        java.util.List<Map<String, Object>> tableData = manager.getTableData(tableName);
+//        printTable(tableData);
+        TableConstructor constructor = new TableConstructor(tableColumns, tableData);
+        view.write(constructor.getTableString());
     }
 
-    private void printHeader(String[] tableColumns) {
+    /*private void printHeader(String[] tableColumns) {
         String result = "|";
         for (String name : tableColumns) {
             result += name + "|";
@@ -58,5 +64,5 @@ public class Find implements Command {
             result += value + "|";
         }
         view.write(result);
+    }*/
     }
-}

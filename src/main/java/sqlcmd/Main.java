@@ -1,5 +1,6 @@
-package sqlcmd.controller;
+package sqlcmd;
 
+import sqlcmd.controller.MainController;
 import sqlcmd.model.DatabaseManager;
 import sqlcmd.model.JDBCDatabaseManager;
 import sqlcmd.view.Console;
@@ -16,5 +17,5 @@ public class Main {     // connect|sqlcmd|postgres|postgres
 
         MainController controller = new MainController(view, manager);
         controller.run();
-    }
+    } // connect|sqlcmd|postgres|postgres
 }

@@ -44,6 +44,16 @@ public class InMemoryDatabaseManager implements DatabaseManager {
     }
 
     @Override
+    public void createDatabase(String databaseName) {
+
+    }
+
+    @Override
+    public void createTable(String query) {
+
+    }
+
+    @Override
     public void create(String tableName, DataSet input) {
         validateTable(tableName);
 

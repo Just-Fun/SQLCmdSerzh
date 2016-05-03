@@ -13,6 +13,10 @@ public interface DatabaseManager {
 
     void clear(String tableName);
 
+    void createDatabase(String databaseName);
+
+    void createTable(String query);
+
     void create(String tableName, DataSet input);
 
     void update(String tableName, int id, DataSet newValue);

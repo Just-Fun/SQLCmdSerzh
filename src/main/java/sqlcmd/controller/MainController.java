@@ -36,7 +36,6 @@ public class MainController {
     }
 
     private void doWork() {
-        view.write("Привет юзер!");
         view.write("Введи, пожалуйста имя базы данных, имя пользователя и пароль в формате: connect|database|userName|password");
 
         while (true) {

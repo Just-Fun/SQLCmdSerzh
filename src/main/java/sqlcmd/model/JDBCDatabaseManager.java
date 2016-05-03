@@ -10,13 +10,32 @@ public class JDBCDatabaseManager implements DatabaseManager {
 
     private Connection connection;
 
+    @Override // try-with-resources statement ensures that each resource is closed at the end of the statement
+    public void connect(String database, String userName, String password) {
+        try {
+            Class.forName("org.postgresql.Driver");//грузим драйвер,  loads a class, including running its static initializers
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException("Please add dependency postgresql version 9.4.1207.jre7 to project.");
+        }
+        try {
+            if (connection != null) {
+                connection.close();
+            }
+            connection = DriverManager.getConnection( // коннектимся к базе
+                    "jdbc:postgresql://localhost:5432/" + database, userName, password);
+        } catch (SQLException e) {
+            connection = null;
+            throw new RuntimeException(
+                    String.format("Cant get connection for model:%s user:%s", database, userName), e);
+        }
+    }
+
     @Override
     public DataSet[] getTableData(String tableName) {
         int size = getSize(tableName);
 
         try (Statement stmt = connection.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM public." + tableName))
-        {
+             ResultSet rs = stmt.executeQuery("SELECT * FROM public." + tableName)) {
             ResultSetMetaData rsmd = rs.getMetaData();
             DataSet[] result = new DataSet[size];
             int index = 0;
@@ -36,8 +55,7 @@ public class JDBCDatabaseManager implements DatabaseManager {
 
     private int getSize(String tableName) {
         try (Statement stmt = connection.createStatement();
-             ResultSet rsCount = stmt.executeQuery("SELECT COUNT(*) FROM public." + tableName))
-        {
+             ResultSet rsCount = stmt.executeQuery("SELECT COUNT(*) FROM public." + tableName)) {
             rsCount.next();
             int size = rsCount.getInt(1);
             return size;
@@ -50,9 +68,8 @@ public class JDBCDatabaseManager implements DatabaseManager {
     @Override
     public String[] getTableNames() {
         try (Statement stmt = connection.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT table_name FROM information_schema.tables WHERE table_schema='public' " +
-                    "AND table_type='BASE TABLE'"))
-        {
+             ResultSet rs = stmt.executeQuery("SELECT table_name FROM information_schema.tables WHERE table_schema='public' " +
+                     "AND table_type='BASE TABLE'")) {
             String[] tables = new String[100];
             int index = 0;
             while (rs.next()) {
@@ -66,29 +83,6 @@ public class JDBCDatabaseManager implements DatabaseManager {
         }
     }
 
-    @Override // try-with-resources statement ensures that each resource is closed at the end of the statement
-    public void connect(String database, String userName, String password) {
-        try {
-            Class.forName("org.postgresql.Driver");//грузим драйвер,  loads a class, including running its static initializers
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException("Please add dependency postgresql version 9.4.1207.jre7 to project.", e);
-        }
-        try {
-            if (connection != null) {
-                connection.close();
-            }
-            connection = DriverManager.getConnection( // коннектимся к базе
-                    "jdbc:postgresql://localhost:5432/" + database, userName,
-                    password);
-        } catch (SQLException e) {
-            connection = null;
-            throw new RuntimeException(
-                    String.format("Cant get connection for model:%s user:%s",
-                            database, userName),
-                    e);
-        }
-    }
-
     @Override
     public void clear(String tableName) {
         try (Statement stmt = connection.createStatement()) {
@@ -97,6 +91,8 @@ public class JDBCDatabaseManager implements DatabaseManager {
             e.printStackTrace();
         }
     }
+
+
 
     @Override
     public void create(String tableName, DataSet input) {
@@ -107,6 +103,24 @@ public class JDBCDatabaseManager implements DatabaseManager {
 
             stmt.executeUpdate("INSERT INTO public." + tableName + " (" + tableNames + ")" +
                     "VALUES (" + values + ")");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override // new
+    public void createDatabase(String databaseName) {
+        try (Statement statement = connection.createStatement()) {
+            statement.executeUpdate("CREATE DATABASE " + databaseName);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override // new
+    public void createTable(String query) {
+        try (Statement statement = connection.createStatement()) {
+            statement.executeUpdate("CREATE TABLE IF NOT EXISTS " + query);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -135,8 +149,7 @@ public class JDBCDatabaseManager implements DatabaseManager {
     @Override
     public String[] getTableColumns(String tableName) {
         try (Statement stmt = connection.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM information_schema.columns WHERE table_schema = 'public' AND table_name = '" + tableName + "'"))
-        {
+             ResultSet rs = stmt.executeQuery("SELECT * FROM information_schema.columns WHERE table_schema = 'public' AND table_name = '" + tableName + "'")) {
             String[] tables = new String[100];
             int index = 0;
             while (rs.next()) {
@@ -166,7 +179,7 @@ public class JDBCDatabaseManager implements DatabaseManager {
 
     private String getValuesFormated(DataSet input, String format) {
         String values = "";
-        for (Object value: input.getValues()) {
+        for (Object value : input.getValues()) {
             values += String.format(format, value);
         }
         values = values.substring(0, values.length() - 1);

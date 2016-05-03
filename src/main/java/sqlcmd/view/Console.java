@@ -14,6 +14,7 @@ public class Console implements View {
 
     public String read() {
         try {
+//            System.out.print(">> ");
             Scanner scanner = new Scanner(System.in);
             return scanner.nextLine();
         } catch (NoSuchElementException e) {

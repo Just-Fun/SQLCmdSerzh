@@ -1,5 +1,8 @@
 package sqlcmd.controller.command;
 
+import org.apache.log4j.BasicConfigurator;
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -7,6 +10,9 @@ import org.mockito.ArgumentCaptor;
 import sqlcmd.model.DataSet;
 import sqlcmd.model.DatabaseManager;
 import sqlcmd.view.View;
+
+import java.util.*;
+import java.util.List;
 
 import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertEquals;
@@ -27,39 +33,42 @@ public class FindTest {
         manager = mock(DatabaseManager.class);
         view = mock(View.class);
         command = new Find(manager, view);
+        BasicConfigurator.configure();
+        Logger.getRootLogger().setLevel(Level.OFF); //Disable log4j from text table formatter
     }
 
     @Test
-    @Ignore
     public void testPrintTableData() {
         // given
-//        when(manager.getTableColumns("user"))
-//                .thenReturn(new String[] {"id", "name", "password"});
+        when(manager.getTableColumns("user")).thenReturn(new LinkedHashSet<>(Arrays.asList("id", "name", "password")));
 
-        DataSet user1 = new DataSet();
+        Map<String, Object> user1 = new HashMap<>();
         user1.put("id", 12);
         user1.put("name", "Stiven");
         user1.put("password", "*****");
 
-        DataSet user2 = new DataSet();
+        Map<String, Object> user2 = new HashMap<>();
         user2.put("id", 13);
         user2.put("name", "Eva");
         user2.put("password", "+++++");
 
-        DataSet[] data = new DataSet[] {user1, user2};
-        /*when(manager.getTableData("user"))
+        List<Map<String, Object>> data = new LinkedList<>();
+        data.add(user1);
+        data.add(user2);
+
+        when(manager.getTableData("user"))
                 .thenReturn(data);
-*/
         // when
         command.process("find|user");
 
         // then
-        shouldPrint("[--------------------, " +
-                    "|id|name|password|, " +
-                    "--------------------, " +
-                    "|12|Stiven|*****|, " +
-                    "|13|Eva|+++++|, " +
-                    "--------------------]");
+        shouldPrint("[+-----+------+--------+\n" +
+                "|id   |name  |password|\n" +
+                "+-----+------+--------+\n" +
+                "|*****|Stiven|12      |\n" +
+                "+-----+------+--------+\n" +
+                "|+++++|Eva   |13      |\n" +
+                "+-----+------+--------+]");
     }
 
     private void shouldPrint(String expected) {
@@ -96,49 +105,48 @@ public class FindTest {
     }
 
     @Test
-    @Ignore
     public void testPrintEmptyTableData() {
         // given
-       /* when(manager.getTableColumns("user"))
-                .thenReturn(new String[]{"id", "name", "password"});
+        when(manager.getTableColumns("user")).thenReturn(new LinkedHashSet<>(Arrays.asList("id", "name", "password")));
 
-        when(manager.getTableData("user")).thenReturn(new DataSet[0]);*/
+        when(manager.getTableData("user")).thenReturn(new LinkedList<Map<String, Object>>());
 
         // when
         command.process("find|user");
 
         // then
-        shouldPrint("[--------------------, " +
-                "|id|name|password|, " +
-                "--------------------, " +
-                "--------------------]");
+        shouldPrint("[+--+----+--------+\n" +
+                    "|id|name|password|\n" +
+                    "+--+----+--------+]");
     }
 
     @Test
-    @Ignore
     public void testPrintTableDataWithOneColumn() {
         // given
-        /*when(manager.getTableColumns("test"))
-                .thenReturn(new String[]{"id"});
-*/
-        DataSet user1 = new DataSet();
+        when(manager.getTableColumns("test")).thenReturn(new LinkedHashSet<>(Arrays.asList("id")));
+
+        Map<String, Object> user1 = new HashMap<>();
         user1.put("id", 12);
 
-        DataSet user2 = new DataSet();
+        Map<String, Object> user2 = new HashMap<>();
         user2.put("id", 13);
 
-        DataSet[] data = new DataSet[] {user1, user2};
-//        when(manager.getTableData("test")).thenReturn(data);
+        List<Map<String, Object>> data = new LinkedList<>();
+        data.add(user1);
+        data.add(user2);
+
+        when(manager.getTableData("test")).thenReturn(data);
 
         // when
         command.process("find|test");
 
         // then
-        shouldPrint("[--------------------, " +
-                "|id|, " +
-                "--------------------, " +
-                "|12|, " +
-                "|13|, " +
-                "--------------------]");
+        shouldPrint("[+--+\n" +
+                    "|id|\n" +
+                    "+--+\n" +
+                    "|12|\n" +
+                    "+--+\n" +
+                    "|13|\n" +
+                    "+--+]");
     }
 }

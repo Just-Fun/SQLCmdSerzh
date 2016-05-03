@@ -4,7 +4,7 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import java.util.Arrays;
+import java.util.*;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -12,17 +12,15 @@ import static org.junit.Assert.assertTrue;
 /**
  * Created by indigo on 21.08.2015.
  */
-public abstract class DatabaseManagerTest {
+public class DatabaseManagerTest {
 
     private DatabaseManager manager;
 
     @Before
     public void setup() {
-        manager = getDatabaseManager();
+        manager = new JDBCDatabaseManager();
         manager.connect("sqlcmd", "postgres", "postgres");
     }
-
-    public abstract DatabaseManager getDatabaseManager();
 
     @Test
     public void testGetAllTableNames() {
@@ -31,7 +29,6 @@ public abstract class DatabaseManagerTest {
     }
 
     @Test
-    @Ignore
     public void testGetTableData() {
         // given
         manager.clear("user");
@@ -44,12 +41,14 @@ public abstract class DatabaseManagerTest {
         manager.create("user", input);
 
         // then
-//        DataSet[] users = manager.getTableData("user");
-//        assertEquals(1, users.length);
-//
-//        DataSet user = users[0];
-//        assertEquals("[name, password, id]", Arrays.toString(user.getNames()));
-//        assertEquals("[Stiven, pass, 13]", Arrays.toString(user.getValues()));
+        List<Map<String, Object>> users = manager.getTableData("user");
+
+        assertEquals(1, users.size());
+
+        Map<String, Object> user = users.get(0);
+
+        assertEquals("[Stiven, pass, 13]", user.values().toString());
+        assertEquals("[name, password, id]", user.keySet().toString());
     }
 
     @Test
@@ -70,25 +69,24 @@ public abstract class DatabaseManagerTest {
         manager.update("user", 13, newValue);
 
         // then
-//        DataSet[] users = manager.getTableData("user");
-//        assertEquals(1, users.length);
-//
-//        DataSet user = users[0];
-//        assertEquals("[name, password, id]", Arrays.toString(user.getNames()));
-//        assertEquals("[Pup, pass2, 13]", Arrays.toString(user.getValues()));
+        List<Map<String, Object>> users = manager.getTableData("user");
+        assertEquals(1, users.size());
+
+        Map<String, Object> user = users.get(0);
+        assertEquals("[name, password, id]", user.keySet().toString());
+        assertEquals("[Pup, pass2, 13]", user.values().toString());
     }
 
     @Test
-    @Ignore
     public void testGetColumnNames() {
         // given
         manager.clear("user");
 
         // when
-//        String[] columnNames = manager.getTableColumns("user");
+        Set<String> columnNames = manager.getTableColumns("user");
 
         // then
-//        assertEquals("[name, password, id]", Arrays.toString(columnNames));
+        assertEquals("[name, password, id]", columnNames.toString());
     }
 
     @Test

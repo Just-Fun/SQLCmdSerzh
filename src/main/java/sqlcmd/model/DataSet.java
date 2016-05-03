@@ -1,6 +1,9 @@
 package sqlcmd.model;
 
 import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by indigo on 21.08.2015.
@@ -26,6 +29,7 @@ public class DataSet {
     }
 
     public Data[] data = new Data[100]; // TODO remove magic number 100
+//    public List<Map<String, Object>> data1 = new LinkedList<>();
     public int freeIndex = 0;
 
     public void put(String name, Object value) {
@@ -38,6 +42,17 @@ public class DataSet {
 
         data[freeIndex++] = new Data(name, value);
     }
+
+    /*public void put(String name, Object value) {
+        for (int index = 0; index < freeIndex; index++) {
+            if (data[index].getName().equals(name)) {
+                data[index].value = value;
+                return;
+            }
+        }
+
+        data[freeIndex++] = new Data(name, value);
+    }*/
 
     public Object[] getValues() {
         Object[] result = new Object[freeIndex];

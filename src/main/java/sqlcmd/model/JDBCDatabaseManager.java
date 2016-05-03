@@ -66,18 +66,18 @@ public class JDBCDatabaseManager implements DatabaseManager {
         }
     }
 
-    @Override
+    @Override // try-with-resources statement ensures that each resource is closed at the end of the statement
     public void connect(String database, String userName, String password) {
         try {
-            Class.forName("org.postgresql.Driver");
+            Class.forName("org.postgresql.Driver");//грузим драйвер,  loads a class, including running its static initializers
         } catch (ClassNotFoundException e) {
-            throw new RuntimeException("Please add jdbc jar to project.", e);
+            throw new RuntimeException("Please add dependency postgresql version 9.4.1207.jre7 to project.", e);
         }
         try {
             if (connection != null) {
                 connection.close();
             }
-            connection = DriverManager.getConnection(
+            connection = DriverManager.getConnection( // коннектимся к базе
                     "jdbc:postgresql://localhost:5432/" + database, userName,
                     password);
         } catch (SQLException e) {

@@ -98,7 +98,7 @@ public class JDBCDatabaseManager implements DatabaseManager {
 
 
     @Override
-    public void create(String tableName, DataSet input) {
+    public void insert(String tableName, DataSet input) {
         try (Statement stmt = connection.createStatement()) {
 
             String tableNames = getNameFormated(input, "%s,");

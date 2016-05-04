@@ -52,7 +52,7 @@ public class IntegrationTest {
                 "\t\tдля получения списка всех таблиц базы, к которой подключились\n" +
                 "\tclear|tableName\n" +
                 "\t\tдля очистки всей таблицы\n" +
-                "\tcreate|tableName|column1|value1|column2|value2|...|columnN|valueN\n" +
+                "\tinsert|tableName|column1|value1|column2|value2|...|columnN|valueN\n" +
                 "\t\tдля создания записи в таблице\n" +
                 "\tfind|tableName\n" +
                 "\t\tдля получения содержимого таблицы 'tableName'\n" +
@@ -268,19 +268,19 @@ public class IntegrationTest {
 //        user1.put("id", 13);
 //        user1.put("name", "Stiven");
 //        user1.put("password", "*****");
-//        databaseManager.create("user", user1);
+//        databaseManager.insert("user", user1);
 //
 //        DataSet user2 = new DataSet();
 //        user2.put("id", 14);
 //        user2.put("name", "Eva");
 //        user2.put("password", "+++++");
-//        databaseManager.create("user", user2);
+//        databaseManager.insert("user", user2);
 
 
         in.add("connect|sqlcmd|postgres|postgres");
         in.add("clear|user");
-        in.add("create|user|id|13|name|Stiven|password|*****");
-        in.add("create|user|id|14|name|Eva|password|+++++");
+        in.add("insert|user|id|13|name|Stiven|password|*****");
+        in.add("insert|user|id|14|name|Eva|password|+++++");
         in.add("find|user");
         in.add("exit");
 
@@ -295,10 +295,10 @@ public class IntegrationTest {
                 // clear|user
                 "Таблица user была успешно очищена.\n" +
                 "Введи команду (или help для помощи):\n" +
-                // create|user|id|13|name|Stiven|password|*****
+                // insert|user|id|13|name|Stiven|password|*****
                 "Запись {names:[id, name, password], values:[13, Stiven, *****]} была успешно создана в таблице 'user'.\n" +
                 "Введи команду (или help для помощи):\n" +
-                // create|user|id|14|name|Eva|password|+++++
+                // insert|user|id|14|name|Eva|password|+++++
                 "Запись {names:[id, name, password], values:[14, Eva, +++++]} была успешно создана в таблице 'user'.\n" +
                 "Введи команду (или help для помощи):\n" +
                 // find|user
@@ -342,7 +342,7 @@ public class IntegrationTest {
     public void testCreateWithErrors() {
         // given
         in.add("connect|sqlcmd|postgres|postgres");
-        in.add("create|user|error");
+        in.add("insert|user|error");
         in.add("exit");
 
         // when
@@ -353,8 +353,8 @@ public class IntegrationTest {
                 // connect
                 "Успех!\n" +
                 "Введи команду (или help для помощи):\n" +
-                // create|user|error
-                "Неудача! по причине: Должно быть четное количество параметров в формате 'create|tableName|column1|value1|column2|value2|...|columnN|valueN', а ты прислал: 'create|user|error'\n" +
+                // insert|user|error
+                "Неудача! по причине: Должно быть четное количество параметров в формате 'insert|tableName|column1|value1|column2|value2|...|columnN|valueN', а ты прислал: 'insert|user|error'\n" +
                 "Повтори попытку.\n" +
                 "Введи команду (или help для помощи):\n" +
                 // exit

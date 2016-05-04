@@ -21,7 +21,7 @@ public interface DatabaseManager {
 
     void createTable(String query);
 
-    void create(String tableName, DataSet input);
+    void insert(String tableName, DataSet input);
 
     void update(String tableName, int id, DataSet newValue);
 

@@ -31,7 +31,7 @@ public class Help implements Command {
         view.write("\tclear|tableName");
         view.write("\t\tдля очистки всей таблицы"); // TODO а если юзер случайно ввел команду? Может переспросить его?
 
-        view.write("\tcreate|tableName|column1|value1|column2|value2|...|columnN|valueN");
+        view.write("\tinsert|tableName|column1|value1|column2|value2|...|columnN|valueN");
         view.write("\t\tдля создания записи в таблице");
 
         view.write("\tfind|tableName");

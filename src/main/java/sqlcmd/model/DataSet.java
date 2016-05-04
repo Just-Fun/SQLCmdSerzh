@@ -21,18 +21,14 @@ public class DataSet {
         public String getName() {
             return name;
         }
-
         public Object getValue() {
             return value;
         }
-
-
     }
 
     // переписать все под List<Map<String, Object>>
 
     public List<Data> data = new LinkedList<>();
-
 
     public void put(String name, Object value) {
         for (Data d : data) {
@@ -84,7 +80,7 @@ public class DataSet {
                 "}";
     }
 
-   /* public Data[] data = new Data[100]; // TODO remove magic number 100
+   /* public Data[] data = new Data[100]; // TODO remove magic number 100 // уже :)
     public int freeIndex = 0;
 
     public void put(String name, Object value) {

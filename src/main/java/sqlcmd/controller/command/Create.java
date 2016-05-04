@@ -18,7 +18,7 @@ public class Create implements Command {
 
     @Override
     public boolean canProcess(String command) {
-        return command.startsWith("create|");
+        return command.startsWith("insert|");
     }
 
     @Override
@@ -27,7 +27,7 @@ public class Create implements Command {
         if (data.length % 2 != 0) {
             throw new IllegalArgumentException(String.format("Должно быть четное " +
                     "количество параметров в формате " +
-                    "'create|tableName|column1|value1|column2|value2|...|columnN|valueN', " +
+                    "'insert|tableName|column1|value1|column2|value2|...|columnN|valueN', " +
                     "а ты прислал: '%s'", command));
         }
 
@@ -40,7 +40,7 @@ public class Create implements Command {
 
             dataSet.put(columnName, value);
         }
-        manager.create(tableName, dataSet);
+        manager.insert(tableName, dataSet);
 
         view.write(String.format("Запись %s была успешно создана в таблице '%s'.", dataSet, tableName));
     }

@@ -1,7 +1,6 @@
 package sqlcmd.model;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.*;
@@ -38,7 +37,7 @@ public class DatabaseManagerTest {
         input.put("name", "Stiven");
         input.put("password", "pass");
         input.put("id", 13);
-        manager.create("user", input);
+        manager.insert("user", input);
 
         // then
         List<Map<String, Object>> users = manager.getTableData("user");
@@ -60,7 +59,7 @@ public class DatabaseManagerTest {
         input.put("name", "Stiven");
         input.put("password", "pass");
         input.put("id", 13);
-        manager.create("user", input);
+        manager.insert("user", input);
 
         // when
         DataSet newValue = new DataSet();

@@ -32,13 +32,13 @@ public class JDBCDatabaseManager implements DatabaseManager {
 
     @Override
     public List<Map<String, Object>> getTableData(String tableName) {
-//        int size = getSize(tableName);
+//        int getSize = getSize(tableName);
 
         try (Statement stmt = connection.createStatement();
              ResultSet rs = stmt.executeQuery("SELECT * FROM public." + tableName)) {
             ResultSetMetaData rsmd = rs.getMetaData();
             List<Map<String, Object>> result = new LinkedList<>();
-//            DataSet[] result = new DataSet[size];
+//            DataSet[] result = new DataSet[getSize];
 //            int index = 0;
             while (rs.next()) {
                 Map<String, Object> data = new LinkedHashMap<>();

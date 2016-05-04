@@ -31,18 +31,60 @@ public class DataSet {
 
     // переписать все под List<Map<String, Object>>
 
-    /*public List<Data> data = new LinkedList<>();
+    public List<Data> data = new LinkedList<>();
+
 
     public void put(String name, Object value) {
-        for (int index = 0; index < freeIndex; index++) {
-            if (data.get(index).getName().equals(name)) {
-                data.get(index).value = value;
+        for (Data d : data) {
+            if (d.getName().equals(name)) {
+                d.value = value;
                 return;
             }
         }
-    }*/
+        data.add(new Data(name, value));
+    }
 
-    public Data[] data = new Data[100]; // TODO remove magic number 100
+    public Object[] getValues() {
+        Object[] result = new Object[data.size()];
+            for (int i = 0; i < data.size(); i++) {
+                result[i] = data.get(i).getValue();
+            }
+        return result;
+    }
+
+    public String[] getNames() {
+        String[] result = new String[data.size()];
+        for (int i = 0; i < data.size(); i++) {
+            result[i] = data.get(i).getName();
+        }
+        return result;
+    }
+
+    public Object get(String name) {
+        for (int i = 0; i < data.size(); i++) {
+            if (data.get(i).getName().equals(name)) {
+                return data.get(i).getValue();
+            }
+        }
+        return null;
+    }
+
+    public void updateFrom(DataSet newValue) {
+        for (int index = 0; index < newValue.data.size(); index++) {
+            Data data = newValue.data.get(index); // не понял что тут натворил и что это, разобраться, если вообще этот метод надо..
+            this.put(data.name, data.value);
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "{" +
+                "names:" + Arrays.toString(getNames()) + ", " +
+                "values:" + Arrays.toString(getValues()) +
+                "}";
+    }
+
+   /* public Data[] data = new Data[100]; // TODO remove magic number 100
     public int freeIndex = 0;
 
     public void put(String name, Object value) {
@@ -94,5 +136,6 @@ public class DataSet {
                 "names:" + Arrays.toString(getNames()) + ", " +
                 "values:" + Arrays.toString(getValues()) +
                 "}";
-    }
+    }*/
+
 }

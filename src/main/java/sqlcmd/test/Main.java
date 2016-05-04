@@ -19,7 +19,10 @@ public class Main {
         System.out.println(Arrays.toString(set.getValues()));*/
 
         String s = "Vasia123";
-        s = s.format("%s, = :", s);
+        s = s.format("%s", s);
+        s += s.format("%s", s);
+        s += s.format("%s", s);
+//        s += s;
         System.out.println(s);
 
 

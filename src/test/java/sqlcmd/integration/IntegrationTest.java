@@ -16,15 +16,21 @@ import static org.junit.Assert.assertEquals;
  */
 public class IntegrationTest {
 
+    private DatabaseManager databaseManager;
     private ConfigurableInputStream in;
     private ByteArrayOutputStream out;
-    private DatabaseManager databaseManager;
+
+    private final static String DATABASE_NAME = "sqlcmd";
+    private final static String USER_NAME = "postgres";
+    private final static String DB_PASSWORD = "postgres";
+    String connect = "connect|"+ DATABASE_NAME + "|" + USER_NAME + "|" + DB_PASSWORD;
+
     private final String pleaseConnect = "Введите имя базы данных, имя пользователя и пароль в формате: " +
             "connect|database|userName|password\n";
 
     @BeforeClass
     public static void builtTheBase() {
-        BuiltDatabase.buildDatabase();
+        buildDatabase();
     }
 
     @Before
@@ -150,7 +156,8 @@ public class IntegrationTest {
     @Test
     public void testUnsupportedAfterConnect() {
         // given
-        in.add("connect|sqlcmd|postgres|postgres");
+
+        in.add(connect);
         in.add("unsupported");
         in.add("exit");
 
@@ -172,7 +179,7 @@ public class IntegrationTest {
     @Test
     public void testListAfterConnect() {
         // given
-        in.add("connect|sqlcmd|postgres|postgres");
+        in.add(connect);
         in.add("list");
         in.add("exit");
 
@@ -194,7 +201,7 @@ public class IntegrationTest {
     @Test
     public void testFindAfterConnect() {
         // given
-        in.add("connect|sqlcmd|postgres|postgres");
+        in.add(connect);
         in.add("find|users");
         in.add("exit");
 
@@ -215,7 +222,7 @@ public class IntegrationTest {
     @Test
     public void testConnectAfterConnect() {
         // given
-        in.add("connect|sqlcmd|postgres|postgres");
+        in.add(connect);
         in.add("list");
         in.add("connect|test|postgres|postgres");
         in.add("list");
@@ -245,7 +252,7 @@ public class IntegrationTest {
     @Test
     public void testConnectWithError() {
         // given
-        in.add("connect|sqlcmd");
+        in.add("connect|" + DATABASE_NAME);
         in.add("exit");
 
         // when
@@ -264,7 +271,7 @@ public class IntegrationTest {
     @Test
     public void testFindAfterConnect_withData() {
         // given
-        in.add("connect|sqlcmd|postgres|postgres");
+        in.add(connect);
         in.add("clear|users");
         in.add("insert|users|id|13|name|Stiven|password|*****");
         in.add("insert|users|id|14|name|Eva|password|+++++");
@@ -307,7 +314,7 @@ public class IntegrationTest {
     @Test
     public void testClearWithError() {
         // given
-        in.add("connect|sqlcmd|postgres|postgres");
+        in.add(connect);
         in.add("clear|sadfasd|fsf|fdsf");
         in.add("exit");
 
@@ -331,7 +338,7 @@ public class IntegrationTest {
     @Test
     public void testCreateWithErrors() {
         // given
-        in.add("connect|sqlcmd|postgres|postgres");
+        in.add(connect);
         in.add("insert|user|error");
         in.add("exit");
 
@@ -349,5 +356,18 @@ public class IntegrationTest {
                 "Введи команду (или help для помощи):\n" +
                 // exit
                 "До скорой встречи!\n", getData());
+    }
+
+    public static void buildDatabase() {
+        DatabaseManager manager = new JDBCDatabaseManager();
+        manager.connect("", "postgres", "postgres");
+        manager.dropDatabase(DATABASE_NAME);
+        manager.createDatabase(DATABASE_NAME);
+        manager.connect(DATABASE_NAME, USER_NAME, DB_PASSWORD);
+
+        manager.createTable("users" + " (name VARCHAR (50) UNIQUE NOT NULL," +
+                " password VARCHAR (50) NOT NULL," + " id SERIAL PRIMARY KEY)");
+        manager.createTable("test1 (id SERIAL PRIMARY KEY)");
+//        manager.disconnectFromDatabase2();
     }
 }

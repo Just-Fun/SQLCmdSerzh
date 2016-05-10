@@ -16,36 +16,40 @@ import static org.junit.Assert.assertEquals;
  */
 public class IntegrationTest {
 
-    private static ConfigurableInputStream in;
-    private static ByteArrayOutputStream out;
-    private static DatabaseManager databaseManager;
+    private ConfigurableInputStream in;
+    private ByteArrayOutputStream out;
+    private DatabaseManager databaseManager;
     private final String pleaseConnect = "Введите имя базы данных, имя пользователя и пароль в формате: " +
             "connect|database|userName|password\n";
 
     @BeforeClass
-    public static void setup() {
-        databaseManager = new JDBCDatabaseManager();
+    public static void builtTheBase() {
+        BuiltDatabase.buildDatabase();
+    }
+
+
+    @Before
+    public void setup() {
+//        BuiltDatabase.buildDatabase();
+       /* databaseManager = new JDBCDatabaseManager();
+
         databaseManager.connect("", "postgres", "postgres");
         databaseManager.dropDatabase("sqlcmd");
         databaseManager.createDatabase("sqlcmd");
-//        databaseManager.createDatabase("test1");
+        databaseManager.createDatabase("test1");
         databaseManager.connect("sqlcmd", "postgres", "postgres");
 
         databaseManager.createTable("test1 (id SERIAL PRIMARY KEY)");
         databaseManager.createTable("users" + " (name VARCHAR (50) UNIQUE NOT NULL," +
-                " password VARCHAR (50) NOT NULL," + "id SERIAL PRIMARY KEY,");
+                " password VARCHAR (50) NOT NULL," + "id SERIAL PRIMARY KEY");
+        databaseManager.disconnectFromDatabase2();*/
+
+        databaseManager = new JDBCDatabaseManager();
         out = new ByteArrayOutputStream();
         in = new ConfigurableInputStream();
 
         System.setIn(in);
         System.setOut(new PrintStream(out));
-    }
-
-    @AfterClass
-    public static void clearAfterAllTests() {
-//        manager.dropTable(TABLE_NAME);
-        databaseManager.disconnectFromDatabase();
-//        manager.dropDatabase(DATABASE_NAME);
     }
 
     @Test
@@ -196,7 +200,7 @@ public class IntegrationTest {
                 "Успех!\n" +
                 "Введи команду (или help для помощи):\n" +
                 // list
-                "[user, test]\n" +
+                "[users, test1]\n" +
                 "Введи команду (или help для помощи):\n" +
                 // exit
                 "До скорой встречи!\n", getData());
@@ -206,7 +210,7 @@ public class IntegrationTest {
     public void testFindAfterConnect() {
         // given
         in.add("connect|sqlcmd|postgres|postgres");
-        in.add("find|user");
+        in.add("find|users");
         in.add("exit");
 
         // when
@@ -241,7 +245,7 @@ public class IntegrationTest {
                 "Успех!\n" +
                 "Введи команду (или help для помощи):\n" +
                 // list
-                "[user, test]\n" +
+                "[users, test1]\n" +
                 "Введи команду (или help для помощи):\n" +
                 // connect test
                 "Успех!\n" +
@@ -276,10 +280,11 @@ public class IntegrationTest {
     public void testFindAfterConnect_withData() {
         // given
         in.add("connect|sqlcmd|postgres|postgres");
-        in.add("clear|user");
-        in.add("insert|user|id|13|name|Stiven|password|*****");
-        in.add("insert|user|id|14|name|Eva|password|+++++");
-        in.add("find|user");
+        in.add("clear|users");
+        in.add("insert|users|id|13|name|Stiven|password|*****");
+        in.add("insert|users|id|14|name|Eva|password|+++++");
+        in.add("find|users");
+        in.add("clear|users");
         in.add("exit");
 
         // when
@@ -291,13 +296,13 @@ public class IntegrationTest {
                 "Успех!\n" +
                 "Введи команду (или help для помощи):\n" +
                 // clear|user
-                "Таблица user была успешно очищена.\n" +
+                "Таблица users была успешно очищена.\n" +
                 "Введи команду (или help для помощи):\n" +
                 // insert|user|id|13|name|Stiven|password|*****
-                "Запись {names:[id, name, password], values:[13, Stiven, *****]} была успешно создана в таблице 'user'.\n" +
+                "Запись {names:[id, name, password], values:[13, Stiven, *****]} была успешно создана в таблице 'users'.\n" +
                 "Введи команду (или help для помощи):\n" +
                 // insert|user|id|14|name|Eva|password|+++++
-                "Запись {names:[id, name, password], values:[14, Eva, +++++]} была успешно создана в таблице 'user'.\n" +
+                "Запись {names:[id, name, password], values:[14, Eva, +++++]} была успешно создана в таблице 'users'.\n" +
                 "Введи команду (или help для помощи):\n" +
                 // find|user
                 "+------+--------+--+\n" +
@@ -307,6 +312,8 @@ public class IntegrationTest {
                 "+------+--------+--+\n" +
                 "|Eva   |+++++   |14|\n" +
                 "+------+--------+--+\n" +
+                "Введи команду (или help для помощи):\n" +
+                "Таблица users была успешно очищена.\n" +
                 "Введи команду (или help для помощи):\n" +
                 // exit
                 "До скорой встречи!\n", getData());

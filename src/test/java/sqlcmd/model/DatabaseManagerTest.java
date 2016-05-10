@@ -1,5 +1,6 @@
 package sqlcmd.model;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -21,71 +22,93 @@ public class DatabaseManagerTest {
         manager.connect("sqlcmd", "postgres", "postgres");
     }
 
+   /* @After
+    public void closeAfter() {
+        manager.disconnectFromDatabase();
+    }
+*/
     @Test
     public void testGetAllTableNames() {
         String[] tableNames = manager.getTableNames();
-        assertEquals("[user, test]", Arrays.toString(tableNames));
+        assertEquals("[users, test1]", Arrays.toString(tableNames));
     }
 
     @Test
     public void testGetTableData() {
         // given
-        manager.clear("user");
-
+        manager.clear("users");
         // when
         DataSet input = new DataSet();
         input.put("name", "Stiven");
-        input.put("password", "pass");
-        input.put("id", 13);
-        manager.insert("user", input);
+        input.put("password", "****");
+        input.put("id", 11);
+        manager.insert("users", input);
 
         // then
-        List<Map<String, Object>> users = manager.getTableData("user");
+        List<Map<String, Object>> users = manager.getTableData("users");
 
         assertEquals(1, users.size());
 
         Map<String, Object> user = users.get(0);
 
-        assertEquals("[Stiven, pass, 13]", user.values().toString());
+        assertEquals("[Stiven, ****, 11]", user.values().toString());
         assertEquals("[name, password, id]", user.keySet().toString());
     }
 
     @Test
     public void testUpdateTableData() {
         // given
-        manager.clear("user");
+        manager.clear("users");
 
         DataSet input = new DataSet();
         input.put("name", "Stiven");
         input.put("password", "pass");
-        input.put("id", 13);
-        manager.insert("user", input);
+        input.put("id", 15);
+        manager.insert("users", input);
 
         // when
         DataSet newValue = new DataSet();
         newValue.put("password", "pass2");
         newValue.put("name", "Pup");
-        manager.update("user", 13, newValue);
+        manager.update("users", 15, newValue);
 
         // then
-        List<Map<String, Object>> users = manager.getTableData("user");
+        List<Map<String, Object>> users = manager.getTableData("users");
         assertEquals(1, users.size());
 
         Map<String, Object> user = users.get(0);
         assertEquals("[name, password, id]", user.keySet().toString());
-        assertEquals("[Pup, pass2, 13]", user.values().toString());
+        assertEquals("[Pup, pass2, 15]", user.values().toString());
     }
 
     @Test
     public void testGetColumnNames() {
         // given
-        manager.clear("user");
+        manager.clear("users");
 
         // when
-        Set<String> columnNames = manager.getTableColumns("user");
+        Set<String> columnNames = manager.getTableColumns("users");
 
         // then
         assertEquals("[name, password, id]", columnNames.toString());
+    }
+
+
+    @Test
+    public void clearTable() {
+        // given
+        DataSet input = new DataSet();
+        input.put("name", "Stiven");
+        input.put("password", "pass");
+        input.put("id", 17);
+        manager.insert("users", input);
+
+        // when
+        manager.clear("users");
+
+        // then
+        List<Map<String, Object>> users = manager.getTableData("users");
+        assertEquals(0, users.size());
     }
 
     @Test

@@ -31,11 +31,31 @@ public class JDBCDatabaseManager implements DatabaseManager {
                     String.format("Cant get connection for model:%s user:%s", database, userName), e);
         }
     }
-
-    @Override
-    public void disconnectFromDatabase() {
+    @Override // проба1
+    public void disconnectFromDatabase(String databaseName) {
 //        isConnected = false;
-        connect("", user, password);
+//        connect("", user, password);
+        try (Statement statement = connection.createStatement()) {
+            statement.executeUpdate( "SELECT pg_terminate_backend(pg_stat_activity.pid)" +
+                    " FROM pg_stat_activity WHERE pg_stat_activity.datname = " + "'databaseName'" +
+                    " AND pid <> pg_backend_pid()" );
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        };
+
+    }
+
+
+    @Override // проба2
+    public void disconnectFromDatabase2() {
+//        isConnected = false;
+//        connect("", user, password);
+        try {
+            connection.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        };
+
     }
 
     @Override
@@ -101,7 +121,7 @@ public class JDBCDatabaseManager implements DatabaseManager {
     @Override
     public void clear(String tableName) {
         try (Statement stmt = connection.createStatement()) {
-            stmt.executeUpdate("DELETE FROM public." + tableName);
+            stmt.executeUpdate("DELETE FROM /*public.*/" + tableName);
         } catch (SQLException e) {
             e.printStackTrace();
         }

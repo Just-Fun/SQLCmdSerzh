@@ -6,13 +6,13 @@ package sqlcmd.model;
 public class Main2 {
     public static void main(String[] args) {
         DatabaseManager databaseManager = new JDBCDatabaseManager();
-        databaseManager.connect("", "postgres", "postgres");
+//        databaseManager.connect("", "postgres", "postgres");
 //        databaseManager.dropDatabase("sqlcmd");
 //        databaseManager.createDatabase("sqlcmd");
-         String DATABASE_NAME = "sqlcmd";
-         String TABLE_NAME = "user";
-        databaseManager.dropDatabase("sqlcmd");
-        databaseManager.createDatabase("sqlcmd");
+//         String DATABASE_NAME = "sqlcmd";
+//         String TABLE_NAME = "user";
+//        databaseManager.dropDatabase("sqlcmd");
+//        databaseManager.createDatabase("sqlcmd");
         databaseManager.connect("sqlcmd", "postgres", "postgres");
        /* String SQL_CREATE_TABLE = "users (id SERIAL PRIMARY KEY," +
                 " username VARCHAR (50) UNIQUE NOT NULL," +

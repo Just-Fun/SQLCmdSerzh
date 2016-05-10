@@ -32,7 +32,7 @@ public class JDBCDatabaseManager implements DatabaseManager {
         }
     }
 
-   /* @Override // проба2
+   /* @Override // проба
     public void disconnectFromDatabase() {
 //        connect("", user, password);
         try {

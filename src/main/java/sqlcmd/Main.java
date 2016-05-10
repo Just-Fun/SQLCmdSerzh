@@ -24,5 +24,5 @@ public class Main {
 
         MainController controller = new MainController(view, manager);
         controller.run();
-    } // connect|sqlcmd|postgres|postgres
+    } // connect|sqlcmd5hope5never5exist|postgres|postgres
 }

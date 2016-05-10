@@ -27,23 +27,8 @@ public class IntegrationTest {
         BuiltDatabase.buildDatabase();
     }
 
-
     @Before
     public void setup() {
-//        BuiltDatabase.buildDatabase();
-       /* databaseManager = new JDBCDatabaseManager();
-
-        databaseManager.connect("", "postgres", "postgres");
-        databaseManager.dropDatabase("sqlcmd");
-        databaseManager.createDatabase("sqlcmd");
-        databaseManager.createDatabase("test1");
-        databaseManager.connect("sqlcmd", "postgres", "postgres");
-
-        databaseManager.createTable("test1 (id SERIAL PRIMARY KEY)");
-        databaseManager.createTable("users" + " (name VARCHAR (50) UNIQUE NOT NULL," +
-                " password VARCHAR (50) NOT NULL," + "id SERIAL PRIMARY KEY");
-        databaseManager.disconnectFromDatabase2();*/
-
         databaseManager = new JDBCDatabaseManager();
         out = new ByteArrayOutputStream();
         in = new ConfigurableInputStream();

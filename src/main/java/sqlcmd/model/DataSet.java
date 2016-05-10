@@ -26,8 +26,6 @@ public class DataSet {
         }
     }
 
-    // переписать все под List<Map<String, Object>>
-
     public List<Data> data = new LinkedList<>();
 
     public void put(String name, Object value) {
@@ -42,9 +40,9 @@ public class DataSet {
 
     public Object[] getValues() {
         Object[] result = new Object[data.size()];
-            for (int i = 0; i < data.size(); i++) {
-                result[i] = data.get(i).getValue();
-            }
+        for (int i = 0; i < data.size(); i++) {
+            result[i] = data.get(i).getValue();
+        }
         return result;
     }
 
@@ -56,7 +54,7 @@ public class DataSet {
         return result;
     }
 
-    public Object get(String name) {
+    /*public Object get(String name) {
         for (int i = 0; i < data.size(); i++) {
             if (data.get(i).getName().equals(name)) {
                 return data.get(i).getValue();
@@ -70,68 +68,13 @@ public class DataSet {
             Data data = newValue.data.get(index); // не понял что тут натворил и что это, разобраться, если вообще этот метод надо..
             this.put(data.name, data.value);
         }
-    }
-
-    @Override
-    public String toString() {
-        return "{" +
-                "names:" + Arrays.toString(getNames()) + ", " +
-                "values:" + Arrays.toString(getValues()) +
-                "}";
-    }
-
-   /* public Data[] data = new Data[100]; // TODO remove magic number 100 // уже :)
-    public int freeIndex = 0;
-
-    public void put(String name, Object value) {
-        for (int index = 0; index < freeIndex; index++) {
-            if (data[index].getName().equals(name)) {
-                data[index].value = value;
-                return;
-            }
-        }
-
-        data[freeIndex++] = new Data(name, value);
-    }
-
-    public Object[] getValues() {
-        Object[] result = new Object[freeIndex];
-        for (int i = 0; i < freeIndex; i++) {
-            result[i] = data[i].getValue();
-        }
-        return result;
-    }
-
-    public String[] getNames() {
-        String[] result = new String[freeIndex];
-        for (int i = 0; i < freeIndex; i++) {
-            result[i] = data[i].getName();
-        }
-        return result;
-    }
-
-    public Object get(String name) {
-        for (int i = 0; i < freeIndex; i++) {
-            if (data[i].getName().equals(name)) {
-                return data[i].getValue();
-            }
-        }
-        return null;
-    }
-
-    public void updateFrom(DataSet newValue) {
-        for (int index = 0; index < newValue.freeIndex; index++) {
-            Data data = newValue.data[index];
-            this.put(data.name, data.value);
-        }
-    }
-
-    @Override
-    public String toString() {
-        return "{" +
-                "names:" + Arrays.toString(getNames()) + ", " +
-                "values:" + Arrays.toString(getValues()) +
-                "}";
     }*/
 
+    @Override
+    public String toString() {
+        return "{" +
+                "names:" + Arrays.toString(getNames()) + ", " +
+                "values:" + Arrays.toString(getValues()) +
+                "}";
+    }
 }

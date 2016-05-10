@@ -9,6 +9,8 @@ import java.util.*;
 public class JDBCDatabaseManager implements DatabaseManager {
 
     private Connection connection;
+    private String user;
+    private String password;
 
     @Override // try-with-resources statement ensures that each resource is closed at the end of the statement
     public void connect(String database, String userName, String password) {
@@ -31,19 +33,20 @@ public class JDBCDatabaseManager implements DatabaseManager {
     }
 
     @Override
-    public List<Map<String, Object>> getTableData(String tableName) {
-//        int getSize = getSize(tableName);
+    public void disconnectFromDatabase() {
+//        isConnected = false;
+        connect("", user, password);
+    }
 
+    @Override
+    public List<Map<String, Object>> getTableData(String tableName) {
         try (Statement stmt = connection.createStatement();
              ResultSet rs = stmt.executeQuery("SELECT * FROM public." + tableName)) {
+
             ResultSetMetaData rsmd = rs.getMetaData();
             List<Map<String, Object>> result = new LinkedList<>();
-//            DataSet[] result = new DataSet[getSize];
-//            int index = 0;
             while (rs.next()) {
                 Map<String, Object> data = new LinkedHashMap<>();
-//                DataSet dataSet = new DataSet();
-//                result[index++] = dataSet;
                 for (int i = 1; i <= rsmd.getColumnCount(); i++) {
                     data.put(rsmd.getColumnName(i), rs.getObject(i));
                 }
@@ -56,7 +59,16 @@ public class JDBCDatabaseManager implements DatabaseManager {
         }
     }
 
-    private int getSize(String tableName) {
+    @Override
+    public void dropDatabase(String databaseName) {
+        try (Statement statement = connection.createStatement()) {
+            statement.executeUpdate("DROP DATABASE IF EXISTS " + databaseName);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+   /* private int getSize(String tableName) {
         try (Statement stmt = connection.createStatement();
              ResultSet rsCount = stmt.executeQuery("SELECT COUNT(*) FROM public." + tableName)) {
             rsCount.next();
@@ -66,7 +78,7 @@ public class JDBCDatabaseManager implements DatabaseManager {
             e.printStackTrace();
             return 0;
         }
-    }
+    }*/
 
     @Override
     public String[] getTableNames() {
@@ -155,15 +167,12 @@ public class JDBCDatabaseManager implements DatabaseManager {
              ResultSet rs = stmt.executeQuery("SELECT * FROM information_schema.columns WHERE " +
                      "table_schema = 'public' AND table_name = '" + tableName + "'")) {
             Set<String> tables = new LinkedHashSet<>();
-//            int index = 0;
             while (rs.next()) {
                 tables.add(rs.getString("column_name"));
             }
-//            tables = Arrays.copyOf(tables, index, String[].class);
             return tables;
         } catch (SQLException e) {
             e.printStackTrace();
-//            return new String[0];
         return new LinkedHashSet<>();
         }
     }

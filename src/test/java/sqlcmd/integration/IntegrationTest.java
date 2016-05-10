@@ -1,7 +1,6 @@
 package sqlcmd.integration;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 import sqlcmd.Main;
 import sqlcmd.model.DatabaseManager;
 import sqlcmd.model.JDBCDatabaseManager;
@@ -17,20 +16,36 @@ import static org.junit.Assert.assertEquals;
  */
 public class IntegrationTest {
 
-    private ConfigurableInputStream in;
-    private ByteArrayOutputStream out;
-    private DatabaseManager databaseManager;
+    private static ConfigurableInputStream in;
+    private static ByteArrayOutputStream out;
+    private static DatabaseManager databaseManager;
     private final String pleaseConnect = "Введите имя базы данных, имя пользователя и пароль в формате: " +
             "connect|database|userName|password\n";
 
-    @Before
-    public void setup() {
+    @BeforeClass
+    public static void setup() {
         databaseManager = new JDBCDatabaseManager();
+        databaseManager.connect("", "postgres", "postgres");
+        databaseManager.dropDatabase("sqlcmd");
+        databaseManager.createDatabase("sqlcmd");
+//        databaseManager.createDatabase("test1");
+        databaseManager.connect("sqlcmd", "postgres", "postgres");
+
+        databaseManager.createTable("test1 (id SERIAL PRIMARY KEY)");
+        databaseManager.createTable("users" + " (name VARCHAR (50) UNIQUE NOT NULL," +
+                " password VARCHAR (50) NOT NULL," + "id SERIAL PRIMARY KEY,");
         out = new ByteArrayOutputStream();
         in = new ConfigurableInputStream();
 
         System.setIn(in);
         System.setOut(new PrintStream(out));
+    }
+
+    @AfterClass
+    public static void clearAfterAllTests() {
+//        manager.dropTable(TABLE_NAME);
+        databaseManager.disconnectFromDatabase();
+//        manager.dropDatabase(DATABASE_NAME);
     }
 
     @Test
@@ -260,23 +275,6 @@ public class IntegrationTest {
     @Test
     public void testFindAfterConnect_withData() {
         // given
-//        databaseManager.connect("sqlcmd", "postgres", "postgres");
-//
-//        databaseManager.clear("user");
-//
-//        DataSet user1 = new DataSet();
-//        user1.put("id", 13);
-//        user1.put("name", "Stiven");
-//        user1.put("password", "*****");
-//        databaseManager.insert("user", user1);
-//
-//        DataSet user2 = new DataSet();
-//        user2.put("id", 14);
-//        user2.put("name", "Eva");
-//        user2.put("password", "+++++");
-//        databaseManager.insert("user", user2);
-
-
         in.add("connect|sqlcmd|postgres|postgres");
         in.add("clear|user");
         in.add("insert|user|id|13|name|Stiven|password|*****");

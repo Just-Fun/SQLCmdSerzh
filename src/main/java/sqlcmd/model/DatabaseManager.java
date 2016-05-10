@@ -11,9 +11,13 @@ public interface DatabaseManager {
 
     List<Map<String, Object>> getTableData(String tableName);
 
+    void dropDatabase(String databaseName);
+
     String[] getTableNames();
 
     void connect(String database, String userName, String password);
+
+    void disconnectFromDatabase();
 
     void clear(String tableName);
 

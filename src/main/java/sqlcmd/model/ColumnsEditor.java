@@ -6,6 +6,7 @@ import java.sql.SQLException;
 /**
  * Created by serzh on 1/10/16.
  */
+// Добавить методов отсюда в Менеджер
 public class ColumnsEditor  {
 
 

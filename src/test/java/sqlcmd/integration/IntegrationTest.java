@@ -20,9 +20,12 @@ public class IntegrationTest {
     private ConfigurableInputStream in;
     private ByteArrayOutputStream out;
 
-    private final static String DATABASE_NAME = "sqlcmd";
+    private final static String DATABASE_NAME = "sqlcmd5hope5never5exist";
+
+    // Change user name and password of your database !!! Only next two lines!!!
     private final static String USER_NAME = "postgres";
     private final static String DB_PASSWORD = "postgres";
+
     String connect = "connect|"+ DATABASE_NAME + "|" + USER_NAME + "|" + DB_PASSWORD;
 
     private final String pleaseConnect = "Введите имя базы данных, имя пользователя и пароль в формате: " +

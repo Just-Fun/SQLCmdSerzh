@@ -9,9 +9,6 @@ import java.util.Set;
  */
 public interface DatabaseManager {
 
-   // проба2
-   void disconnectFromDatabase2();
-
    List<Map<String, Object>> getTableData(String tableName);
 
     void dropDatabase(String databaseName);
@@ -20,7 +17,7 @@ public interface DatabaseManager {
 
     void connect(String database, String userName, String password);
 
-    void disconnectFromDatabase(String databaseName);
+//    void disconnectFromDatabase();
 
     void clear(String tableName);
 

@@ -31,32 +31,17 @@ public class JDBCDatabaseManager implements DatabaseManager {
                     String.format("Cant get connection for model:%s user:%s", database, userName), e);
         }
     }
-    @Override // проба1
-    public void disconnectFromDatabase(String databaseName) {
-//        isConnected = false;
-//        connect("", user, password);
-        try (Statement statement = connection.createStatement()) {
-            statement.executeUpdate( "SELECT pg_terminate_backend(pg_stat_activity.pid)" +
-                    " FROM pg_stat_activity WHERE pg_stat_activity.datname = " + "'databaseName'" +
-                    " AND pid <> pg_backend_pid()" );
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        };
 
-    }
-
-
-    @Override // проба2
-    public void disconnectFromDatabase2() {
-//        isConnected = false;
+   /* @Override // проба2
+    public void disconnectFromDatabase() {
 //        connect("", user, password);
         try {
             connection.close();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+
         };
 
-    }
+    }*/
 
     @Override
     public List<Map<String, Object>> getTableData(String tableName) {

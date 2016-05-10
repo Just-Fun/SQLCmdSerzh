@@ -19,14 +19,14 @@ public class DatabaseManagerTest {
     @Before
     public void setup() {
         manager = new JDBCDatabaseManager();
-        manager.connect("sqlcmd", "postgres", "postgres");
+        manager.connect("sqlcmd5hope5never5exist", "postgres", "postgres");
     }
 
-   /* @After
+  /*  @After
     public void closeAfter() {
         manager.disconnectFromDatabase();
-    }
-*/
+    }*/
+
     @Test
     public void testGetAllTableNames() {
         String[] tableNames = manager.getTableNames();

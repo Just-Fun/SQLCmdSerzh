@@ -21,7 +21,9 @@ public class Help implements Command {
         commands = new ArrayList<>(Arrays.asList(
                 new Connect(manager, view),
                 new Clear(manager, view),
-                new Create(manager, view),
+                new СreateDatabase(manager, view),
+                new DropDatabase(manager, view),
+                new Insert(manager, view),
                 new Find(manager, view),
                 this,
                 new sqlcmd.controller.command.List(manager, view),

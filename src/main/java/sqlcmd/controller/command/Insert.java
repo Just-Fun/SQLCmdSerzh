@@ -7,11 +7,11 @@ import sqlcmd.view.View;
 /**
  * Created by indigo on 28.08.2015.
  */
-public class Create implements Command {
+public class Insert implements Command {
     private final DatabaseManager manager;
     private final View view;
 
-    public Create(DatabaseManager manager, View view) {
+    public Insert(DatabaseManager manager, View view) {
         this.manager = manager;
         this.view = view;
     }

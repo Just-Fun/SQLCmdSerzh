@@ -30,12 +30,9 @@ public class Find implements Command {
         String[] data = command.split("\\|");
         String tableName = data[1]; // TODO to add validation
 
-
         Set<String> tableColumns = manager.getTableColumns(tableName);
-//        printHeader(tableColumns);
 
         java.util.List<Map<String, Object>> tableData = manager.getTableData(tableName);
-//        printTable(tableData);
         TableConstructor constructor = new TableConstructor(tableColumns, tableData);
         view.write(constructor.getTableString());
     }

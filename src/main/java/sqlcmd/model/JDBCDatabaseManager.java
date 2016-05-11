@@ -64,6 +64,15 @@ public class JDBCDatabaseManager implements DatabaseManager {
         }
     }
 
+    @Override // new
+    public void createDatabase(String databaseName) {
+        try (Statement statement = connection.createStatement()) {
+            statement.executeUpdate("CREATE DATABASE " + databaseName);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     @Override
     public void dropDatabase(String databaseName) {
         try (Statement statement = connection.createStatement()) {
@@ -103,6 +112,8 @@ public class JDBCDatabaseManager implements DatabaseManager {
         }
     }
 
+
+
     @Override
     public void clear(String tableName) {
         try (Statement stmt = connection.createStatement()) {
@@ -111,8 +122,6 @@ public class JDBCDatabaseManager implements DatabaseManager {
             e.printStackTrace();
         }
     }
-
-
 
     @Override
     public void insert(String tableName, DataSet input) {
@@ -123,15 +132,6 @@ public class JDBCDatabaseManager implements DatabaseManager {
 
             stmt.executeUpdate("INSERT INTO public." + tableName + " (" + tableNames + ")" +
                     "VALUES (" + values + ")");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Override // new
-    public void createDatabase(String databaseName) {
-        try (Statement statement = connection.createStatement()) {
-            statement.executeUpdate("CREATE DATABASE " + databaseName);
         } catch (SQLException e) {
             e.printStackTrace();
         }

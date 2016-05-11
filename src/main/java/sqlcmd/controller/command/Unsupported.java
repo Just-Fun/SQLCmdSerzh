@@ -22,4 +22,14 @@ public class Unsupported implements Command {
     public void process(String command) {
         view.write("Несуществующая команда: " + command);
     }
+
+    @Override
+    public String description() {
+        return null;
+    }
+
+    @Override
+    public String format() {
+        return null;
+    }
 }

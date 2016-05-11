@@ -59,8 +59,6 @@ public class IntegrationTest {
                 "Существующие команды:\n" +
                 "\tconnect|databaseName|userName|password\n" +
                 "\t\tдля подключения к базе данных, с которой будем работать\n" +
-                "\tlist\n" +
-                "\t\tдля получения списка всех таблиц базы, к которой подключились\n" +
                 "\tclear|tableName\n" +
                 "\t\tдля очистки всей таблицы\n" +
                 "\tinsert|tableName|column1|value1|column2|value2|...|columnN|valueN\n" +
@@ -69,6 +67,8 @@ public class IntegrationTest {
                 "\t\tдля получения содержимого таблицы 'tableName'\n" +
                 "\thelp\n" +
                 "\t\tдля вывода этого списка на экран\n" +
+                "\tlist\n" +
+                "\t\tдля получения списка всех таблиц базы, к которой подключились\n" +
                 "\texit\n" +
                 "\t\tдля выхода из программы\n" +
                 "Введи команду (или help для помощи):\n" +

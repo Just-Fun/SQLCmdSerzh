@@ -42,6 +42,16 @@ public class Connect implements Command {
         view.write("Успех!");
     }
 
+    @Override
+    public String description() {
+        return "для подключения к базе данных, с которой будем работать";
+    }
+
+    @Override
+    public String format() {
+        return "connect|databaseName|userName|password";
+    }
+
     private int count() {
         return COMMAND_SAMPLE.split("\\|").length;
     }

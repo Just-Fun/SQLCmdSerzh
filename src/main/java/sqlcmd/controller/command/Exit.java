@@ -23,4 +23,14 @@ public class Exit implements Command {
         view.write("До скорой встречи!");
         throw new ExitException();
     }
+
+    @Override
+    public String description() {
+        return "для выхода из программы";
+    }
+
+    @Override
+    public String format() {
+        return "exit";
+    }
 }

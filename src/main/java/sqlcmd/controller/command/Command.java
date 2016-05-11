@@ -8,4 +8,8 @@ public interface Command {
     boolean canProcess(String command);
 
     void process(String command);
+
+    public String description();
+
+    public String format();
 }

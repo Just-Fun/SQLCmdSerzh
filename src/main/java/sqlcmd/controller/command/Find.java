@@ -40,29 +40,13 @@ public class Find implements Command {
         view.write(constructor.getTableString());
     }
 
-    /*private void printHeader(String[] tableColumns) {
-        String result = "|";
-        for (String name : tableColumns) {
-            result += name + "|";
-        }
-        view.write("--------------------");
-        view.write(result);
-        view.write("--------------------");
+    @Override
+    public String description() {
+        return "для получения содержимого таблицы 'tableName'";
     }
 
-    private void printTable(DataSet[] tableData) {
-        for (DataSet row : tableData) {
-            printRow(row);
-        }
-        view.write("--------------------");
+    @Override
+    public String format() {
+        return "find|tableName";
     }
-
-    private void printRow(DataSet row) {
-        Object[] values = row.getValues();
-        String result = "|";
-        for (Object value : values) {
-            result += value + "|";
-        }
-        view.write(result);
-    }*/
-    }
+}

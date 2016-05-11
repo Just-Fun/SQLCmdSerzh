@@ -16,6 +16,7 @@ public class Create implements Command {
         this.view = view;
     }
 
+
     @Override
     public boolean canProcess(String command) {
         return command.startsWith("insert|");
@@ -43,5 +44,15 @@ public class Create implements Command {
         manager.insert(tableName, dataSet);
 
         view.write(String.format("Запись %s была успешно создана в таблице '%s'.", dataSet, tableName));
+    }
+
+    @Override
+    public String description() {
+        return "для создания записи в таблице";
+    }
+
+    @Override
+    public String format() {
+        return "insert|tableName|column1|value1|column2|value2|...|columnN|valueN";
     }
 }

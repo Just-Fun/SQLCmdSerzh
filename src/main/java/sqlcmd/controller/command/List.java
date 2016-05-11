@@ -31,4 +31,14 @@ public class List implements Command {
 
         view.write(message);
     }
+
+    @Override
+    public String description() {
+        return "для получения списка всех таблиц базы, к которой подключились";
+    }
+
+    @Override
+    public String format() {
+        return "list";
+    }
 }

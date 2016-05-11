@@ -146,6 +146,12 @@ public class JDBCDatabaseManager implements DatabaseManager {
         }
     }
 
+    /*protected void removeTable(String table) throws SQLException {
+        String query3 = "drop table " + table;
+        stmt.execute(query3);
+        System.out.println(table + " table removed");
+    }*/
+
     @Override
     public void update(String tableName, int id, DataSet newValue) {
         String tableNames = getNameFormated(newValue, "%s = ?,");

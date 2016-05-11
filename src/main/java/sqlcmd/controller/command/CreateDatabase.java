@@ -6,11 +6,11 @@ import sqlcmd.view.View;
 /**
  * Created by serzh on 5/11/16.
  */
-public class СreateDatabase implements Command {
+public class CreateDatabase implements Command {
     private DatabaseManager manager;
     private View view;
 
-    public СreateDatabase(DatabaseManager manager, View view) {
+    public CreateDatabase(DatabaseManager manager, View view) {
         this.manager = manager;
         this.view = view;
     }

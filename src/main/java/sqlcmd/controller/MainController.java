@@ -21,8 +21,9 @@ public class MainController {
                 new IsConnected(manager, view),
                 new List(manager, view),
                 new Clear(manager, view),
-                new СreateDatabase(manager, view),
+                new CreateDatabase(manager, view),
                 new DropDatabase(manager, view),
+                new CreateTable(manager, view),
                 new Insert(manager, view),
                 new Find(manager, view),
                 new Unsupported(view)

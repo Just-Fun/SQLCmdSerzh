@@ -2,6 +2,7 @@ package sqlcmd.integration;
 
 import org.junit.*;
 import sqlcmd.Main;
+import sqlcmd.model.DataSet;
 import sqlcmd.model.DatabaseManager;
 import sqlcmd.model.JDBCDatabaseManager;
 
@@ -25,7 +26,7 @@ public class IntegrationTest {
     private final static String DB_PASSWORD = "postgres";
 
     private final static String DATABASE_NAME = "sqlcmd5hope5never5exist";
-    String connect = "connect|"+ DATABASE_NAME + "|" + USER_NAME + "|" + DB_PASSWORD;
+    String connect = "connect|" + DATABASE_NAME + "|" + USER_NAME + "|" + DB_PASSWORD;
     private final String pleaseConnect = "Введите имя базы данных, имя пользователя и пароль в формате: " +
             "connect|database|userName|password\n";
 
@@ -62,13 +63,13 @@ public class IntegrationTest {
                 "\tclear|tableName\n" +
                 "\t\tдля очистки всей таблицы\n" +
                 "\tcreateDB|databaseName\n" +
-                        "\t\tдля создания новой Database\n" +
-                        "\tdropDB|databaseName\n" +
-                        "\t\tдля удаления Database\n" +
-                        "\tcreateTable|tableName\n" +
-                        "\t\tдля создания новой таблицы\n" +
-                        "\tdropTable|tableName\n" +
-                        "\t\tдля удаления таблицы\n" +
+                "\t\tдля создания новой Database\n" +
+                "\tdropDB|databaseName\n" +
+                "\t\tдля удаления Database\n" +
+                "\tcreateTable|tableName\n" +
+                "\t\tдля создания новой таблицы\n" +
+                "\tdropTable|tableName\n" +
+                "\t\tдля удаления таблицы\n" +
                 "\tinsert|tableName|column1|value1|column2|value2|...|columnN|valueN\n" +
                 "\t\tдля создания записи в таблице\n" +
                 "\tfind|tableName\n" +
@@ -221,9 +222,11 @@ public class IntegrationTest {
         assertEquals(pleaseConnect +
                 "Успех!\n" +
                 "Введи команду (или help для помощи):\n" +
-                "+----+--------+--+\n" +
-                "|name|password|id|\n" +
-                "+----+--------+--+\n" +
+                "+-----+--------+--+\n" +
+                "|name |password|id|\n" +
+                "+-----+--------+--+\n" +
+                "|Vasia|****    |22|\n" +
+                "+-----+--------+--+\n" +
                 "Введи команду (или help для помощи):\n" +
                 "До скорой встречи!\n", getData());
     }
@@ -377,6 +380,10 @@ public class IntegrationTest {
         manager.createTable("users" + " (name VARCHAR (50) UNIQUE NOT NULL," +
                 " password VARCHAR (50) NOT NULL," + " id SERIAL PRIMARY KEY)");
         manager.createTable("test1 (id SERIAL PRIMARY KEY)");
-//        manager.disconnectFromDatabase2();
+        DataSet dataSet = new DataSet();
+        dataSet.put("name", "Vasia");
+        dataSet.put("password", "****");
+        dataSet.put("id", "22");
+        manager.insert("users", dataSet);
     }
 }

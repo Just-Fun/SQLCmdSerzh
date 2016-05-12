@@ -24,6 +24,7 @@ public class MainController {
                 new CreateDatabase(manager, view),
                 new DropDatabase(manager, view),
                 new CreateTable(manager, view),
+                new DropTable(manager, view),
                 new Insert(manager, view),
                 new Find(manager, view),
                 new Unsupported(view)

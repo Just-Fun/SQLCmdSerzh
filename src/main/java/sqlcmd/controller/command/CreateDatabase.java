@@ -17,14 +17,14 @@ public class CreateDatabase implements Command {
 
     @Override
     public boolean canProcess(String command) {
-        return command.startsWith("create|");
+        return command.startsWith("createDB|");
     }
 
     @Override
     public void process(String command) {
         String[] data = command.split("\\|");
         if (data.length != 2) {
-            throw new IllegalArgumentException("Формат команды 'create|databaseName', а ты ввел: " + command);
+            throw new IllegalArgumentException("Формат команды 'createDB|databaseName', а ты ввел: " + command);
         }
         manager.createDatabase(data[1]);
 
@@ -38,6 +38,6 @@ public class CreateDatabase implements Command {
 
     @Override
     public String format() {
-        return "create|databaseName";
+        return "createDB|databaseName";
     }
 }

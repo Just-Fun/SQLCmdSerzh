@@ -4,40 +4,40 @@ import sqlcmd.model.DatabaseManager;
 import sqlcmd.view.View;
 
 /**
- * Created by serzh on 5/11/16.
+ * Created by serzh on 5/12/16.
  */
-public class CreateTable implements Command {
+public class DropTable implements Command {
     private DatabaseManager manager;
     private View view;
 
-    public CreateTable(DatabaseManager manager, View view) {
+    public DropTable(DatabaseManager manager, View view) {
         this.manager = manager;
         this.view = view;
     }
 
     @Override
     public boolean canProcess(String command) {
-        return command.startsWith("createTable|");
+        return command.startsWith("dropTable|");
     }
 
     @Override
     public void process(String command) {
         String[] data = command.split("\\|");
         if (data.length != 2) {
-            throw new IllegalArgumentException("Формат команды 'createTable|tableName', а ты ввел: " + command);
+            throw new IllegalArgumentException("Формат команды 'create|dropTable', а ты ввел: " + command);
         }
         manager.createTable(data[1]);
 
-        view.write(String.format("Таблица %s была успешно создана.", data[1]));
+        view.write(String.format("Таблица %s была успешно удалена.", data[1]));
     }
 
     @Override
     public String description() {
-        return "для создания новой таблицы";
+        return "для удаления таблицы";
     }
 
     @Override
     public String format() {
-        return "createTable|tableName";
+        return "dropTable|tableName";
     }
 }

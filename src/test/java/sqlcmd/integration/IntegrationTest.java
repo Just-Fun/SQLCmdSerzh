@@ -61,6 +61,14 @@ public class IntegrationTest {
                 "\t\tдля подключения к базе данных, с которой будем работать\n" +
                 "\tclear|tableName\n" +
                 "\t\tдля очистки всей таблицы\n" +
+                "\tcreateDB|databaseName\n" +
+                        "\t\tдля создания новой Database\n" +
+                        "\tdropDB|databaseName\n" +
+                        "\t\tдля удаления Database\n" +
+                        "\tcreateTable|tableName\n" +
+                        "\t\tдля создания новой таблицы\n" +
+                        "\tdropTable|tableName\n" +
+                        "\t\tдля удаления таблицы\n" +
                 "\tinsert|tableName|column1|value1|column2|value2|...|columnN|valueN\n" +
                 "\t\tдля создания записи в таблице\n" +
                 "\tfind|tableName\n" +

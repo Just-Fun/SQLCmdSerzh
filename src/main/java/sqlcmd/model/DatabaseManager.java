@@ -11,8 +11,6 @@ public interface DatabaseManager {
 
    List<Map<String, Object>> getTableData(String tableName);
 
-    void dropDatabase(String databaseName);
-
     String[] getTableNames();
 
     void connect(String database, String userName, String password);
@@ -23,7 +21,11 @@ public interface DatabaseManager {
 
     void createDatabase(String databaseName);
 
+    void dropDatabase(String databaseName);
+
     void createTable(String query);
+
+    void dropTable(String query);
 
     void insert(String tableName, DataSet input);
 

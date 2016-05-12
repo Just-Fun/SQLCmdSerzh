@@ -115,15 +115,16 @@ public class JDBCDatabaseManager implements DatabaseManager {
 
 
     @Override
-    public void clear(String tableName) {
+    public void clear(String tableName) throws RuntimeException {
         try (Statement stmt = connection.createStatement()) {
-            stmt.executeUpdate("DELETE FROM /*public.*/" + tableName);
+            stmt.executeUpdate("DELETE FROM " /*+ "public. "*/ + tableName);
         } catch (SQLException e) {
-            e.printStackTrace();
+//            e.printStackTrace();
+            throw new RuntimeException(tableName + " doesn't exist");
         }
     }
 
-    @Override
+    @Override //TODO реализовать, если такой таблицы нет
     public void insert(String tableName, DataSet input) {
         try (Statement stmt = connection.createStatement()) {
 
@@ -133,19 +134,31 @@ public class JDBCDatabaseManager implements DatabaseManager {
             stmt.executeUpdate("INSERT INTO public." + tableName + " (" + tableNames + ")" +
                     "VALUES (" + values + ")");
         } catch (SQLException e) {
-            e.printStackTrace();
+//            e.printStackTrace();
+           throw new RuntimeException(tableName + " doesn't exist");
         }
     }
 
-    @Override // new
-    public void createTable(String query) {
+    @Override
+    public void createTable(String table_name) {
         try (Statement statement = connection.createStatement()) {
-            statement.executeUpdate("CREATE TABLE IF NOT EXISTS " + query);
+            statement.executeUpdate("CREATE TABLE IF NOT EXISTS " + table_name);
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
+    @Override //TODO подумать что сделать, если таблица не существует
+    public void dropTable(String table_name) {
+        try (Statement statement = connection.createStatement()) {
+            statement.executeUpdate("DROP TABLE IF EXISTS " + table_name + " CASCADE");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    //DROP TABLE IF EXISTS author;
+    //DROP TABLE table_name CASCADE;
+//    DROP TABLE IF EXISTS table_name CASCADE;
     /*protected void removeTable(String table) throws SQLException {
         String query3 = "drop table " + table;
         stmt.execute(query3);

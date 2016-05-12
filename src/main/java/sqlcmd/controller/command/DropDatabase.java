@@ -17,14 +17,14 @@ public class DropDatabase implements Command {
 
     @Override
     public boolean canProcess(String command) {
-        return command.startsWith("drop|");
+        return command.startsWith("dropDB|");
     }
 
     @Override
     public void process(String command) {
         String[] data = command.split("\\|");
         if (data.length != 2) {
-            throw new IllegalArgumentException("Формат команды 'drop|databaseName', а ты ввел: " + command);
+            throw new IllegalArgumentException("Формат команды 'dropDB|databaseName', а ты ввел: " + command);
         }
         manager.dropDatabase(data[1]);
 
@@ -38,6 +38,6 @@ public class DropDatabase implements Command {
 
     @Override
     public String format() {
-        return "drop|databaseName";
+        return "dropDB|databaseName";
     }
 }

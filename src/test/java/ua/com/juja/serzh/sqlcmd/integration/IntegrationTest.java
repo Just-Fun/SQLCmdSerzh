@@ -17,16 +17,15 @@ import static org.junit.Assert.assertEquals;
  */
 public class IntegrationTest {
 
-    private DatabaseManager databaseManager;
-    private ConfigurableInputStream in;
-    private ByteArrayOutputStream out;
-
     //TODO Change user name and password of your database !!! Only next two lines!!!
     private final static String USER_NAME = "postgres";
     private final static String DB_PASSWORD = "postgres";
 
+    private ConfigurableInputStream in;
+    private ByteArrayOutputStream out;
+
     private final static String DATABASE_NAME = "sqlcmd5hope5never5exist";
-    String connect = "connect|" + DATABASE_NAME + "|" + USER_NAME + "|" + DB_PASSWORD;
+    private final String commandConnect = "connect|" + DATABASE_NAME + "|" + USER_NAME + "|" + DB_PASSWORD;
     private final String pleaseConnect = "Введите имя базы данных, имя пользователя и пароль в формате: " +
             "connect|database|userName|password\n";
 
@@ -38,8 +37,8 @@ public class IntegrationTest {
         manager.createDatabase(DATABASE_NAME);
         manager.connect(DATABASE_NAME, USER_NAME, DB_PASSWORD);
 
-        manager.createTable("users" + " (name VARCHAR (50) UNIQUE NOT NULL," +
-                " password VARCHAR (50) NOT NULL," + " id SERIAL PRIMARY KEY)");
+        manager.createTable("users" +
+                " (name VARCHAR (50) UNIQUE NOT NULL, password VARCHAR (50) NOT NULL, id SERIAL PRIMARY KEY)");
         manager.createTable("test1 (id SERIAL PRIMARY KEY)");
         DataSet dataSet = new DataSet();
         dataSet.put("name", "Vasia");
@@ -50,7 +49,6 @@ public class IntegrationTest {
 
     @Before
     public void setup() {
-        databaseManager = new JDBCDatabaseManager();
         out = new ByteArrayOutputStream();
         in = new ConfigurableInputStream();
 
@@ -170,7 +168,7 @@ public class IntegrationTest {
     @Test
     public void testUnsupportedAfterConnect() {
         // given
-        in.add(connect);
+        in.add(commandConnect);
         in.add("unsupported");
         in.add("exit");
         // when
@@ -190,7 +188,7 @@ public class IntegrationTest {
     @Test
     public void testListAfterConnect() {
         // given
-        in.add(connect);
+        in.add(commandConnect);
         in.add("list");
         in.add("exit");
         // when
@@ -210,7 +208,7 @@ public class IntegrationTest {
     @Test
     public void testFindAfterConnect() {
         // given
-        in.add(connect);
+        in.add(commandConnect);
         in.add("find|users");
         in.add("exit");
         // when
@@ -231,7 +229,7 @@ public class IntegrationTest {
     @Test
     public void testConnectAfterConnect() {
         // given
-        in.add(connect);
+        in.add(commandConnect);
         in.add("list");
         in.add("connect|test|postgres|postgres");
         in.add("list");
@@ -276,7 +274,7 @@ public class IntegrationTest {
     @Test
     public void testFindAfterConnect_withData() {
         // given
-        in.add(connect);
+        in.add(commandConnect);
         in.add("clear|users");
         in.add("insert|users|id|13|name|Stiven|password|*****");
         in.add("insert|users|id|14|name|Eva|password|+++++");
@@ -317,7 +315,7 @@ public class IntegrationTest {
     @Test
     public void testClearWithError() {
         // given
-        in.add(connect);
+        in.add(commandConnect);
         in.add("clear|sadfasd|fsf|fdsf");
         in.add("exit");
         // when
@@ -339,7 +337,7 @@ public class IntegrationTest {
     @Test
     public void testCreateWithErrors() {
         // given
-        in.add(connect);
+        in.add(commandConnect);
         in.add("insert|user|error");
         in.add("exit");
         // when

@@ -45,7 +45,7 @@ public class Connect implements Command {
     }
 
     @Override
-    public String format() {
+    public String commandFormat() {
         return COMMAND_SAMPLE;
     }
 

@@ -30,7 +30,7 @@ public class Exit implements Command {
     }
 
     @Override
-    public String format() {
+    public String commandFormat() {
         return "exit";
     }
 }

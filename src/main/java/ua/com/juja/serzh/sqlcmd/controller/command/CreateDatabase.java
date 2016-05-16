@@ -37,7 +37,7 @@ public class CreateDatabase implements Command {
     }
 
     @Override
-    public String format() {
+    public String commandFormat() {
         return "createDB|databaseName";
     }
 }

@@ -37,7 +37,7 @@ public class Clear implements Command {
     }
 
     @Override
-    public String format() {
+    public String commandFormat() {
         return "clear|tableName";
     }
 }

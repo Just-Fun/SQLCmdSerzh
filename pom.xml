@@ -43,7 +43,7 @@
             <version>9.4.1207.jre7</version>
         </dependency>
 
-        <!-- Table format -->
+        <!-- Table commandFormat -->
         <dependency>
             <groupId>org.ow2.sirocco</groupId>
             <artifactId>sirocco-text-table-formatter</artifactId>

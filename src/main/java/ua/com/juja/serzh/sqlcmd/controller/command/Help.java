@@ -43,7 +43,7 @@ public class Help implements Command {
         view.write("Существующие команды:");
 
         for (Command command : commands) {
-            view.write("\t" + command.format());
+            view.write("\t" + command.commandFormat());
             view.write("\t\t" + command.description());
         }
     }
@@ -54,7 +54,7 @@ public class Help implements Command {
     }
 
     @Override
-    public String format() {
+    public String commandFormat() {
         return "help";
     }
 }

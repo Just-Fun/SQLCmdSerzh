@@ -41,7 +41,7 @@ public class Find implements Command {
     }
 
     @Override
-    public String format() {
+    public String commandFormat() {
         return "find|tableName";
     }
 }

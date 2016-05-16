@@ -49,7 +49,7 @@ public class Insert implements Command {
     }
 
     @Override
-    public String format() {
+    public String commandFormat() {
         return "insert|tableName|column1|value1|column2|value2|...|columnN|valueN";
     }
 }

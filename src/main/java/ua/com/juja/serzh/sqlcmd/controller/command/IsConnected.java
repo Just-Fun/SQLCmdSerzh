@@ -34,7 +34,7 @@ public class IsConnected implements Command {
     }
 
     @Override
-    public String format() {
+    public String commandFormat() {
         return null;
     }
 }

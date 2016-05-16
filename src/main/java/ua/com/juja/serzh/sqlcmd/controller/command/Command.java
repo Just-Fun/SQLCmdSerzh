@@ -11,5 +11,5 @@ public interface Command {
 
     public String description();
 
-    public String format();
+    public String commandFormat();
 }

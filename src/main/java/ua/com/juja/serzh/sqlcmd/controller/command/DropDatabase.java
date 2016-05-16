@@ -37,7 +37,7 @@ public class DropDatabase implements Command {
     }
 
     @Override
-    public String format() {
+    public String commandFormat() {
         return "dropDB|databaseName";
     }
 }

@@ -37,7 +37,7 @@ public class CreateTable implements Command {
     }
 
     @Override
-    public String format() {
+    public String commandFormat() {
         return "createTable|tableName(column1,column2,...,columnN)";
     }
 }

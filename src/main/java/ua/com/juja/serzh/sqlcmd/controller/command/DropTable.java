@@ -37,7 +37,7 @@ public class DropTable implements Command {
     }
 
     @Override
-    public String format() {
+    public String commandFormat() {
         return "dropTable|tableName";
     }
 }

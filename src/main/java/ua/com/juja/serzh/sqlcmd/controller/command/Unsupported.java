@@ -29,7 +29,7 @@ public class Unsupported implements Command {
     }
 
     @Override
-    public String format() {
+    public String commandFormat() {
         return null;
     }
 }

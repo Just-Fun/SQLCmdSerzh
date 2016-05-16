@@ -58,14 +58,4 @@ public class DropTableTest {
             assertEquals("Формат команды 'create|dropTable', а ты ввел: createTable|tableName|wrong", e.getMessage());
         }
     }
-
-    @Test
-    public void testDescription() throws Exception {
-
-    }
-
-    @Test
-    public void testFormat() throws Exception {
-
-    }
 }

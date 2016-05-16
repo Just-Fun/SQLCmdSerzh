@@ -1,6 +1,7 @@
 package ua.com.juja.serzh.sqlcmd.integration;
 
 import org.junit.*;
+import ua.com.juja.serzh.sqlcmd.BeforeTestsChangeNameAndPass;
 import ua.com.juja.serzh.sqlcmd.Main;
 import ua.com.juja.serzh.sqlcmd.model.DataSet;
 import ua.com.juja.serzh.sqlcmd.model.DatabaseManager;
@@ -17,25 +18,23 @@ import static org.junit.Assert.assertEquals;
  */
 public class IntegrationTest {
 
-    //TODO Change user name and password of your database !!! Only next two lines!!!
-    private final static String USER_NAME = "postgres";
-    private final static String DB_PASSWORD = "postgres";
-
+    private static final String DATABASE = BeforeTestsChangeNameAndPass.DATABASE;
+    private static final String USER = BeforeTestsChangeNameAndPass.USER;
+    private static final String PASSWORD = BeforeTestsChangeNameAndPass.PASSWORD;
     private ConfigurableInputStream in;
     private ByteArrayOutputStream out;
 
-    private final static String DATABASE_NAME = "sqlcmd5hope5never5exist";
-    private final String commandConnect = "connect|" + DATABASE_NAME + "|" + USER_NAME + "|" + DB_PASSWORD;
+    private final String commandConnect = "connect|" + DATABASE + "|" + USER + "|" + PASSWORD;
     private final String pleaseConnect = "Введите имя базы данных, имя пользователя и пароль в формате: " +
             "connect|database|userName|password\n";
 
     @BeforeClass
     public static void buildDatabase() {
         DatabaseManager manager = new JDBCDatabaseManager();
-        manager.connect("", "postgres", "postgres");
-        manager.dropDatabase(DATABASE_NAME);
-        manager.createDatabase(DATABASE_NAME);
-        manager.connect(DATABASE_NAME, USER_NAME, DB_PASSWORD);
+        manager.connect("", USER, PASSWORD);
+        manager.dropDatabase(DATABASE);
+        manager.createDatabase(DATABASE);
+        manager.connect(DATABASE, USER, PASSWORD);
 
         manager.createTable("users" +
                 " (name VARCHAR (50) UNIQUE NOT NULL, password VARCHAR (50) NOT NULL, id SERIAL PRIMARY KEY)");
@@ -257,7 +256,7 @@ public class IntegrationTest {
     @Test
     public void testConnectWithError() {
         // given
-        in.add("connect|" + DATABASE_NAME);
+        in.add("connect|" + DATABASE);
         in.add("exit");
         // when
         Main.main(new String[0]);

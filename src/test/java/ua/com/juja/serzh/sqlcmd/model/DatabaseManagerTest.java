@@ -2,6 +2,7 @@ package ua.com.juja.serzh.sqlcmd.model;
 
 import org.junit.Before;
 import org.junit.Test;
+import ua.com.juja.serzh.sqlcmd.BeforeTestsChangeNameAndPass;
 
 import java.util.*;
 
@@ -18,7 +19,7 @@ public class DatabaseManagerTest {
     @Before
     public void setup() {
         manager = new JDBCDatabaseManager();
-        manager.connect("sqlcmd5hope5never5exist", "postgres", "postgres");
+        manager.connect(BeforeTestsChangeNameAndPass.DATABASE, BeforeTestsChangeNameAndPass.USER, BeforeTestsChangeNameAndPass.PASSWORD);
     }
 
     @Test

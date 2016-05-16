@@ -54,19 +54,18 @@ public class FindTest {
         data.add(user1);
         data.add(user2);
 
-        when(manager.getTableData("user"))
-                .thenReturn(data);
+        when(manager.getTableData("user")).thenReturn(data);
         // when
         command.process("find|user");
 
         // then
         shouldPrint("[+-----+------+--------+\n" +
-                "|id   |name  |password|\n" +
-                "+-----+------+--------+\n" +
-                "|*****|Stiven|12      |\n" +
-                "+-----+------+--------+\n" +
-                "|+++++|Eva   |13      |\n" +
-                "+-----+------+--------+]");
+                    "|id   |name  |password|\n" +
+                    "+-----+------+--------+\n" +
+                    "|*****|Stiven|12      |\n" +
+                    "+-----+------+--------+\n" +
+                    "|+++++|Eva   |13      |\n" +
+                    "+-----+------+--------+]");
     }
 
     private void shouldPrint(String expected) {
@@ -79,7 +78,6 @@ public class FindTest {
     public void testCanProcessFindWithParametersString() {
         // when
         boolean canProcess = command.canProcess("find|user");
-
         // then
         assertTrue(canProcess);
     }
@@ -87,19 +85,18 @@ public class FindTest {
     @Test
     public void testCantProcessFindWithoutParametersString() {
         // when
-        boolean canProcess = command.canProcess("find");
-
+        boolean canNotProcess = command.canProcess("find");
         // then
-        assertFalse(canProcess);
+        assertFalse(canNotProcess);
     }
 
     @Test
     public void testCantProcessQweString() {
         // when
-        boolean canProcess = command.canProcess("qwe|user");
+        boolean canNotProcess = command.canProcess("qwe|user");
 
         // then
-        assertFalse(canProcess);
+        assertFalse(canNotProcess);
     }
 
     @Test

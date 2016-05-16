@@ -45,14 +45,14 @@ public class ListTest {
 
     @Test
     public void canProcessListWithWrongParameter() {
-        boolean canProcess = command.canProcess("ghkk");
-        assertFalse(canProcess);
+        boolean canNotProcess = command.canProcess("ghkk");
+        assertFalse(canNotProcess);
     }
 
     @Test
     public void canProcessListWithoutParameter() {
-        boolean canProcess = command.canProcess("");
-        assertFalse(canProcess);
+        boolean canNotProcess = command.canProcess("");
+        assertFalse(canNotProcess);
     }
 
     @Test

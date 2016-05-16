@@ -16,6 +16,7 @@ public class JDBCDatabaseManager implements DatabaseManager {
         } catch (ClassNotFoundException e) {
             throw new RuntimeException("Please add dependency postgresql version 9.4.1207.jre7 to project.");
         }
+
         try {
             if (connection != null) {
                 connection.close();

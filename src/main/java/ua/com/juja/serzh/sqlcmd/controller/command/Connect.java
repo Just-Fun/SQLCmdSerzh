@@ -7,9 +7,9 @@ import ua.com.juja.serzh.sqlcmd.view.View;
  * Created by serzh on 5/11/16.
  */
 public class Connect implements Command {
-    private static String COMMAND_SAMPLE = "connect|databaseName|userName|password";
     private DatabaseManager manager;
     private View view;
+    private static String COMMAND_SAMPLE = "connect|databaseName|userName|password";
 
     public Connect(DatabaseManager manager, View view) {
         this.manager = manager;

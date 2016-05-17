@@ -40,7 +40,6 @@ public class FindTest {
     public void testPrintTableData() {
         // given
         setupTableColumns("user", "id", "name", "password");
-//        when(manager.getTableColumns("user")).thenReturn(new LinkedHashSet<>(Arrays.asList("id", "name", "password")));
 
         Map<String, Object> user1 = new HashMap<>();
         user1.put("id", 12);
@@ -59,7 +58,6 @@ public class FindTest {
         when(manager.getTableData("user")).thenReturn(data);
         // when
         command.process("find|user");
-
         // then
         shouldPrint("[+-----+------+--------+\n" +
                     "|id   |name  |password|\n" +
@@ -101,7 +99,6 @@ public class FindTest {
     public void testCantProcessQweString() {
         // when
         boolean canNotProcess = command.canProcess("qwe|user");
-
         // then
         assertFalse(canNotProcess);
     }
@@ -109,14 +106,10 @@ public class FindTest {
     @Test
     public void testPrintEmptyTableData() {
         // given
-//        when(manager.getTableColumns("user")).thenReturn(new LinkedHashSet<>(Arrays.asList("id", "name", "password")));
         setupTableColumns("user", "id", "name", "password");
-
         when(manager.getTableData("user")).thenReturn(new LinkedList<Map<String, Object>>());
-
         // when
         command.process("find|user");
-
         // then
         shouldPrint("[+--+----+--------+\n" +
                 "|id|name|password|\n" +
@@ -125,10 +118,7 @@ public class FindTest {
 
     @Test
     public void testPrintTableDataWithOneColumn() {
-        // given
-//        when(manager.getTableColumns("test")).thenReturn(new LinkedHashSet<>(Arrays.asList("id")));
         setupTableColumns("test", "id");
-
 
         Map<String, Object> user1 = new HashMap<>();
         user1.put("id", 12);
@@ -141,10 +131,8 @@ public class FindTest {
         data.add(user2);
 
         when(manager.getTableData("test")).thenReturn(data);
-
         // when
         command.process("find|test");
-
         // then
         shouldPrint("[+--+\n" +
                 "|id|\n" +

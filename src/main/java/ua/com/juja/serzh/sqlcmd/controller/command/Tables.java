@@ -21,7 +21,7 @@ public class Tables implements Command {
 
     @Override
     public boolean canProcess(String command) {
-        return command.equals("list");
+        return command.equals("tables");
     }
 
     @Override
@@ -37,6 +37,6 @@ public class Tables implements Command {
 
     @Override
     public String commandFormat() {
-        return "list";
+        return "tables";
     }
 }

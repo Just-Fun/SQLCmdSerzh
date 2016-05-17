@@ -42,7 +42,7 @@ public class TablesTest {
 
     @Test
     public void canProcessListWithRightParameter() {
-        boolean canProcess = command.canProcess("list");
+        boolean canProcess = command.canProcess("tables");
         assertTrue(canProcess);
     }
 

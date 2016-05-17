@@ -85,7 +85,7 @@ public class IntegrationTest {
                 "\t\tдля получения содержимого таблицы 'tableName'\n" +
                 "\thelp\n" +
                 "\t\tдля вывода этого списка на экран\n" +
-                "\tlist\n" +
+                "\ttables\n" +
                 "\t\tдля получения списка всех таблиц базы, к которой подключились\n" +
                 "\texit\n" +
                 "\t\tдля выхода из программы\n" +
@@ -117,16 +117,16 @@ public class IntegrationTest {
     }
 
     @Test
-    public void testListWithoutConnect() {
+    public void testTablesWithoutConnect() {
         // given
-        in.add("list");
+        in.add("tables");
         in.add("exit");
         // when
         Main.main(new String[0]);
         // then
         assertEquals(pleaseConnect +
-                // list
-                "Вы не можете пользоваться командой 'list' пока не подключитесь с помощью комманды connect|databaseName|userName|password\n" +
+                // tables
+                "Вы не можете пользоваться командой 'tables' пока не подключитесь с помощью комманды connect|databaseName|userName|password\n" +
                 "Введи команду (или help для помощи):\n" +
                 // exit
                 "До скорой встречи!\n", getData());
@@ -185,10 +185,10 @@ public class IntegrationTest {
     }
 
     @Test
-    public void testListAfterConnect() {
+    public void testTablesAfterConnect() {
         // given
         in.add(commandConnect);
-        in.add("list");
+        in.add("tables");
         in.add("exit");
         // when
         Main.main(new String[0]);
@@ -197,7 +197,7 @@ public class IntegrationTest {
                 // connect
                 "Успех!\n" +
                 "Введи команду (или help для помощи):\n" +
-                // list
+                // tables
                 "[users, test1]\n" +
                 "Введи команду (или help для помощи):\n" +
                 // exit
@@ -229,9 +229,9 @@ public class IntegrationTest {
     public void testConnectAfterConnect() {
         // given
         in.add(commandConnect);
-        in.add("list");
+        in.add("tables");
         in.add("connect|test|" + USER + "|" + PASSWORD);
-        in.add("list");
+        in.add("tables");
         in.add("exit");
         // when
         Main.main(new String[0]);
@@ -240,13 +240,13 @@ public class IntegrationTest {
                 // connect ua.com.juja.serzh.sqlcmd
                 "Успех!\n" +
                 "Введи команду (или help для помощи):\n" +
-                // list
+                // tables
                 "[users, test1]\n" +
                 "Введи команду (или help для помощи):\n" +
                 // connect test
                 "Успех!\n" +
                 "Введи команду (или help для помощи):\n" +
-                // list
+                // tables
                 "[qwe]\n" +
                 "Введи команду (или help для помощи):\n" +
                 // exit

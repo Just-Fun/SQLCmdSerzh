@@ -57,7 +57,7 @@ public class JDBCDatabaseManager implements DatabaseManager {
         try (Statement statement = connection.createStatement()) {
             statement.executeUpdate("CREATE DATABASE " + databaseName);
         } catch (SQLException e) {
-            throw new RuntimeException(e); // TODO имя не может начинаться с цифры и...
+            throw new RuntimeException(e);
         }
     }
 
@@ -186,8 +186,6 @@ public class JDBCDatabaseManager implements DatabaseManager {
             throw new RuntimeException(e);
         }
     }
-
-
 
     // TODO заготовка, может как-нибудь реализовать в userInerface
     @Override

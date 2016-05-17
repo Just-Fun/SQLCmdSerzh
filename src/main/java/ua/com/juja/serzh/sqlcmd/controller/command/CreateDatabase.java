@@ -31,7 +31,7 @@ public class CreateDatabase implements Command {
         view.write(String.format("Database %s была успешно создана.", data[1]));
     }
 
-    @Override
+    @Override // TODO имя не может начинаться с цифры и еще чего-то нельзя, может добавить в описание...
     public String description() {
         return "для создания новой Database";
     }

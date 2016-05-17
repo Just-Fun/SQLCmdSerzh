@@ -32,22 +32,23 @@ public class JDBCDatabaseManager implements DatabaseManager {
 
     @Override
     public List<Map<String, Object>> getTableData(String tableName) {
+        List<Map<String, Object>> result = new LinkedList<>();
+
         try (Statement stmt = connection.createStatement();
              ResultSet tableData = stmt.executeQuery("SELECT * FROM public." + tableName)) {
+            ResultSetMetaData metaData = tableData.getMetaData();
 
-            ResultSetMetaData rsmd = tableData.getMetaData();
-            List<Map<String, Object>> result = new LinkedList<>();
             while (tableData.next()) {
                 Map<String, Object> data = new LinkedHashMap<>();
-                for (int i = 1; i <= rsmd.getColumnCount(); i++) {
-                    data.put(rsmd.getColumnName(i), tableData.getObject(i));
+                for (int i = 1; i <= metaData.getColumnCount(); i++) {
+                    data.put(metaData.getColumnName(i), tableData.getObject(i));
                 }
                 result.add(data);
             }
             return result;
         } catch (SQLException e) {
             e.printStackTrace();
-            return new LinkedList<>();
+            return result;
         }
     }
 

@@ -9,6 +9,8 @@ import java.util.List;
  */
 public class DataSet {
 
+    private List<Data> data = new LinkedList<>();
+
     static class Data {
         private String name;
         private Object value;
@@ -25,9 +27,8 @@ public class DataSet {
         public Object getValue() {
             return value;
         }
-    }
 
-    public List<Data> data = new LinkedList<>();
+    }
 
     public void put(String name, Object value) {
         for (Data d : data) {
@@ -39,18 +40,18 @@ public class DataSet {
         data.add(new Data(name, value));
     }
 
-    public Object[] getValues() {
-        Object[] result = new Object[data.size()];
-        for (int i = 0; i < data.size(); i++) {
-            result[i] = data.get(i).getValue();
+    public List<Object> getValues() {
+        List<Object> result = new LinkedList<>();
+        for (Data d : data){
+            result.add(d.getValue());
         }
         return result;
     }
 
-    public String[] getNames() {
-        String[] result = new String[data.size()];
-        for (int i = 0; i < data.size(); i++) {
-            result[i] = data.get(i).getName();
+    public List<String> getNames() {
+        List<String> result = new LinkedList<>();
+        for (Data d : data){
+            result.add(d.getName());
         }
         return result;
     }
@@ -58,8 +59,8 @@ public class DataSet {
     @Override
     public String toString() {
         return "{" +
-                "names:" + Arrays.toString(getNames()) + ", " +
-                "values:" + Arrays.toString(getValues()) +
+                "names:" + getNames().toString() + ", " +
+                "values:" + getValues().toString() +
                 "}";
     }
 }

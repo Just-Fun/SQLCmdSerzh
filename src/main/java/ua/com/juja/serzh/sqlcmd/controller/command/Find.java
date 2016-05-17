@@ -30,7 +30,7 @@ public class Find implements Command {
         String tableName = data[1];
         Set<String> tableColumns = manager.getTableColumns(tableName);
 
-        java.util.List<Map<String, Object>> tableData = manager.getTableData(tableName);
+        List<Map<String, Object>> tableData = manager.getTableData(tableName);
         TableConstructor constructor = new TableConstructor(tableColumns, tableData);
         view.write(constructor.getTableString());
     }

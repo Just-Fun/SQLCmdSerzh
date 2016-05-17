@@ -1,15 +1,35 @@
 package ua.com.juja.serzh.sqlcmd.model;
 
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by serzh on 5/11/16.
  */
 public class DataSet {
 
-    private List<Data> data = new LinkedList<>();
+    private Map<String, Object> data = new LinkedHashMap<>();
+
+    public void put(String name, Object value) {
+       data.put(name, value);
+    }
+
+    public List<Object> getValues() {
+        return new ArrayList<Object>(data.values());
+    }
+
+    public Set<String> getNames() {
+        return data.keySet();
+    }
+
+    @Override
+    public String toString() {
+        return "{" +
+                "names:" + getNames().toString() + ", " +
+                "values:" + getValues().toString() +
+                "}";
+    }
+
+    /*private List<Data> data = new LinkedList<>();
 
     static class Data {
         private String name;
@@ -27,7 +47,6 @@ public class DataSet {
         public Object getValue() {
             return value;
         }
-
     }
 
     public void put(String name, Object value) {
@@ -62,5 +81,5 @@ public class DataSet {
                 "names:" + getNames().toString() + ", " +
                 "values:" + getValues().toString() +
                 "}";
-    }
+    }*/
 }

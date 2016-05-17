@@ -30,7 +30,7 @@ public class TablesTest {
     @Test
     public void testPrintGetTableNames() {
         when(manager.getTableNames()).thenReturn(new HashSet<String>(Arrays.asList("user", "test")));
-        command.process("list");
+        command.process("tables");
         shouldPrint("[[test, user]]");
     }
 
@@ -61,7 +61,7 @@ public class TablesTest {
     @Test
     public void testPrintEmptyTableData() {
         when(manager.getTableNames()).thenReturn(new HashSet<String>());
-        command.process("list");
+        command.process("tables");
         shouldPrint("[[]]");
     }
 }

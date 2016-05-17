@@ -7,6 +7,7 @@ import ua.com.juja.serzh.sqlcmd.controller.MainController;
 import ua.com.juja.serzh.sqlcmd.model.DatabaseManager;
 import ua.com.juja.serzh.sqlcmd.model.JDBCDatabaseManager;
 import ua.com.juja.serzh.sqlcmd.view.Console;
+import ua.com.juja.serzh.sqlcmd.view.InFile;
 import ua.com.juja.serzh.sqlcmd.view.View;
 
 /**
@@ -19,6 +20,7 @@ public class Main {
         Logger.getRootLogger().setLevel(Level.OFF); //Disable log4j from text table formatter
 
         View view = new Console();
+//        View view = new InFile("/Users/serzh/Desktop/test");
         DatabaseManager manager = new JDBCDatabaseManager();
 
         MainController controller = new MainController(view, manager);

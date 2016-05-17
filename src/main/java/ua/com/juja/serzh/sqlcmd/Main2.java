@@ -11,5 +11,6 @@ public class Main2 {
     public static void main(String[] args) {
         Set<String> set = new HashSet<>(Arrays.asList("11", "22", "a", "h", "bbvfgg"));
         System.out.println(set);
+
     }
 }

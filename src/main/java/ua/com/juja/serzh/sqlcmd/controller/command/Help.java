@@ -28,7 +28,7 @@ public class Help implements Command {
                 new Insert(manager, view),
                 new Find(manager, view),
                 this,
-                new ua.com.juja.serzh.sqlcmd.controller.command.List(manager, view),
+                new Tables(manager, view),
                 new Exit(view)
         ));
     }

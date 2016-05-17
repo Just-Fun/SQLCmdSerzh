@@ -15,7 +15,7 @@ import static org.mockito.Mockito.*;
 /**
  * Created by serzh on 1/25/16.
  */
-public class ListTest {
+public class TablesTest {
     private DatabaseManager manager;
     private View view;
     private Command command;
@@ -24,7 +24,7 @@ public class ListTest {
     public void setup() {
         manager = mock(DatabaseManager.class);
         view = mock(View.class);
-        command = new List(manager, view);
+        command = new Tables(manager, view);
     }
 
     @Test

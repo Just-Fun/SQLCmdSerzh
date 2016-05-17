@@ -15,6 +15,7 @@ import java.util.List;
 import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.fail;
 import static org.mockito.Mockito.*;
 
 /**
@@ -152,5 +153,25 @@ public class FindTest {
                 "+--+\n" +
                 "|13|\n" +
                 "+--+]");
+    }
+
+    @Test
+    public void testValidationErrorWhenCountParametersIsLessThan2() {
+        try {
+            command.process("find");
+            fail();
+        } catch (IllegalArgumentException e) {
+            assertEquals("Формат команды 'find|tableName', а ты ввел: find", e.getMessage());
+        }
+    }
+
+    @Test
+    public void testValidationErrorWhenCountParametersIsMoreThan2() {
+        try {
+            command.process("find|table|qwe");
+            fail();
+        } catch (IllegalArgumentException e) {
+            assertEquals("Формат команды 'find|tableName', а ты ввел: find|table|qwe", e.getMessage());
+        }
     }
 }

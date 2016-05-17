@@ -230,7 +230,7 @@ public class IntegrationTest {
         // given
         in.add(commandConnect);
         in.add("list");
-        in.add("connect|test|postgres|postgres");
+        in.add("connect|test|" + USER + "|" + PASSWORD);
         in.add("list");
         in.add("exit");
         // when

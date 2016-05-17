@@ -27,8 +27,6 @@ public class List implements Command {
     @Override
     public void process(String command) {
         Set<String> tableNames = manager.getTableNames();
-//        String message = Arrays.toString(tableNames);
-//        view.write(message);
         view.write(tableNames.toString());
     }
 

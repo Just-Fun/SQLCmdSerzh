@@ -25,7 +25,7 @@ public class DatabaseManagerTest {
     @Test
     public void testGetAllTableNames() {
         Set<String> tableNames = manager.getTableNames();
-        assertEquals("[test1, users]", tableNames.toString());
+        assertEquals("[users, test1]", tableNames.toString());
     }
 
     @Test
@@ -133,7 +133,7 @@ public class DatabaseManagerTest {
     @Test
     public void tablesList() {
         Set<String> tables = manager.getTableNames();
-        assertEquals("[test1, users]", tables.toString());
+        assertEquals("[users, test1]", tables.toString());
     }
 
     @Test

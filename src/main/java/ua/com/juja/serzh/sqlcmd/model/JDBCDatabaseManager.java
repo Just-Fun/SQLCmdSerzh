@@ -72,19 +72,17 @@ public class JDBCDatabaseManager implements DatabaseManager {
 
     @Override
     public Set<String> getTableNames() {
+        Set<String> tables = new LinkedHashSet<>();
         try (Statement stmt = connection.createStatement();
-             ResultSet tableNames = stmt.executeQuery("SELECT table_name FROM information_schema.tables WHERE table_schema='public' " +
-                     "AND table_type='BASE TABLE'")) {
-            Set<String> tables = new HashSet<>();
-//            int index = 0;
+             ResultSet tableNames = stmt.executeQuery("SELECT table_name FROM information_schema.tables " +
+                     "WHERE table_schema='public' AND table_type='BASE TABLE'")) {
             while (tableNames.next()) {
                 tables.add(tableNames.getString("table_name"));
             }
-//            tables = Arrays.copyOf(tables, index, String[].class);
             return tables;
         } catch (SQLException e) {
             e.printStackTrace();
-            return new HashSet<>();
+            return tables;
         }
     }
 
@@ -133,17 +131,17 @@ public class JDBCDatabaseManager implements DatabaseManager {
 
     @Override
     public Set<String> getTableColumns(String tableName) {
+        Set<String> tables = new LinkedHashSet<>();
         try (Statement stmt = connection.createStatement();
              ResultSet tableColumns = stmt.executeQuery("SELECT * FROM information_schema.columns WHERE " +
                      "table_schema = 'public' AND table_name = '" + tableName + "'")) {
-            Set<String> tables = new LinkedHashSet<>();
             while (tableColumns.next()) {
                 tables.add(tableColumns.getString("column_name"));
             }
             return tables;
         } catch (SQLException e) {
             e.printStackTrace();
-            return new LinkedHashSet<>();
+            return tables;
         }
     }
 

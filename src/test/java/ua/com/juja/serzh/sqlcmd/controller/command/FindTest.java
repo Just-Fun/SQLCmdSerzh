@@ -38,7 +38,8 @@ public class FindTest {
     @Test
     public void testPrintTableData() {
         // given
-        when(manager.getTableColumns("user")).thenReturn(new LinkedHashSet<>(Arrays.asList("id", "name", "password")));
+        setupTableColumns("user", "id", "name", "password");
+//        when(manager.getTableColumns("user")).thenReturn(new LinkedHashSet<>(Arrays.asList("id", "name", "password")));
 
         Map<String, Object> user1 = new HashMap<>();
         user1.put("id", 12);
@@ -66,6 +67,11 @@ public class FindTest {
                     "+-----+------+--------+\n" +
                     "|+++++|Eva   |13      |\n" +
                     "+-----+------+--------+]");
+    }
+
+    private void setupTableColumns(String tableName, String... columns) {
+        when(manager.getTableColumns(tableName)).thenReturn(new LinkedHashSet<>(Arrays.asList(columns)));
+
     }
 
     private void shouldPrint(String expected) {
@@ -102,7 +108,8 @@ public class FindTest {
     @Test
     public void testPrintEmptyTableData() {
         // given
-        when(manager.getTableColumns("user")).thenReturn(new LinkedHashSet<>(Arrays.asList("id", "name", "password")));
+//        when(manager.getTableColumns("user")).thenReturn(new LinkedHashSet<>(Arrays.asList("id", "name", "password")));
+        setupTableColumns("user", "id", "name", "password");
 
         when(manager.getTableData("user")).thenReturn(new LinkedList<Map<String, Object>>());
 
@@ -118,7 +125,9 @@ public class FindTest {
     @Test
     public void testPrintTableDataWithOneColumn() {
         // given
-        when(manager.getTableColumns("test")).thenReturn(new LinkedHashSet<>(Arrays.asList("id")));
+//        when(manager.getTableColumns("test")).thenReturn(new LinkedHashSet<>(Arrays.asList("id")));
+        setupTableColumns("test", "id");
+
 
         Map<String, Object> user1 = new HashMap<>();
         user1.put("id", 12);

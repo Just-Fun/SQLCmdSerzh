@@ -198,7 +198,7 @@ public class IntegrationTest {
                 "Успех!\n" +
                 "Введи команду (или help для помощи):\n" +
                 // list
-                "[users, test1]\n" +
+                "[test1, users]\n" +
                 "Введи команду (или help для помощи):\n" +
                 // exit
                 "До скорой встречи!\n", getData());
@@ -241,7 +241,7 @@ public class IntegrationTest {
                 "Успех!\n" +
                 "Введи команду (или help для помощи):\n" +
                 // list
-                "[users, test1]\n" +
+                "[test1, users]\n" +
                 "Введи команду (или help для помощи):\n" +
                 // connect test
                 "Успех!\n" +

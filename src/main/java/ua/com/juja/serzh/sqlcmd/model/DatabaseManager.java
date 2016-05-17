@@ -11,7 +11,7 @@ public interface DatabaseManager {
 
     List<Map<String, Object>> getTableData(String tableName);
 
-    String[] getTableNames();
+    Set<String> getTableNames();
 
     void connect(String database, String userName, String password);
 

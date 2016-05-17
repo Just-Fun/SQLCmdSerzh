@@ -71,20 +71,20 @@ public class JDBCDatabaseManager implements DatabaseManager {
     }
 
     @Override
-    public String[] getTableNames() {
+    public Set<String> getTableNames() {
         try (Statement stmt = connection.createStatement();
              ResultSet tableNames = stmt.executeQuery("SELECT table_name FROM information_schema.tables WHERE table_schema='public' " +
                      "AND table_type='BASE TABLE'")) {
-            String[] tables = new String[100];
-            int index = 0;
+            Set<String> tables = new HashSet<>();
+//            int index = 0;
             while (tableNames.next()) {
-                tables[index++] = tableNames.getString("table_name");
+                tables.add(tableNames.getString("table_name"));
             }
-            tables = Arrays.copyOf(tables, index, String[].class);
+//            tables = Arrays.copyOf(tables, index, String[].class);
             return tables;
         } catch (SQLException e) {
             e.printStackTrace();
-            return new String[0];
+            return new HashSet<>();
         }
     }
 

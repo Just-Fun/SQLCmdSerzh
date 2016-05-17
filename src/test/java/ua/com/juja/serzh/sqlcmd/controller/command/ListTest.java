@@ -6,6 +6,9 @@ import org.mockito.ArgumentCaptor;
 import ua.com.juja.serzh.sqlcmd.model.DatabaseManager;
 import ua.com.juja.serzh.sqlcmd.view.View;
 
+import java.util.Arrays;
+import java.util.HashSet;
+
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
@@ -26,9 +29,9 @@ public class ListTest {
 
     @Test
     public void testPrintGetTableNames() {
-        when(manager.getTableNames()).thenReturn(new String[]{"user", "test"});
+        when(manager.getTableNames()).thenReturn(new HashSet<String>(Arrays.asList("user", "test")));
         command.process("list");
-        shouldPrint("[[user, test]]");
+        shouldPrint("[[test, user]]");
     }
 
     private void shouldPrint(String expected) {
@@ -57,7 +60,7 @@ public class ListTest {
 
     @Test
     public void testPrintEmptyTableData() {
-        when(manager.getTableNames()).thenReturn(new String[]{});
+        when(manager.getTableNames()).thenReturn(new HashSet<String>());
         command.process("list");
         shouldPrint("[[]]");
     }

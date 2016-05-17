@@ -187,8 +187,11 @@ public class JDBCDatabaseManager implements DatabaseManager {
         }
     }
 
+
+
     // TODO заготовка, может как-нибудь реализовать в userInerface
-    private int getSize(String tableName) {
+    @Override
+    public int getSize(String tableName) {
         try (Statement stmt = connection.createStatement();
              ResultSet tableSize = stmt.executeQuery("SELECT COUNT(*) FROM public." + tableName)) {
             tableSize.next();

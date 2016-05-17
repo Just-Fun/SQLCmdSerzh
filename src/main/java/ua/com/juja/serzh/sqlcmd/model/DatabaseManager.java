@@ -32,4 +32,6 @@ public interface DatabaseManager {
     Set<String> getTableColumns(String tableName);
 
     boolean isConnected();
+
+    int getSize(String tableName);
 }

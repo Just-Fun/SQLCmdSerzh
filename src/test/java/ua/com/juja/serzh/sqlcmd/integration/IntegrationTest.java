@@ -34,7 +34,7 @@ public class IntegrationTest {
         try {
         manager.connect("", USER, PASSWORD);
         } catch (RuntimeException e) {
-            throw new RuntimeException("Измените имя и пароль в классе BeforeTestsChangeNameAndPass на ваши" + "\n" + e.getCause());
+            throw new RuntimeException("Для работы тестов измените имя и пароль в классе BeforeTestsChangeNameAndPass." + "\n" + e.getCause());
         }
         manager.dropDatabase(DATABASE);
         manager.createDatabase(DATABASE);

@@ -19,7 +19,7 @@
                 </configuration>
             </plugin>
 
-            <!-- make jar executable -->
+            <!-- make jar executable, понять надо ли -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>

@@ -1,9 +1,6 @@
 package ua.com.juja.serzh.sqlcmd.view;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
@@ -20,17 +17,19 @@ public class InFile implements View {
 
     @Override
     public void write(String message) {
+        PrintWriter out = null;
         try {
             File file = new File(pathname);
             if (!file.exists()) {
                 file.createNewFile();
             }
-            BufferedWriter writer = new BufferedWriter(new FileWriter(file.getAbsoluteFile()));
-            writer.write(message);
-            writer.flush();
-            writer.close();
+            out = new PrintWriter(new BufferedWriter(new FileWriter(file.getAbsoluteFile())));
+            out.println(message);
+            out.flush();
         } catch (IOException e) {
             e.printStackTrace();
+        } finally {
+            out.close();
         }
     }
 

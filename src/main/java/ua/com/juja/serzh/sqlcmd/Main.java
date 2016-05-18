@@ -20,7 +20,7 @@ public class Main {
         Logger.getRootLogger().setLevel(Level.OFF); //Disable log4j from text table formatter
 
         View view = new Console();
-//        View view = new InFile("/Users/serzh/Desktop/test");
+//        View view = new InFile("massage.txt");
         DatabaseManager manager = new JDBCDatabaseManager();
 
         MainController controller = new MainController(view, manager);

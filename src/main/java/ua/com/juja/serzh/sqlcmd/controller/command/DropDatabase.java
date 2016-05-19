@@ -24,7 +24,7 @@ public class DropDatabase implements Command {
     public void process(String command) {
         String[] data = command.split("\\|");
         if (data.length != 2) {
-            throw new IllegalArgumentException("Формат команды 'dropDB|databaseName', а ты ввел: " + command);
+            throw new IllegalArgumentException(String.format("Формат команды '%s', а ты ввел: %s", commandFormat(), command));
         }
         manager.dropDatabase(data[1]);
 

@@ -9,7 +9,7 @@ public interface Command {
 
     void process(String command);
 
-    public String description();
+    String description();
 
-    public String commandFormat();
+    String commandFormat();
 }

@@ -23,7 +23,7 @@ public class CreateTable implements Command {
     @Override
     public void process(String command) {
         String[] data = command.split("\\|");
-        // TODO сделать у всех команд одинаковый формат вывода сообщений об ошибке
+        // TODO сделать у всех команд одинаковый формат вывода сообщений об ошибке, у Жени реализовано
         if (data.length != 2) {
             throw new IllegalArgumentException("Формат команды 'createTable|tableName', а ты ввел: " + command);
         }

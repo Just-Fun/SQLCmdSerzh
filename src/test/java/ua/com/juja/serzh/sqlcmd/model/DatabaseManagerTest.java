@@ -103,7 +103,7 @@ public class DatabaseManagerTest {
     @Test
     public void testGetColumnNames() {
         // given
-        manager.clear("users");
+//        manager.clear("users");
         // when
         Set<String> columnNames = manager.getTableColumns("users");
         // then

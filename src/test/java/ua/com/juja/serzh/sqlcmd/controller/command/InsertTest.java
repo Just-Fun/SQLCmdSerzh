@@ -1,14 +1,18 @@
 package ua.com.juja.serzh.sqlcmd.controller.command;
 
+import org.apache.log4j.BasicConfigurator;
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
-import ua.com.juja.serzh.sqlcmd.model.DataSet;
 import ua.com.juja.serzh.sqlcmd.model.DatabaseManager;
 import ua.com.juja.serzh.sqlcmd.view.View;
 
 import static org.junit.Assert.*;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.atLeastOnce;
+import static org.mockito.Mockito.verify;
 
 /**
  * Created by serzh on 5/19/16.
@@ -23,6 +27,9 @@ public class InsertTest {
         manager = Mockito.mock(DatabaseManager.class);
         view = Mockito.mock(View.class);
         command = new Insert(manager, view);
+
+        BasicConfigurator.configure();
+        Logger.getRootLogger().setLevel(Level.OFF); //Disable log4j from text table formatter
     }
 
     @Test
@@ -40,9 +47,19 @@ public class InsertTest {
     @Test
     public void testProcess() throws Exception {
        /* DataSet dataSet = new DataSet();
-        dataSet.put("Vasia", 1);
-        dataSet.put("Petia", 2);
-        when(manager.insert("user", dataSet)).thenReturn();*/
+        dataSet.put("name", "Vasia");
+        dataSet.put("password", "****");
+        dataSet.put("id", "22");*/
+
+        command.process("insert|user|name|Vasia|password|****|id|22");
+        ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
+        verify(view, atLeastOnce()).write(captor.capture());
+        assertEquals("[В таблице 'user' была успешно добавлена запись:, " +
+                     "+-----+--------+--+\n" +
+                     "|name |password|id|\n" +
+                     "+-----+--------+--+\n" +
+                     "|Vasia|****    |22|\n" +
+                     "+-----+--------+--+]", captor.getAllValues().toString());
     }
 
     @Test

@@ -46,29 +46,38 @@ public class InsertTest {
 
     @Test
     public void testProcess() throws Exception {
-       /* DataSet dataSet = new DataSet();
-        dataSet.put("name", "Vasia");
-        dataSet.put("password", "****");
-        dataSet.put("id", "22");*/
-
         command.process("insert|user|name|Vasia|password|****|id|22");
         ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
         verify(view, atLeastOnce()).write(captor.capture());
         assertEquals("[В таблице 'user' была успешно добавлена запись:, " +
-                     "+-----+--------+--+\n" +
-                     "|name |password|id|\n" +
-                     "+-----+--------+--+\n" +
-                     "|Vasia|****    |22|\n" +
-                     "+-----+--------+--+]", captor.getAllValues().toString());
+                "+-----+--------+--+\n" +
+                "|name |password|id|\n" +
+                "+-----+--------+--+\n" +
+                "|Vasia|****    |22|\n" +
+                "+-----+--------+--+]", captor.getAllValues().toString());
     }
 
     @Test
-    public void testDescription() throws Exception {
-
+    public void testWithWrongParameters() throws Exception {
+        try {
+            command.process("insert|user|name");
+            fail("Expected IllegalArgumentException...");
+        } catch (Exception e) {
+            assertEquals("Должно быть четное количество параметров в формате " +
+                    "'insert|tableName|column1|value1|column2|value2|...|columnN|valueN', " +
+                    "а ты прислал: 'insert|user|name'", e.getMessage());
+        }
     }
 
     @Test
-    public void testCommandFormat() throws Exception {
-
+    public void testWithoutParameters() throws Exception {
+        try {
+            command.process("insert|");
+            fail("Expected IllegalArgumentException...");
+        } catch (Exception e) {
+            assertEquals("Должно быть четное количество параметров в формате " +
+                    "'insert|tableName|column1|value1|column2|value2|...|columnN|valueN', " +
+                    "а ты прислал: 'insert|'", e.getMessage());
+        }
     }
 }

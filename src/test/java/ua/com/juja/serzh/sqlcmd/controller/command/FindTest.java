@@ -75,7 +75,7 @@ public class FindTest {
 
     private void shouldPrint(String expected) {
         ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
-        verify(view, atLeastOnce()).write(captor.capture());
+        verify(view, atLeastOnce()).write(captor.capture()); // все что на view при вызове write - записать в captor
         assertEquals(expected, captor.getAllValues().toString());
     }
 

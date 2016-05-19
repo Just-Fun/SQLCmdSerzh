@@ -1,7 +1,9 @@
 package ua.com.juja.serzh.sqlcmd.controller.command;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
+import ua.com.juja.serzh.sqlcmd.model.DatabaseManager;
 import ua.com.juja.serzh.sqlcmd.view.View;
 
 import static junit.framework.TestCase.assertTrue;
@@ -13,25 +15,28 @@ import static org.junit.Assert.fail;
  */
 public class ExitTest {
     private View view = Mockito.mock(View.class);
+    private Command command;
+
+    @Before
+    public void setup() {
+        view = Mockito.mock(View.class);
+        command = new Exit(view);
+    }
 
     @Test
     public void testCanProcessExitString() {
-        Command command = new Exit(view);
         boolean canProcess = command.canProcess("exit");
         assertTrue(canProcess);
     }
 
     @Test
     public void testCantProcessQweString() {
-        Command command = new Exit(view);
         boolean canNotProcess = command.canProcess("qwe");
         assertFalse(canNotProcess);
     }
 
     @Test
     public void testProcessExitCommand_thowsExitException() {
-        Command command = new Exit(view);
-
         try {
             command.process("exit");
             fail("Expected ExitException");

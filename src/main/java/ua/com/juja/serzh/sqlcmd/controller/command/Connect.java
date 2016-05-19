@@ -9,7 +9,7 @@ import ua.com.juja.serzh.sqlcmd.view.View;
 public class Connect implements Command {
     private DatabaseManager manager;
     private View view;
-    private static String COMMAND_SAMPLE = "connect|databaseName|userName|password";
+    private final static String COMMAND_SAMPLE = "connect|databaseName|userName|password";
 
     public Connect(DatabaseManager manager, View view) {
         this.manager = manager;

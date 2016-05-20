@@ -2,7 +2,12 @@ package ua.com.juja.serzh.sqlcmd.controller.command;
 
 import ua.com.juja.serzh.sqlcmd.controller.util.UserInput;
 import ua.com.juja.serzh.sqlcmd.model.DatabaseManager;
+import ua.com.juja.serzh.sqlcmd.model.TableConstructor;
 import ua.com.juja.serzh.sqlcmd.view.View;
+
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by serzh on 5/11/16.
@@ -27,13 +32,11 @@ public class CreateTable implements Command {
         validation(input, data);
         String command = data[1];
         manager.createTable(command);
-        view.write(String.format("Таблица %s была успешно создана.", command));
-        //TODO сделать красивый вывод таблицы
-       /* String tableName = command.split("\\(")[0];
-        view.write(String.format("Таблица %s была успешно создана.", tableName));
 
-        TableConstructor constructor = new TableConstructor(dataSet.getNames(), null);
-        */
+        String tableName = command.split("\\(")[0];
+        view.write(String.format("Таблица %s была успешно создана.", tableName));
+        Command find = new Find(manager, view);
+        find.process(new UserInput("find|" + tableName));
     }
 
     private void validation(UserInput input, String[] data) {

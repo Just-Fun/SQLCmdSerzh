@@ -17,13 +17,9 @@ public class DataSet {
         return new ArrayList<>(data.values());
     }
 
-    public Set<String> getNames() {
-        return data.keySet();
-    }
+    public Set<String> getNames() { return data.keySet(); }
 
-    public Map<String, Object> returnData() {
-        return data;
-    }
+    public Map<String, Object> returnData() { return data; }
 
     @Override
     public String toString() {

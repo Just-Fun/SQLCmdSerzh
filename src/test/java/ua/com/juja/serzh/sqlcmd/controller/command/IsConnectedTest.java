@@ -7,6 +7,7 @@ import ua.com.juja.serzh.sqlcmd.controller.util.UserInput;
 import ua.com.juja.serzh.sqlcmd.model.DatabaseManager;
 import ua.com.juja.serzh.sqlcmd.view.View;
 
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.verify;
 
 /**
@@ -28,5 +29,17 @@ public class IsConnectedTest {
     public void testProcess() throws Exception {
         command.process(new UserInput("if does not connected"));
         verify(view).write("Вы не можете пользоваться командой 'if does not connected' пока не подключитесь с помощью комманды connect|databaseName|userName|password");
+    }
+
+    @Test
+    public void testDescription() throws Exception {
+        String description = command.description();
+        assertEquals(null, description);
+    }
+
+    @Test
+    public void testCommandFormat() throws Exception {
+        String description = command.commandFormat();
+        assertEquals(null, description);
     }
 }

@@ -33,4 +33,16 @@ public class UnsupportedTest {
         command.process(new UserInput("ifDontMatchAnyCommand"));
         verify(view).write("Несуществующая команда: ifDontMatchAnyCommand");
     }
+
+    @Test
+    public void testDescription() throws Exception {
+        String description = command.description();
+        assertEquals(null, description);
+    }
+
+    @Test
+    public void testCommandFormat() throws Exception {
+        String description = command.commandFormat();
+        assertEquals(null, description);
+    }
 }

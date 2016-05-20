@@ -34,7 +34,7 @@ public class Insert implements Command {
                     "а ты прислал: '%s'", command));
         }
         String tableName = data[1];
-// TODO убрать дублирование, а может выпилить вообще везде этот DataSet
+// TODO убрать дублирование, а может выпилить вообще везде этот DataSet, подумать
         Map<String, Object> map = new LinkedHashMap<>();
         DataSet dataSet = new DataSet();
         for (int index = 1; index < (data.length / 2); index++) {

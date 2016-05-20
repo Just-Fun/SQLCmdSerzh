@@ -5,18 +5,20 @@ package ua.com.juja.serzh.sqlcmd.controller.command;
  */
 public class UserCommand {
     String userCommand;
-    String commandFormat;
-    Command command;
 
-    public UserCommand(String userCommand, Command command) {
+    public UserCommand(String userCommand) {
         this.userCommand = userCommand;
-        this.command = command;
+
     }
 
-    public void validation(String userCommand, int num) {
-        String[] data = userCommand.split("\\|");
-        if (data.length != 2) {
-            throw new IllegalArgumentException(String.format("Формат команды '%s', а ты ввел: %s", command.commandFormat(), command));
+    public void validation(String commandFormat) {
+        int formatLength = (commandFormat.split("\\|")).length;
+        if (formatLength != userCommandLength()) {
+            throw new IllegalArgumentException(String.format("Формат команды '%s', а ты ввел: %s", commandFormat, userCommand));
         }
+    }
+
+    private int userCommandLength() {
+        return (userCommand.split("\\|")).length;
     }
 }

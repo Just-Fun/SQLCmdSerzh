@@ -27,29 +27,14 @@ public class Insert implements Command {
 
     @Override
     public void process(UserInput input) {
-        String[] data = input.splitCommand();
-        if (data.length % 2 != 0) {
-            throw new IllegalArgumentException(String.format("Должно быть четное " +
-                    "количество параметров в формате " +
-                    "'insert|tableName|column1|value1|column2|value2|...|columnN|valueN', " +
-                    "а ты прислал: '%s'", input.toString()));
-        }
-
+        String[] data = input.splitInput();
+        validation(input, data);
         String tableName = data[1];
-// TODO убрать дублирование, а может выпилить вообще везде этот DataSet,
-        Map<String, Object> map = new LinkedHashMap<>();
-        DataSet dataSet = new DataSet();
-        for (int index = 1; index < (data.length / 2); index++) {
-            String columnName = data[index * 2];
-            String value = data[index * 2 + 1];
-            dataSet.put(columnName, value);
-            map.put(columnName, value);
-        }
-        manager.insert(tableName, dataSet);
+        DataSet command = getDataSet(data);
 
-        List<Map<String, Object>> tableData = new LinkedList<>();
-        tableData.add(map);
-        TableConstructor constructor = new TableConstructor(dataSet.getNames(), tableData);
+        manager.insert(tableName, command);
+
+        TableConstructor constructor = getTableConstructor(command);
         view.write(String.format("В таблице '%s' была успешно добавлена запись:", tableName));
         view.write(constructor.getTableString());
     }
@@ -62,5 +47,32 @@ public class Insert implements Command {
     @Override
     public String commandFormat() {
         return "insert|tableName|column1|value1|column2|value2|...|columnN|valueN";
+    }
+
+    private DataSet getDataSet(String[] data) {
+        DataSet dataSet = new DataSet();
+        for (int index = 1; index < (data.length / 2); index++) {
+            String columnName = data[index * 2];
+            String value = data[index * 2 + 1];
+            dataSet.put(columnName, value);
+        }
+        return dataSet;
+    }
+
+    private TableConstructor getTableConstructor(DataSet dataSet) {
+        Map<String, Object> map = new LinkedHashMap<>();
+        map.putAll(dataSet.returnData());
+
+        List<Map<String, Object>> tableData = new LinkedList<>();
+        tableData.add(map);
+        return new TableConstructor(dataSet.getNames(), tableData);
+    }
+
+    private void validation(UserInput input, String[] data) {
+        if (data.length % 2 != 0) {
+            throw new IllegalArgumentException(String.format("Должно быть четное количество параметров" +
+                    " в формате 'insert|tableName|column1|value1|column2|value2|...|columnN|valueN', " +
+                    "а ты прислал: '%s'", input.toString()));
+        }
     }
 }

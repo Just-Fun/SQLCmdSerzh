@@ -25,7 +25,7 @@ public class Connect implements Command {
     @Override
     public void process(UserInput input) {
         input.validation(commandFormat());
-        String[] data = input.splitCommand();
+        String[] data = input.splitInput();
         String databaseName = data[1];
         String userName = data[2];
         String password = data[3];

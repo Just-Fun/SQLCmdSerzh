@@ -24,7 +24,7 @@ public class DropTable implements Command {
     @Override
     public void process(UserInput input) {
         input.validation(commandFormat());
-        String tableName = input.splitCommand()[1];
+        String tableName = input.splitInput()[1];
 
         manager.dropTable(tableName);
         view.write(String.format("Таблица %s была успешно удалена.", tableName));

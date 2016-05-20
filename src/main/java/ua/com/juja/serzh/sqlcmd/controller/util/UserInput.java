@@ -22,7 +22,7 @@ public class UserInput {
         return (userCommand.split("\\|")).length;
     }
 
-    public String[] splitCommand() { return userCommand.split("\\|"); }
+    public String[] splitInput() { return userCommand.split("\\|"); }
 
     @Override
     public String toString() {

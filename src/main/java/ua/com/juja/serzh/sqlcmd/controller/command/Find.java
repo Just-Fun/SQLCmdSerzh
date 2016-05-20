@@ -28,7 +28,7 @@ public class Find implements Command {
     @Override
     public void process(UserInput input) {
         input.validation(commandFormat());
-        String tableName = input.splitCommand()[1];
+        String tableName = input.splitInput()[1];
         Set<String> tableColumns = manager.getTableColumns(tableName);
         List<Map<String, Object>> tableData = manager.getTableData(tableName);
         TableConstructor constructor = new TableConstructor(tableColumns, tableData);

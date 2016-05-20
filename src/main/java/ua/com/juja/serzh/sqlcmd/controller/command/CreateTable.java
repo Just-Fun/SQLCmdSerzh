@@ -23,13 +23,24 @@ public class CreateTable implements Command {
 
     @Override
     public void process(UserInput input) {
-        String[] data = input.splitCommand();
+        String[] data = input.splitInput();
+        validation(input, data);
+        String command = data[1];
+        manager.createTable(command);
+        view.write(String.format("Таблица %s была успешно создана.", command));
+        //TODO сделать красивый вывод таблицы
+       /* String tableName = command.split("\\(")[0];
+        view.write(String.format("Таблица %s была успешно создана.", tableName));
+
+        TableConstructor constructor = new TableConstructor(dataSet.getNames(), null);
+        */
+    }
+
+    private void validation(UserInput input, String[] data) {
         if (data.length != 2) {
             throw new IllegalArgumentException("Формат команды 'createTable|tableName(column1,column2,...,columnN)' " +
                     "в SQL!!! формате, а ты ввел: " + input.toString());
         }
-        manager.createTable(data[1]);
-        view.write(String.format("Таблица %s была успешно создана.", data[1]));
     }
 
     @Override

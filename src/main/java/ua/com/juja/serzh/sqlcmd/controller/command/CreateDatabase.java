@@ -24,7 +24,7 @@ public class CreateDatabase implements Command {
     @Override
     public void process(UserInput input) {
         input.validation(commandFormat());
-        String databaseName = input.splitCommand()[1];
+        String databaseName = input.splitInput()[1];
 
         manager.createDatabase(databaseName);
         view.write(String.format("Database %s была успешно создана.", databaseName));

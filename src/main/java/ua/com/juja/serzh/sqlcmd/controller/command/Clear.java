@@ -7,7 +7,7 @@ import ua.com.juja.serzh.sqlcmd.view.View;
 /**
  * Created by serzh on 5/11/16.
  */
-public class Clear implements Command {
+public class Clear extends CommandAbstract implements Command {
     private DatabaseManager manager;
     private View view;
 
@@ -16,10 +16,16 @@ public class Clear implements Command {
         this.view = view;
     }
 
+    // TODO сделать метод canProcess1 универсальным
+    public boolean canProcess2(UserInput input) {
+        return super.canProcess1(input);
+    }
+
     @Override
     public boolean canProcess(String command) {
-        return command.startsWith("clear|");
+        return command.split("\\|")[0].equals("clear");
     }
+
 
     @Override
     public void process(UserInput input) {

@@ -10,6 +10,11 @@ public class UserInput {
         this.userCommand = userCommand;
 
     }
+    public boolean validationCommandName(String commandFormat) {
+        String nameCommand = commandFormat.split("\\|")[0];
+        String inputCmmand = userCommand.split("\\|")[0];
+        return nameCommand.equals(inputCmmand);
+    }
 
     public void validation(String commandFormat) {
         int formatLength = (commandFormat.split("\\|")).length;

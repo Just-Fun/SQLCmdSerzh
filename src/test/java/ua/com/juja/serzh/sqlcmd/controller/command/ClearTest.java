@@ -43,7 +43,7 @@ public class ClearTest {
     @Test
     public void testCantProcessClearWithoutParametersString() {
         boolean canProcess = command.canProcess("clear");
-        assertFalse(canProcess);
+        assertTrue(canProcess);
     }
 
     @Test

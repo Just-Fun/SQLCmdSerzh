@@ -6,6 +6,7 @@ import org.apache.log4j.Logger;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
+import ua.com.juja.serzh.sqlcmd.controller.util.UserInput;
 import ua.com.juja.serzh.sqlcmd.model.DatabaseManager;
 import ua.com.juja.serzh.sqlcmd.view.View;
 
@@ -57,7 +58,7 @@ public class FindTest {
 
         when(manager.getTableData("user")).thenReturn(data);
         // when
-        command.process("find|user");
+        command.process(new UserInput("find|user"));
         // then
         shouldPrint("[+-----+------+--------+\n" +
                     "|id   |name  |password|\n" +
@@ -109,7 +110,7 @@ public class FindTest {
         setupTableColumns("user", "id", "name", "password");
         when(manager.getTableData("user")).thenReturn(new LinkedList<Map<String, Object>>());
         // when
-        command.process("find|user");
+        command.process(new UserInput("find|user"));
         // then
         shouldPrint("[+--+----+--------+\n" +
                 "|id|name|password|\n" +
@@ -132,7 +133,7 @@ public class FindTest {
 
         when(manager.getTableData("test")).thenReturn(data);
         // when
-        command.process("find|test");
+        command.process(new UserInput("find|test"));
         // then
         shouldPrint("[+--+\n" +
                 "|id|\n" +
@@ -146,7 +147,7 @@ public class FindTest {
     @Test
     public void testValidationErrorWhenCountParametersIsLessThan2() {
         try {
-            command.process("find");
+            command.process(new UserInput("find"));
             fail();
         } catch (IllegalArgumentException e) {
             assertEquals("Формат команды 'find|tableName', а ты ввел: find", e.getMessage());
@@ -156,7 +157,7 @@ public class FindTest {
     @Test
     public void testValidationErrorWhenCountParametersIsMoreThan2() {
         try {
-            command.process("find|table|qwe");
+            command.process(new UserInput("find|table|qwe"));
             fail();
         } catch (IllegalArgumentException e) {
             assertEquals("Формат команды 'find|tableName', а ты ввел: find|table|qwe", e.getMessage());

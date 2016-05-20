@@ -1,5 +1,6 @@
 package ua.com.juja.serzh.sqlcmd.controller.command;
 
+import ua.com.juja.serzh.sqlcmd.controller.util.UserInput;
 import ua.com.juja.serzh.sqlcmd.model.DatabaseManager;
 import ua.com.juja.serzh.sqlcmd.view.View;
 
@@ -22,10 +23,9 @@ public class IsConnected implements Command {
     }
 
     @Override
-    public void process(String command) {
-        view.write(String.format("Вы не можете пользоваться командой '%s' пока " +
-                "не подключитесь с помощью комманды " +
-                "connect|databaseName|userName|password", command));
+    public void process(UserInput input) {
+        view.write(String.format("Вы не можете пользоваться командой '%s' пока не подключитесь " +
+                "с помощью комманды connect|databaseName|userName|password", input.toString()));
     }
 
     @Override

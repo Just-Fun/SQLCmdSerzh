@@ -1,5 +1,6 @@
 package ua.com.juja.serzh.sqlcmd.controller.command;
 
+import ua.com.juja.serzh.sqlcmd.controller.util.UserInput;
 import ua.com.juja.serzh.sqlcmd.view.View;
 
 /**
@@ -19,7 +20,7 @@ public class Exit implements Command {
     }
 
     @Override
-    public void process(String command) {
+    public void process(UserInput command) {
         view.write("До скорой встречи!");
         throw new ExitException();
     }

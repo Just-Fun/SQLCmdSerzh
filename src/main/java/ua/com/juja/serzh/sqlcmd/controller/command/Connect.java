@@ -1,5 +1,6 @@
 package ua.com.juja.serzh.sqlcmd.controller.command;
 
+import ua.com.juja.serzh.sqlcmd.controller.util.UserInput;
 import ua.com.juja.serzh.sqlcmd.model.DatabaseManager;
 import ua.com.juja.serzh.sqlcmd.view.View;
 
@@ -22,20 +23,14 @@ public class Connect implements Command {
     }
 
     @Override
-    public void process(String command) {
-
-        String[] data = command.split("\\|");
-        if (data.length != count()) {
-            throw new IllegalArgumentException(
-                    String.format("Неверно количество параметров разделенных знаком '|', ожидается %s, но есть: %s",
-                            count(), data.length));
-        }
+    public void process(UserInput input) {
+        input.validation(commandFormat());
+        String[] data = input.splitCommand();
         String databaseName = data[1];
         String userName = data[2];
         String password = data[3];
 
         manager.connect(databaseName, userName, password);
-
         view.write("Успех!");
     }
 
@@ -48,10 +43,4 @@ public class Connect implements Command {
     public String commandFormat() {
         return COMMAND_SAMPLE;
     }
-
-    private int count() {
-        return COMMAND_SAMPLE.split("\\|").length;
-    }
-
-
 }

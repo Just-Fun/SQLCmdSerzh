@@ -1,5 +1,6 @@
 package ua.com.juja.serzh.sqlcmd.controller.command;
 
+import ua.com.juja.serzh.sqlcmd.controller.util.UserInput;
 import ua.com.juja.serzh.sqlcmd.view.View;
 
 /**
@@ -19,8 +20,8 @@ public class Unsupported implements Command {
     }
 
     @Override
-    public void process(String command) {
-        view.write("Несуществующая команда: " + command);
+    public void process(UserInput input) {
+        view.write("Несуществующая команда: " + input.toString());
     }
 
     @Override

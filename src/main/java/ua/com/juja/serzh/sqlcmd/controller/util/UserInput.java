@@ -1,12 +1,12 @@
-package ua.com.juja.serzh.sqlcmd.controller.command;
+package ua.com.juja.serzh.sqlcmd.controller.util;
 
 /**
  * Created by serzh on 19.05.16.
  */
-public class UserCommand {
+public class UserInput {
     String userCommand;
 
-    public UserCommand(String userCommand) {
+    public UserInput(String userCommand) {
         this.userCommand = userCommand;
 
     }
@@ -20,5 +20,12 @@ public class UserCommand {
 
     private int userCommandLength() {
         return (userCommand.split("\\|")).length;
+    }
+
+    public String[] splitCommand() { return userCommand.split("\\|"); }
+
+    @Override
+    public String toString() {
+        return userCommand;
     }
 }

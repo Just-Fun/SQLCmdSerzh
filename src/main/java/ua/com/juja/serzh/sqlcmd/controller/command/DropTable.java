@@ -1,5 +1,6 @@
 package ua.com.juja.serzh.sqlcmd.controller.command;
 
+import ua.com.juja.serzh.sqlcmd.controller.util.UserInput;
 import ua.com.juja.serzh.sqlcmd.model.DatabaseManager;
 import ua.com.juja.serzh.sqlcmd.view.View;
 
@@ -21,14 +22,12 @@ public class DropTable implements Command {
     }
 
     @Override
-    public void process(String command) {
-        String[] data = command.split("\\|");
-        if (data.length != 2) {
-            throw new IllegalArgumentException("Формат команды 'create|dropTable', а ты ввел: " + command);
-        }
-        manager.dropTable(data[1]);
+    public void process(UserInput input) {
+        input.validation(commandFormat());
+        String tableName = input.splitCommand()[1];
 
-        view.write(String.format("Таблица %s была успешно удалена.", data[1]));
+        manager.dropTable(tableName);
+        view.write(String.format("Таблица %s была успешно удалена.", tableName));
     }
 
     @Override

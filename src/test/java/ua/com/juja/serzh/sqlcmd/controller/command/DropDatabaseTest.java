@@ -2,6 +2,7 @@ package ua.com.juja.serzh.sqlcmd.controller.command;
 
 import org.junit.Before;
 import org.junit.Test;
+import ua.com.juja.serzh.sqlcmd.controller.util.UserInput;
 import ua.com.juja.serzh.sqlcmd.model.DatabaseManager;
 import ua.com.juja.serzh.sqlcmd.view.View;
 
@@ -45,7 +46,7 @@ public class DropDatabaseTest {
 
     @Test
     public void testProcess() throws Exception {
-        command.process("dropDB|db");
+        command.process(new UserInput("dropDB|db"));
         verify(manager).dropDatabase("db");
         verify(view).write("Database db была успешно удалена.");
     }
@@ -53,7 +54,7 @@ public class DropDatabaseTest {
     @Test
     public void testProcessWrongFormat() throws Exception {
         try {
-            command.process("dropDB|db|wrong");
+            command.process(new UserInput("dropDB|db|wrong"));
             fail();
         } catch (IllegalArgumentException e) {
             assertEquals("Формат команды 'dropDB|databaseName', а ты ввел: dropDB|db|wrong", e.getMessage());

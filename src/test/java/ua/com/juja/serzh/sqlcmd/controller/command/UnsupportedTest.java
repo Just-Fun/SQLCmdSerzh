@@ -2,6 +2,7 @@ package ua.com.juja.serzh.sqlcmd.controller.command;
 
 import org.junit.Before;
 import org.junit.Test;
+import ua.com.juja.serzh.sqlcmd.controller.util.UserInput;
 import ua.com.juja.serzh.sqlcmd.view.View;
 
 import static org.junit.Assert.*;
@@ -29,7 +30,7 @@ public class UnsupportedTest {
 
     @Test
     public void testProcess() throws Exception {
-        command.process("ifDontMatchAnyCommand");
+        command.process(new UserInput("ifDontMatchAnyCommand"));
         verify(view).write("Несуществующая команда: ifDontMatchAnyCommand");
     }
 }

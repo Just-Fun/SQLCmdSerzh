@@ -1,9 +1,9 @@
 package ua.com.juja.serzh.sqlcmd.controller.command;
 
+import ua.com.juja.serzh.sqlcmd.controller.util.UserInput;
 import ua.com.juja.serzh.sqlcmd.model.DatabaseManager;
 import ua.com.juja.serzh.sqlcmd.view.View;
 
-import java.util.Arrays;
 import java.util.Set;
 
 /**
@@ -25,7 +25,7 @@ public class Tables implements Command {
     }
 
     @Override
-    public void process(String command) {
+    public void process(UserInput input) {
         Set<String> tableNames = manager.getTableNames();
         view.write(tableNames.toString());
     }

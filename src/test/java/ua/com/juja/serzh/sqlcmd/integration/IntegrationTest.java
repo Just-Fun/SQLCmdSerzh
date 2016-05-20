@@ -267,7 +267,7 @@ public class IntegrationTest {
         // then
         assertEquals(pleaseConnect +
                 // connect ua.com.juja.serzh.sqlcmd
-                "Неудача! по причине: Неверно количество параметров разделенных знаком '|', ожидается 4, но есть: 2\n" +
+                "Неудача! по причине: Формат команды 'connect|databaseName|userName|password', а ты ввел: connect|sqlcmd5hope5never5exist\n" +
                 "Повтори попытку.\n" +
                 "Введи команду (или help для помощи):\n" +
                 // exit

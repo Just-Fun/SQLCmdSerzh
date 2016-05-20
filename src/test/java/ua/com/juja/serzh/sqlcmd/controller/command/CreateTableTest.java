@@ -2,6 +2,7 @@ package ua.com.juja.serzh.sqlcmd.controller.command;
 
 import org.junit.Before;
 import org.junit.Test;
+import ua.com.juja.serzh.sqlcmd.controller.util.UserInput;
 import ua.com.juja.serzh.sqlcmd.model.DatabaseManager;
 import ua.com.juja.serzh.sqlcmd.view.View;
 
@@ -44,7 +45,7 @@ public class CreateTableTest {
 
     @Test
     public void testProcess() throws Exception {
-        command.process("createTable|user");
+        command.process(new UserInput("createTable|user"));
         verify(manager).createTable("user");
         verify(view).write("Таблица user была успешно создана.");
     }
@@ -52,10 +53,10 @@ public class CreateTableTest {
     @Test
     public void testProcessWrongFormat() throws Exception {
         try {
-            command.process("createTable|tableName|wrong");
+            command.process(new UserInput("createTable|tableName|wrong"));
             fail();
         } catch (IllegalArgumentException e) {
-            assertEquals("Формат команды 'createTable|tableName', а ты ввел: createTable|tableName|wrong", e.getMessage());
+            assertEquals("Формат команды 'createTable|tableName(column1,column2,...,columnN)' в SQL!!! формате, а ты ввел: createTable|tableName|wrong", e.getMessage());
         }
     }
 }

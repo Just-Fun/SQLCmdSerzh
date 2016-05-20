@@ -1,6 +1,7 @@
 package ua.com.juja.serzh.sqlcmd.controller;
 
 import ua.com.juja.serzh.sqlcmd.controller.command.*;
+import ua.com.juja.serzh.sqlcmd.controller.util.UserInput;
 import ua.com.juja.serzh.sqlcmd.model.DatabaseManager;
 import ua.com.juja.serzh.sqlcmd.view.View;
 
@@ -44,11 +45,11 @@ public class MainController {
 
         while (true) {
             String input = view.read();
-
+            UserInput userInput = new UserInput(input);
             for (Command command : commands) {
                 try {
                     if (command.canProcess(input)) {
-                        command.process(input);
+                        command.process(userInput);
                         break;
                     }
                 } catch (Exception e) {

@@ -3,6 +3,7 @@ package ua.com.juja.serzh.sqlcmd.controller.command;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
+import ua.com.juja.serzh.sqlcmd.controller.util.UserInput;
 import ua.com.juja.serzh.sqlcmd.model.DatabaseManager;
 import ua.com.juja.serzh.sqlcmd.view.View;
 
@@ -38,17 +39,17 @@ public class ConnectTest {
 
     @Test
     public void testProcess() throws Exception {
-        command.process("connect|databaseName|userName|password");
+        command.process(new UserInput("connect|databaseName|userName|password"));
         verify(view).write("Успех!");
     }
 
     @Test
     public void testProcessWithWrongParameters() throws Exception {
         try {
-            command.process("connect|databaseName|userName");
+            command.process(new UserInput("connect|databaseName|userName"));
             fail("Expected IllegalArgumentException");
         } catch (IllegalArgumentException e) {
-            assertEquals("Неверно количество параметров разделенных знаком '|', ожидается 4, но есть: 3", e.getMessage());
+            assertEquals("Формат команды 'connect|databaseName|userName|password', а ты ввел: connect|databaseName|userName", e.getMessage());
         }
     }
 

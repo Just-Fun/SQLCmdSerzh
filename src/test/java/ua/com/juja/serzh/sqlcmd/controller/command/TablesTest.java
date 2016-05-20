@@ -3,6 +3,7 @@ package ua.com.juja.serzh.sqlcmd.controller.command;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
+import ua.com.juja.serzh.sqlcmd.controller.util.UserInput;
 import ua.com.juja.serzh.sqlcmd.model.DatabaseManager;
 import ua.com.juja.serzh.sqlcmd.view.View;
 
@@ -30,7 +31,7 @@ public class TablesTest {
     @Test
     public void testPrintGetTableNames() {
         when(manager.getTableNames()).thenReturn(new HashSet<String>(Arrays.asList("user", "test")));
-        command.process("tables");
+        command.process(new UserInput("tables"));
         shouldPrint("[[test, user]]");
     }
 
@@ -61,7 +62,7 @@ public class TablesTest {
     @Test
     public void testPrintEmptyTableData() {
         when(manager.getTableNames()).thenReturn(new HashSet<String>());
-        command.process("tables");
+        command.process(new UserInput("tables"));
         shouldPrint("[[]]");
     }
 }

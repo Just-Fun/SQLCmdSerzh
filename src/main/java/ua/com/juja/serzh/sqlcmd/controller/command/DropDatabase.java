@@ -1,5 +1,6 @@
 package ua.com.juja.serzh.sqlcmd.controller.command;
 
+import ua.com.juja.serzh.sqlcmd.controller.util.UserInput;
 import ua.com.juja.serzh.sqlcmd.model.DatabaseManager;
 import ua.com.juja.serzh.sqlcmd.view.View;
 
@@ -21,14 +22,12 @@ public class DropDatabase implements Command {
     }
 
     @Override
-    public void process(String command) {
-        String[] data = command.split("\\|");
-        if (data.length != 2) {
-            throw new IllegalArgumentException(String.format("Формат команды '%s', а ты ввел: %s", commandFormat(), command));
-        }
-        manager.dropDatabase(data[1]);
+    public void process(UserInput input) {
+        input.validation(commandFormat());
+        String databaseName = input.splitCommand()[1];
+        manager.dropDatabase(databaseName);
 
-        view.write(String.format("Database %s была успешно удалена.", data[1]));
+        view.write(String.format("Database %s была успешно удалена.", databaseName));
     }
 
     @Override

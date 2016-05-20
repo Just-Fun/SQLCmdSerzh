@@ -1,5 +1,6 @@
 package ua.com.juja.serzh.sqlcmd.controller.command;
 
+import ua.com.juja.serzh.sqlcmd.controller.util.UserInput;
 import ua.com.juja.serzh.sqlcmd.model.DatabaseManager;
 import ua.com.juja.serzh.sqlcmd.view.View;
 
@@ -39,7 +40,7 @@ public class Help implements Command {
     }
 
     @Override
-    public void process(String userCommand) {
+    public void process(UserInput input) {
         view.write("Существующие команды:");
 
         for (Command command : commands) {

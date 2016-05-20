@@ -3,10 +3,10 @@ package ua.com.juja.serzh.sqlcmd.controller.command;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
+import ua.com.juja.serzh.sqlcmd.controller.util.UserInput;
 import ua.com.juja.serzh.sqlcmd.model.DatabaseManager;
 import ua.com.juja.serzh.sqlcmd.view.View;
 
-import static org.junit.Assert.*;
 import static org.mockito.Mockito.verify;
 
 /**
@@ -26,7 +26,7 @@ public class IsConnectedTest {
 
     @Test
     public void testProcess() throws Exception {
-        command.process("if does not connected");
+        command.process(new UserInput("if does not connected"));
         verify(view).write("Вы не можете пользоваться командой 'if does not connected' пока не подключитесь с помощью комманды connect|databaseName|userName|password");
     }
 }

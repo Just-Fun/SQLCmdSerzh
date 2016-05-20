@@ -2,6 +2,7 @@ package ua.com.juja.serzh.sqlcmd.controller.command;
 
 import org.junit.Before;
 import org.junit.Test;
+import ua.com.juja.serzh.sqlcmd.controller.util.UserInput;
 import ua.com.juja.serzh.sqlcmd.model.DatabaseManager;
 import ua.com.juja.serzh.sqlcmd.view.View;
 
@@ -44,7 +45,7 @@ public class DropTableTest {
 
     @Test
     public void testProcess() throws Exception {
-        command.process("dropTable|nameTable");
+        command.process(new UserInput("dropTable|nameTable"));
         verify(manager).dropTable("nameTable");
         verify(view).write("Таблица nameTable была успешно удалена.");
     }
@@ -52,10 +53,10 @@ public class DropTableTest {
     @Test
     public void testProcessWrongFormat() throws Exception {
         try {
-            command.process("createTable|tableName|wrong");
+            command.process(new UserInput("createTable|tableName|wrong"));
             fail();
         } catch (IllegalArgumentException e) {
-            assertEquals("Формат команды 'create|dropTable', а ты ввел: createTable|tableName|wrong", e.getMessage());
+            assertEquals("Формат команды 'dropTable|tableName', а ты ввел: createTable|tableName|wrong", e.getMessage());
         }
     }
 }

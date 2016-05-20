@@ -2,6 +2,7 @@ package ua.com.juja.serzh.sqlcmd.controller.command;
 
 import org.junit.Before;
 import org.junit.Test;
+import ua.com.juja.serzh.sqlcmd.controller.util.UserInput;
 import ua.com.juja.serzh.sqlcmd.model.DatabaseManager;
 import ua.com.juja.serzh.sqlcmd.view.View;
 
@@ -45,7 +46,7 @@ public class CreateDatabaseTest {
 
     @Test
     public void testProcess() throws Exception {
-        command.process("createDB|databaseName");
+        command.process(new UserInput("createDB|databaseName"));
         verify(manager).createDatabase("databaseName");
         verify(view).write("Database databaseName была успешно создана.");
     }
@@ -53,7 +54,7 @@ public class CreateDatabaseTest {
     @Test
     public void testProcessWrongFormat() throws Exception {
         try {
-            command.process("createDB|databaseName|wrong");
+            command.process(new UserInput("createDB|databaseName|wrong"));
             fail();
         } catch (IllegalArgumentException e) {
             assertEquals("Формат команды 'createDB|databaseName', а ты ввел: createDB|databaseName|wrong", e.getMessage());

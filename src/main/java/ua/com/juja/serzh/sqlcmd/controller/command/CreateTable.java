@@ -1,5 +1,6 @@
 package ua.com.juja.serzh.sqlcmd.controller.command;
 
+import ua.com.juja.serzh.sqlcmd.controller.util.UserInput;
 import ua.com.juja.serzh.sqlcmd.model.DatabaseManager;
 import ua.com.juja.serzh.sqlcmd.view.View;
 
@@ -21,11 +22,11 @@ public class CreateTable implements Command {
     }
 
     @Override
-    public void process(String command) {
-        String[] data = command.split("\\|");
-        // TODO сделать у всех команд одинаковый формат вывода сообщений об ошибке, у Жени реализовано
+    public void process(UserInput input) {
+        String[] data = input.splitCommand();
         if (data.length != 2) {
-            throw new IllegalArgumentException("Формат команды 'createTable|tableName', а ты ввел: " + command);
+            throw new IllegalArgumentException("Формат команды 'createTable|tableName(column1,column2,...,columnN)' " +
+                    "в SQL!!! формате, а ты ввел: " + input.toString());
         }
         manager.createTable(data[1]);
         view.write(String.format("Таблица %s была успешно создана.", data[1]));

@@ -1,5 +1,6 @@
 package ua.com.juja.serzh.sqlcmd.controller.command;
 
+import ua.com.juja.serzh.sqlcmd.controller.util.UserInput;
 import ua.com.juja.serzh.sqlcmd.model.DataSet;
 import ua.com.juja.serzh.sqlcmd.model.DatabaseManager;
 import ua.com.juja.serzh.sqlcmd.model.TableConstructor;
@@ -25,16 +26,17 @@ public class Insert implements Command {
     }
 
     @Override
-    public void process(String command) {
-        String[] data = command.split("\\|");
+    public void process(UserInput input) {
+        String[] data = input.splitCommand();
         if (data.length % 2 != 0) {
             throw new IllegalArgumentException(String.format("Должно быть четное " +
                     "количество параметров в формате " +
                     "'insert|tableName|column1|value1|column2|value2|...|columnN|valueN', " +
-                    "а ты прислал: '%s'", command));
+                    "а ты прислал: '%s'", input.toString()));
         }
+
         String tableName = data[1];
-// TODO убрать дублирование, а может выпилить вообще везде этот DataSet, подумать
+// TODO убрать дублирование, а может выпилить вообще везде этот DataSet,
         Map<String, Object> map = new LinkedHashMap<>();
         DataSet dataSet = new DataSet();
         for (int index = 1; index < (data.length / 2); index++) {

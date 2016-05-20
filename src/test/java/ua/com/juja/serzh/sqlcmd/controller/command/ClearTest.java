@@ -2,6 +2,7 @@ package ua.com.juja.serzh.sqlcmd.controller.command;
 
 import org.junit.Before;
 import org.junit.Test;
+import ua.com.juja.serzh.sqlcmd.controller.util.UserInput;
 import ua.com.juja.serzh.sqlcmd.model.DatabaseManager;
 import ua.com.juja.serzh.sqlcmd.view.View;
 
@@ -27,7 +28,7 @@ public class ClearTest {
 
     @Test
     public void testClearTable() {
-        command.process("clear|user");
+        command.process(new UserInput("clear|user"));
 
         verify(manager).clear("user");
         verify(view).write("Таблица user была успешно очищена.");
@@ -48,7 +49,7 @@ public class ClearTest {
     @Test
     public void testValidationErrorWhenCountParametersIsLessThan2() {
         try {
-            command.process("clear");
+            command.process(new UserInput("clear"));
             fail();
         } catch (IllegalArgumentException e) {
             assertEquals("Формат команды 'clear|tableName', а ты ввел: clear", e.getMessage());
@@ -58,7 +59,7 @@ public class ClearTest {
     @Test
     public void testValidationErrorWhenCountParametersIsMoreThan2() {
         try {
-            command.process("clear|table|qwe");
+            command.process(new UserInput("clear|table|qwe"));
             fail();
         } catch (IllegalArgumentException e) {
             assertEquals("Формат команды 'clear|tableName', а ты ввел: clear|table|qwe", e.getMessage());

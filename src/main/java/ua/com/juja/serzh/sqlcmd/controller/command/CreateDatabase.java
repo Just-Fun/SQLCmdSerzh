@@ -1,5 +1,6 @@
 package ua.com.juja.serzh.sqlcmd.controller.command;
 
+import ua.com.juja.serzh.sqlcmd.controller.util.UserInput;
 import ua.com.juja.serzh.sqlcmd.model.DatabaseManager;
 import ua.com.juja.serzh.sqlcmd.view.View;
 
@@ -21,17 +22,15 @@ public class CreateDatabase implements Command {
     }
 
     @Override
-    public void process(String command) {
-        String[] data = command.split("\\|");
-        if (data.length != 2) {
-            throw new IllegalArgumentException("Формат команды 'createDB|databaseName', а ты ввел: " + command);
-        }
-        manager.createDatabase(data[1]);
+    public void process(UserInput input) {
+        input.validation(commandFormat());
+        String databaseName = input.splitCommand()[1];
 
-        view.write(String.format("Database %s была успешно создана.", data[1]));
+        manager.createDatabase(databaseName);
+        view.write(String.format("Database %s была успешно создана.", databaseName));
     }
 
-    @Override // TODO имя не может начинаться с цифры и еще чего-то нельзя, может добавить в описание...
+    @Override // TODO может добавить в описание, что имя не может начинаться с цифры и еще чего-то нельзя...
     public String description() {
         return "для создания новой Database";
     }

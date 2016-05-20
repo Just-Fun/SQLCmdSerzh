@@ -2,14 +2,12 @@ package ua.com.juja.serzh.sqlcmd.controller.command;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.ArgumentCaptor;
-import org.mockito.Mock;
 import org.mockito.Mockito;
+import ua.com.juja.serzh.sqlcmd.controller.util.UserInput;
 import ua.com.juja.serzh.sqlcmd.model.DatabaseManager;
 import ua.com.juja.serzh.sqlcmd.view.View;
 
 import static org.junit.Assert.*;
-import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.verify;
 
 /**
@@ -42,7 +40,7 @@ public class HelpTest {
 
     @Test
     public void testProcess() throws Exception {
-        command.process("help");
+        command.process(new UserInput("help"));
         verify(view).write("Существующие команды:");
     }
 

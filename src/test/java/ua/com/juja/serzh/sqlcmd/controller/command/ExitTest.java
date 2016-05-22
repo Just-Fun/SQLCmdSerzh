@@ -15,7 +15,7 @@ import static org.junit.Assert.fail;
  */
 public class ExitTest {
     private View view = Mockito.mock(View.class);
-    private CommandAbstract command;
+    private Command command;
 
     @Before
     public void setup() {

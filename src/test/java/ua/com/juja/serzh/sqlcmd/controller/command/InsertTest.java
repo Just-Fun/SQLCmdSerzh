@@ -21,7 +21,7 @@ import static org.mockito.Mockito.verify;
 public class InsertTest {
     DatabaseManager manager;
     View view;
-    CommandAbstract command;
+    Command command;
 
     @Before
     public void setup() {

@@ -16,7 +16,7 @@ import static org.mockito.Mockito.verify;
 public class DropTableTest {
     private DatabaseManager manager;
     private View view;
-    private CommandAbstract command;
+    private Command command;
 
     @Before
     public void setup() {

@@ -7,15 +7,11 @@ import ua.com.juja.serzh.sqlcmd.view.View;
 /**
  * Created by serzh on 5/11/16.
  */
-public class CreateDatabase extends CommandAbstract {
+public class CreateDatabase extends Command {
 
     public CreateDatabase(DatabaseManager manager, View view) {
         super(manager, view);
     }
-    //    @Override
-//    public boolean canProcess(String command) {
-//        return command.startsWith("createDB|");
-//    }
 
     @Override
     public void process(UserInput input) {
@@ -26,7 +22,8 @@ public class CreateDatabase extends CommandAbstract {
         view.write(String.format("Database %s была успешно создана.", databaseName));
     }
 
-    @Override // TODO может добавить в описание, что имя не может начинаться с цифры и еще чего-то нельзя...
+    // TODO может добавить в описание, что имя не может начинаться с цифры, заглавные буквы становяться прописными и еще чего-то нельзя...
+    @Override
     public String description() {
         return "для создания новой Database";
     }

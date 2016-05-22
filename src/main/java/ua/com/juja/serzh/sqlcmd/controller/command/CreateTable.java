@@ -2,27 +2,16 @@ package ua.com.juja.serzh.sqlcmd.controller.command;
 
 import ua.com.juja.serzh.sqlcmd.controller.util.UserInput;
 import ua.com.juja.serzh.sqlcmd.model.DatabaseManager;
-import ua.com.juja.serzh.sqlcmd.model.TableConstructor;
 import ua.com.juja.serzh.sqlcmd.view.View;
-
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
 
 /**
  * Created by serzh on 5/11/16.
  */
-public class CreateTable extends CommandAbstract {
+public class CreateTable extends Command {
 
     public CreateTable(DatabaseManager manager, View view) {
         super(manager, view);
     }
-    //    @Override
-//    public boolean canProcess(String command) {
-//        return command.split("\\|")[0].equals("createTable");
-//
-////        return command.startsWith("createTable|");
-//    }
 
     @Override
     public void process(UserInput input) {
@@ -33,7 +22,7 @@ public class CreateTable extends CommandAbstract {
 
         String tableName = command.split("\\(")[0];
         view.write(String.format("Таблица %s была успешно создана.", tableName));
-        CommandAbstract find = new Find(manager, view);
+        Command find = new Find(manager, view);
         find.process(new UserInput("find|" + tableName));
     }
 

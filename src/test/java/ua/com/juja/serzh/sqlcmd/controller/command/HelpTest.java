@@ -17,7 +17,7 @@ public class HelpTest {
 
     private DatabaseManager manager;
     private View view;
-    private CommandAbstract command;
+    private Command command;
 
     @Before
     public void setup() {

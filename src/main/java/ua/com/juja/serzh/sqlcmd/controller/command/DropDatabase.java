@@ -7,15 +7,11 @@ import ua.com.juja.serzh.sqlcmd.view.View;
 /**
  * Created by serzh on 5/11/16.
  */
-public class DropDatabase extends CommandAbstract {
+public class DropDatabase extends Command {
 
     public DropDatabase(DatabaseManager manager, View view) {
         super(manager, view);
     }
-    //    @Override
-//    public boolean canProcess(String command) {
-//        return command.startsWith("dropDB|");
-//    }
 
     @Override
     public void process(UserInput input) {

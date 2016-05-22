@@ -7,17 +7,11 @@ import ua.com.juja.serzh.sqlcmd.view.View;
 /**
  * Created by serzh on 5/11/16.
  */
-public class Clear extends CommandAbstract {
+public class Clear extends Command {
 
     public Clear(DatabaseManager manager, View view) {
         super(manager, view);
     }
-
-    //    @Override
-//    public boolean canProcess(String command) {
-//        return command.split("\\|")[0].equals("clear");
-//    }
-
 
     @Override
     public void process(UserInput input) {

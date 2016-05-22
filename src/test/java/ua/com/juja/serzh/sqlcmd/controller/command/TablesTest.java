@@ -19,7 +19,7 @@ import static org.mockito.Mockito.*;
 public class TablesTest {
     private DatabaseManager manager;
     private View view;
-    private CommandAbstract command;
+    private Command command;
 
     @Before
     public void setup() {

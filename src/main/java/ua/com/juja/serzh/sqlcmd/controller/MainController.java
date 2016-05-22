@@ -14,7 +14,7 @@ import java.util.List;
  */
 public class MainController {
 
-    private List<CommandAbstract> commands;
+    private List<Command> commands;
     private View view;
 
 
@@ -50,10 +50,9 @@ public class MainController {
 
         while (true) {
             UserInput userInput = new UserInput(view.read());
-            for (CommandAbstract command : commands) {
+            for (Command command : commands) {
                 try {
                     if (command.canProcess(userInput)) {
-//                    if (check(command, userInput)) {
                         command.process(userInput);
                         break;
                     }
@@ -78,11 +77,4 @@ public class MainController {
         view.write("Неудача! по причине: " + message);
         view.write("Повтори попытку.");
     }
-
-    /*public boolean check(Command command, UserInput input) {
-        String[] splitFormat = command.commandFormat().split("\\|");
-        String[] parameters = input.splitInput();
-        return parameters[0].equals(splitFormat[0]);
-    }*/
-
 }

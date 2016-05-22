@@ -16,7 +16,7 @@ import static org.mockito.Mockito.verify;
 public class IsConnectedTest {
     DatabaseManager manager;
     View view;
-    CommandAbstract command;
+    Command command;
 
     @Before
     public void setup() {

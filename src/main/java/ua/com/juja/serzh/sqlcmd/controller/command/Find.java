@@ -10,20 +10,16 @@ import java.util.*;
 /**
  * Created by serzh on 5/11/16.
  */
-public class Find extends CommandAbstract {
+public class Find extends Command {
 
     public Find(DatabaseManager manager, View view) {
         super(manager, view);
     }
 
-//    @Override
-//    public boolean canProcess(String command) {
-//        return command.startsWith("find|");
-//    }
-
     @Override
     public void process(UserInput input) {
         input.validation(commandFormat());
+
         String tableName = input.splitInput()[1];
         Set<String> tableColumns = manager.getTableColumns(tableName);
         List<Map<String, Object>> tableData = manager.getTableData(tableName);

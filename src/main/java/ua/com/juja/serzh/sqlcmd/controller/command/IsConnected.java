@@ -7,14 +7,11 @@ import ua.com.juja.serzh.sqlcmd.view.View;
 /**
  * Created by serzh on 5/11/16.
  */
-public class IsConnected extends CommandAbstract {
+public class IsConnected extends Command {
+
     public IsConnected(DatabaseManager manager, View view) {
         super(manager, view);
     }
-    //    @Override
-//    public boolean canProcess(String command) {
-//        return !manager.isConnected();
-//    }
 
     @Override
     public boolean canProcess(UserInput command) {

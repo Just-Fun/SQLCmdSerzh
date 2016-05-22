@@ -9,16 +9,11 @@ import java.util.Set;
 /**
  * Created by serzh on 5/11/16.
  */
-public class Tables extends CommandAbstract {
+public class Tables extends Command {
 
     public Tables(DatabaseManager manager, View view) {
         super(manager, view);
     }
-
-    //    @Override
-//    public boolean canProcess(String command) {
-//        return command.equals("tables");
-//    }
 
     @Override
     public void process(UserInput input) {

@@ -10,6 +10,7 @@ public class UserInput {
         this.userCommand = userCommand;
 
     }
+    //TODO  заменить метод на проверку четности аргументов, использоать для сложных методов
     public boolean validationCommandName(String commandFormat) {
         String nameCommand = commandFormat.split("\\|")[0];
         String inputCmmand = userCommand.split("\\|")[0];

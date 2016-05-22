@@ -7,18 +7,11 @@ import ua.com.juja.serzh.sqlcmd.view.View;
 /**
  * Created by serzh on 5/11/16.
  */
-public class Connect extends CommandAbstract {
-
-    private final static String COMMAND_SAMPLE = "connect|databaseName|userName|password";
+public class Connect extends Command {
 
     public Connect(DatabaseManager manager, View view) {
         super(manager, view);
     }
-
-    //    @Override
-//    public boolean canProcess(String command) {
-//        return command.startsWith("connect|");
-//    }
 
     @Override
     public void process(UserInput input) {
@@ -39,6 +32,6 @@ public class Connect extends CommandAbstract {
 
     @Override
     public String commandFormat() {
-        return COMMAND_SAMPLE;
+        return "connect|databaseName|userName|password";
     }
 }

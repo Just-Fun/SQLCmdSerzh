@@ -11,15 +11,11 @@ import java.util.*;
 /**
  * Created by serzh on 5/11/16.
  */
-public class Insert extends CommandAbstract {
+public class Insert extends Command {
 
     public Insert(DatabaseManager manager, View view) {
         super(manager, view);
     }
-    //    @Override
-//    public boolean canProcess(String command) {
-//        return command.startsWith("insert|");
-//    }
 
     @Override
     public void process(UserInput input) {
@@ -30,8 +26,8 @@ public class Insert extends CommandAbstract {
 
         manager.insert(tableName, command);
 
-        TableConstructor constructor = getTableConstructor(command);
         view.write(String.format("В таблице '%s' была успешно добавлена запись:", tableName));
+        TableConstructor constructor = getTableConstructor(command);
         view.write(constructor.getTableString());
     }
 

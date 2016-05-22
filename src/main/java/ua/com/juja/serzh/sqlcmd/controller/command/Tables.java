@@ -9,20 +9,16 @@ import java.util.Set;
 /**
  * Created by serzh on 5/11/16.
  */
-public class Tables implements Command {
-
-    private DatabaseManager manager;
-    private View view;
+public class Tables extends CommandAbstract {
 
     public Tables(DatabaseManager manager, View view) {
-        this.manager = manager;
-        this.view = view;
+        super(manager, view);
     }
 
-    @Override
-    public boolean canProcess(String command) {
-        return command.equals("tables");
-    }
+    //    @Override
+//    public boolean canProcess(String command) {
+//        return command.equals("tables");
+//    }
 
     @Override
     public void process(UserInput input) {

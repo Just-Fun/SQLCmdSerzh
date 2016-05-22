@@ -15,7 +15,7 @@ import static org.junit.Assert.fail;
  */
 public class ExitTest {
     private View view = Mockito.mock(View.class);
-    private Command command;
+    private CommandAbstract command;
 
     @Before
     public void setup() {
@@ -25,13 +25,13 @@ public class ExitTest {
 
     @Test
     public void testCanProcessExitString() {
-        boolean canProcess = command.canProcess("exit");
+        boolean canProcess = command.canProcess(new UserInput("exit"));
         assertTrue(canProcess);
     }
 
     @Test
     public void testCantProcessQweString() {
-        boolean canNotProcess = command.canProcess("qwe");
+        boolean canNotProcess = command.canProcess(new UserInput("qwe"));
         assertFalse(canNotProcess);
     }
 

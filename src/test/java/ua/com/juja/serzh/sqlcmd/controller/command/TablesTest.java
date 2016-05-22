@@ -19,7 +19,7 @@ import static org.mockito.Mockito.*;
 public class TablesTest {
     private DatabaseManager manager;
     private View view;
-    private Command command;
+    private CommandAbstract command;
 
     @Before
     public void setup() {
@@ -43,19 +43,19 @@ public class TablesTest {
 
     @Test
     public void canProcessListWithRightParameter() {
-        boolean canProcess = command.canProcess("tables");
+        boolean canProcess = command.canProcess(new UserInput("tables"));
         assertTrue(canProcess);
     }
 
     @Test
     public void canProcessListWithWrongParameter() {
-        boolean canNotProcess = command.canProcess("ghkk");
+        boolean canNotProcess = command.canProcess(new UserInput("ghkk"));
         assertFalse(canNotProcess);
     }
 
     @Test
     public void canProcessListWithoutParameter() {
-        boolean canNotProcess = command.canProcess("");
+        boolean canNotProcess = command.canProcess(new UserInput(""));
         assertFalse(canNotProcess);
     }
 

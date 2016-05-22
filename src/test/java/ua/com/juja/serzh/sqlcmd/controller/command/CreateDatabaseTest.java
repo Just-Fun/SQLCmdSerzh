@@ -17,7 +17,7 @@ import static org.mockito.Mockito.verify;
 public class CreateDatabaseTest {
     private DatabaseManager manager;
     private View view;
-    private Command command;
+    private CommandAbstract command;
 
     @Before
     public void setup() {
@@ -28,20 +28,20 @@ public class CreateDatabaseTest {
 
     @Test
     public void testCanProcess() throws Exception {
-        boolean canProcess = command.canProcess("createDB|databaseName");
+        boolean canProcess = command.canProcess(new UserInput("createDB|databaseName"));
         assertTrue(canProcess);
     }
 
     @Test
     public void testProcessWithWrongCommand() throws Exception {
-        boolean canProcess = command.canProcess("createDB34|databaseName");
+        boolean canProcess = command.canProcess(new UserInput("createDB34|databaseName"));
         assertFalse(canProcess);
     }
 
     @Test
-    public void testCantProcessWithoutParameters() throws Exception {
-        boolean canProcess = command.canProcess("createDB");
-        assertFalse(canProcess);
+    public void testCanProcessWithoutParameters() throws Exception {
+        boolean canProcess = command.canProcess(new UserInput("createDB"));
+        assertTrue(canProcess);
     }
 
     @Test

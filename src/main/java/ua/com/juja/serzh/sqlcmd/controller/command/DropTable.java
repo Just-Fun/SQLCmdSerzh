@@ -7,19 +7,14 @@ import ua.com.juja.serzh.sqlcmd.view.View;
 /**
  * Created by serzh on 5/12/16.
  */
-public class DropTable implements Command {
-    private DatabaseManager manager;
-    private View view;
-
+public class DropTable extends CommandAbstract {
     public DropTable(DatabaseManager manager, View view) {
-        this.manager = manager;
-        this.view = view;
+        super(manager, view);
     }
-
-    @Override
-    public boolean canProcess(String command) {
-        return command.startsWith("dropTable|");
-    }
+    //    @Override
+//    public boolean canProcess(String command) {
+//        return command.startsWith("dropTable|");
+//    }
 
     @Override
     public void process(UserInput input) {

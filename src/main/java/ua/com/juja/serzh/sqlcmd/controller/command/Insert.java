@@ -11,19 +11,15 @@ import java.util.*;
 /**
  * Created by serzh on 5/11/16.
  */
-public class Insert implements Command {
-    private final DatabaseManager manager;
-    private final View view;
+public class Insert extends CommandAbstract {
 
     public Insert(DatabaseManager manager, View view) {
-        this.manager = manager;
-        this.view = view;
+        super(manager, view);
     }
-
-    @Override
-    public boolean canProcess(String command) {
-        return command.startsWith("insert|");
-    }
+    //    @Override
+//    public boolean canProcess(String command) {
+//        return command.startsWith("insert|");
+//    }
 
     @Override
     public void process(UserInput input) {

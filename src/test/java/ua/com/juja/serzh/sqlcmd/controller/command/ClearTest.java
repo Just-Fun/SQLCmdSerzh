@@ -17,7 +17,7 @@ import static org.mockito.Mockito.verify;
 public class ClearTest {
     private DatabaseManager manager;
     private View view;
-    private Command command;
+    private CommandAbstract command;
 
     @Before
     public void setup() {
@@ -36,13 +36,13 @@ public class ClearTest {
 
     @Test
     public void testCanProcessClearWithParametersString() {
-        boolean canProcess = command.canProcess("clear|user");
+        boolean canProcess = command.canProcess(new UserInput("clear|user"));
         assertTrue(canProcess);
     }
 
     @Test
     public void testCantProcessClearWithoutParametersString() {
-        boolean canProcess = command.canProcess("clear");
+        boolean canProcess = command.canProcess(new UserInput("clear"));
         assertTrue(canProcess);
     }
 

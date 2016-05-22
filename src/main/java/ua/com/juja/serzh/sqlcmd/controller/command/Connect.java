@@ -7,20 +7,18 @@ import ua.com.juja.serzh.sqlcmd.view.View;
 /**
  * Created by serzh on 5/11/16.
  */
-public class Connect implements Command {
-    private DatabaseManager manager;
-    private View view;
+public class Connect extends CommandAbstract {
+
     private final static String COMMAND_SAMPLE = "connect|databaseName|userName|password";
 
     public Connect(DatabaseManager manager, View view) {
-        this.manager = manager;
-        this.view = view;
+        super(manager, view);
     }
 
-    @Override
-    public boolean canProcess(String command) {
-        return command.startsWith("connect|");
-    }
+    //    @Override
+//    public boolean canProcess(String command) {
+//        return command.startsWith("connect|");
+//    }
 
     @Override
     public void process(UserInput input) {

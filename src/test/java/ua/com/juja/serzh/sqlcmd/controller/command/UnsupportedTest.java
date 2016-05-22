@@ -14,7 +14,7 @@ import static org.mockito.Mockito.verify;
  */
 public class UnsupportedTest {
     private View view;
-    private Command command;
+    private CommandAbstract command;
 
     @Before
     public void setup() {
@@ -24,7 +24,7 @@ public class UnsupportedTest {
 
     @Test
     public void testCanProcess() throws Exception {
-        boolean canProceed = command.canProcess("ifDontMatchAnyCommand");
+        boolean canProceed = command.canProcess(new UserInput("ifDontMatchAnyCommand"));
         assertTrue(canProceed);
     }
 

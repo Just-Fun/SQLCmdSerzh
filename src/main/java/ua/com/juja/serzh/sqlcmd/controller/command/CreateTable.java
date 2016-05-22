@@ -12,19 +12,17 @@ import java.util.Map;
 /**
  * Created by serzh on 5/11/16.
  */
-public class CreateTable implements Command {
-    private DatabaseManager manager;
-    private View view;
+public class CreateTable extends CommandAbstract {
 
     public CreateTable(DatabaseManager manager, View view) {
-        this.manager = manager;
-        this.view = view;
+        super(manager, view);
     }
-
-    @Override
-    public boolean canProcess(String command) {
-        return command.startsWith("createTable|");
-    }
+    //    @Override
+//    public boolean canProcess(String command) {
+//        return command.split("\\|")[0].equals("createTable");
+//
+////        return command.startsWith("createTable|");
+//    }
 
     @Override
     public void process(UserInput input) {
@@ -35,7 +33,7 @@ public class CreateTable implements Command {
 
         String tableName = command.split("\\(")[0];
         view.write(String.format("Таблица %s была успешно создана.", tableName));
-        Command find = new Find(manager, view);
+        CommandAbstract find = new Find(manager, view);
         find.process(new UserInput("find|" + tableName));
     }
 

@@ -11,11 +11,11 @@ import java.util.List;
 /**
  * Created by serzh on 5/11/16.
  */
-public class Help implements Command {
+public class Help extends CommandAbstract {
 
-    private DatabaseManager manager;
+//    private DatabaseManager manager;
     private View view;
-    private List<Command> commands;
+    private List<CommandAbstract> commands;
 
     public Help(View view) {
         this.view = view;
@@ -34,16 +34,16 @@ public class Help implements Command {
         ));
     }
 
-    @Override
-    public boolean canProcess(String command) {
-        return command.equals("help");
-    }
+//    @Override
+//    public boolean canProcess(String command) {
+//        return command.equals("help");
+//    }
 
     @Override
     public void process(UserInput input) {
         view.write("Существующие команды:");
 
-        for (Command command : commands) {
+        for (CommandAbstract command : commands) {
             view.write("\t" + command.commandFormat());
             view.write("\t\t" + command.description());
         }

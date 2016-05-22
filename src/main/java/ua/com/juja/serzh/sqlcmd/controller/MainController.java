@@ -5,17 +5,22 @@ import ua.com.juja.serzh.sqlcmd.controller.util.UserInput;
 import ua.com.juja.serzh.sqlcmd.model.DatabaseManager;
 import ua.com.juja.serzh.sqlcmd.view.View;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * Created by indigo on 25.08.2015.
  */
 public class MainController {
 
-    private Command[] commands;
+    private List<CommandAbstract> commands;
     private View view;
+
 
     public MainController(View view, DatabaseManager manager) {
         this.view = view;
-        this.commands = new Command[]{
+        this.commands = new ArrayList<>(Arrays.asList(
                 new Connect(manager, view),
                 new Help(view),
                 new Exit(view),
@@ -29,7 +34,7 @@ public class MainController {
                 new Insert(manager, view),
                 new Find(manager, view),
                 new Unsupported(view)
-        };
+        ));
     }
 
     public void run() {
@@ -44,11 +49,11 @@ public class MainController {
         view.write("Введите имя базы данных, имя пользователя и пароль в формате: connect|database|userName|password");
 
         while (true) {
-            String input = view.read();
-            UserInput userInput = new UserInput(input);
-            for (Command command : commands) {
+            UserInput userInput = new UserInput(view.read());
+            for (CommandAbstract command : commands) {
                 try {
-                    if (command.canProcess(input)) {
+                    if (command.canProcess(userInput)) {
+//                    if (check(command, userInput)) {
                         command.process(userInput);
                         break;
                     }
@@ -73,5 +78,11 @@ public class MainController {
         view.write("Неудача! по причине: " + message);
         view.write("Повтори попытку.");
     }
+
+    /*public boolean check(Command command, UserInput input) {
+        String[] splitFormat = command.commandFormat().split("\\|");
+        String[] parameters = input.splitInput();
+        return parameters[0].equals(splitFormat[0]);
+    }*/
 
 }

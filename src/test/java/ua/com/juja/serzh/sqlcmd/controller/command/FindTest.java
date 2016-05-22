@@ -25,7 +25,7 @@ import static org.mockito.Mockito.*;
 public class FindTest {
     private DatabaseManager manager;
     private View view;
-    private Command command;
+    private CommandAbstract command;
 
     @Before
     public void setup() {
@@ -83,23 +83,23 @@ public class FindTest {
     @Test
     public void testCanProcessFindWithParametersString() {
         // when
-        boolean canProcess = command.canProcess("find|user");
+        boolean canProcess = command.canProcess(new UserInput("find|user"));
         // then
         assertTrue(canProcess);
     }
 
     @Test
-    public void testCantProcessFindWithoutParametersString() {
+    public void testCanProcessFindWithoutParametersString() {
         // when
-        boolean canNotProcess = command.canProcess("find");
+        boolean canNotProcess = command.canProcess(new UserInput("find"));
         // then
-        assertFalse(canNotProcess);
+        assertTrue(canNotProcess);
     }
 
     @Test
     public void testCantProcessQweString() {
         // when
-        boolean canNotProcess = command.canProcess("qwe|user");
+        boolean canNotProcess = command.canProcess(new UserInput("qwe|user"));
         // then
         assertFalse(canNotProcess);
     }

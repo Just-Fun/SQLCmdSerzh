@@ -6,16 +6,20 @@ import ua.com.juja.serzh.sqlcmd.view.View;
 /**
  * Created by serzh on 5/11/16.
  */
-public class Unsupported implements Command {
-
-    private View view;
+public class Unsupported extends CommandAbstract {
 
     public Unsupported(View view) {
-        this.view = view;
+        super(view);
     }
 
+//    @Override
+//    public boolean canProcess(String command) {
+//        return true;
+//    }
+
+
     @Override
-    public boolean canProcess(String command) {
+    public boolean canProcess(UserInput command) {
         return true;
     }
 

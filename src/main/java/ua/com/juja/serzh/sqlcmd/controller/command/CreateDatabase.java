@@ -7,19 +7,15 @@ import ua.com.juja.serzh.sqlcmd.view.View;
 /**
  * Created by serzh on 5/11/16.
  */
-public class CreateDatabase implements Command {
-    private DatabaseManager manager;
-    private View view;
+public class CreateDatabase extends CommandAbstract {
 
     public CreateDatabase(DatabaseManager manager, View view) {
-        this.manager = manager;
-        this.view = view;
+        super(manager, view);
     }
-
-    @Override
-    public boolean canProcess(String command) {
-        return command.startsWith("createDB|");
-    }
+    //    @Override
+//    public boolean canProcess(String command) {
+//        return command.startsWith("createDB|");
+//    }
 
     @Override
     public void process(UserInput input) {

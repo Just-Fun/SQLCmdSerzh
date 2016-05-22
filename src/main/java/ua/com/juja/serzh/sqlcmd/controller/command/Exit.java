@@ -6,18 +6,22 @@ import ua.com.juja.serzh.sqlcmd.view.View;
 /**
  * Created by serzh on 5/11/16.
  */
-public class Exit implements Command {
-
-    private View view;
+public class Exit extends CommandAbstract {
 
     public Exit(View view) {
-        this.view = view;
+        super(view);
     }
 
-    @Override
-    public boolean canProcess(String command) {
-        return command.equals("exit");
-    }
+    //    private View view;
+
+//    public Exit(View view) {
+//        this.view = view;
+//    }
+
+//    @Override
+//    public boolean canProcess(String command) {
+//        return command.equals("exit");
+//    }
 
     @Override
     public void process(UserInput command) {

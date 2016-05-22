@@ -17,7 +17,7 @@ public class HelpTest {
 
     private DatabaseManager manager;
     private View view;
-    private Command command;
+    private CommandAbstract command;
 
     @Before
     public void setup() {
@@ -28,13 +28,13 @@ public class HelpTest {
 
     @Test
     public void testCanProcess() throws Exception {
-        boolean canProcess = command.canProcess("help");
+        boolean canProcess = command.canProcess(new UserInput("help"));
         assertTrue(canProcess);
     }
 
     @Test
     public void testCanProcessWrongCommand() throws Exception {
-        boolean canNotProcess = command.canProcess("helpBadWay");
+        boolean canNotProcess = command.canProcess(new UserInput("helpBadWay"));
         assertFalse(canNotProcess);
     }
 

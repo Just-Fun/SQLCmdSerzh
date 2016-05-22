@@ -10,20 +10,16 @@ import java.util.*;
 /**
  * Created by serzh on 5/11/16.
  */
-public class Find implements Command {
-
-    private DatabaseManager manager;
-    private View view;
+public class Find extends CommandAbstract {
 
     public Find(DatabaseManager manager, View view) {
-        this.manager = manager;
-        this.view = view;
+        super(manager, view);
     }
 
-    @Override
-    public boolean canProcess(String command) {
-        return command.startsWith("find|");
-    }
+//    @Override
+//    public boolean canProcess(String command) {
+//        return command.startsWith("find|");
+//    }
 
     @Override
     public void process(UserInput input) {

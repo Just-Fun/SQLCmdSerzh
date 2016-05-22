@@ -21,7 +21,7 @@ import static org.mockito.Mockito.verify;
 public class InsertTest {
     DatabaseManager manager;
     View view;
-    Command command;
+    CommandAbstract command;
 
     @Before
     public void setup() {
@@ -35,13 +35,13 @@ public class InsertTest {
 
     @Test
     public void testCanProcess() throws Exception {
-        boolean canProcess = command.canProcess("insert|");
+        boolean canProcess = command.canProcess(new UserInput("insert|"));
         assertTrue(canProcess);
     }
 
     @Test
     public void testCanProcessWrongInput() throws Exception {
-        boolean canNotProcess = command.canProcess("inser|");
+        boolean canNotProcess = command.canProcess(new UserInput("inser|"));
         assertFalse(canNotProcess);
     }
 

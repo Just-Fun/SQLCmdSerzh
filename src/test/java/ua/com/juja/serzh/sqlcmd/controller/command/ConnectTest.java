@@ -16,7 +16,7 @@ import static org.mockito.Mockito.verify;
 public class ConnectTest {
     DatabaseManager manager;
     View view;
-    Command command;
+    CommandAbstract command;
 
     @Before
     public void setup() {
@@ -27,13 +27,13 @@ public class ConnectTest {
 
     @Test
     public void testCanProcess() throws Exception {
-        boolean canProcess = command.canProcess("connect|");
+        boolean canProcess = command.canProcess(new UserInput("connect|"));
         assertTrue(canProcess);
     }
 
     @Test
     public void testCanNotProcess() throws Exception {
-        boolean canProcess = command.canProcess("conneeeect|");
+        boolean canProcess = command.canProcess(new UserInput("conneeeect|"));
         assertFalse(canProcess);
     }
 

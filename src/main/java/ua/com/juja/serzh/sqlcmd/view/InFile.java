@@ -33,13 +33,13 @@ public class InFile implements View {
         }
     }
 
-        @Override
-        public String read() {
-            try {
-                Scanner scanner = new Scanner(System.in);
-                return scanner.nextLine();
-            } catch (NoSuchElementException e) {
-                return null;
-            }
+    @Override
+    public String read() {
+        try {
+            Scanner scanner = new Scanner(System.in);
+            return scanner.nextLine();
+        } catch (NoSuchElementException e) {
+            return null;
         }
     }
+}

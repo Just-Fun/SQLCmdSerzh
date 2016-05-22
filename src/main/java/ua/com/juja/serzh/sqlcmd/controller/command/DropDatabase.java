@@ -18,12 +18,12 @@ public class DropDatabase extends Command {
         input.validationParametersLength(commandFormat());
         String databaseName = input.splitInput()[1];
 
-        if (checkIfUserDontWantToDrop(databaseName)) return;
+        if (dropConfirmation(databaseName)) return;
         manager.dropDatabase(databaseName);
         view.write(String.format("Database %s была успешно удалена.", databaseName));
     }
 
-    /*private boolean checkIfUserDontWantToDrop(String databaseName) {
+    /*private boolean dropConfirmation(String databaseName) {
         view.write(String.format("Вы уверены, что хотите удалить таблицу %s? Y/N", databaseName));
         if (!view.read().toUpperCase().equals("Y") ) {
             view.write("Действие отменено!");

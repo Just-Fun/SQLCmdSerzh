@@ -29,7 +29,7 @@ public abstract class Command {
         return parametersInput[0].equals(splitCommandFormat[0]);
     }
 
-    public boolean checkIfUserDontWantToDrop(String name) {
+    public boolean dropConfirmation(String name) {
         view.write(String.format("Вы уверены, что хотите удалить %s? Y/N", name));
         if (!view.read().toUpperCase().equals("Y") ) {
             view.write("Действие отменено!");

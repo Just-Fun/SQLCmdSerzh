@@ -41,7 +41,7 @@ public class Help extends Command {
             view.write("\t\t" + command.description());
         }
     }
-// TODO проверить, что за для вывода этого!!! списка
+
     @Override
     public String description() {
         return "для вывода этого списка на экран";

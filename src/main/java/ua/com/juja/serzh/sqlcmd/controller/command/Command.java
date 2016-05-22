@@ -25,8 +25,17 @@ public abstract class Command {
 
     public boolean canProcess(UserInput command) {
         String[] splitCommandFormat = commandFormat().split("\\|");
-        String[] parameters = command.splitInput();
-        return parameters[0].equals(splitCommandFormat[0]);
+        String[] parametersInput = command.splitInput();
+        return parametersInput[0].equals(splitCommandFormat[0]);
+    }
+
+    public boolean checkIfUserDontWantToDrop(String name) {
+        view.write(String.format("Вы уверены, что хотите удалить %s? Y/N", name));
+        if (!view.read().toUpperCase().equals("Y") ) {
+            view.write("Действие отменено!");
+            return true;
+        }
+        return false;
     }
 
     public abstract String description();

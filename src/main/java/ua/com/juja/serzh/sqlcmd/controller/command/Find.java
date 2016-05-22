@@ -18,7 +18,7 @@ public class Find extends Command {
 
     @Override
     public void process(UserInput input) {
-        input.validation(commandFormat());
+        input.validationParametersLength(commandFormat());
 
         String tableName = input.splitInput()[1];
         Set<String> tableColumns = manager.getTableColumns(tableName);

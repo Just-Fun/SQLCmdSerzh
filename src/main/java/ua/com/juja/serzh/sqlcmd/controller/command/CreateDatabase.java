@@ -15,7 +15,7 @@ public class CreateDatabase extends Command {
 
     @Override
     public void process(UserInput input) {
-        input.validation(commandFormat());
+        input.validationParametersLength(commandFormat());
         String databaseName = input.splitInput()[1];
 
         manager.createDatabase(databaseName);

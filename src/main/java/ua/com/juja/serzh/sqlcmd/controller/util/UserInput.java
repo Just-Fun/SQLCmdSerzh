@@ -1,5 +1,7 @@
 package ua.com.juja.serzh.sqlcmd.controller.util;
 
+import ua.com.juja.serzh.sqlcmd.controller.command.Command;
+
 /**
  * Created by serzh on 19.05.16.
  */
@@ -10,25 +12,34 @@ public class UserInput {
         this.userCommand = userCommand;
 
     }
-    //TODO  заменить метод на проверку четности аргументов, использоать для сложных методов
-    public boolean validationCommandName(String commandFormat) {
-        String nameCommand = commandFormat.split("\\|")[0];
-        String inputCmmand = userCommand.split("\\|")[0];
-        return nameCommand.equals(inputCmmand);
-    }
 
-    public void validation(String commandFormat) {
+    public void validationParametersLength(String commandFormat) {
         int formatLength = (commandFormat.split("\\|")).length;
-        if (formatLength != userCommandLength()) {
+        if (formatLength != parametersLength()) {
             throw new IllegalArgumentException(String.format("Формат команды '%s', а ты ввел: %s", commandFormat, userCommand));
         }
     }
 
-    private int userCommandLength() {
+    public void validationPairParameters(UserInput input, Command command) {
+        int length = getParametersLength(input);
+        if (length % 2 != 0) {
+            throw new IllegalArgumentException(String.format("Должно быть четное количество параметров " +
+                    "в формате '%s', а ты прислал: '%s'",command.commandFormat(), input.toString()));
+        }
+    }
+
+    private int getParametersLength(UserInput input) {
+        String[] data = input.toString().split("\\|");
+        return data.length;
+    }
+
+    private int parametersLength() {
         return (userCommand.split("\\|")).length;
     }
 
-    public String[] splitInput() { return userCommand.split("\\|"); }
+    public String[] splitInput() {
+        return userCommand.split("\\|");
+    }
 
     @Override
     public String toString() {

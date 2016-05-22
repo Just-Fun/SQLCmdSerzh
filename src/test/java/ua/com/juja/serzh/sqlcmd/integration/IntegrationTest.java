@@ -32,9 +32,10 @@ public class IntegrationTest {
     public static void buildDatabase() {
         DatabaseManager manager = new JDBCDatabaseManager();
         try {
-        manager.connect("", USER, PASSWORD);
+            manager.connect("", USER, PASSWORD);
         } catch (RuntimeException e) {
-            throw new RuntimeException("Для работы тестов измените имя и пароль в классе BeforeTestsChangeNameAndPass." + "\n" + e.getCause());
+            throw new RuntimeException("Для работы тестов измените имя и пароль в классе BeforeTestsChangeNameAndPass."
+                    + "\n" + e.getCause());
         }
         manager.dropDatabase(DATABASE);
         manager.createDatabase(DATABASE);
@@ -241,7 +242,7 @@ public class IntegrationTest {
         Main.main(new String[0]);
         // then
         assertEquals(pleaseConnect +
-                // connect ua.com.juja.serzh.sqlcmd
+                // connect
                 "Успех!\n" +
                 "Введи команду (или help для помощи):\n" +
                 // tables
@@ -266,7 +267,7 @@ public class IntegrationTest {
         Main.main(new String[0]);
         // then
         assertEquals(pleaseConnect +
-                // connect ua.com.juja.serzh.sqlcmd
+                // connect
                 "Неудача! по причине: Формат команды 'connect|databaseName|userName|password', а ты ввел: connect|sqlcmd5hope5never5exist\n" +
                 "Повтори попытку.\n" +
                 "Введи команду (или help для помощи):\n" +
@@ -291,10 +292,10 @@ public class IntegrationTest {
                 // connect
                 "Успех!\n" +
                 "Введи команду (или help для помощи):\n" +
-                // clear|user
+                // clear|users
                 "Таблица users была успешно очищена.\n" +
                 "Введи команду (или help для помощи):\n" +
-                // insert|user|id|13|name|Stiven|password|*****
+                // insert|users|id|13|name|Stiven|password|*****
                 "В таблице 'users' была успешно добавлена запись:\n" +
                 "+--+------+--------+\n" +
                 "|id|name  |password|\n" +
@@ -302,7 +303,7 @@ public class IntegrationTest {
                 "|13|Stiven|*****   |\n" +
                 "+--+------+--------+\n" +
                 "Введи команду (или help для помощи):\n" +
-                // insert|user|id|14|name|Eva|password|+++++
+                // insert|users|id|14|name|Eva|password|+++++
                 "В таблице 'users' была успешно добавлена запись:\n" +
                 "+--+----+--------+\n" +
                 "|id|name|password|\n" +
@@ -310,7 +311,7 @@ public class IntegrationTest {
                 "|14|Eva |+++++   |\n" +
                 "+--+----+--------+\n" +
                 "Введи команду (или help для помощи):\n" +
-                // find|user
+                // find|users
                 "+------+--------+--+\n" +
                 "|name  |password|id|\n" +
                 "+------+--------+--+\n" +
@@ -367,4 +368,31 @@ public class IntegrationTest {
                 // exit
                 "До скорой встречи!\n", getData());
     }
+
+    @Ignore // тест занимает много времени, треть от всех вместе взятых...
+    @Test
+    public void testCreateDropDatabase() {
+        // given
+        in.add(commandConnect);
+        in.add("createDB|databaseName");
+        in.add("dropDB|databaseName");
+        in.add("y");
+        in.add("exit");
+        // when
+        Main.main(new String[0]);
+        // then
+
+        assertEquals(pleaseConnect +
+                // connect
+                "Успех!\n" +
+                "Введи команду (или help для помощи):\n" +
+                "Database databaseName была успешно создана.\n" +
+                "Введи команду (или help для помощи):\n" +
+                "Вы уверены, что хотите удалить таблицу databaseName? Y/N\n" +
+                "Database databaseName была успешно удалена.\n" +
+                "Введи команду (или help для помощи):\n" +
+                // exit
+                "До скорой встречи!\n", getData());
+    }
+
 }

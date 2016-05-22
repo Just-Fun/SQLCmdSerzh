@@ -15,22 +15,15 @@ public class CreateTable extends Command {
 
     @Override
     public void process(UserInput input) {
-        String[] data = input.splitInput();
-        validation(input, data);
-        String command = data[1];
+        input.validationParametersLength(commandFormat());
+        validationParametersInParentheses(input);
+        String command = input.splitInput()[1];
         manager.createTable(command);
 
         String tableName = command.split("\\(")[0];
         view.write(String.format("Таблица %s была успешно создана.", tableName));
         Command find = new Find(manager, view);
         find.process(new UserInput("find|" + tableName));
-    }
-
-    private void validation(UserInput input, String[] data) {
-        if (data.length != 2) {
-            throw new IllegalArgumentException("Формат команды 'createTable|tableName(column1,column2,...,columnN)' " +
-                    "в SQL!!! формате, а ты ввел: " + input.toString());
-        }
     }
 
     @Override
@@ -42,5 +35,13 @@ public class CreateTable extends Command {
     @Override
     public String commandFormat() {
         return "createTable|tableName(column1,column2,...,columnN)";
+    }
+
+    public void validationParametersInParentheses(UserInput input) {
+        int presenceOfParentheses = (input.toString().split("\\(")).length;
+        if (presenceOfParentheses < 2) {
+            throw new IllegalArgumentException(String.format("Формат команды 'createTable|tableName" +
+                    "(column1,column2,...,columnN)' в SQL!!! формате, а ты ввел: %s", input.toString()));
+        }
     }
 }

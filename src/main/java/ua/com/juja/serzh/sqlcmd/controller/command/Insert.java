@@ -20,7 +20,7 @@ public class Insert extends Command {
     @Override
     public void process(UserInput input) {
         String[] data = input.splitInput();
-        validation(input, data);
+        input.validationPairParameters(input, this);
         String tableName = data[1];
         DataSet command = getDataSet(data);
 
@@ -58,13 +58,5 @@ public class Insert extends Command {
         List<Map<String, Object>> tableData = new LinkedList<>();
         tableData.add(map);
         return new TableConstructor(dataSet.getNames(), tableData);
-    }
-
-    private void validation(UserInput input, String[] data) {
-        if (data.length % 2 != 0) {
-            throw new IllegalArgumentException(String.format("Должно быть четное количество параметров" +
-                    " в формате 'insert|tableName|column1|value1|column2|value2|...|columnN|valueN', " +
-                    "а ты прислал: '%s'", input.toString()));
-        }
     }
 }

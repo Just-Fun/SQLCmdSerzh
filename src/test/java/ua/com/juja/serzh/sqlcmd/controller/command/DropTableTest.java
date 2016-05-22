@@ -9,6 +9,7 @@ import ua.com.juja.serzh.sqlcmd.view.View;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 /**
  * Created by serzh on 13.05.16.
@@ -45,9 +46,19 @@ public class DropTableTest {
 
     @Test
     public void testProcess() throws Exception {
+        when(view.read()).thenReturn("y");
         command.process(new UserInput("dropTable|nameTable"));
+        verify(view).write("Вы уверены, что хотите удалить nameTable? Y/N");
         verify(manager).dropTable("nameTable");
         verify(view).write("Таблица nameTable была успешно удалена.");
+    }
+
+    @Test
+    public void testActionCanceled() throws Exception {
+        when(view.read()).thenReturn("n");
+        command.process(new UserInput("dropTable|nameTable"));
+        verify(view).write("Вы уверены, что хотите удалить nameTable? Y/N");
+        verify(view).write("Действие отменено!");
     }
 
     @Test

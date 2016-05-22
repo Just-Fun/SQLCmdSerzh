@@ -15,9 +15,10 @@ public class DropTable extends Command {
 
     @Override
     public void process(UserInput input) {
-        input.validation(commandFormat());
+        input.validationParametersLength(commandFormat());
         String tableName = input.splitInput()[1];
 
+        if (checkIfUserDontWantToDrop(tableName)) return;
         manager.dropTable(tableName);
         view.write(String.format("Таблица %s была успешно удалена.", tableName));
     }
@@ -31,4 +32,13 @@ public class DropTable extends Command {
     public String commandFormat() {
         return "dropTable|tableName";
     }
+
+    /*private boolean checkIfUserDontWantToDrop(String tableName) {
+        view.write(String.format("Вы уверены, что хотите удалить таблицу %s? Y/N", tableName));
+        if (!view.read().toUpperCase().equals("Y") ) {
+            view.write("Действие отменено!");
+            return true;
+        }
+        return false;
+    }*/
 }

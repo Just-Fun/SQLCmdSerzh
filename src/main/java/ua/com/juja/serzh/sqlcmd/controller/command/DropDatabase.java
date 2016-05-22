@@ -15,12 +15,22 @@ public class DropDatabase extends Command {
 
     @Override
     public void process(UserInput input) {
-        input.validation(commandFormat());
+        input.validationParametersLength(commandFormat());
         String databaseName = input.splitInput()[1];
-        manager.dropDatabase(databaseName);
 
+        if (checkIfUserDontWantToDrop(databaseName)) return;
+        manager.dropDatabase(databaseName);
         view.write(String.format("Database %s была успешно удалена.", databaseName));
     }
+
+    /*private boolean checkIfUserDontWantToDrop(String databaseName) {
+        view.write(String.format("Вы уверены, что хотите удалить таблицу %s? Y/N", databaseName));
+        if (!view.read().toUpperCase().equals("Y") ) {
+            view.write("Действие отменено!");
+            return true;
+        }
+        return false;
+    }*/
 
     @Override
     public String description() {

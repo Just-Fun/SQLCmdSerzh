@@ -23,22 +23,13 @@ public class DropDatabase extends Command {
         view.write(String.format("Database %s была успешно удалена.", databaseName));
     }
 
-    /*private boolean dropConfirmation(String databaseName) {
-        view.write(String.format("Вы уверены, что хотите удалить таблицу %s? Y/N", databaseName));
-        if (!view.read().toUpperCase().equals("Y") ) {
-            view.write("Действие отменено!");
-            return true;
-        }
-        return false;
-    }*/
+    @Override
+    public String commandFormat() {
+        return "dropDB|databaseName";
+    }
 
     @Override
     public String description() {
         return "для удаления Database";
-    }
-
-    @Override
-    public String commandFormat() {
-        return "dropDB|databaseName";
     }
 }

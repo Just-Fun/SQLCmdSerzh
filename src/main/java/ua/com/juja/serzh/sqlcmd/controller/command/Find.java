@@ -29,12 +29,12 @@ public class Find extends Command {
     }
 
     @Override
-    public String description() {
-        return "для получения содержимого таблицы 'tableName'";
+    public String commandFormat() {
+        return "find|tableName";
     }
 
     @Override
-    public String commandFormat() {
-        return "find|tableName";
+    public String description() {
+        return "для получения содержимого таблицы 'tableName'";
     }
 }

@@ -23,12 +23,12 @@ public class Clear extends Command {
     }
 
     @Override
-    public String description() {
-        return "для очистки всей таблицы";
+    public String commandFormat() {
+        return "clear|tableName";
     }
 
     @Override
-    public String commandFormat() {
-        return "clear|tableName";
+    public String description() {
+        return "для очистки всей таблицы";
     }
 }

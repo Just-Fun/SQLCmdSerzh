@@ -43,12 +43,12 @@ public class Help extends Command {
     }
 
     @Override
-    public String description() {
-        return "для вывода этого списка на экран";
+    public String commandFormat() {
+        return "help";
     }
 
     @Override
-    public String commandFormat() {
-        return "help";
+    public String description() {
+        return "для вывода этого списка на экран";
     }
 }

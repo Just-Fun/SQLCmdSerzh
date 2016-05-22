@@ -26,12 +26,12 @@ public class Connect extends Command {
     }
 
     @Override
-    public String description() {
-        return "для подключения к базе данных, с которой будем работать";
+    public String commandFormat() {
+        return "connect|databaseName|userName|password";
     }
 
     @Override
-    public String commandFormat() {
-        return "connect|databaseName|userName|password";
+    public String description() {
+        return "для подключения к базе данных, с которой будем работать";
     }
 }

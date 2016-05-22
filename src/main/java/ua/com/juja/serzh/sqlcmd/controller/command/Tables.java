@@ -22,12 +22,12 @@ public class Tables extends Command {
     }
 
     @Override
-    public String description() {
-        return "для получения списка всех таблиц базы, к которой подключились";
+    public String commandFormat() {
+        return "tables";
     }
 
     @Override
-    public String commandFormat() {
-        return "tables";
+    public String description() {
+        return "для получения списка всех таблиц базы, к которой подключились";
     }
 }

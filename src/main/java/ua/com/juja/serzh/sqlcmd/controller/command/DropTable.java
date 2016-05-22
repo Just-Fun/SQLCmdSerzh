@@ -24,21 +24,12 @@ public class DropTable extends Command {
     }
 
     @Override
-    public String description() {
-        return "для удаления таблицы";
-    }
-
-    @Override
     public String commandFormat() {
         return "dropTable|tableName";
     }
 
-    /*private boolean dropConfirmation(String tableName) {
-        view.write(String.format("Вы уверены, что хотите удалить таблицу %s? Y/N", tableName));
-        if (!view.read().toUpperCase().equals("Y") ) {
-            view.write("Действие отменено!");
-            return true;
-        }
-        return false;
-    }*/
+    @Override
+    public String description() {
+        return "для удаления таблицы";
+    }
 }

@@ -38,9 +38,9 @@ public abstract class Command {
         return false;
     }
 
-    public abstract String description();
-
     public abstract String commandFormat();
+
+    public abstract String description();
 
     public abstract void process(UserInput userCommand);
 }

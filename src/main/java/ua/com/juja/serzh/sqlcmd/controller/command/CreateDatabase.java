@@ -22,14 +22,14 @@ public class CreateDatabase extends Command {
         view.write(String.format("Database %s была успешно создана.", databaseName));
     }
 
+    @Override
+    public String commandFormat() {
+        return "createDB|databaseName";
+    }
+
     // TODO может добавить в описание, что имя не может начинаться с цифры, заглавные буквы становяться прописными и еще чего-то нельзя...
     @Override
     public String description() {
         return "для создания новой Database";
-    }
-
-    @Override
-    public String commandFormat() {
-        return "createDB|databaseName";
     }
 }

@@ -32,13 +32,13 @@ public class Insert extends Command {
     }
 
     @Override
-    public String description() {
-        return "для создания записи в существующей таблице";
+    public String commandFormat() {
+        return "insert|tableName|column1|value1|column2|value2|...|columnN|valueN";
     }
 
     @Override
-    public String commandFormat() {
-        return "insert|tableName|column1|value1|column2|value2|...|columnN|valueN";
+    public String description() {
+        return "для создания записи в существующей таблице";
     }
 
     private DataSet getDataSet(String[] data) {

@@ -25,12 +25,12 @@ public class IsConnected extends Command {
     }
 
     @Override
-    public String description() {
+    public String commandFormat() {
         return null;
     }
 
     @Override
-    public String commandFormat() {
+    public String description() {
         return null;
     }
 }

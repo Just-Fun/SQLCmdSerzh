@@ -75,7 +75,7 @@ public class IntegrationTest {
         // then
         assertEquals(pleaseConnect +
                 // help
-                "Существующие команды:\r\n" +
+                "Существующие команды:\n" +
                 "\tconnect|databaseName|userName|password\n" +
                 "\t\tдля подключения к базе данных, с которой будем работать\n" +
                 "\tclear|tableName\n" +

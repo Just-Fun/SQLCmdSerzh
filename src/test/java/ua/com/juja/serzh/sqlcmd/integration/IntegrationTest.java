@@ -27,7 +27,7 @@ public class IntegrationTest {
 
     private final String commandConnect = "connect|" + DATABASE + "|" + USER + "|" + PASSWORD;
     private final String pleaseConnect = "Введите имя базы данных, имя пользователя и пароль в формате: " +
-            "connect|database|userName|password\r\n";
+            "connect|database|userName|password\n";
 
     @BeforeClass
     public static void buildDatabase() {
@@ -36,7 +36,7 @@ public class IntegrationTest {
             manager.connect("", USER, PASSWORD);
         } catch (RuntimeException e) {
             throw new RuntimeException("Для работы тестов измените имя и пароль в классе BeforeTestsChangeNameAndPass."
-                    + "\r\n" + e.getCause());
+                    + "\n" + e.getCause());
         }
         try {
         manager.dropDatabase(DATABASE);
@@ -75,33 +75,33 @@ public class IntegrationTest {
         // then
         assertEquals(pleaseConnect +
                 // help
-                "Существующие команды:\r\n" +
-                "\tconnect|databaseName|userName|password\r\n" +
-                "\t\tдля подключения к базе данных, с которой будем работать\r\n" +
-                "\tclear|tableName\r\n" +
-                "\t\tдля очистки всей таблицы\r\n" +
-                "\tcreateDB|databaseName\r\n" +
-                "\t\tдля создания новой Database\r\n" +
-                "\tdropDB|databaseName\r\n" +
-                "\t\tдля удаления Database\r\n" +
-                "\tcreateTable|tableName(column1,column2,...,columnN)\r\n" +
-                "\t\tдля создания новой таблицы, в круглых скобках вставить опиание колонок в SQL формате, пример:\r\n" +
+                "Существующие команды:\n" +
+                "\tconnect|databaseName|userName|password\n" +
+                "\t\tдля подключения к базе данных, с которой будем работать\n" +
+                "\tclear|tableName\n" +
+                "\t\tдля очистки всей таблицы\n" +
+                "\tcreateDB|databaseName\n" +
+                "\t\tдля создания новой Database\n" +
+                "\tdropDB|databaseName\n" +
+                "\t\tдля удаления Database\n" +
+                "\tcreateTable|tableName(column1,column2,...,columnN)\n" +
+                "\t\tдля создания новой таблицы, в круглых скобках вставить опиание колонок в SQL формате, пример:\n" +
                 "\t\tcreateTable|user(id SERIAL NOT NULL PRIMARY KEY,username varchar(225) NOT NULL UNIQUE, password varchar(225))" +
-                "\r\n\tdropTable|tableName\r\n" +
-                "\t\tдля удаления таблицы\r\n" +
-                "\tinsert|tableName|column1|value1|column2|value2|...|columnN|valueN\r\n" +
-                "\t\tдля создания записи в существующей таблице\r\n" +
-                "\tfind|tableName\r\n" +
-                "\t\tдля получения содержимого таблицы 'tableName'\r\n" +
-                "\thelp\r\n" +
-                "\t\tдля вывода этого списка на экран\r\n" +
-                "\ttables\r\n" +
-                "\t\tдля получения списка всех таблиц базы, к которой подключились\r\n" +
-                "\texit\r\n" +
-                "\t\tдля выхода из программы\r\n" +
-                "Введи команду (или help для помощи):\r\n" +
+                "\n\tdropTable|tableName\n" +
+                "\t\tдля удаления таблицы\n" +
+                "\tinsert|tableName|column1|value1|column2|value2|...|columnN|valueN\n" +
+                "\t\tдля создания записи в существующей таблице\n" +
+                "\tfind|tableName\n" +
+                "\t\tдля получения содержимого таблицы 'tableName'\n" +
+                "\thelp\n" +
+                "\t\tдля вывода этого списка на экран\n" +
+                "\ttables\n" +
+                "\t\tдля получения списка всех таблиц базы, к которой подключились\n" +
+                "\texit\n" +
+                "\t\tдля выхода из программы\n" +
+                "Введи команду (или help для помощи):\n" +
                 // exit
-                "До скорой встречи!\r\n", getData());
+                "До скорой встречи!\n", getData());
     }
 
     public String getData() {
@@ -123,7 +123,7 @@ public class IntegrationTest {
         // then
         assertEquals(pleaseConnect +
                 // exit
-                "До скорой встречи!\r\n", getData());
+                "До скорой встречи!\n", getData());
     }
 
     @Test
@@ -136,10 +136,10 @@ public class IntegrationTest {
         // then
         assertEquals(pleaseConnect +
                 // tables
-                "Вы не можете пользоваться командой 'tables' пока не подключитесь с помощью комманды connect|databaseName|userName|password\r\n" +
-                "Введи команду (или help для помощи):\r\n" +
+                "Вы не можете пользоваться командой 'tables' пока не подключитесь с помощью комманды connect|databaseName|userName|password\n" +
+                "Введи команду (или help для помощи):\n" +
                 // exit
-                "До скорой встречи!\r\n", getData());
+                "До скорой встречи!\n", getData());
     }
 
     @Test
@@ -152,10 +152,10 @@ public class IntegrationTest {
         // then
         assertEquals(pleaseConnect +
                 // find|user
-                "Вы не можете пользоваться командой 'find|user' пока не подключитесь с помощью комманды connect|databaseName|userName|password\r\n" +
-                "Введи команду (или help для помощи):\r\n" +
+                "Вы не можете пользоваться командой 'find|user' пока не подключитесь с помощью комманды connect|databaseName|userName|password\n" +
+                "Введи команду (или help для помощи):\n" +
                 // exit
-                "До скорой встречи!\r\n", getData());
+                "До скорой встречи!\n", getData());
     }
 
     @Test
@@ -168,10 +168,10 @@ public class IntegrationTest {
         // then
         assertEquals(pleaseConnect +
                 // unsupported
-                "Вы не можете пользоваться командой 'unsupported' пока не подключитесь с помощью комманды connect|databaseName|userName|password\r\n" +
-                "Введи команду (или help для помощи):\r\n" +
+                "Вы не можете пользоваться командой 'unsupported' пока не подключитесь с помощью комманды connect|databaseName|userName|password\n" +
+                "Введи команду (или help для помощи):\n" +
                 // exit
-                "До скорой встречи!\r\n", getData());
+                "До скорой встречи!\n", getData());
     }
 
     @Test
@@ -185,13 +185,13 @@ public class IntegrationTest {
         // then
         assertEquals(pleaseConnect +
                 // connect
-                "Успех!\r\n" +
-                "Введи команду (или help для помощи):\r\n" +
+                "Успех!\n" +
+                "Введи команду (или help для помощи):\n" +
                 // unsupported
-                "Несуществующая команда: unsupported\r\n" +
-                "Введи команду (или help для помощи):\r\n" +
+                "Несуществующая команда: unsupported\n" +
+                "Введи команду (или help для помощи):\n" +
                 // exit
-                "До скорой встречи!\r\n", getData());
+                "До скорой встречи!\n", getData());
     }
 
     @Test
@@ -205,13 +205,13 @@ public class IntegrationTest {
         // then
         assertEquals(pleaseConnect +
                 // connect
-                "Успех!\r\n" +
-                "Введи команду (или help для помощи):\r\n" +
+                "Успех!\n" +
+                "Введи команду (или help для помощи):\n" +
                 // tables
-                "[users, test1]\r\n" +
-                "Введи команду (или help для помощи):\r\n" +
+                "[users, test1]\n" +
+                "Введи команду (или help для помощи):\n" +
                 // exit
-                "До скорой встречи!\r\n", getData());
+                "До скорой встречи!\n", getData());
     }
 
     @Test
@@ -224,15 +224,15 @@ public class IntegrationTest {
         Main.main(new String[0]);
         // then
         assertEquals(pleaseConnect +
-                "Успех!\r\n" +
-                "Введи команду (или help для помощи):\r\n" +
-                "+-----+--------+--+\r\n" +
-                "|name |password|id|\r\n" +
-                "+-----+--------+--+\r\n" +
-                "|Vasia|****    |22|\r\n" +
-                "+-----+--------+--+\r\n" +
-                "Введи команду (или help для помощи):\r\n" +
-                "До скорой встречи!\r\n", getData());
+                "Успех!\n" +
+                "Введи команду (или help для помощи):\n" +
+                "+-----+--------+--+\n" +
+                "|name |password|id|\n" +
+                "+-----+--------+--+\n" +
+                "|Vasia|****    |22|\n" +
+                "+-----+--------+--+\n" +
+                "Введи команду (или help для помощи):\n" +
+                "До скорой встречи!\n", getData());
     }
 
     @Test
@@ -248,19 +248,19 @@ public class IntegrationTest {
         // then
         assertEquals(pleaseConnect +
                 // connect
-                "Успех!\r\n" +
-                "Введи команду (или help для помощи):\r\n" +
+                "Успех!\n" +
+                "Введи команду (или help для помощи):\n" +
                 // tables
-                "[users, test1]\r\n" +
-                "Введи команду (или help для помощи):\r\n" +
+                "[users, test1]\n" +
+                "Введи команду (или help для помощи):\n" +
                 // connect test
-                "Успех!\r\n" +
-                "Введи команду (или help для помощи):\r\n" +
+                "Успех!\n" +
+                "Введи команду (или help для помощи):\n" +
                 // tables
-                "[qwe]\r\n" +
-                "Введи команду (или help для помощи):\r\n" +
+                "[qwe]\n" +
+                "Введи команду (или help для помощи):\n" +
                 // exit
-                "До скорой встречи!\r\n", getData());
+                "До скорой встречи!\n", getData());
     }
 
     @Test
@@ -273,11 +273,11 @@ public class IntegrationTest {
         // then
         assertEquals(pleaseConnect +
                 // connect
-                "Неудача! по причине: Формат команды 'connect|databaseName|userName|password', а ты ввел: connect|sqlcmd5hope5never5exist\r\n" +
-                "Повтори попытку.\r\n" +
-                "Введи команду (или help для помощи):\r\n" +
+                "Неудача! по причине: Формат команды 'connect|databaseName|userName|password', а ты ввел: connect|sqlcmd5hope5never5exist\n" +
+                "Повтори попытку.\n" +
+                "Введи команду (или help для помощи):\n" +
                 // exit
-                "До скорой встречи!\r\n", getData());
+                "До скорой встречи!\n", getData());
     }
 
     @Test
@@ -295,40 +295,40 @@ public class IntegrationTest {
         // then
         assertEquals(pleaseConnect +
                 // connect
-                "Успех!\r\n" +
-                "Введи команду (или help для помощи):\r\n" +
+                "Успех!\n" +
+                "Введи команду (или help для помощи):\n" +
                 // clear|users
-                "Таблица users была успешно очищена.\r\n" +
-                "Введи команду (или help для помощи):\r\n" +
+                "Таблица users была успешно очищена.\n" +
+                "Введи команду (или help для помощи):\n" +
                 // insert|users|id|13|name|Stiven|password|*****
-                "В таблице 'users' была успешно добавлена запись:\r\n" +
-                "+--+------+--------+\r\n" +
-                "|id|name  |password|\r\n" +
-                "+--+------+--------+\r\n" +
-                "|13|Stiven|*****   |\r\n" +
-                "+--+------+--------+\r\n" +
-                "Введи команду (или help для помощи):\r\n" +
+                "В таблице 'users' была успешно добавлена запись:\n" +
+                "+--+------+--------+\n" +
+                "|id|name  |password|\n" +
+                "+--+------+--------+\n" +
+                "|13|Stiven|*****   |\n" +
+                "+--+------+--------+\n" +
+                "Введи команду (или help для помощи):\n" +
                 // insert|users|id|14|name|Eva|password|+++++
-                "В таблице 'users' была успешно добавлена запись:\r\n" +
-                "+--+----+--------+\r\n" +
-                "|id|name|password|\r\n" +
-                "+--+----+--------+\r\n" +
-                "|14|Eva |+++++   |\r\n" +
-                "+--+----+--------+\r\n" +
-                "Введи команду (или help для помощи):\r\n" +
+                "В таблице 'users' была успешно добавлена запись:\n" +
+                "+--+----+--------+\n" +
+                "|id|name|password|\n" +
+                "+--+----+--------+\n" +
+                "|14|Eva |+++++   |\n" +
+                "+--+----+--------+\n" +
+                "Введи команду (или help для помощи):\n" +
                 // find|users
-                "+------+--------+--+\r\n" +
-                "|name  |password|id|\r\n" +
-                "+------+--------+--+\r\n" +
-                "|Stiven|*****   |13|\r\n" +
-                "+------+--------+--+\r\n" +
-                "|Eva   |+++++   |14|\r\n" +
-                "+------+--------+--+\r\n" +
-                "Введи команду (или help для помощи):\r\n" +
-                "Таблица users была успешно очищена.\r\n" +
-                "Введи команду (или help для помощи):\r\n" +
+                "+------+--------+--+\n" +
+                "|name  |password|id|\n" +
+                "+------+--------+--+\n" +
+                "|Stiven|*****   |13|\n" +
+                "+------+--------+--+\n" +
+                "|Eva   |+++++   |14|\n" +
+                "+------+--------+--+\n" +
+                "Введи команду (или help для помощи):\n" +
+                "Таблица users была успешно очищена.\n" +
+                "Введи команду (или help для помощи):\n" +
                 // exit
-                "До скорой встречи!\r\n", getData());
+                "До скорой встречи!\n", getData());
     }
 
     @Test
@@ -343,14 +343,14 @@ public class IntegrationTest {
 
         assertEquals(pleaseConnect +
                 // connect
-                "Успех!\r\n" +
-                "Введи команду (или help для помощи):\r\n" +
+                "Успех!\n" +
+                "Введи команду (или help для помощи):\n" +
                 // clear|sadfasd|fsf|fdsf
-                "Неудача! по причине: Формат команды 'clear|tableName', а ты ввел: clear|sadfasd|fsf|fdsf\r\n" +
-                "Повтори попытку.\r\n" +
-                "Введи команду (или help для помощи):\r\n" +
+                "Неудача! по причине: Формат команды 'clear|tableName', а ты ввел: clear|sadfasd|fsf|fdsf\n" +
+                "Повтори попытку.\n" +
+                "Введи команду (или help для помощи):\n" +
                 // exit
-                "До скорой встречи!\r\n", getData());
+                "До скорой встречи!\n", getData());
     }
 
     @Test
@@ -364,14 +364,14 @@ public class IntegrationTest {
         // then
         assertEquals(pleaseConnect +
                 // connect
-                "Успех!\r\n" +
-                "Введи команду (или help для помощи):\r\n" +
+                "Успех!\n" +
+                "Введи команду (или help для помощи):\n" +
                 // insert|user|error
-                "Неудача! по причине: Должно быть четное количество параметров в формате 'insert|tableName|column1|value1|column2|value2|...|columnN|valueN', а ты прислал: 'insert|user|error'\r\n" +
-                "Повтори попытку.\r\n" +
-                "Введи команду (или help для помощи):\r\n" +
+                "Неудача! по причине: Должно быть четное количество параметров в формате 'insert|tableName|column1|value1|column2|value2|...|columnN|valueN', а ты прислал: 'insert|user|error'\n" +
+                "Повтори попытку.\n" +
+                "Введи команду (или help для помощи):\n" +
                 // exit
-                "До скорой встречи!\r\n", getData());
+                "До скорой встречи!\n", getData());
     }
 
     @Ignore // тест занимает много времени, треть от всех вместе взятых...
@@ -389,15 +389,15 @@ public class IntegrationTest {
 
         assertEquals(pleaseConnect +
                 // connect
-                "Успех!\r\n" +
-                "Введи команду (или help для помощи):\r\n" +
-                "Database databaseName была успешно создана.\r\n" +
-                "Введи команду (или help для помощи):\r\n" +
-                "Вы уверены, что хотите удалить таблицу databaseName? Y/N\r\n" +
-                "Database databaseName была успешно удалена.\r\n" +
-                "Введи команду (или help для помощи):\r\n" +
+                "Успех!\n" +
+                "Введи команду (или help для помощи):\n" +
+                "Database databaseName была успешно создана.\n" +
+                "Введи команду (или help для помощи):\n" +
+                "Вы уверены, что хотите удалить таблицу databaseName? Y/N\n" +
+                "Database databaseName была успешно удалена.\n" +
+                "Введи команду (или help для помощи):\n" +
                 // exit
-                "До скорой встречи!\r\n", getData());
+                "До скорой встречи!\n", getData());
     }
 
 }

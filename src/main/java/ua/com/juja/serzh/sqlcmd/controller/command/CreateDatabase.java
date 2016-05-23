@@ -30,6 +30,6 @@ public class CreateDatabase extends Command {
     // TODO может добавить в описание, что имя должно начинаться с буквы, заглавные буквы становяться прописными и еще чего-то нельзя...
     @Override
     public String description() {
-        return "для создания новой Database";
+        return "для создания новой Database"; // Имя должно начинаться с буквы, заглавные буквы становяться прописными
     }
 }

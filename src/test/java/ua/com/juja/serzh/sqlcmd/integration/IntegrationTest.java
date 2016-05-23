@@ -10,6 +10,7 @@ import ua.com.juja.serzh.sqlcmd.model.JDBCDatabaseManager;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.io.UnsupportedEncodingException;
+import java.sql.SQLException;
 
 import static org.junit.Assert.assertEquals;
 
@@ -37,7 +38,11 @@ public class IntegrationTest {
             throw new RuntimeException("Для работы тестов измените имя и пароль в классе BeforeTestsChangeNameAndPass."
                     + "\n" + e.getCause());
         }
+        try {
         manager.dropDatabase(DATABASE);
+        } catch (Exception e) {
+            // do nothing
+        }
         manager.createDatabase(DATABASE);
         manager.connect(DATABASE, USER, PASSWORD);
 

@@ -1,6 +1,13 @@
 package ua.com.juja.serzh.sqlcmd.controller.util;
 
 import ua.com.juja.serzh.sqlcmd.controller.command.Command;
+import ua.com.juja.serzh.sqlcmd.model.DataSet;
+import ua.com.juja.serzh.sqlcmd.model.TableConstructor;
+
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by serzh on 19.05.16.
@@ -38,5 +45,14 @@ public class UserInput {
     @Override
     public String toString() {
         return userCommand;
+    }
+
+    public TableConstructor getTableConstructorFromDataSet(DataSet dataSet) {
+        Map<String, Object> map = new LinkedHashMap<>();
+        map.putAll(dataSet.returnData());
+
+        List<Map<String, Object>> tableData = new LinkedList<>();
+        tableData.add(map);
+        return new TableConstructor(dataSet.getNames(), tableData);
     }
 }

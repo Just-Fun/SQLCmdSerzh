@@ -27,7 +27,6 @@ public class Insert extends Command {
         manager.insert(tableName, command);
 
         view.write(String.format("В таблице '%s' была успешно добавлена запись:", tableName));
-//        TableConstructor constructor = getTableConstructorFromDataSet(command);
         TableConstructor constructor = input.getTableConstructorFromDataSet(command);
         view.write(constructor.getTableString());
     }

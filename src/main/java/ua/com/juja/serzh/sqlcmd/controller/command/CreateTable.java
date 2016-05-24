@@ -16,7 +16,7 @@ public class CreateTable extends Command {
     @Override
     public void process(UserInput input) {
         input.validationParametersLength(commandFormat());
-        validationParametersInParentheses(input);
+        validationPresenceOfParentheses(input);
         String command = input.splitInput()[1];
         manager.createTable(command);
 
@@ -37,7 +37,7 @@ public class CreateTable extends Command {
                 + "\t\tcreateTable|user(id SERIAL NOT NULL PRIMARY KEY,username varchar(225) NOT NULL UNIQUE, password varchar(225))";
     }
 
-    public void validationParametersInParentheses(UserInput input) {
+    public void validationPresenceOfParentheses(UserInput input) {
         int presenceOfParentheses = (input.toString().split("\\(")).length;
         if (presenceOfParentheses < 2) {
             throw new IllegalArgumentException(String.format("Формат команды 'createTable|tableName" +

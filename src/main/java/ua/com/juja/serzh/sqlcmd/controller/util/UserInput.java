@@ -21,16 +21,10 @@ public class UserInput {
     }
 
     public void validationPairParameters(UserInput input, Command command) {
-        int length = getParametersLength(input);
-        if (length % 2 != 0) {
+        if (parametersLength() % 2 != 0) {
             throw new IllegalArgumentException(String.format("Должно быть четное количество параметров " +
                     "в формате '%s', а ты прислал: '%s'",command.commandFormat(), input.toString()));
         }
-    }
-
-    private int getParametersLength(UserInput input) {
-        String[] data = input.toString().split("\\|");
-        return data.length;
     }
 
     private int parametersLength() {

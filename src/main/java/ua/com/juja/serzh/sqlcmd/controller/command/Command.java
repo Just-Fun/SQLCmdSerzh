@@ -24,9 +24,9 @@ public abstract class Command {
     public Command() { }
 
     public boolean canProcess(UserInput command) {
-        String[] splitCommandFormat = commandFormat().split("\\|");
+        String[] parametersCommandFormat = commandFormat().split("\\|");
         String[] parametersInput = command.splitInput();
-        return parametersInput[0].equals(splitCommandFormat[0]);
+        return parametersInput[0].equals(parametersCommandFormat[0]);
     }
 
     public boolean dropConfirmation(String name) {

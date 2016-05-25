@@ -103,8 +103,8 @@ public class JDBCDatabaseManager implements DatabaseManager {
     @Override
     public void insert(String tableName, DataSet input) {
         try (Statement stmt = connection.createStatement()) {
-            String tableNames = getNameFormated(input, "%s,");
-            String values = getValuesFormated(input, "'%s',");
+            String tableNames = getNameFormatted(input, "%s,");
+            String values = getValuesFormatted(input, "'%s',");
 
             stmt.executeUpdate("INSERT INTO public." + tableName + " (" + tableNames + ")" +
                     "VALUES (" + values + ")");
@@ -154,7 +154,7 @@ public class JDBCDatabaseManager implements DatabaseManager {
         return connection != null;
     }
 
-    private String getNameFormated(DataSet newValue, String format) {
+    private String getNameFormatted(DataSet newValue, String format) {
         String string = "";
         for (String name : newValue.getNames()) {
             string += String.format(format, name);
@@ -163,7 +163,7 @@ public class JDBCDatabaseManager implements DatabaseManager {
         return string;
     }
 
-    private String getValuesFormated(DataSet input, String format) {
+    private String getValuesFormatted(DataSet input, String format) {
         String values = "";
         for (Object value : input.getValues()) {
             values += String.format(format, value);
@@ -174,7 +174,7 @@ public class JDBCDatabaseManager implements DatabaseManager {
 
     @Override // TODO заготовка, может как-нибудь реализовать в userInerface, тест написан
     public void update(String tableName, int id, DataSet newValue) {
-        String tableNames = getNameFormated(newValue, "%s = ?,");
+        String tableNames = getNameFormatted(newValue, "%s = ?,");
 
         String updateTable = "UPDATE public." + tableName + " SET " + tableNames + " WHERE id = ?";
         try (PreparedStatement ps = connection.prepareStatement(updateTable)) {

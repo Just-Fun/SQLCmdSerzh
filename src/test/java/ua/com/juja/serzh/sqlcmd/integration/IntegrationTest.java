@@ -17,6 +17,7 @@ import static org.junit.Assert.assertEquals;
 /**
  * Created by serzh on 5/11/16.
  */
+// TODO поэкспериментировать с виндой assertEquals(expectedStringExit, outString.toString().replaceAll("\r\n", "\n"));
 public class IntegrationTest {
 
     private static final String DATABASE = BeforeTestsChangeNameAndPass.DATABASE;

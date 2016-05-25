@@ -15,7 +15,8 @@ import ua.com.juja.serzh.sqlcmd.view.View;
 public class Main {
 
     public static void main(String[] args) {
-        BasicConfigurator.configure();
+        BasicConfigurator.configure(); // TODO Понять, может и не надо BasicConfigurator.
+        // Без него работает, но везде написано что он нужен :)
         Logger.getRootLogger().setLevel(Level.OFF); //Disable log4j from text table formatter
 
         View view = new Console();

@@ -10,7 +10,6 @@ import ua.com.juja.serzh.sqlcmd.model.JDBCDatabaseManager;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.io.UnsupportedEncodingException;
-import java.sql.SQLException;
 
 import static org.junit.Assert.assertEquals;
 

@@ -7,15 +7,16 @@ import java.util.*;
  * Created by serzh on 5/11/16.
  */
 public class JDBCDatabaseManager implements DatabaseManager {
-    private Connection connection;
 
     static {
         try {
             Class.forName("org.postgresql.Driver");
         } catch (ClassNotFoundException e) {
-            throw new RuntimeException("Please add dependency postgresql version 9.4.1207.jre7 to project.");
+            throw new DriverException("Not installed PostgreSQL JDBC driver.", e);
         }
     }
+
+    private Connection connection;
 
     @Override // try-with-resources statement ensures that each resource is closed at the end of the statement
     public void connect(String database, String userName, String password) {

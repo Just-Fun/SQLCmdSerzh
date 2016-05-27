@@ -18,7 +18,7 @@ public class DropTable extends Command {
         input.validationParametersLength(commandFormat());
         String tableName = input.splitInput()[1];
 
-        if (dropConfirmation(tableName)) return;
+        if (!dropConfirmation(tableName)) return;
         manager.dropTable(tableName);
         view.write(String.format("Таблица %s была успешно удалена.", tableName));
     }

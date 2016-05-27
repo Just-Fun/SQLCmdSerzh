@@ -86,8 +86,7 @@ public class PostgresManager implements DatabaseManager {
             }
             return tables;
         } catch (SQLException e) {
-            e.printStackTrace();//TODO: Иван стэк трейс выводить не нужно, лучше пробросить дальше как в других методах.
-            return tables;
+            throw new RuntimeException(e);
         }
     }
 

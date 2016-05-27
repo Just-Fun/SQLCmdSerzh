@@ -18,7 +18,7 @@ public class DropDatabase extends Command {
         input.validationParametersLength(commandFormat());
         String databaseName = input.splitInput()[1];
 
-        if (dropConfirmation(databaseName)) return;
+        if (!dropConfirmation(databaseName)) return;
         manager.dropDatabase(databaseName);
         view.write(String.format("Database %s была успешно удалена.", databaseName));
     }

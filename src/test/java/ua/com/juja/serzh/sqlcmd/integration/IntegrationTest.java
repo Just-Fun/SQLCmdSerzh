@@ -109,11 +109,10 @@ public class IntegrationTest {
                 // exit
                 "До скорой встречи!\n", getData());
     }
-    //TODO: Иван вот тут хорошее место, чтобы избавиться от \r\n
-    // Как?
+
     public String getData() {
         try {
-            String result = new String(out.toByteArray(), "UTF-8");
+            String result = new String(out.toByteArray(), "UTF-8").replaceAll("\r\n","\n");
             out.reset();
             return result;
         } catch (UnsupportedEncodingException e) {
@@ -381,7 +380,7 @@ public class IntegrationTest {
                 "До скорой встречи!\n", getData());
     }
 
-    @Ignore // тест занимает много времени, треть от всех вместе взятых...
+    @Ignore // тест занимает много времени, половина от всех вместе взятых...
     @Test
     public void testCreateDropDatabase() {
         // given
@@ -400,7 +399,7 @@ public class IntegrationTest {
                 "Введи команду (или help для помощи):\n" +
                 "Database databaseName была успешно создана.\n" +
                 "Введи команду (или help для помощи):\n" +
-                "Вы уверены, что хотите удалить таблицу databaseName? Y/N\n" +
+                "Вы уверены, что хотите удалить databaseName? Y/N\n" +
                 "Database databaseName была успешно удалена.\n" +
                 "Введи команду (или help для помощи):\n" +
                 // exit

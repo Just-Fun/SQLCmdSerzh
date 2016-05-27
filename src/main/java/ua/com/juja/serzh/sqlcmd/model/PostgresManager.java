@@ -51,8 +51,7 @@ public class PostgresManager implements DatabaseManager {
             }
             return result;
         } catch (SQLException e) {
-            e.printStackTrace();
-            return result;
+            throw new RuntimeException(e);
         }
     }
 
@@ -144,8 +143,7 @@ public class PostgresManager implements DatabaseManager {
             }
             return tables;
         } catch (SQLException e) {
-            e.printStackTrace(); //TODO:Иван может, сделать более информативную реакцию на ошибку. Вылетает при find|(несуществующая таблица)
-            return tables;
+            throw new RuntimeException(e); //TODO:Иван может, сделать более информативную реакцию на ошибку. Вылетает при find|(несуществующая таблица)
         }
     }
 

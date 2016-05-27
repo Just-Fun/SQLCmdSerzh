@@ -96,6 +96,7 @@ public class FindTest {
         assertTrue(canNotProcess);
     }
 
+
     @Test
     public void testCantProcessQweString() {
         // when
@@ -151,6 +152,16 @@ public class FindTest {
             fail();
         } catch (IllegalArgumentException e) {
             assertEquals("Формат команды 'find|tableName', а ты ввел: find", e.getMessage());
+        }
+    }
+
+    @Test // TODO обработать
+    public void testCanProcessFindWithOnlySlash() {
+        try {
+            command.process(new UserInput("find|"));
+            fail();
+        } catch (IllegalArgumentException e) {
+            assertEquals("Формат команды 'find|tableName', а ты ввел: find|", e.getMessage());
         }
     }
 

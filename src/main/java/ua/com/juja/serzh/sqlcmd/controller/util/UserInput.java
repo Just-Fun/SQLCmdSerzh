@@ -25,6 +25,10 @@ public class UserInput {
         if (formatLength != parametersLength()) {
             throw new IllegalArgumentException(String.format("Формат команды '%s', а ты ввел: %s", commandFormat, userCommand));
         }
+        if (formatLength > 1 && splitInput()[1].equals("")) {
+            throw new IllegalArgumentException(String.format("Пустой аргумент"));
+
+        }
     }
 
     public void validationPairParameters(UserInput input, Command command) {

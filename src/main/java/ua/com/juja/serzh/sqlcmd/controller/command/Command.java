@@ -23,8 +23,7 @@ public abstract class Command {
 
     public Command() {
     }
-//TODO: Иван :мне кажется этот метод проще сделать абстрактным, а проверять на валидность команду уже в самих классах командах.
-//TODO Спросить еще пару мнений на этот счет.
+
     public boolean canProcess(UserInput command) {
         String[] parametersCommandFormat = commandFormat().split("\\|");
         String[] parametersInput = command.splitInput();

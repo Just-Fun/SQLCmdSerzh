@@ -18,7 +18,7 @@ public class DatabaseManagerTest {
 
     @Before
     public void setup() {
-        manager = new JDBCDatabaseManager();
+        manager = new PostgresManager();
         manager.connect(BeforeTestsChangeNameAndPass.DATABASE, BeforeTestsChangeNameAndPass.USER, BeforeTestsChangeNameAndPass.PASSWORD);
     }
 

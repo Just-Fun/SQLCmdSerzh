@@ -5,7 +5,7 @@ import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import ua.com.juja.serzh.sqlcmd.controller.MainController;
 import ua.com.juja.serzh.sqlcmd.model.DatabaseManager;
-import ua.com.juja.serzh.sqlcmd.model.JDBCDatabaseManager;
+import ua.com.juja.serzh.sqlcmd.model.PostgresManager;
 import ua.com.juja.serzh.sqlcmd.view.Console;
 import ua.com.juja.serzh.sqlcmd.view.View;
 
@@ -20,7 +20,7 @@ public class Main {
         Logger.getRootLogger().setLevel(Level.OFF); //Disable log4j from text table formatter
 
         View view = new Console();
-        DatabaseManager manager = new JDBCDatabaseManager();
+        DatabaseManager manager = new PostgresManager();
         MainController controller = new MainController(view, manager);
         controller.run();
     }

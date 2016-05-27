@@ -5,6 +5,8 @@ import java.util.*;
 /**
  * Created by serzh on 5/11/16.
  */
+//TODO:Иван можно выпилить DataSet потому что он просто оборачивает в себя  Map<String,Object>
+//TODO:Иван и использовать уже Map где нужно
 public class DataSet {
 
     private Map<String, Object> data = new LinkedHashMap<>();

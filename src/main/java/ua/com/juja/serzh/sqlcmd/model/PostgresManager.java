@@ -6,7 +6,7 @@ import java.util.*;
 /**
  * Created by serzh on 5/11/16.
  */
-public class JDBCDatabaseManager implements DatabaseManager {
+public class PostgresManager implements DatabaseManager {
 
     static {
         try {
@@ -86,7 +86,7 @@ public class JDBCDatabaseManager implements DatabaseManager {
             }
             return tables;
         } catch (SQLException e) {
-            e.printStackTrace();
+            e.printStackTrace();//TODO: Иван стэк трейс выводить не нужно, лучше пробросить дальше как в других методах.
             return tables;
         }
     }
@@ -145,7 +145,7 @@ public class JDBCDatabaseManager implements DatabaseManager {
             }
             return tables;
         } catch (SQLException e) {
-            e.printStackTrace();
+            e.printStackTrace(); //TODO:Иван может, сделать более информативную реакцию на ошибку. Вылетает при find|(несуществующая таблица)
             return tables;
         }
     }
@@ -158,7 +158,7 @@ public class JDBCDatabaseManager implements DatabaseManager {
     private String getNameFormatted(DataSet newValue, String format) {
         String string = "";
         for (String name : newValue.getNames()) {
-            string += String.format(format, name);
+            string += String.format(format, name); //TODO: Иван тут лучше использовать StringBuffer
         }
         string = string.substring(0, string.length() - 1);
         return string;

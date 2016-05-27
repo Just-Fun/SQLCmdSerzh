@@ -5,7 +5,7 @@ import ua.com.juja.serzh.sqlcmd.BeforeTestsChangeNameAndPass;
 import ua.com.juja.serzh.sqlcmd.Main;
 import ua.com.juja.serzh.sqlcmd.model.DataSet;
 import ua.com.juja.serzh.sqlcmd.model.DatabaseManager;
-import ua.com.juja.serzh.sqlcmd.model.JDBCDatabaseManager;
+import ua.com.juja.serzh.sqlcmd.model.PostgresManager;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -17,6 +17,12 @@ import static org.junit.Assert.assertEquals;
  * Created by serzh on 5/11/16.
  */
 // TODO поэкспериментировать с виндой assertEquals(expectedStringExit, outString.toString().replaceAll("\r\n", "\n"));
+// Иван:
+//TODO: у меня все интеграционные тесты сначала легли писало, что org.junit.ComparisonFailure:
+//TODO: и приэтом контент идентичный проблема в злополучных \r\n
+//TODO: этот тест не подчищает за собой созданную базу данных. Он должен создать тестовую базу у меня а потом убрать
+//TODO: как по мне то опасно сначала перед тестами дропать базу.
+//TODO: Понятно, что название такое вряд ли у кого будет, но все-таки вдруг совпадет и тогда можешь случайно дропнуть чужую базу
 public class IntegrationTest {
 
     private static final String DATABASE = BeforeTestsChangeNameAndPass.DATABASE;
@@ -31,7 +37,7 @@ public class IntegrationTest {
 
     @BeforeClass
     public static void buildDatabase() {
-        DatabaseManager manager = new JDBCDatabaseManager();
+        DatabaseManager manager = new PostgresManager();
         try {
             manager.connect("", USER, PASSWORD);
         } catch (RuntimeException e) {
@@ -103,7 +109,8 @@ public class IntegrationTest {
                 // exit
                 "До скорой встречи!\n", getData());
     }
-
+    //TODO: Иван вот тут хорошее место, чтобы избавиться от \r\n
+    // Как?
     public String getData() {
         try {
             String result = new String(out.toByteArray(), "UTF-8");

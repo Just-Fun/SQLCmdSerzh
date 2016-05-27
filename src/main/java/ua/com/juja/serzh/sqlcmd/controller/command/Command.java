@@ -22,12 +22,14 @@ public abstract class Command {
     }
 
     public Command() { }
+//TODO: Иван :мне кажется этот метод проще сделать абстрактным, а проверять на валидность команду уже в самих классах командах.
 
     public boolean canProcess(UserInput command) {
         String[] parametersCommandFormat = commandFormat().split("\\|");
         String[] parametersInput = command.splitInput();
         return parametersInput[0].equals(parametersCommandFormat[0]);
     }
+//TODO: Иван немного путает результат метода. Если метод возвращает тру, то тогда не удалять...
 
     public boolean dropConfirmation(String name) {
         view.write(String.format("Вы уверены, что хотите удалить %s? Y/N", name));

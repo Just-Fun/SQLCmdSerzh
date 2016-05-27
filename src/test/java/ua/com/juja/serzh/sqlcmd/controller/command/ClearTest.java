@@ -26,9 +26,9 @@ public class ClearTest {
         command = new Clear(manager, view);
     }
 
-    @Test
+    @Test // TODO что-то не так
     public void testClearTable() {
-        command.process(new UserInput("clear|user"));
+        command.process(new UserInput("cleardf|user"));
 
         verify(manager).clear("user");
         verify(view).write("Таблица user была успешно очищена.");

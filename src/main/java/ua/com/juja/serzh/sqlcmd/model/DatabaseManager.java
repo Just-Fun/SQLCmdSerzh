@@ -25,9 +25,9 @@ public interface DatabaseManager {
 
     void dropTable(String query);
 
-    void insert(String tableName, DataSet input);
+    void insert(String tableName, Map<String, Object> input);
 
-    void update(String tableName, int id, DataSet newValue);
+    void update(String tableName, int id, Map<String, Object> newValue);
 
     Set<String> getTableColumns(String tableName);
 

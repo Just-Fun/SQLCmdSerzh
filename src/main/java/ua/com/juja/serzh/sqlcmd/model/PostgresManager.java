@@ -100,7 +100,7 @@ public class PostgresManager implements DatabaseManager {
     }
 
     @Override
-    public void insert(String tableName, DataSet input) {
+    public void insert(String tableName, Map<String, Object> input) {
         try (Statement stmt = connection.createStatement()) {
             String tableNames = getNameFormatted(input, "%s,");
             String values = getValuesFormatted(input, "'%s',");
@@ -152,18 +152,18 @@ public class PostgresManager implements DatabaseManager {
         return connection != null;
     }
 
-    private String getNameFormatted(DataSet newValue, String format) {
+    private String getNameFormatted(Map<String, Object> newValue, String format) {
         String string = "";
-        for (String name : newValue.getNames()) {
+        for (String name : newValue.keySet()) {
             string += String.format(format, name); //TODO: Иван тут лучше использовать StringBuffer
         }
         string = string.substring(0, string.length() - 1);
         return string;
     }
 
-    private String getValuesFormatted(DataSet input, String format) {
+    private String getValuesFormatted(Map<String, Object> input, String format) {
         String values = "";
-        for (Object value : input.getValues()) {
+        for (Object value : input.values()) {
             values += String.format(format, value);
         }
         values = values.substring(0, values.length() - 1);
@@ -171,13 +171,13 @@ public class PostgresManager implements DatabaseManager {
     }
 
     @Override // TODO заготовка, может как-нибудь реализовать в userInerface, тест написан
-    public void update(String tableName, int id, DataSet newValue) {
+    public void update(String tableName, int id, Map<String, Object> newValue) {
         String tableNames = getNameFormatted(newValue, "%s = ?,");
 
         String updateTable = "UPDATE public." + tableName + " SET " + tableNames + " WHERE id = ?";
         try (PreparedStatement ps = connection.prepareStatement(updateTable)) {
             int index = 1;
-            for (Object value : newValue.getValues()) {
+            for (Object value : newValue.values()) {
                 ps.setObject(index, value);
                 index++;
             }

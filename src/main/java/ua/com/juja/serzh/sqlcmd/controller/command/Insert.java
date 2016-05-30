@@ -1,7 +1,6 @@
 package ua.com.juja.serzh.sqlcmd.controller.command;
 
 import ua.com.juja.serzh.sqlcmd.controller.util.UserInput;
-import ua.com.juja.serzh.sqlcmd.model.DataSet;
 import ua.com.juja.serzh.sqlcmd.model.DatabaseManager;
 import ua.com.juja.serzh.sqlcmd.model.TableConstructor;
 import ua.com.juja.serzh.sqlcmd.view.View;
@@ -22,7 +21,7 @@ public class Insert extends Command {
         String[] data = input.splitInput();
         input.validationPairParameters(input, this);
         String tableName = data[1];
-        DataSet command = getDataSet(data);
+        Map<String, Object> command = getDataSet(data);
 
         manager.insert(tableName, command);
 
@@ -41,14 +40,16 @@ public class Insert extends Command {
         return "для создания записи в существующей таблице";
     }
 
-    private DataSet getDataSet(String[] data) {
-        DataSet dataSet = new DataSet();
+    private Map<String, Object> getDataSet(String[] data) {
+//        DataSet dataSet = new DataSet();
+        Map<String, Object> data1 = new LinkedHashMap<>();
         for (int index = 1; index < (data.length / 2); index++) {
             String columnName = data[index * 2];
             String value = data[index * 2 + 1];
-            dataSet.put(columnName, value);
+//            dataSet.put(columnName, value);
+            data1.put(columnName, value);
         }
-        return dataSet;
+        return data1;
     }
 
 

@@ -1,6 +1,7 @@
 package ua.com.juja.serzh.sqlcmd.model;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import ua.com.juja.serzh.sqlcmd.BeforeTestsChangeNameAndPass;
 
@@ -12,6 +13,7 @@ import static org.junit.Assert.assertTrue;
 /**
  * Created by serzh on 5/11/16.
  */
+
 public class DatabaseManagerTest {
 
     private DatabaseManager manager;
@@ -33,7 +35,7 @@ public class DatabaseManagerTest {
         // given
         manager.clear("users");
         // when
-        DataSet input = new DataSet();
+        Map<String, Object> input = new LinkedHashMap<>();
         input.put("name", "Stiven");
         input.put("password", "****");
         input.put("id", 11);
@@ -52,13 +54,13 @@ public class DatabaseManagerTest {
         // given
         manager.clear("users");
         // when
-        DataSet input = new DataSet();
+        Map<String, Object> input = new LinkedHashMap<>();
         input.put("name", "Stiven");
         input.put("password", "****");
         input.put("id", 11);
         manager.insert("users", input);
 
-        DataSet input2 = new DataSet();
+        Map<String, Object> input2 = new LinkedHashMap<>();
         input2.put("name", "Stiven2");
         input2.put("password", "*****");
         input2.put("id", 12);
@@ -81,13 +83,13 @@ public class DatabaseManagerTest {
         // given
         manager.clear("users");
 
-        DataSet input = new DataSet();
+        Map<String, Object> input = new LinkedHashMap<>();
         input.put("name", "Stiven");
         input.put("password", "pass");
         input.put("id", 15);
         manager.insert("users", input);
         // when
-        DataSet newValue = new DataSet();
+        Map<String, Object> newValue = new LinkedHashMap<>();
         newValue.put("password", "pass2");
         newValue.put("name", "Pup");
         manager.update("users", 15, newValue);
@@ -102,8 +104,6 @@ public class DatabaseManagerTest {
 
     @Test
     public void testGetColumnNames() {
-        // given
-//        manager.clear("users");
         // when
         Set<String> columnNames = manager.getTableColumns("users");
         // then
@@ -113,7 +113,7 @@ public class DatabaseManagerTest {
     @Test
     public void clearTable() {
         // given
-        DataSet input = new DataSet();
+        Map<String, Object> input = new LinkedHashMap<>();
         input.put("name", "Stiven");
         input.put("password", "pass");
         input.put("id", 17);

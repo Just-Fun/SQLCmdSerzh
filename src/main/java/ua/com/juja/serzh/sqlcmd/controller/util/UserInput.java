@@ -1,7 +1,6 @@
 package ua.com.juja.serzh.sqlcmd.controller.util;
 
 import ua.com.juja.serzh.sqlcmd.controller.command.Command;
-import ua.com.juja.serzh.sqlcmd.model.DataSet;
 import ua.com.juja.serzh.sqlcmd.model.TableConstructor;
 
 import java.util.LinkedHashMap;
@@ -47,12 +46,12 @@ public class UserInput {
         return userCommand;
     }
 
-    public TableConstructor getTableConstructorFromDataSet(DataSet dataSet) {
+    public TableConstructor getTableConstructorFromDataSet(Map<String, Object> dataSet) {
         Map<String, Object> map = new LinkedHashMap<>();
-        map.putAll(dataSet.returnData());
+        map.putAll(dataSet);
 
         List<Map<String, Object>> tableData = new LinkedList<>();
         tableData.add(map);
-        return new TableConstructor(dataSet.getNames(), tableData);
+        return new TableConstructor(dataSet.keySet(), tableData);
     }
 }

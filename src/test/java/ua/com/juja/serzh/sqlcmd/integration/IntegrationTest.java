@@ -3,13 +3,14 @@ package ua.com.juja.serzh.sqlcmd.integration;
 import org.junit.*;
 import ua.com.juja.serzh.sqlcmd.BeforeTestsChangeNameAndPass;
 import ua.com.juja.serzh.sqlcmd.Main;
-import ua.com.juja.serzh.sqlcmd.model.DataSet;
 import ua.com.juja.serzh.sqlcmd.model.DatabaseManager;
 import ua.com.juja.serzh.sqlcmd.model.PostgresManager;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.io.UnsupportedEncodingException;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
 
@@ -55,7 +56,7 @@ public class IntegrationTest {
         manager.createTable("users" +
                 " (name VARCHAR (50) UNIQUE NOT NULL, password VARCHAR (50) NOT NULL, id SERIAL PRIMARY KEY)");
         manager.createTable("test1 (id SERIAL PRIMARY KEY)");
-        DataSet dataSet = new DataSet();
+        Map<String, Object> dataSet = new LinkedHashMap<>();
         dataSet.put("name", "Vasia");
         dataSet.put("password", "****");
         dataSet.put("id", "22");

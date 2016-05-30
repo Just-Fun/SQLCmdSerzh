@@ -41,12 +41,10 @@ public class Insert extends Command {
     }
 
     private Map<String, Object> getDataSet(String[] data) {
-//        DataSet dataSet = new DataSet();
         Map<String, Object> data1 = new LinkedHashMap<>();
         for (int index = 1; index < (data.length / 2); index++) {
             String columnName = data[index * 2];
             String value = data[index * 2 + 1];
-//            dataSet.put(columnName, value);
             data1.put(columnName, value);
         }
         return data1;

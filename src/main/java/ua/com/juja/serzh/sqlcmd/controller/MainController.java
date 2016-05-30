@@ -75,6 +75,5 @@ public class MainController {
             message += " " + cause.getMessage();
         }
         view.write("Неудача! по причине: " + message);
-        view.write("Повтори попытку.");
     }
 }

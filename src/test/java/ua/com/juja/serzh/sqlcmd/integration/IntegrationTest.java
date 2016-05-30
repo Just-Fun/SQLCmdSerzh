@@ -85,7 +85,7 @@ public class IntegrationTest {
                 "\tconnect|databaseName|userName|password\n" +
                 "\t\tдля подключения к базе данных, с которой будем работать\n" +
                 "\tcreateDB|databaseName\n" +
-                "\t\tдля создания новой Database. Имя базы должно начинаться с буквы, прописные буквы становяться строчными.\n" +
+                "\t\tдля создания новой Database. Имя базы должно начинаться с буквы.\n" +
                 "\tdropDB|databaseName\n" +
                 "\t\tдля удаления Database. База должна быть свободна от любого конекшина.\n" +
                 "\tcreateTable|tableName(column1,column2,...,columnN)\n" +
@@ -279,7 +279,6 @@ public class IntegrationTest {
         assertEquals(pleaseConnect +
                 // connect
                 "Неудача! по причине: Формат команды 'connect|databaseName|userName|password', а ты ввел: connect|sqlcmd5hope5never5exist\n" +
-                "Повтори попытку.\n" +
                 "Введи команду (или help для помощи):\n" +
                 // exit
                 "До скорой встречи!\n", getData());
@@ -352,7 +351,6 @@ public class IntegrationTest {
                 "Введи команду (или help для помощи):\n" +
                 // clear|sadfasd|fsf|fdsf
                 "Неудача! по причине: Формат команды 'clear|tableName', а ты ввел: clear|sadfasd|fsf|fdsf\n" +
-                "Повтори попытку.\n" +
                 "Введи команду (или help для помощи):\n" +
                 // exit
                 "До скорой встречи!\n", getData());
@@ -373,7 +371,6 @@ public class IntegrationTest {
                 "Введи команду (или help для помощи):\n" +
                 // insert|user|error
                 "Неудача! по причине: Должно быть четное количество параметров в формате 'insert|tableName|column1|value1|column2|value2|...|columnN|valueN', а ты прислал: 'insert|user|error'\n" +
-                "Повтори попытку.\n" +
                 "Введи команду (или help для помощи):\n" +
                 // exit
                 "До скорой встречи!\n", getData());

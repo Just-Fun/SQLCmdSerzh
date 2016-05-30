@@ -51,7 +51,7 @@ public class PostgresManager implements DatabaseManager {
             }
             return result;
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException(e.getLocalizedMessage());
         }
     }
 
@@ -60,7 +60,7 @@ public class PostgresManager implements DatabaseManager {
         try (Statement statement = connection.createStatement()) {
             statement.executeUpdate("CREATE DATABASE " + databaseName);
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException(e.getLocalizedMessage());
         }
     }
 
@@ -85,7 +85,7 @@ public class PostgresManager implements DatabaseManager {
             }
             return tables;
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException(e.getLocalizedMessage());
         }
     }
 
@@ -95,7 +95,7 @@ public class PostgresManager implements DatabaseManager {
         try (Statement stmt = connection.createStatement()) {
             stmt.executeUpdate("DELETE FROM " + tableName);
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException(e.getLocalizedMessage());
         }
     }
 
@@ -108,7 +108,7 @@ public class PostgresManager implements DatabaseManager {
             stmt.executeUpdate("INSERT INTO public." + tableName + " (" + tableNames + ")" +
                     "VALUES (" + values + ")");
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException(e.getLocalizedMessage());
         }
     }
 
@@ -118,7 +118,7 @@ public class PostgresManager implements DatabaseManager {
 //            statement.executeUpdate("CREATE TABLE IF NOT EXISTS " + table_name);
             statement.executeUpdate("CREATE TABLE " + table_name);
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException(e.getLocalizedMessage());
         }
     }
 
@@ -128,7 +128,7 @@ public class PostgresManager implements DatabaseManager {
 //            statement.executeUpdate("DROP TABLE IF EXISTS " + table_name + " CASCADE");
             statement.executeUpdate("DROP TABLE " + table_name);
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException(e.getLocalizedMessage());
         }
     }
 
@@ -143,7 +143,7 @@ public class PostgresManager implements DatabaseManager {
             }
             return tables;
         } catch (SQLException e) {
-            throw new RuntimeException(e); //TODO:Иван может, сделать более информативную реакцию на ошибку. Вылетает при find|(несуществующая таблица)
+            throw new RuntimeException(e.getLocalizedMessage());
         }
     }
 
@@ -184,7 +184,7 @@ public class PostgresManager implements DatabaseManager {
             ps.setInt(index, id);
             ps.executeUpdate();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException(e.getLocalizedMessage());
         }
     }
 

@@ -8,6 +8,9 @@ import ua.com.juja.serzh.sqlcmd.view.View;
  * Created by serzh on 5/11/16.
  */
 public class Connect extends Command {
+    static String databaseName = "";
+    static String userName = "";
+    static String password = "";
 
     public Connect(DatabaseManager manager, View view) {
         super(manager, view);
@@ -17,9 +20,9 @@ public class Connect extends Command {
     public void process(UserInput input) {
         input.validationParameters(commandFormat());
         String[] data = input.splitInput();
-        String databaseName = data[1];
-        String userName = data[2];
-        String password = data[3];
+        databaseName = data[1];
+        userName = data[2];
+        password = data[3];
 
         manager.connect(databaseName, userName, password);
         view.write("Успех!");
@@ -33,5 +36,17 @@ public class Connect extends Command {
     @Override
     public String description() {
         return "для подключения к базе данных, с которой будем работать";
+    }
+
+    public static String getDatabaseName() {
+        return databaseName;
+    }
+
+    public static String getUserName() {
+        return userName;
+    }
+
+    public static String getPassword() {
+        return password;
     }
 }

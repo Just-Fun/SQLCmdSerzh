@@ -33,7 +33,7 @@ public class IntegrationTest {
     private ByteArrayOutputStream out;
 
     private final String commandConnect = "connect|" + DATABASE + "|" + USER + "|" + PASSWORD;
-    private final String pleaseConnect = "Введите имя базы данных, имя пользователя и пароль в формате: " +
+    private final String pleaseConnect = "Введите имя базы данных, с которой будем работать, имя пользователя и пароль в формате: " +
             "connect|database|userName|password\n";
 
     @BeforeClass
@@ -48,7 +48,7 @@ public class IntegrationTest {
         try {
         manager.dropDatabase(DATABASE);
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            // do nothing
         }
         manager.createDatabase(DATABASE);
         manager.connect(DATABASE, USER, PASSWORD);

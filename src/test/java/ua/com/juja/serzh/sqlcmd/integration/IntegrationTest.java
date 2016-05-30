@@ -47,7 +47,7 @@ public class IntegrationTest {
         try {
         manager.dropDatabase(DATABASE);
         } catch (Exception e) {
-            // do nothing
+            throw new RuntimeException(e);
         }
         manager.createDatabase(DATABASE);
         manager.connect(DATABASE, USER, PASSWORD);
@@ -84,29 +84,28 @@ public class IntegrationTest {
                 "Существующие команды:\n" +
                 "\tconnect|databaseName|userName|password\n" +
                 "\t\tдля подключения к базе данных, с которой будем работать\n" +
-                "\tclear|tableName\n" +
-                "\t\tдля очистки всей таблицы\n" +
                 "\tcreateDB|databaseName\n" +
-                "\t\tдля создания новой Database\n" +
+                "\t\tдля создания новой Database. Имя базы должно начинаться с буквы, прописные буквы становяться строчными.\n" +
                 "\tdropDB|databaseName\n" +
-                "\t\tдля удаления Database\n" +
+                "\t\tдля удаления Database. База должна быть свободна от любого конекшина.\n" +
                 "\tcreateTable|tableName(column1,column2,...,columnN)\n" +
                 "\t\tдля создания новой таблицы, в круглых скобках вставить опиание колонок в SQL формате, пример:\n" +
-                "\t\tcreateTable|user(id SERIAL NOT NULL PRIMARY KEY,username varchar(225) NOT NULL UNIQUE, password varchar(225))" +
-                "\n\tdropTable|tableName\n" +
+                "\t\tcreateTable|user(id SERIAL NOT NULL PRIMARY KEY,username varchar(225) NOT NULL UNIQUE, password varchar(225))\n" +
+                "\tclear|tableName\n" +
+                "\t\tдля очистки всей таблицы\n" +
+                "\tdropTable|tableName\n" +
                 "\t\tдля удаления таблицы\n" +
                 "\tinsert|tableName|column1|value1|column2|value2|...|columnN|valueN\n" +
                 "\t\tдля создания записи в существующей таблице\n" +
+                "\ttables\n" +
+                "\t\tдля получения списка всех таблиц базы, к которой подключились\n" +
                 "\tfind|tableName\n" +
                 "\t\tдля получения содержимого таблицы 'tableName'\n" +
                 "\thelp\n" +
                 "\t\tдля вывода этого списка на экран\n" +
-                "\ttables\n" +
-                "\t\tдля получения списка всех таблиц базы, к которой подключились\n" +
                 "\texit\n" +
                 "\t\tдля выхода из программы\n" +
                 "Введи команду (или help для помощи):\n" +
-                // exit
                 "До скорой встречи!\n", getData());
     }
 

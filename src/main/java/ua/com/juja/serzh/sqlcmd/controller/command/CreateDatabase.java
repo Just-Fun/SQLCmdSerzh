@@ -15,7 +15,7 @@ public class CreateDatabase extends Command {
 
     @Override
     public void process(UserInput input) {
-        input.validationParametersLength(commandFormat());
+        input.validationParameters(commandFormat());
         String databaseName = input.splitInput()[1];
 
         manager.createDatabase(databaseName);
@@ -27,9 +27,8 @@ public class CreateDatabase extends Command {
         return "createDB|databaseName";
     }
 
-    // TODO может добавить в описание, что имя должно начинаться с буквы, заглавные буквы становяться прописными и еще чего-то нельзя...
     @Override
     public String description() {
-        return "для создания новой Database";
+        return "для создания новой Database. Имя базы должно начинаться с буквы, прописные буквы становяться строчными.";
     }
 }

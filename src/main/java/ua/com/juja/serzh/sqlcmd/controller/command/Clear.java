@@ -15,7 +15,7 @@ public class Clear extends Command {
 
     @Override
     public void process(UserInput input) {
-        input.validationParametersLength(commandFormat());
+        input.validationParameters(commandFormat());
         String tableName = input.splitInput()[1];
         manager.clear(tableName);
 

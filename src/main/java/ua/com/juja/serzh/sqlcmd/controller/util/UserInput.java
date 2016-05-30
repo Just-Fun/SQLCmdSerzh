@@ -20,7 +20,7 @@ public class UserInput {
 
     }
 
-    public void validationParametersLength(String commandFormat) {
+    public void validationParameters(String commandFormat) {
         int formatLength = (commandFormat.split("\\|")).length;
         if (formatLength != parametersLength()) {
             throw new IllegalArgumentException(String.format("Формат команды '%s', а ты ввел: %s", commandFormat, userCommand));

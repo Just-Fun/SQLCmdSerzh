@@ -70,7 +70,7 @@ public class PostgresManager implements DatabaseManager {
 //            statement.executeUpdate("DROP DATABASE IF EXISTS " + databaseName + " CASCADE");
             statement.executeUpdate("DROP DATABASE " + databaseName);
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException(e.getLocalizedMessage());
         }
     }
 

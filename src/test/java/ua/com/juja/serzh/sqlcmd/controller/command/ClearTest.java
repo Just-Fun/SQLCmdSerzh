@@ -26,18 +26,24 @@ public class ClearTest {
         command = new Clear(manager, view);
     }
 
-    @Test // TODO что-то не так
+    @Test
     public void testClearTable() {
-        command.process(new UserInput("cleardf|user"));
-
+        command.process(new UserInput("clear|user"));
         verify(manager).clear("user");
         verify(view).write("Таблица user была успешно очищена.");
     }
 
+
     @Test
-    public void testCanProcessClearWithParametersString() {
+    public void testCantProcess() {
         boolean canProcess = command.canProcess(new UserInput("clear|user"));
         assertTrue(canProcess);
+    }
+
+    @Test
+    public void testClearTableWrongCommand() {
+        boolean  canNotProcess = command.canProcess(new UserInput("cleardf|user"));
+        assertFalse(canNotProcess);
     }
 
     @Test

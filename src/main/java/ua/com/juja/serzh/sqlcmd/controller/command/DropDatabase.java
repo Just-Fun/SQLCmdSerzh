@@ -15,7 +15,7 @@ public class DropDatabase extends Command {
 
     @Override
     public void process(UserInput input) {
-        input.validationParametersLength(commandFormat());
+        input.validationParameters(commandFormat());
         String databaseName = input.splitInput()[1];
 
         if (!dropConfirmation(databaseName)) return;
@@ -30,6 +30,6 @@ public class DropDatabase extends Command {
 
     @Override
     public String description() {
-        return "для удаления Database";
+        return "для удаления Database. База должна быть свободна от любого конекшина.";
     }
 }

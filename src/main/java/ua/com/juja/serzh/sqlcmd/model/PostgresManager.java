@@ -15,6 +15,7 @@ public class PostgresManager implements DatabaseManager {
             throw new DriverException("Not installed PostgreSQL JDBC driver.", e);
         }
     }
+    private static final String ERROR = "It is impossible because: ";
     private static final String HOST = "localhost";
     private static final String PORT = "5432";
 
@@ -29,17 +30,18 @@ public class PostgresManager implements DatabaseManager {
             this.user = user;
             this.password = password;
         }
-
         this.database = database;
 
-        try {
-            if (connection != null) {
+        if (connection != null) {
+            try {
                 connection.close();
+            } catch (SQLException e) {
+                throw new DatabaseManagerException(ERROR, e);
             }
+        }
+        try {
             String url = String.format("jdbc:postgresql://%s:%s/%s", HOST, PORT, database);
             connection = DriverManager.getConnection(url, user, password);
-//            connection = DriverManager.getConnection(
-//                    "jdbc:postgresql://" + HOST + ":5432/" + database, user, password);
         } catch (SQLException e) {
             connection = null;
             throw new RuntimeException(
@@ -207,8 +209,7 @@ public class PostgresManager implements DatabaseManager {
         try (Statement stmt = connection.createStatement();
              ResultSet tableSize = stmt.executeQuery("SELECT COUNT(*) FROM public." + tableName)) {
             tableSize.next();
-            int size = tableSize.getInt(1);
-            return size;
+            return tableSize.getInt(1);
         } catch (SQLException e) {
             e.printStackTrace();
             return 0;

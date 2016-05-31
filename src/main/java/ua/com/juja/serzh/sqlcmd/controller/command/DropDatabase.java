@@ -22,6 +22,7 @@ public class DropDatabase extends Command {
         input.validationParameters(commandFormat());
         String databaseName = input.splitInput()[1];
         if (!dropConfirmation(databaseName)) return;
+
 //Сперва реализовал вариант удаления базы к которой подключен, но потом замахался выходить по меню из разных ситуаций :)
         String databaseNameConnect = Connect.databaseName;
         if (databaseName.equals(databaseNameConnect)) {
@@ -29,6 +30,15 @@ public class DropDatabase extends Command {
             view.write(String.format("Для удаления текущей базы '%s', подключитесь к другой базе.", databaseName));
             return;
         }
+
+        // Если вздумается таки реализовать удаление базы, к которой подключен
+        /*if (databaseName.equals(databaseNameConnect)) {
+            manager.connect("", Connect.userName,Connect.password);
+            view.write(String.format("Вы отключены от базы '%s'.", databaseNameConnect));
+            manager.dropDatabase(databaseName);
+            view.write(String.format("Database %s была успешно удалена.", databaseName));
+            return;
+        }*/
         manager.dropDatabase(databaseName);
         view.write(String.format("Database '%s' была успешно удалена.", databaseName));
     }

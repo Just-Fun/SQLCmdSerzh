@@ -15,22 +15,35 @@ public class PostgresManager implements DatabaseManager {
             throw new DriverException("Not installed PostgreSQL JDBC driver.", e);
         }
     }
+    private static final String HOST = "localhost";
+    private static final String PORT = "5432";
 
     private Connection connection;
+    private String user;
+    private String password;
+    private String database;
 
     @Override // try-with-resources statement ensures that each resource is closed at the end of the statement
-    public void connect(String database, String userName, String password) {
+    public void connect(String database, String user, String password) {
+        if (this.user != null && password != null) {
+            this.user = user;
+            this.password = password;
+        }
+
+        this.database = database;
 
         try {
             if (connection != null) {
                 connection.close();
             }
-            connection = DriverManager.getConnection(
-                    "jdbc:postgresql://localhost:5432/" + database, userName, password);
+            String url = String.format("jdbc:postgresql://%s:%s/%s", HOST, PORT, database);
+            connection = DriverManager.getConnection(url, user, password);
+//            connection = DriverManager.getConnection(
+//                    "jdbc:postgresql://" + HOST + ":5432/" + database, user, password);
         } catch (SQLException e) {
             connection = null;
             throw new RuntimeException(
-                    String.format("Cant get connection for model:%s user:%s", database, userName), e);
+                    String.format("Cant get connection for model:%s user:%s", database, user), e);
         }
     }
 
@@ -200,5 +213,17 @@ public class PostgresManager implements DatabaseManager {
             e.printStackTrace();
             return 0;
         }
+    }
+
+    public String getUser() {
+        return user;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public String getDatabase() {
+        return database;
     }
 }

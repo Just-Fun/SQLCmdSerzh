@@ -17,10 +17,7 @@ import static org.junit.Assert.assertEquals;
 /**
  * Created by serzh on 5/11/16.
  */
-// TODO поэкспериментировать с виндой assertEquals(expectedStringExit, outString.toString().replaceAll("\r\n", "\n"));
 // Иван:
-//TODO: у меня все интеграционные тесты сначала легли писало, что org.junit.ComparisonFailure:
-//TODO: и приэтом контент идентичный проблема в злополучных \r\n
 //TODO: этот тест не подчищает за собой созданную базу данных. Он должен создать тестовую базу у меня а потом убрать
 //TODO: как по мне то опасно сначала перед тестами дропать базу.
 //TODO: Понятно, что название такое вряд ли у кого будет, но все-таки вдруг совпадет и тогда можешь случайно дропнуть чужую базу
@@ -36,9 +33,11 @@ public class IntegrationTest {
     private final String pleaseConnect = "Введите имя базы данных, с которой будем работать, имя пользователя и пароль в формате: " +
             "connect|database|userName|password\n";
 
+    private static DatabaseManager manager;
+
     @BeforeClass
     public static void buildDatabase() {
-        DatabaseManager manager = new PostgresManager();
+        manager = new PostgresManager();
         try {
             manager.connect("", USER, PASSWORD);
         } catch (RuntimeException e) {
@@ -46,7 +45,7 @@ public class IntegrationTest {
                     + "\n" + e.getCause());
         }
         try {
-        manager.dropDatabase(DATABASE);
+            manager.dropDatabase(DATABASE);
         } catch (Exception e) {
             // do nothing
         }
@@ -71,6 +70,16 @@ public class IntegrationTest {
         System.setIn(in);
         System.setOut(new PrintStream(out));
     }
+
+   /* @AfterClass
+    public static void dropDatabase() {
+        try {
+            manager.connect("", USER, PASSWORD);
+            manager.dropDatabase(DATABASE);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }*/
 
     @Test
     public void testHelp() {
@@ -112,7 +121,7 @@ public class IntegrationTest {
 
     public String getData() {
         try {
-            String result = new String(out.toByteArray(), "UTF-8").replaceAll("\r\n","\n");
+            String result = new String(out.toByteArray(), "UTF-8").replaceAll("\r\n", "\n");
             out.reset();
             return result;
         } catch (UnsupportedEncodingException e) {

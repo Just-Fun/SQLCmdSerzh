@@ -8,7 +8,7 @@ import ua.com.juja.serzh.sqlcmd.view.View;
  * Created by serzh on 5/11/16.
  */
 public class Connect extends Command {
-    static String databaseName = "";
+    static String databaseName;
 
     public Connect(DatabaseManager manager, View view) {
         super(manager, view);

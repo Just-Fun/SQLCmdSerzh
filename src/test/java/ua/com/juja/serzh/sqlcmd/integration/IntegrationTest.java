@@ -71,7 +71,7 @@ public class IntegrationTest {
         System.setOut(new PrintStream(out));
     }
 
-   /* @AfterClass
+    /*@AfterClass
     public static void dropDatabase() {
         try {
             manager.connect("", USER, PASSWORD);

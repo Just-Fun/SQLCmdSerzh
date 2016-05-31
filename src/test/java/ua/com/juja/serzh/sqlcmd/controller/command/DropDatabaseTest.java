@@ -52,7 +52,7 @@ public class DropDatabaseTest {
 
         verify(view).write(String.format("Вы уверены, что хотите удалить db? Y/N"));
         verify(manager).dropDatabase("db");
-        verify(view).write("Database db была успешно удалена.");
+        verify(view).write("Database 'db' была успешно удалена.");
     }
 
     @Test
@@ -62,7 +62,7 @@ public class DropDatabaseTest {
 
         verify(view).write(String.format("Вы уверены, что хотите удалить db? Y/N"));
         verify(manager).dropDatabase("db");
-        verify(view).write("Database db была успешно удалена.");
+        verify(view).write("Database 'db' была успешно удалена.");
     }
 
     @Test

@@ -21,18 +21,16 @@ public class DropDatabase extends Command {
     public void process(UserInput input) {
         input.validationParameters(commandFormat());
         String databaseName = input.splitInput()[1];
-
         if (!dropConfirmation(databaseName)) return;
-        String databaseNameConnect = Connect.getDatabaseName();
+
+        String databaseNameConnect = Connect.databaseName;
         if (databaseName.equals(databaseNameConnect)) {
-            manager.connect("", Connect.userName,Connect.password);
-            view.write(String.format("Вы отключены от базы '%s'.", databaseNameConnect));
-            manager.dropDatabase(databaseName);
-            view.write(String.format("Database %s была успешно удалена.", databaseName));
-            Main.main(new String[0]);
+            view.write("Нельзя удалять базу, к которой вы подключены.");
+            view.write(String.format("Для удаления текущей базы '%s', подключитесь к другой базе.", databaseName));
+            return;
         }
         manager.dropDatabase(databaseName);
-        view.write(String.format("Database %s была успешно удалена.", databaseName));
+        view.write(String.format("Database '%s' была успешно удалена.", databaseName));
     }
 
     @Override

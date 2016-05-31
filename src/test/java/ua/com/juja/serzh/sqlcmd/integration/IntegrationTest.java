@@ -7,6 +7,7 @@ import ua.com.juja.serzh.sqlcmd.model.DatabaseManager;
 import ua.com.juja.serzh.sqlcmd.model.PostgresManager;
 
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.PrintStream;
 import java.io.UnsupportedEncodingException;
 import java.util.LinkedHashMap;
@@ -51,6 +52,7 @@ public class IntegrationTest {
         }
         manager.createDatabase(DATABASE);
         manager.connect(DATABASE, USER, PASSWORD);
+//        manager.connect(DATABASE, null, null);
 
         manager.createTable("users" +
                 " (name VARCHAR (50) UNIQUE NOT NULL, password VARCHAR (50) NOT NULL, id SERIAL PRIMARY KEY)");
@@ -60,6 +62,8 @@ public class IntegrationTest {
         dataSet.put("password", "****");
         dataSet.put("id", "22");
         manager.insert("users", dataSet);
+        manager.connect("", USER, PASSWORD);
+//        manager.disconnectFromDatabase();
     }
 
     @Before
@@ -71,15 +75,22 @@ public class IntegrationTest {
         System.setOut(new PrintStream(out));
     }
 
-    /*@AfterClass
+    @After
+    public void clear() {
+//        in.add("exit");
+//        Main.main(new String[0]);
+    }
+
+    @AfterClass
     public static void dropDatabase() {
         try {
             manager.connect("", USER, PASSWORD);
-            manager.dropDatabase(DATABASE);
+//            manager.disconnectFromDatabase(); // the same
+//            manager.dropDatabase(DATABASE);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-    }*/
+    }
 
     @Test
     public void testHelp() {

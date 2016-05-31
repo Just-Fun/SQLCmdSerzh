@@ -1,8 +1,6 @@
 package ua.com.juja.serzh.sqlcmd.model;
 
-import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.*;
 import ua.com.juja.serzh.sqlcmd.BeforeTestsChangeNameAndPass;
 
 import java.util.*;
@@ -13,15 +11,28 @@ import static org.junit.Assert.assertTrue;
 /**
  * Created by serzh on 5/11/16.
  */
-
 public class DatabaseManagerTest {
 
-    private DatabaseManager manager;
+    private static DatabaseManager manager;
+    private static final String DATABASE = BeforeTestsChangeNameAndPass.DATABASE;
+    private static final String USER = BeforeTestsChangeNameAndPass.USER;
+    private static final String PASSWORD = BeforeTestsChangeNameAndPass.PASSWORD;
 
-    @Before
-    public void setup() {
+    @BeforeClass
+    public static void setup() {
         manager = new PostgresManager();
-        manager.connect(BeforeTestsChangeNameAndPass.DATABASE, BeforeTestsChangeNameAndPass.USER, BeforeTestsChangeNameAndPass.PASSWORD);
+        manager.connect(DATABASE, USER, PASSWORD);
+    }
+
+    @AfterClass
+    public static void dropDatabase() {
+        try {
+            manager.connect("", USER, PASSWORD);
+//            manager.disconnectFromDatabase(); // the same
+//            manager.dropDatabase(DATABASE);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Test

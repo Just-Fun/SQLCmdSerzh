@@ -15,6 +15,7 @@ public class PostgresManager implements DatabaseManager {
             throw new DriverException("Not installed PostgreSQL JDBC driver.", e);
         }
     }
+
     private static final String ERROR = "It is impossible because: ";
     private static final String HOST = "localhost";
     private static final String PORT = "5432";
@@ -26,19 +27,17 @@ public class PostgresManager implements DatabaseManager {
 
     @Override // try-with-resources statement ensures that each resource is closed at the end of the statement
     public void connect(String database, String user, String password) {
-        if (this.user != null && password != null) {
+        if (user != null && password != null) {
             this.user = user;
             this.password = password;
         }
         this.database = database;
 
-        if (connection != null) {
-            try {
-                connection.close();
-            } catch (SQLException e) {
-                throw new DatabaseManagerException(ERROR, e);
-            }
-        }
+        closeOpenedConnection();
+        getConnection(database);
+    }
+
+    private void getConnection(String database) {
         try {
             String url = String.format("jdbc:postgresql://%s:%s/%s", HOST, PORT, database);
             connection = DriverManager.getConnection(url, user, password);
@@ -47,6 +46,21 @@ public class PostgresManager implements DatabaseManager {
             throw new RuntimeException(
                     String.format("Cant get connection for model:%s user:%s", database, user), e);
         }
+    }
+
+    private void closeOpenedConnection() {
+        if (connection != null) {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                throw new DatabaseManagerException(ERROR, e);
+            }
+        }
+    }
+
+    @Override
+    public void disconnectFromDatabase() {
+        connect("", user, password);
     }
 
     @Override
@@ -87,6 +101,11 @@ public class PostgresManager implements DatabaseManager {
         } catch (SQLException e) {
             throw new RuntimeException(e.getLocalizedMessage());
         }
+    }
+
+    @Override // TODO Реализовать
+    public Set<String> getDatabases() {
+        return null;
     }
 
     @Override
@@ -216,14 +235,17 @@ public class PostgresManager implements DatabaseManager {
         }
     }
 
+    @Override
     public String getUser() {
         return user;
     }
 
+    @Override
     public String getPassword() {
         return password;
     }
 
+    @Override
     public String getDatabase() {
         return database;
     }

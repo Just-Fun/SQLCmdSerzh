@@ -59,11 +59,6 @@ public class PostgresManager implements DatabaseManager {
     }
 
     @Override
-    public void disconnectFromDatabase() {
-        connect("", user, password);
-    }
-
-    @Override
     public List<Map<String, Object>> getTableData(String tableName) {
         List<Map<String, Object>> result = new LinkedList<>();
 

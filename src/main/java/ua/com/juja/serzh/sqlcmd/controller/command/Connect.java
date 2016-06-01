@@ -7,7 +7,6 @@ import ua.com.juja.serzh.sqlcmd.view.View;
  * Created by serzh on 5/11/16.
  */
 public class Connect extends Command {
-    static String databaseName;
 
     public Connect(DatabaseManager manager, View view) {
         super(manager, view);
@@ -17,7 +16,7 @@ public class Connect extends Command {
     public void process(String input) {
         validationParameters(input);
         String[] data = input.split("\\|");
-        databaseName = data[1];
+        String databaseName = data[1];
         String userName = data[2];
         String password = data[3];
 

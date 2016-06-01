@@ -9,7 +9,6 @@ import java.util.Set;
  */
 public interface DatabaseManager {
 
-    void disconnectFromDatabase();
 
     List<Map<String, Object>> getTableData(String tableName);
 
@@ -23,7 +22,6 @@ public interface DatabaseManager {
 
     void dropDatabase(String databaseName);
 
-    Set<String> getDatabases();
 
     void createTable(String query);
 
@@ -37,11 +35,14 @@ public interface DatabaseManager {
 
     boolean isConnected();
 
-    int getSize(String tableName);
-
     String getUser();
 
     String getPassword();
 
     String getDatabase();
+
+    Set<String> getDatabases();
+
+    int getSize(String tableName);
+
 }

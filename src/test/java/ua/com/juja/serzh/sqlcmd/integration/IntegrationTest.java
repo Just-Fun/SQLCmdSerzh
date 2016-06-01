@@ -18,10 +18,6 @@ import static org.junit.Assert.assertEquals;
 /**
  * Created by serzh on 5/11/16.
  */
-// Иван:
-//TODO: этот тест не подчищает за собой созданную базу данных. Он должен создать тестовую базу у меня а потом убрать
-//TODO: как по мне то опасно сначала перед тестами дропать базу.
-//TODO: Понятно, что название такое вряд ли у кого будет, но все-таки вдруг совпадет и тогда можешь случайно дропнуть чужую базу
 public class IntegrationTest {
 
     private static final String DATABASE = BeforeTestsChangeNameAndPass.DATABASE;
@@ -52,7 +48,6 @@ public class IntegrationTest {
         }
         manager.createDatabase(DATABASE);
         manager.connect(DATABASE, USER, PASSWORD);
-//        manager.connect(DATABASE, null, null);
 
         manager.createTable("users" +
                 " (name VARCHAR (50) UNIQUE NOT NULL, password VARCHAR (50) NOT NULL, id SERIAL PRIMARY KEY)");
@@ -63,7 +58,6 @@ public class IntegrationTest {
         dataSet.put("id", "22");
         manager.insert("users", dataSet);
         manager.connect("", USER, PASSWORD);
-//        manager.disconnectFromDatabase();
     }
 
     @Before

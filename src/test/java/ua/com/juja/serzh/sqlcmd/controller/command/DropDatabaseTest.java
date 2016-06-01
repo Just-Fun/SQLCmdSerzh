@@ -49,7 +49,7 @@ public class DropDatabaseTest {
         when(view.read()).thenReturn("y");
         command.process("dropDB|db");
 
-        verify(view).write(String.format("Вы уверены, что хотите удалить db? Y/N"));
+        verify(view).write("Вы уверены, что хотите удалить db? Y/N");
         verify(manager).dropDatabase("db");
         verify(view).write("Database 'db' была успешно удалена.");
     }
@@ -59,7 +59,7 @@ public class DropDatabaseTest {
         when(view.read()).thenReturn("Y");
         command.process("dropDB|db");
 
-        verify(view).write(String.format("Вы уверены, что хотите удалить db? Y/N"));
+        verify(view).write("Вы уверены, что хотите удалить db? Y/N");
         verify(manager).dropDatabase("db");
         verify(view).write("Database 'db' была успешно удалена.");
     }

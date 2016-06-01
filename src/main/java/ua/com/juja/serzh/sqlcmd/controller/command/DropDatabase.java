@@ -19,7 +19,7 @@ public class DropDatabase extends Command {
         if (!dropConfirmation(databaseName)) return;
 
 //Сперва реализовал вариант удаления базы к которой подключен, но потом замахался выходить по меню из разных ситуаций :)
-        String databaseNameConnect = Connect.databaseName;
+        String databaseNameConnect = manager.getDatabase();
         if (databaseName.equals(databaseNameConnect)) {
             view.write("Нельзя удалять базу, к которой вы подключены.");
             view.write(String.format("Для удаления текущей базы '%s', подключитесь к другой базе.", databaseName));

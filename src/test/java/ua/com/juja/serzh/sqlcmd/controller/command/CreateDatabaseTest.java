@@ -27,25 +27,25 @@ public class CreateDatabaseTest {
 
     @Test
     public void testCanProcess() throws Exception {
-        boolean canProcess = command.canProcess(("createDB|databaseName"));
+        boolean canProcess = command.canProcess("createDB|databaseName");
         assertTrue(canProcess);
     }
 
     @Test
     public void testProcessWithWrongCommand() throws Exception {
-        boolean canProcess = command.canProcess(("createDB34|databaseName"));
+        boolean canProcess = command.canProcess("createDB34|databaseName");
         assertFalse(canProcess);
     }
 
     @Test
     public void testCanProcessWithoutParameters() throws Exception {
-        boolean canProcess = command.canProcess(("createDB"));
+        boolean canProcess = command.canProcess("createDB");
         assertTrue(canProcess);
     }
 
     @Test
     public void testProcess() throws Exception {
-        command.process(("createDB|databaseName"));
+        command.process("createDB|databaseName");
         verify(manager).createDatabase("databaseName");
         verify(view).write("Database databaseName была успешно создана.");
     }
@@ -53,7 +53,7 @@ public class CreateDatabaseTest {
     @Test
     public void testProcessWrongFormat() throws Exception {
         try {
-            command.process(("createDB|databaseName|wrong"));
+            command.process("createDB|databaseName|wrong");
             fail();
         } catch (IllegalArgumentException e) {
             assertEquals("Формат команды 'createDB|databaseName', а ты ввел: createDB|databaseName|wrong", e.getMessage());

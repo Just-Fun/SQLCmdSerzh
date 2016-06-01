@@ -29,7 +29,7 @@ public class TablesTest {
 
     @Test
     public void testPrintGetTableNames() {
-        when(manager.getTableNames()).thenReturn(new HashSet<String>(Arrays.asList("user", "test")));
+        when(manager.getTableNames()).thenReturn(new HashSet<>(Arrays.asList("user", "test")));
         command.process("tables");
         shouldPrint("[[test, user]]");
     }

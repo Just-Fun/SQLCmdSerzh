@@ -26,8 +26,8 @@ public class Insert extends Command {
         manager.insert(tableName, command);
 
         view.write(String.format("В таблице '%s' была успешно добавлена запись:", tableName));
-        TableConstructor constructor = input.getTableConstructorFromDataSet(command);
-        view.write(constructor.getTableString());
+
+        view.write(getTableConstructor(command));
     }
 
     @Override
@@ -50,5 +50,13 @@ public class Insert extends Command {
         return data1;
     }
 
+    public String getTableConstructor(Map<String, Object> dataSet) {
+        Map<String, Object> map = new LinkedHashMap<>();
+        map.putAll(dataSet);
 
+        List<Map<String, Object>> tableData = new LinkedList<>();
+        tableData.add(map);
+        TableConstructor constructor = new TableConstructor(dataSet.keySet(), tableData);
+        return constructor.getTableString();
+    }
 }

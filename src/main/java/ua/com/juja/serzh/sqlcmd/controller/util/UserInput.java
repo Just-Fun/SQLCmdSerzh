@@ -16,7 +16,6 @@ public class UserInput {
 
     public UserInput(String userCommand) {
         this.userCommand = userCommand;
-
     }
 
     public int parametersLength() {
@@ -30,14 +29,5 @@ public class UserInput {
     @Override
     public String toString() {
         return userCommand;
-    }
-
-    public TableConstructor getTableConstructorFromDataSet(Map<String, Object> dataSet) {
-        Map<String, Object> map = new LinkedHashMap<>();
-        map.putAll(dataSet);
-
-        List<Map<String, Object>> tableData = new LinkedList<>();
-        tableData.add(map);
-        return new TableConstructor(dataSet.keySet(), tableData);
     }
 }

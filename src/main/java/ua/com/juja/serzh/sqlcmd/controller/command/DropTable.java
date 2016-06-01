@@ -14,9 +14,9 @@ public class DropTable extends Command {
     }
 
     @Override
-    public void process(UserInput input) {
+    public void process(String input) {
         validationParameters(input);
-        String tableName = input.splitInput()[1];
+        String tableName = splitInput(input)[1];
 
         if (!dropConfirmation(tableName)) return;
         manager.dropTable(tableName);

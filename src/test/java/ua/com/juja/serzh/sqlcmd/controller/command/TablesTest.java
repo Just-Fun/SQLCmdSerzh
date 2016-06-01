@@ -31,7 +31,7 @@ public class TablesTest {
     @Test
     public void testPrintGetTableNames() {
         when(manager.getTableNames()).thenReturn(new HashSet<String>(Arrays.asList("user", "test")));
-        command.process(new UserInput("tables"));
+        command.process(("tables"));
         shouldPrint("[[test, user]]");
     }
 
@@ -43,26 +43,26 @@ public class TablesTest {
 
     @Test
     public void canProcessListWithRightParameter() {
-        boolean canProcess = command.canProcess(new UserInput("tables"));
+        boolean canProcess = command.canProcess(("tables"));
         assertTrue(canProcess);
     }
 
     @Test
     public void canProcessListWithWrongParameter() {
-        boolean canNotProcess = command.canProcess(new UserInput("ghkk"));
+        boolean canNotProcess = command.canProcess(("ghkk"));
         assertFalse(canNotProcess);
     }
 
     @Test
     public void canProcessListWithoutParameter() {
-        boolean canNotProcess = command.canProcess(new UserInput(""));
+        boolean canNotProcess = command.canProcess((""));
         assertFalse(canNotProcess);
     }
 
     @Test
     public void testPrintEmptyTableData() {
         when(manager.getTableNames()).thenReturn(new HashSet<String>());
-        command.process(new UserInput("tables"));
+        command.process(("tables"));
         shouldPrint("[[]]");
     }
 }

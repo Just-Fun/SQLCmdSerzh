@@ -35,19 +35,19 @@ public class InsertTest {
 
     @Test
     public void testCanProcess() throws Exception {
-        boolean canProcess = command.canProcess(new UserInput("insert|"));
+        boolean canProcess = command.canProcess(("insert|"));
         assertTrue(canProcess);
     }
 
     @Test
     public void testCanProcessWrongInput() throws Exception {
-        boolean canNotProcess = command.canProcess(new UserInput("inser|"));
+        boolean canNotProcess = command.canProcess(("inser|"));
         assertFalse(canNotProcess);
     }
 
     @Test
     public void testProcess() throws Exception {
-        command.process(new UserInput("insert|user|name|Vasia|password|****|id|22"));
+        command.process(("insert|user|name|Vasia|password|****|id|22"));
         ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
         verify(view, atLeastOnce()).write(captor.capture());
         assertEquals("[В таблице 'user' была успешно добавлена запись:, " +
@@ -61,7 +61,7 @@ public class InsertTest {
     @Test
     public void testWithWrongParameters() throws Exception {
         try {
-            command.process(new UserInput("insert|user|name"));
+            command.process(("insert|user|name"));
             fail("Expected IllegalArgumentException...");
         } catch (Exception e) {
             assertEquals("Должно быть четное количество параметров в формате " +
@@ -73,7 +73,7 @@ public class InsertTest {
     @Test
     public void testWithoutParameters() throws Exception {
         try {
-            command.process(new UserInput("insert|"));
+            command.process(("insert|"));
             fail("Expected IllegalArgumentException...");
         } catch (Exception e) {
             assertEquals("Должно быть четное количество параметров в формате " +

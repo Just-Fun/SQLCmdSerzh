@@ -27,7 +27,7 @@ public class IsConnectedTest {
 
     @Test
     public void testProcess() throws Exception {
-        command.process(new UserInput("if does not connected"));
+        command.process(("if does not connected"));
         verify(view).write("Вы не можете пользоваться командой 'if does not connected' пока не подключитесь с помощью комманды connect|databaseName|userName|password");
     }
 

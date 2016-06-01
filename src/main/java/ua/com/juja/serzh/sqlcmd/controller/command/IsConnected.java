@@ -14,14 +14,14 @@ public class IsConnected extends Command {
     }
 
     @Override
-    public boolean canProcess(UserInput command) {
+    public boolean canProcess(String command) {
         return !manager.isConnected();
     }
 
     @Override
-    public void process(UserInput input) {
+    public void process(String input) {
         view.write(String.format("Вы не можете пользоваться командой '%s' пока не подключитесь " +
-                "с помощью комманды connect|databaseName|userName|password", input.toString()));
+                "с помощью комманды connect|databaseName|userName|password", input));
     }
 
     @Override

@@ -28,19 +28,19 @@ public class DropDatabaseTest {
 
     @Test
     public void testCanProcess() throws Exception {
-        boolean canProcess = command.canProcess(new UserInput("dropDB|db"));
+        boolean canProcess = command.canProcess(("dropDB|db"));
         assertTrue(canProcess);
     }
 
     @Test
     public void testProcessWithWrongCommand() throws Exception {
-        boolean canNotProcess = command.canProcess(new UserInput("dropFB|db"));
+        boolean canNotProcess = command.canProcess(("dropFB|db"));
         assertFalse(canNotProcess);
     }
 
     @Test
     public void testCanProcessClearWithoutParametersString() {
-        boolean canProcess = command.canProcess(new UserInput("dropDB"));
+        boolean canProcess = command.canProcess(("dropDB"));
         assertTrue(canProcess);
     }
 
@@ -48,7 +48,7 @@ public class DropDatabaseTest {
     @Test
     public void testProcess() throws Exception {
         when(view.read()).thenReturn("y");
-        command.process(new UserInput("dropDB|db"));
+        command.process(("dropDB|db"));
 
         verify(view).write(String.format("Вы уверены, что хотите удалить db? Y/N"));
         verify(manager).dropDatabase("db");
@@ -58,7 +58,7 @@ public class DropDatabaseTest {
     @Test
     public void testProcessUpperY() throws Exception {
         when(view.read()).thenReturn("Y");
-        command.process(new UserInput("dropDB|db"));
+        command.process(("dropDB|db"));
 
         verify(view).write(String.format("Вы уверены, что хотите удалить db? Y/N"));
         verify(manager).dropDatabase("db");
@@ -68,7 +68,7 @@ public class DropDatabaseTest {
     @Test
     public void testActionCanceled() throws Exception {
         when(view.read()).thenReturn("N");
-        command.process(new UserInput("dropDB|db"));
+        command.process(("dropDB|db"));
 
         verify(view).write("Вы уверены, что хотите удалить db? Y/N");
         verify(view).write("Действие отменено!");
@@ -77,7 +77,7 @@ public class DropDatabaseTest {
     @Test
     public void testProcessWrongFormat() throws Exception {
         try {
-            command.process(new UserInput("dropDB|db|wrong"));
+            command.process(("dropDB|db|wrong"));
             fail();
         } catch (IllegalArgumentException e) {
             assertEquals("Формат команды 'dropDB|databaseName', а ты ввел: dropDB|db|wrong", e.getMessage());

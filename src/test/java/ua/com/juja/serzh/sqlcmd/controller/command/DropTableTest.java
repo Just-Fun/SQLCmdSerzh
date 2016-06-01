@@ -28,26 +28,26 @@ public class DropTableTest {
 
     @Test
     public void testCanProcess() throws Exception {
-        boolean canProcess = command.canProcess(new UserInput("dropTable|"));
+        boolean canProcess = command.canProcess(("dropTable|"));
         assertTrue(canProcess);
     }
 
     @Test
     public void testProcessWithWrongCommand() throws Exception {
-        boolean canNotProcess = command.canProcess(new UserInput("dropTables|"));
+        boolean canNotProcess = command.canProcess(("dropTables|"));
         assertFalse(canNotProcess);
     }
 
     @Test
     public void testCanProcessClearWithoutParametersString() {
-        boolean canProcess = command.canProcess(new UserInput("dropTable"));
+        boolean canProcess = command.canProcess(("dropTable"));
         assertTrue(canProcess);
     }
 
     @Test
     public void testProcess() throws Exception {
         when(view.read()).thenReturn("y");
-        command.process(new UserInput("dropTable|nameTable"));
+        command.process(("dropTable|nameTable"));
         verify(view).write("Вы уверены, что хотите удалить nameTable? Y/N");
         verify(manager).dropTable("nameTable");
         verify(view).write("Таблица nameTable была успешно удалена.");
@@ -56,7 +56,7 @@ public class DropTableTest {
     @Test
     public void testActionCanceled() throws Exception {
         when(view.read()).thenReturn("n");
-        command.process(new UserInput("dropTable|nameTable"));
+        command.process(("dropTable|nameTable"));
         verify(view).write("Вы уверены, что хотите удалить nameTable? Y/N");
         verify(view).write("Действие отменено!");
     }
@@ -64,7 +64,7 @@ public class DropTableTest {
     @Test
     public void testProcessWrongFormat() throws Exception {
         try {
-            command.process(new UserInput("createTable|tableName|wrong"));
+            command.process(("createTable|tableName|wrong"));
             fail();
         } catch (IllegalArgumentException e) {
             assertEquals("Формат команды 'dropTable|tableName', а ты ввел: createTable|tableName|wrong", e.getMessage());

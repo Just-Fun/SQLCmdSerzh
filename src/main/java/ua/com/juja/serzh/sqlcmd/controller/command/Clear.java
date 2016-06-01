@@ -14,9 +14,9 @@ public class Clear extends Command {
     }
 
     @Override
-    public void process(UserInput input) {
+    public void process(String input) {
         validationParameters(input);
-        String tableName = input.splitInput()[1];
+        String tableName = input.split("\\|")[1];
         manager.clear(tableName);
 
         view.write(String.format("Таблица %s была успешно очищена.", tableName));

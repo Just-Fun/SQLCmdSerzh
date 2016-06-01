@@ -17,16 +17,14 @@ public class Insert extends Command {
     }
 
     @Override
-    public void process(UserInput input) {
-        String[] data = input.splitInput();
+    public void process(String input) {
+        String[] data = input.split("\\|");
         validationPairParameters(input);
         String tableName = data[1];
         Map<String, Object> command = getDataSet(data);
 
         manager.insert(tableName, command);
-
         view.write(String.format("В таблице '%s' была успешно добавлена запись:", tableName));
-
         view.write(getTableConstructor(command));
     }
 

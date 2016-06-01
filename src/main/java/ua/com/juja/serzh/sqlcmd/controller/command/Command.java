@@ -24,9 +24,9 @@ public abstract class Command {
     public Command() {
     }
 
-    public boolean canProcess(UserInput command) {
-        String[] parametersCommandFormat = commandFormat().split("\\|");
-        String[] parametersInput = command.splitInput();
+    public boolean canProcess(String input) {
+        String[] parametersCommandFormat = splitInput(commandFormat());
+        String[] parametersInput = splitInput(input);
         return parametersInput[0].toLowerCase().equals(parametersCommandFormat[0].toLowerCase());
     }
 
@@ -39,23 +39,33 @@ public abstract class Command {
         return false;
     }
 
-    public void validationParameters(UserInput input) {
-        int formatLength = (commandFormat().split("\\|")).length;
-        if (formatLength != input.parametersLength()) {
+    public void validationParameters(String input) {
+        int formatLength = parametersLength(commandFormat());
+        int inputLength = parametersLength(input);
+        if (formatLength != inputLength) {
             throw new IllegalArgumentException(String.format("Формат команды '%s', а ты ввел: %s", commandFormat(), input));
         }
     }
 
-    public void validationPairParameters(UserInput input) {
-        if (input.parametersLength() % 2 != 0) {
+    public void validationPairParameters(String input) {
+        int inputLength = parametersLength(input);
+        if (inputLength % 2 != 0) {
             throw new IllegalArgumentException(String.format("Должно быть четное количество параметров " +
-                    "в формате '%s', а ты прислал: '%s'", commandFormat(), input.toString()));
+                    "в формате '%s', а ты прислал: '%s'", commandFormat(), input));
         }
+    }
+
+    public String[] splitInput(String input) {
+        return input.split("\\|");
+    }
+
+    public int parametersLength(String input) {
+        return input.split("\\|").length;
     }
 
     public abstract String commandFormat();
 
     public abstract String description();
 
-    public abstract void process(UserInput userCommand);
+    public abstract void process(String input);
 }

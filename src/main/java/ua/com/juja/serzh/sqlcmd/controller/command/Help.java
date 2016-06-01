@@ -33,7 +33,7 @@ public class Help extends Command {
     }
 
     @Override
-    public void process(UserInput input) {
+    public void process(String input) {
         view.write("Существующие команды:");
 
         for (Command command : commands) {

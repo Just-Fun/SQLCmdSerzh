@@ -13,7 +13,7 @@ public class Exit extends Command {
     }
 
     @Override
-    public void process(UserInput command) {
+    public void process(String command) {
         view.write("До скорой встречи!");
         throw new ExitException();
     }

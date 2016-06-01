@@ -13,13 +13,13 @@ public class Unsupported extends Command {
     }
 
     @Override
-    public boolean canProcess(UserInput command) {
+    public boolean canProcess(String command) {
         return true;
     }
 
     @Override
-    public void process(UserInput input) {
-        view.write("Несуществующая команда: " + input.toString());
+    public void process(String input) {
+        view.write("Несуществующая команда: " + input);
     }
 
     @Override

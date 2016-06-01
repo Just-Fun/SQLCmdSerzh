@@ -28,19 +28,19 @@ public class HelpTest {
 
     @Test
     public void testCanProcess() throws Exception {
-        boolean canProcess = command.canProcess(new UserInput("help"));
+        boolean canProcess = command.canProcess(("help"));
         assertTrue(canProcess);
     }
 
     @Test
     public void testCanProcessWrongCommand() throws Exception {
-        boolean canNotProcess = command.canProcess(new UserInput("helpBadWay"));
+        boolean canNotProcess = command.canProcess(("helpBadWay"));
         assertFalse(canNotProcess);
     }
 
     @Test
     public void testProcess() throws Exception {
-        command.process(new UserInput("help"));
+        command.process(("help"));
         verify(view).write("Существующие команды:");
     }
 

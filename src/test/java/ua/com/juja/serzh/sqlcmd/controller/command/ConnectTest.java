@@ -27,26 +27,26 @@ public class ConnectTest {
 
     @Test
     public void testCanProcess() throws Exception {
-        boolean canProcess = command.canProcess(new UserInput("connect|"));
+        boolean canProcess = command.canProcess(("connect|"));
         assertTrue(canProcess);
     }
 
     @Test
     public void testCanNotProcess() throws Exception {
-        boolean canProcess = command.canProcess(new UserInput("conneeeect|"));
+        boolean canProcess = command.canProcess(("conneeeect|"));
         assertFalse(canProcess);
     }
 
     @Test
     public void testProcess() throws Exception {
-        command.process(new UserInput("connect|databaseName|userName|password"));
+        command.process(("connect|databaseName|userName|password"));
         verify(view).write("Успех!");
     }
 
     @Test
     public void testProcessWithWrongParameters() throws Exception {
         try {
-            command.process(new UserInput("connect|databaseName|userName"));
+            command.process(("connect|databaseName|userName"));
             fail("Expected IllegalArgumentException");
         } catch (IllegalArgumentException e) {
             assertEquals("Формат команды 'connect|databaseName|userName|password', а ты ввел: connect|databaseName|userName", e.getMessage());

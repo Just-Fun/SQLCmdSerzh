@@ -14,10 +14,10 @@ public class CreateDatabase extends Command {
     }
 
     @Override
-    public void process(UserInput input) {
+    public void process(String input) {
         validationParameters(input);
         checkDBNameStartWithLetter(input);
-        String databaseName = input.splitInput()[1];
+        String databaseName = input.split("\\|")[1];
 
         manager.createDatabase(databaseName);
         view.write(String.format("Database %s была успешно создана.", databaseName));
@@ -33,8 +33,8 @@ public class CreateDatabase extends Command {
         return "для создания новой Database. Имя базы должно начинаться с буквы.";
     }
 
-    public void checkDBNameStartWithLetter(UserInput input) {
-        String databaseName = input.splitInput()[1];
+    public void checkDBNameStartWithLetter(String input) {
+        String databaseName = input.split("\\|")[1];
         char fistChar = databaseName.charAt(0);
         if (!(fistChar >= 'a' && fistChar <= 'z') && !(fistChar >= 'A' && fistChar <= 'Z')) {
             throw new IllegalArgumentException(String.format(

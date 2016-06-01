@@ -49,11 +49,11 @@ public class MainController {
         view.write("Введите имя базы данных, с которой будем работать, имя пользователя и пароль в формате: connect|database|userName|password");
 
         while (true) {
-            UserInput userInput = new UserInput(view.read());
+            String input = view.read();
             for (Command command : commands) {
                 try {
-                    if (command.canProcess(userInput)) {
-                        command.process(userInput);
+                    if (command.canProcess(input)) {
+                        command.process(input);
                         break;
                     }
                 } catch (Exception e) {

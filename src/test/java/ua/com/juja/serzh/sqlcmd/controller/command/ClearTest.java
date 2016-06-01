@@ -28,7 +28,7 @@ public class ClearTest {
 
     @Test
     public void testClearTable() {
-        command.process(new UserInput("clear|user"));
+        command.process(("clear|user"));
         verify(manager).clear("user");
         verify(view).write("Таблица user была успешно очищена.");
     }
@@ -36,26 +36,26 @@ public class ClearTest {
 
     @Test
     public void testCantProcess() {
-        boolean canProcess = command.canProcess(new UserInput("clear|user"));
+        boolean canProcess = command.canProcess(("clear|user"));
         assertTrue(canProcess);
     }
 
     @Test
     public void testClearTableWrongCommand() {
-        boolean  canNotProcess = command.canProcess(new UserInput("cleardf|user"));
+        boolean  canNotProcess = command.canProcess(("cleardf|user"));
         assertFalse(canNotProcess);
     }
 
     @Test
     public void testCantProcessClearWithoutParametersString() {
-        boolean canProcess = command.canProcess(new UserInput("clear"));
+        boolean canProcess = command.canProcess(("clear"));
         assertTrue(canProcess);
     }
 
     @Test
     public void testValidationErrorWhenCountParametersIsLessThan2() {
         try {
-            command.process(new UserInput("clear"));
+            command.process(("clear"));
             fail();
         } catch (IllegalArgumentException e) {
             assertEquals("Формат команды 'clear|tableName', а ты ввел: clear", e.getMessage());
@@ -65,7 +65,7 @@ public class ClearTest {
     @Test
     public void testValidationErrorWhenCountParametersIsMoreThan2() {
         try {
-            command.process(new UserInput("clear|table|qwe"));
+            command.process(("clear|table|qwe"));
             fail();
         } catch (IllegalArgumentException e) {
             assertEquals("Формат команды 'clear|tableName', а ты ввел: clear|table|qwe", e.getMessage());

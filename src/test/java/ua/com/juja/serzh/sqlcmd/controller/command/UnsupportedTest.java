@@ -24,13 +24,13 @@ public class UnsupportedTest {
 
     @Test
     public void testCanProcess() throws Exception {
-        boolean canProceed = command.canProcess(new UserInput("ifDontMatchAnyCommand"));
+        boolean canProceed = command.canProcess(("ifDontMatchAnyCommand"));
         assertTrue(canProceed);
     }
 
     @Test
     public void testProcess() throws Exception {
-        command.process(new UserInput("ifDontMatchAnyCommand"));
+        command.process(("ifDontMatchAnyCommand"));
         verify(view).write("Несуществующая команда: ifDontMatchAnyCommand");
     }
 

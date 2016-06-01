@@ -16,7 +16,7 @@ public class Tables extends Command {
     }
 
     @Override
-    public void process(UserInput input) {
+    public void process(String input) {
         Set<String> tableNames = manager.getTableNames();
         view.write(tableNames.toString());
     }

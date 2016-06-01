@@ -18,9 +18,9 @@ public class DropDatabase extends Command {
     }
 
     @Override
-    public void process(UserInput input) {
+    public void process(String input) {
         validationParameters(input);
-        String databaseName = input.splitInput()[1];
+        String databaseName = splitInput(input)[1];
         if (!dropConfirmation(databaseName)) return;
 
 //Сперва реализовал вариант удаления базы к которой подключен, но потом замахался выходить по меню из разных ситуаций :)

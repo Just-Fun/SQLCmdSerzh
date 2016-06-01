@@ -25,20 +25,20 @@ public class ExitTest {
 
     @Test
     public void testCanProcessExitString() {
-        boolean canProcess = command.canProcess(new UserInput("exit"));
+        boolean canProcess = command.canProcess(("exit"));
         assertTrue(canProcess);
     }
 
     @Test
     public void testCantProcessQweString() {
-        boolean canNotProcess = command.canProcess(new UserInput("qwe"));
+        boolean canNotProcess = command.canProcess(("qwe"));
         assertFalse(canNotProcess);
     }
 
     @Test
     public void testProcessExitCommand_thowsExitException() {
         try {
-            command.process(new UserInput("exit"));
+            command.process(("exit"));
             fail("Expected ExitException");
         } catch (ExitException e) {
             // do nothing

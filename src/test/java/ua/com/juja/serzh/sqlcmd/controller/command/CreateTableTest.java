@@ -27,25 +27,25 @@ public class CreateTableTest {
 
     @Test
     public void testCanProcess() throws Exception {
-        boolean canProcess = command.canProcess(new UserInput("createTable|user"));
+        boolean canProcess = command.canProcess(("createTable|user"));
         assertTrue(canProcess);
     }
 
     @Test
     public void testProcessWithWrongCommand() throws Exception {
-        boolean canProcess = command.canProcess(new UserInput("createTable34|user"));
+        boolean canProcess = command.canProcess(("createTable34|user"));
         assertFalse(canProcess);
     }
 
     @Test
     public void testCantProcessClearWithoutParametersString() {
-        boolean canProcess = command.canProcess(new UserInput("createTable"));
+        boolean canProcess = command.canProcess(("createTable"));
         assertTrue(canProcess);
     }
 
     @Test
     public void testProcess() throws Exception {
-        command.process(new UserInput("createTable|user(id SERIAL NOT NULL PRIMARY KEY,username varchar(225) NOT NULL UNIQUE, password varchar(225))"));
+        command.process(("createTable|user(id SERIAL NOT NULL PRIMARY KEY,username varchar(225) NOT NULL UNIQUE, password varchar(225))"));
         verify(manager).createTable("user(id SERIAL NOT NULL PRIMARY KEY,username varchar(225) NOT NULL UNIQUE, password varchar(225))");
         verify(view).write("Таблица user была успешно создана.");
     }
@@ -53,7 +53,7 @@ public class CreateTableTest {
     @Test
     public void testProcessWithoutParameters() throws Exception {
         try {
-            command.process(new UserInput("createTable|user"));
+            command.process(("createTable|user"));
             fail();
         } catch (IllegalArgumentException e) {
             assertEquals("Формат команды 'createTable|tableName(column1,column2,...,columnN)' в SQL!!! формате, а ты ввел: createTable|user", e.getMessage());
@@ -63,7 +63,7 @@ public class CreateTableTest {
     @Test
     public void testProcessWrongFormat() throws Exception {
         try {
-            command.process(new UserInput("createTable|tableName|wrong"));
+            command.process(("createTable|tableName|wrong"));
             fail();
         } catch (IllegalArgumentException e) {
             assertEquals("Формат команды 'createTable|tableName(column1,column2,...,columnN)', а ты ввел: createTable|tableName|wrong", e.getMessage());

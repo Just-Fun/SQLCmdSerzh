@@ -387,13 +387,13 @@ public class IntegrationTest {
                 "До скорой встречи!\n", getData());
     }
 
-//    @Ignore // тест занимает много времени, половина от всех вместе взятых...
+    @Ignore // тест занимает много времени, половина от всех вместе взятых...
     @Test
     public void testCreateDropDatabase() {
         // given
         in.add(commandConnect);
-        in.add("createDB|databaseName");
-        in.add("dropDB|databaseName");
+        in.add("createDB|sqlcmd9hope9never9exist");
+        in.add("dropDB|sqlcmd9hope9never9exist");
         in.add("y");
         in.add("exit");
         // when
@@ -404,10 +404,10 @@ public class IntegrationTest {
                 // connect
                 "Успех!\n" +
                 "Введи команду (или help для помощи):\n" +
-                "Database databaseName была успешно создана.\n" +
+                "Database sqlcmd9hope9never9exist была успешно создана.\n" +
                 "Введи команду (или help для помощи):\n" +
-                "Вы уверены, что хотите удалить databaseName? Y/N\n" +
-                "Database 'databaseName' была успешно удалена.\n" +
+                "Вы уверены, что хотите удалить sqlcmd9hope9never9exist? Y/N\n" +
+                "Database 'sqlcmd9hope9never9exist' была успешно удалена.\n" +
                 "Введи команду (или help для помощи):\n" +
                 // exit
                 "До скорой встречи!\n", getData());

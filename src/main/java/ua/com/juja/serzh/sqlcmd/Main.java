@@ -1,6 +1,5 @@
 package ua.com.juja.serzh.sqlcmd;
 
-import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import ua.com.juja.serzh.sqlcmd.controller.MainController;
@@ -15,8 +14,6 @@ import ua.com.juja.serzh.sqlcmd.view.View;
 public class Main {
 
     public static void main(String[] args) {
-        BasicConfigurator.configure(); // TODO Понять, может и не надо BasicConfigurator.
-        // Без него работает, но везде написано что он нужен :)
         Logger.getRootLogger().setLevel(Level.OFF); //Disable log4j from text table formatter
 
         View view = new Console();

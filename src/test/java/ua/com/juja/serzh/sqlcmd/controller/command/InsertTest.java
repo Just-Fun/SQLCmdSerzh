@@ -1,6 +1,5 @@
 package ua.com.juja.serzh.sqlcmd.controller.command;
 
-import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.junit.Before;
@@ -27,8 +26,6 @@ public class InsertTest {
         manager = Mockito.mock(DatabaseManager.class);
         view = Mockito.mock(View.class);
         command = new Insert(manager, view);
-
-        BasicConfigurator.configure();
         Logger.getRootLogger().setLevel(Level.OFF); //Disable log4j from text table formatter
     }
 

@@ -387,7 +387,7 @@ public class IntegrationTest {
                 "До скорой встречи!\n", getData());
     }
 
-    @Ignore // тест занимает много времени, половина от всех вместе взятых...
+//    @Ignore // тест занимает много времени, половина от всех вместе взятых...
     @Test
     public void testCreateDropDatabase() {
         // given
@@ -407,7 +407,7 @@ public class IntegrationTest {
                 "Database databaseName была успешно создана.\n" +
                 "Введи команду (или help для помощи):\n" +
                 "Вы уверены, что хотите удалить databaseName? Y/N\n" +
-                "Database databaseName была успешно удалена.\n" +
+                "Database 'databaseName' была успешно удалена.\n" +
                 "Введи команду (или help для помощи):\n" +
                 // exit
                 "До скорой встречи!\n", getData());

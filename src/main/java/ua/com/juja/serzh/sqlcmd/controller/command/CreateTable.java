@@ -22,7 +22,7 @@ public class CreateTable extends Command {
         String tableName = command.split("\\(")[0];
         view.write(String.format("Таблица %s была успешно создана.", tableName));
         Command find = new Find(manager, view);
-        find.process("find|" + tableName);
+        find.process("find|" + tableName); // красивый вывод новосозданной таблички
     }
 
     @Override

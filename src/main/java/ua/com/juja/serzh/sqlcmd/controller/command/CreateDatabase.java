@@ -15,7 +15,7 @@ public class CreateDatabase extends Command {
     @Override
     public void process(String input) {
         validationParameters(input);
-        checkDBNameStartWithLetter(input);
+        checkNameStartWithLetter(input);
         String databaseName = input.split("\\|")[1];
 
         manager.createDatabase(databaseName);
@@ -32,7 +32,7 @@ public class CreateDatabase extends Command {
         return "для создания новой Database. Имя базы должно начинаться с буквы.";
     }
 
-    public void checkDBNameStartWithLetter(String input) {
+    public void checkNameStartWithLetter(String input) {
         String databaseName = input.split("\\|")[1];
         char fistChar = databaseName.charAt(0);
         if (!(fistChar >= 'a' && fistChar <= 'z') && !(fistChar >= 'A' && fistChar <= 'Z')) {

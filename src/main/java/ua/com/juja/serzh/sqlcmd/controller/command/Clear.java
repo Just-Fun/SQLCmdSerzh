@@ -17,7 +17,6 @@ public class Clear extends Command {
         validationParameters(input);
         String tableName = input.split("\\|")[1];
         manager.clear(tableName);
-
         view.write(String.format("Таблица %s была успешно очищена.", tableName));
     }
 

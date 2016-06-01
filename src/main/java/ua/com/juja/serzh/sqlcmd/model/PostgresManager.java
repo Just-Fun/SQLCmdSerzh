@@ -146,7 +146,7 @@ public class PostgresManager implements DatabaseManager {
         }
     }
 
-    @Override // TODO почему-то не покрыто тестами...
+    @Override
     public void dropTable(String table_name) {
         try (Statement statement = connection.createStatement()) {
 //            statement.executeUpdate("DROP TABLE IF EXISTS " + table_name + " CASCADE");

@@ -17,7 +17,7 @@ public class Insert extends Command {
 
     @Override
     public void process(String input) {
-        String[] data = input.split("\\|");
+        String[] data = splitInput(input);
         validationPairParameters(input);
         String tableName = data[1];
         Map<String, Object> command = getDataSet(data);

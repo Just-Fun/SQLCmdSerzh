@@ -84,9 +84,9 @@ public class IntegrationTest {
     @AfterClass
     public static void dropDatabase() {
         try {
-//            manager.connect("", USER, PASSWORD);
+            manager.connect("", USER, PASSWORD);
 //            manager.disconnectFromDatabase(); // the same
-            manager.dropDatabase(DATABASE);
+//            manager.dropDatabase(DATABASE);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

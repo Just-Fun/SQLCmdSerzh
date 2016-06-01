@@ -29,7 +29,6 @@ public class DatabaseManagerTest {
     public static void dropDatabase() {
         try {
             manager.connect("", USER, PASSWORD);
-//            manager.disconnectFromDatabase(); // the same
 //            manager.dropDatabase(DATABASE);
         } catch (Exception e) {
             throw new RuntimeException(e);

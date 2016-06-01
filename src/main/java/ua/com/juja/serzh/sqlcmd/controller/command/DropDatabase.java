@@ -19,7 +19,7 @@ public class DropDatabase extends Command {
 
     @Override
     public void process(UserInput input) {
-        input.validationParameters(commandFormat());
+        validationParameters(input);
         String databaseName = input.splitInput()[1];
         if (!dropConfirmation(databaseName)) return;
 

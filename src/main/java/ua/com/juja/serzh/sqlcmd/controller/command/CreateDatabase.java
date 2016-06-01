@@ -15,7 +15,7 @@ public class CreateDatabase extends Command {
 
     @Override
     public void process(UserInput input) {
-        input.validationParameters(commandFormat());
+        validationParameters(input);
         checkDBNameStartWithLetter(input);
         String databaseName = input.splitInput()[1];
 

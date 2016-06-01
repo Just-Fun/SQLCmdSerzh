@@ -19,7 +19,7 @@ public class Insert extends Command {
     @Override
     public void process(UserInput input) {
         String[] data = input.splitInput();
-        input.validationPairParameters(input, this);
+        validationPairParameters(input);
         String tableName = data[1];
         Map<String, Object> command = getDataSet(data);
 

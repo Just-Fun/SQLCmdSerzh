@@ -19,21 +19,7 @@ public class UserInput {
 
     }
 
-    public void validationParameters(String commandFormat) {
-        int formatLength = (commandFormat.split("\\|")).length;
-        if (formatLength != parametersLength()) {
-            throw new IllegalArgumentException(String.format("Формат команды '%s', а ты ввел: %s", commandFormat, userCommand));
-        }
-    }
-
-    public void validationPairParameters(UserInput input, Command command) {
-        if (parametersLength() % 2 != 0) {
-            throw new IllegalArgumentException(String.format("Должно быть четное количество параметров " +
-                    "в формате '%s', а ты прислал: '%s'",command.commandFormat(), input.toString()));
-        }
-    }
-
-    private int parametersLength() {
+    public int parametersLength() {
         return (userCommand.split("\\|")).length;
     }
 

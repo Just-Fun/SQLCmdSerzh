@@ -15,7 +15,7 @@ public class CreateTable extends Command {
 
     @Override
     public void process(UserInput input) {
-        input.validationParameters(commandFormat());
+        validationParameters(input);
         validationPresenceOfParentheses(input);
         String command = input.splitInput()[1];
         manager.createTable(command);

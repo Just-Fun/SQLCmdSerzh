@@ -16,7 +16,7 @@ public class Connect extends Command {
 
     @Override
     public void process(UserInput input) {
-        input.validationParameters(commandFormat());
+        validationParameters(input);
         String[] data = input.splitInput();
         databaseName = data[1];
         String userName = data[2];

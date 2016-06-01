@@ -39,6 +39,20 @@ public abstract class Command {
         return false;
     }
 
+    public void validationParameters(UserInput input) {
+        int formatLength = (commandFormat().split("\\|")).length;
+        if (formatLength != input.parametersLength()) {
+            throw new IllegalArgumentException(String.format("Формат команды '%s', а ты ввел: %s", commandFormat(), input));
+        }
+    }
+
+    public void validationPairParameters(UserInput input) {
+        if (input.parametersLength() % 2 != 0) {
+            throw new IllegalArgumentException(String.format("Должно быть четное количество параметров " +
+                    "в формате '%s', а ты прислал: '%s'", commandFormat(), input.toString()));
+        }
+    }
+
     public abstract String commandFormat();
 
     public abstract String description();

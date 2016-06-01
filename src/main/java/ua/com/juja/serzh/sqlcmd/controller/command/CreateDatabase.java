@@ -35,6 +35,7 @@ public class CreateDatabase extends Command {
     public void checkDBNameStartWithLetter(String input) {
         String databaseName = input.split("\\|")[1];
         char fistChar = databaseName.charAt(0);
+        //TODO написать тест
         if (!(fistChar >= 'a' && fistChar <= 'z') && !(fistChar >= 'A' && fistChar <= 'Z')) {
             throw new IllegalArgumentException(String.format(
                     "Имя базы должно начинаться с буквы, а у тебя начинается с '%s'", fistChar));

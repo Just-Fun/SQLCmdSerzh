@@ -175,7 +175,7 @@ public class PostgresManager implements DatabaseManager {
     public boolean isConnected() {
         return connection != null;
     }
-// TODO упростить
+
     private String getNameFormatted(Map<String, Object> newValue, String format) {
         StringBuffer strings = new StringBuffer("");
         for (String name : newValue.keySet()) {

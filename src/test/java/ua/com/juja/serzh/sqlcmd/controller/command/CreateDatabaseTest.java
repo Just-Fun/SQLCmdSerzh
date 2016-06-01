@@ -59,4 +59,14 @@ public class CreateDatabaseTest {
             assertEquals("Формат команды 'createDB|databaseName', а ты ввел: createDB|databaseName|wrong", e.getMessage());
         }
     }
+
+    @Test
+    public void testNameStartWithNumber() throws Exception {
+        try {
+            command.process("createDB|12databaseName");
+            fail();
+        } catch (IllegalArgumentException e) {
+            assertEquals("Имя базы должно начинаться с буквы, а у тебя начинается с '1'", e.getMessage());
+        }
+    }
 }

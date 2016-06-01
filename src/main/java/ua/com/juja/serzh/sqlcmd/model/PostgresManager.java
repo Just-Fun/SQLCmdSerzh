@@ -98,11 +98,6 @@ public class PostgresManager implements DatabaseManager {
         }
     }
 
-    @Override // TODO Реализовать
-    public Set<String> getDatabases() {
-        return null;
-    }
-
     @Override
     public Set<String> getTableNames() {
         Set<String> tables = new LinkedHashSet<>();
@@ -199,6 +194,21 @@ public class PostgresManager implements DatabaseManager {
         return values;
     }
 
+    @Override
+    public String getUser() {
+        return user;
+    }
+
+    @Override
+    public String getPassword() {
+        return password;
+    }
+
+    @Override
+    public String getDatabase() {
+        return database;
+    }
+
     @Override // TODO заготовка, может как-нибудь реализовать в userInerface, тест написан
     public void update(String tableName, int id, Map<String, Object> newValue) {
         String tableNames = getNameFormatted(newValue, "%s = ?,");
@@ -230,18 +240,8 @@ public class PostgresManager implements DatabaseManager {
         }
     }
 
-    @Override
-    public String getUser() {
-        return user;
-    }
-
-    @Override
-    public String getPassword() {
-        return password;
-    }
-
-    @Override
-    public String getDatabase() {
-        return database;
+    @Override // TODO Реализовать
+    public Set<String> getDatabases() {
+        return null;
     }
 }

@@ -154,4 +154,12 @@ public class DatabaseManagerTest {
         assertEquals("[users]", tables.toString());
         manager.createTable("test1(id SERIAL NOT NULL PRIMARY KEY,username varchar(225) NOT NULL UNIQUE, password varchar(225))");
     }
+
+    @Test
+    public void getters() {
+        assertEquals(DATABASE, manager.getDatabase());
+        assertEquals(USER, manager.getPassword());
+        assertEquals(PASSWORD, manager.getUser());
+
+    }
 }

@@ -7,7 +7,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
-import ua.com.juja.serzh.sqlcmd.controller.util.UserInput;
 import ua.com.juja.serzh.sqlcmd.model.DatabaseManager;
 import ua.com.juja.serzh.sqlcmd.view.View;
 
@@ -35,19 +34,19 @@ public class InsertTest {
 
     @Test
     public void testCanProcess() throws Exception {
-        boolean canProcess = command.canProcess(("insert|"));
+        boolean canProcess = command.canProcess("insert|");
         assertTrue(canProcess);
     }
 
     @Test
     public void testCanProcessWrongInput() throws Exception {
-        boolean canNotProcess = command.canProcess(("inser|"));
+        boolean canNotProcess = command.canProcess("inser|");
         assertFalse(canNotProcess);
     }
 
     @Test
     public void testProcess() throws Exception {
-        command.process(("insert|user|name|Vasia|password|****|id|22"));
+        command.process("insert|user|name|Vasia|password|****|id|22");
         ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
         verify(view, atLeastOnce()).write(captor.capture());
         assertEquals("[В таблице 'user' была успешно добавлена запись:, " +
@@ -61,7 +60,7 @@ public class InsertTest {
     @Test
     public void testWithWrongParameters() throws Exception {
         try {
-            command.process(("insert|user|name"));
+            command.process("insert|user|name");
             fail("Expected IllegalArgumentException...");
         } catch (Exception e) {
             assertEquals("Должно быть четное количество параметров в формате " +
@@ -73,7 +72,7 @@ public class InsertTest {
     @Test
     public void testWithoutParameters() throws Exception {
         try {
-            command.process(("insert|"));
+            command.process("insert|");
             fail("Expected IllegalArgumentException...");
         } catch (Exception e) {
             assertEquals("Должно быть четное количество параметров в формате " +

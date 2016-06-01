@@ -1,6 +1,5 @@
 package ua.com.juja.serzh.sqlcmd.controller.command;
 
-import ua.com.juja.serzh.sqlcmd.controller.util.UserInput;
 import ua.com.juja.serzh.sqlcmd.model.DatabaseManager;
 import ua.com.juja.serzh.sqlcmd.model.TableConstructor;
 import ua.com.juja.serzh.sqlcmd.view.View;

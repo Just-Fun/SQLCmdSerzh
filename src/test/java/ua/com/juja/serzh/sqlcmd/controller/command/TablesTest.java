@@ -3,7 +3,6 @@ package ua.com.juja.serzh.sqlcmd.controller.command;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
-import ua.com.juja.serzh.sqlcmd.controller.util.UserInput;
 import ua.com.juja.serzh.sqlcmd.model.DatabaseManager;
 import ua.com.juja.serzh.sqlcmd.view.View;
 
@@ -31,7 +30,7 @@ public class TablesTest {
     @Test
     public void testPrintGetTableNames() {
         when(manager.getTableNames()).thenReturn(new HashSet<String>(Arrays.asList("user", "test")));
-        command.process(("tables"));
+        command.process("tables");
         shouldPrint("[[test, user]]");
     }
 
@@ -43,19 +42,19 @@ public class TablesTest {
 
     @Test
     public void canProcessListWithRightParameter() {
-        boolean canProcess = command.canProcess(("tables"));
+        boolean canProcess = command.canProcess("tables");
         assertTrue(canProcess);
     }
 
     @Test
     public void canProcessListWithWrongParameter() {
-        boolean canNotProcess = command.canProcess(("ghkk"));
+        boolean canNotProcess = command.canProcess("ghkk");
         assertFalse(canNotProcess);
     }
 
     @Test
     public void canProcessListWithoutParameter() {
-        boolean canNotProcess = command.canProcess((""));
+        boolean canNotProcess = command.canProcess("");
         assertFalse(canNotProcess);
     }
 

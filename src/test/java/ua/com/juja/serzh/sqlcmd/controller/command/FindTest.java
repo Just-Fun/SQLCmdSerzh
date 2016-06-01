@@ -6,7 +6,6 @@ import org.apache.log4j.Logger;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
-import ua.com.juja.serzh.sqlcmd.controller.util.UserInput;
 import ua.com.juja.serzh.sqlcmd.model.DatabaseManager;
 import ua.com.juja.serzh.sqlcmd.view.View;
 
@@ -58,7 +57,7 @@ public class FindTest {
 
         when(manager.getTableData("user")).thenReturn(data);
         // when
-        command.process(("find|user"));
+        command.process("find|user");
         // then
         shouldPrint("[+-----+------+--------+\n" +
                     "|id   |name  |password|\n" +
@@ -83,7 +82,7 @@ public class FindTest {
     @Test
     public void testCanProcessFindWithParametersString() {
         // when
-        boolean canProcess = command.canProcess(("find|user"));
+        boolean canProcess = command.canProcess("find|user");
         // then
         assertTrue(canProcess);
     }
@@ -91,7 +90,7 @@ public class FindTest {
     @Test
     public void testCanProcessFindWithoutParametersString() {
         // when
-        boolean canNotProcess = command.canProcess(("find"));
+        boolean canNotProcess = command.canProcess("find");
         // then
         assertTrue(canNotProcess);
     }
@@ -100,7 +99,7 @@ public class FindTest {
     @Test
     public void testCantProcessQweString() {
         // when
-        boolean canNotProcess = command.canProcess(("qwe|user"));
+        boolean canNotProcess = command.canProcess("qwe|user");
         // then
         assertFalse(canNotProcess);
     }
@@ -111,7 +110,7 @@ public class FindTest {
         setupTableColumns("user", "id", "name", "password");
         when(manager.getTableData("user")).thenReturn(new LinkedList<Map<String, Object>>());
         // when
-        command.process(("find|user"));
+        command.process("find|user");
         // then
         shouldPrint("[+--+----+--------+\n" +
                 "|id|name|password|\n" +
@@ -134,7 +133,7 @@ public class FindTest {
 
         when(manager.getTableData("test")).thenReturn(data);
         // when
-        command.process(("find|test"));
+        command.process("find|test");
         // then
         shouldPrint("[+--+\n" +
                 "|id|\n" +
@@ -148,7 +147,7 @@ public class FindTest {
     @Test
     public void testValidationErrorWhenCountParametersIsLessThan2() {
         try {
-            command.process(("find"));
+            command.process("find");
             fail();
         } catch (IllegalArgumentException e) {
             assertEquals("Формат команды 'find|tableName', а ты ввел: find", e.getMessage());
@@ -158,7 +157,7 @@ public class FindTest {
     @Test //
     public void testCanProcessFindWithOnlySlash() {
         try {
-            command.process(("find|"));
+            command.process("find|");
             fail();
         } catch (IllegalArgumentException e) {
             assertEquals("Формат команды 'find|tableName', а ты ввел: find|", e.getMessage());
@@ -168,7 +167,7 @@ public class FindTest {
     @Test
     public void testValidationErrorWhenCountParametersIsMoreThan2() {
         try {
-            command.process(("find|table|qwe"));
+            command.process("find|table|qwe");
             fail();
         } catch (IllegalArgumentException e) {
             assertEquals("Формат команды 'find|tableName', а ты ввел: find|table|qwe", e.getMessage());

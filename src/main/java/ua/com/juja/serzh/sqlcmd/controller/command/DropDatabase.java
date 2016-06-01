@@ -1,12 +1,7 @@
 package ua.com.juja.serzh.sqlcmd.controller.command;
 
-import ua.com.juja.serzh.sqlcmd.Main;
-import ua.com.juja.serzh.sqlcmd.controller.MainController;
-import ua.com.juja.serzh.sqlcmd.controller.util.UserInput;
 import ua.com.juja.serzh.sqlcmd.model.DatabaseManager;
 import ua.com.juja.serzh.sqlcmd.view.View;
-
-import java.sql.Connection;
 
 /**
  * Created by serzh on 5/11/16.

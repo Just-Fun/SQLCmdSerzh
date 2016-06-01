@@ -3,7 +3,6 @@ package ua.com.juja.serzh.sqlcmd.controller.command;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
-import ua.com.juja.serzh.sqlcmd.controller.util.UserInput;
 import ua.com.juja.serzh.sqlcmd.model.DatabaseManager;
 import ua.com.juja.serzh.sqlcmd.view.View;
 

@@ -25,7 +25,7 @@ public class PostgresManager implements DatabaseManager {
     private String password;
     private String database;
 
-    @Override // try-with-resources statement ensures that each resource is closed at the end of the statement
+    @Override
     public void connect(String database, String user, String password) {
         if (user != null && password != null) {
             this.user = user;
@@ -34,16 +34,16 @@ public class PostgresManager implements DatabaseManager {
         this.database = database;
 
         closeOpenedConnection();
-        getConnection(database);
+        getConnection();
     }
 
-    private void getConnection(String database) {
+    private void getConnection() {
         try {
             String url = String.format("jdbc:postgresql://%s:%s/%s", HOST, PORT, database);
             connection = DriverManager.getConnection(url, user, password);
         } catch (SQLException e) {
             connection = null;
-            throw new RuntimeException(
+            throw new DatabaseManagerException(
                     String.format("Cant get connection for model:%s user:%s", database, user), e);
         }
     }
@@ -61,7 +61,7 @@ public class PostgresManager implements DatabaseManager {
     @Override
     public List<Map<String, Object>> getTableData(String tableName) {
         List<Map<String, Object>> result = new LinkedList<>();
-
+        // try-with-resources statement ensures that each resource is closed at the end of the statement
         try (Statement stmt = connection.createStatement();
              ResultSet tableData = stmt.executeQuery("SELECT * FROM public." + tableName)) {
             ResultSetMetaData metaData = tableData.getMetaData();
@@ -175,23 +175,21 @@ public class PostgresManager implements DatabaseManager {
     public boolean isConnected() {
         return connection != null;
     }
-
+// TODO упростить
     private String getNameFormatted(Map<String, Object> newValue, String format) {
-        String string = "";
+        StringBuffer strings = new StringBuffer("");
         for (String name : newValue.keySet()) {
-            string += String.format(format, name); //TODO: Иван тут лучше использовать StringBuffer
+            strings.append(String.format(format, name));
         }
-        string = string.substring(0, string.length() - 1);
-        return string;
+        return strings.substring(0, strings.length() - 1);
     }
 
     private String getValuesFormatted(Map<String, Object> input, String format) {
-        String values = "";
+        StringBuffer values = new StringBuffer("");
         for (Object value : input.values()) {
-            values += String.format(format, value);
+            values.append(String.format(format, value));
         }
-        values = values.substring(0, values.length() - 1);
-        return values;
+        return values.substring(0, values.length() - 1);
     }
 
     @Override

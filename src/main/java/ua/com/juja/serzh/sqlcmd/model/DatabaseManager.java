@@ -9,7 +9,6 @@ import java.util.Set;
  */
 public interface DatabaseManager {
 
-
     List<Map<String, Object>> getTableData(String tableName);
 
     Set<String> getTableNames();
@@ -21,7 +20,6 @@ public interface DatabaseManager {
     void createDatabase(String databaseName);
 
     void dropDatabase(String databaseName);
-
 
     void createTable(String query);
 

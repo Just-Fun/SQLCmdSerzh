@@ -11,8 +11,8 @@ import java.util.*;
  */
 public class TableConstructor {
 
-    private Set<String> columns;
     private Table table;
+    private Set<String> columns;
     private List<Map<String, Object>> tableData;
 
     public TableConstructor(Set<String> columns, List<Map<String, Object>> tableData) {

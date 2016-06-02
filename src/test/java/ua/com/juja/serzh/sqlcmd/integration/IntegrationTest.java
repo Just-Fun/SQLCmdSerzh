@@ -25,6 +25,7 @@ public class IntegrationTest {
     private static final String PASSWORD = BeforeTestsChangeNameAndPass.PASSWORD;
 
     private final String commandConnect = "connect|" + DATABASE + "|" + USER + "|" + PASSWORD;
+    private final String commandDisconnect = "connect|" + "" + "|" + USER + "|" + PASSWORD;
     private final String pleaseConnect = "Введите имя базы данных, с которой будем работать, имя пользователя и пароль в формате: " +
             "connect|database|userName|password\n";
 
@@ -46,10 +47,9 @@ public class IntegrationTest {
         } catch (Exception e) {
             // do nothing
         }
-        manager.createDatabase(DATABASE);
+        manager.createDatabase(DATABASE); // TODO  вынести в отдельный класс, также и в DatabaseManagerTest, или нет :)
         manager.connect(DATABASE, USER, PASSWORD);
         createTablesWithData();
-        manager.connect("", USER, PASSWORD);
     }
 
     private static void createTablesWithData() {
@@ -76,7 +76,7 @@ public class IntegrationTest {
     public static void dropDatabase() {
         try {
             manager.connect("", USER, PASSWORD);
-//            manager.dropDatabase(DATABASE);
+            manager.dropDatabase(DATABASE);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -195,6 +195,7 @@ public class IntegrationTest {
         // given
         in.add(commandConnect);
         in.add("unsupported");
+        in.add(commandDisconnect);
         in.add("exit");
         // when
         Main.main(new String[0]);
@@ -206,6 +207,8 @@ public class IntegrationTest {
                 // unsupported
                 "Несуществующая команда: unsupported\n" +
                 "Введи команду (или help для помощи):\n" +
+                "Успех!\n" +
+                "Введи команду (или help для помощи):\n" +
                 // exit
                 "До скорой встречи!\n", getData());
     }
@@ -215,6 +218,7 @@ public class IntegrationTest {
         // given
         in.add(commandConnect);
         in.add("tables");
+        in.add(commandDisconnect);
         in.add("exit");
         // when
         Main.main(new String[0]);
@@ -226,6 +230,8 @@ public class IntegrationTest {
                 // tables
                 "[users, test1]\n" +
                 "Введи команду (или help для помощи):\n" +
+                "Успех!\n" +
+                "Введи команду (или help для помощи):\n" +
                 // exit
                 "До скорой встречи!\n", getData());
     }
@@ -235,6 +241,7 @@ public class IntegrationTest {
         // given
         in.add(commandConnect);
         in.add("find|users");
+        in.add(commandDisconnect);
         in.add("exit");
         // when
         Main.main(new String[0]);
@@ -248,6 +255,8 @@ public class IntegrationTest {
                 "|Vasia|****    |22|\n" +
                 "+-----+--------+--+\n" +
                 "Введи команду (или help для помощи):\n" +
+                "Успех!\n" +
+                "Введи команду (или help для помощи):\n" +
                 "До скорой встречи!\n", getData());
     }
 
@@ -258,6 +267,7 @@ public class IntegrationTest {
         in.add("tables");
         in.add("connect|test|" + USER + "|" + PASSWORD);
         in.add("tables");
+        in.add(commandDisconnect);
         in.add("exit");
         // when
         Main.main(new String[0]);
@@ -274,6 +284,8 @@ public class IntegrationTest {
                 "Введи команду (или help для помощи):\n" +
                 // tables
                 "[qwe]\n" +
+                "Введи команду (или help для помощи):\n" +
+                "Успех!\n" +
                 "Введи команду (или help для помощи):\n" +
                 // exit
                 "До скорой встречи!\n", getData());
@@ -304,6 +316,7 @@ public class IntegrationTest {
         in.add("insert|users|id|14|name|Eva|password|+++++");
         in.add("find|users");
         in.add("clear|users");
+        in.add(commandDisconnect);
         in.add("exit");
         // when
         Main.main(new String[0]);
@@ -342,6 +355,8 @@ public class IntegrationTest {
                 "Введи команду (или help для помощи):\n" +
                 "Таблица users была успешно очищена.\n" +
                 "Введи команду (или help для помощи):\n" +
+                "Успех!\n" +
+                "Введи команду (или help для помощи):\n" +
                 // exit
                 "До скорой встречи!\n", getData());
     }
@@ -351,6 +366,7 @@ public class IntegrationTest {
         // given
         in.add(commandConnect);
         in.add("clear|sadfasd|fsf|fdsf");
+        in.add(commandDisconnect);
         in.add("exit");
         // when
         Main.main(new String[0]);
@@ -363,6 +379,8 @@ public class IntegrationTest {
                 // clear|sadfasd|fsf|fdsf
                 "Неудача! по причине: Формат команды 'clear|tableName', а ты ввел: clear|sadfasd|fsf|fdsf\n" +
                 "Введи команду (или help для помощи):\n" +
+                "Успех!\n" +
+                "Введи команду (или help для помощи):\n" +
                 // exit
                 "До скорой встречи!\n", getData());
     }
@@ -372,6 +390,7 @@ public class IntegrationTest {
         // given
         in.add(commandConnect);
         in.add("insert|user|error");
+        in.add(commandDisconnect);
         in.add("exit");
         // when
         Main.main(new String[0]);
@@ -382,6 +401,8 @@ public class IntegrationTest {
                 "Введи команду (или help для помощи):\n" +
                 // insert|user|error
                 "Неудача! по причине: Должно быть четное количество параметров в формате 'insert|tableName|column1|value1|column2|value2|...|columnN|valueN', а ты прислал: 'insert|user|error'\n" +
+                "Введи команду (или help для помощи):\n" +
+                "Успех!\n" +
                 "Введи команду (или help для помощи):\n" +
                 // exit
                 "До скорой встречи!\n", getData());
@@ -395,6 +416,7 @@ public class IntegrationTest {
         in.add("createDB|sqlcmd9hope9never9exist");
         in.add("dropDB|sqlcmd9hope9never9exist");
         in.add("y");
+        in.add(commandDisconnect);
         in.add("exit");
         // when
         Main.main(new String[0]);

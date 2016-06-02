@@ -11,7 +11,6 @@ import static org.junit.Assert.assertTrue;
 /**
  * Created by serzh on 5/11/16.
  */
-@Ignore
 public class DatabaseManagerTest {
 
     private static DatabaseManager manager;
@@ -22,14 +21,28 @@ public class DatabaseManagerTest {
     @BeforeClass
     public static void setup() {
         manager = new PostgresManager();
+        manager.connect("", USER, PASSWORD);
+        manager.createDatabase(DATABASE);
         manager.connect(DATABASE, USER, PASSWORD);
+        createTablesWithData();
+    }
+
+    private static void createTablesWithData() {
+        manager.createTable("users" +
+                " (name VARCHAR (50) UNIQUE NOT NULL, password VARCHAR (50) NOT NULL, id SERIAL PRIMARY KEY)");
+        manager.createTable("test1 (id SERIAL PRIMARY KEY)");
+        Map<String, Object> dataSet = new LinkedHashMap<>();
+        dataSet.put("name", "Vasia");
+        dataSet.put("password", "****");
+        dataSet.put("id", "22");
+        manager.insert("users", dataSet);
     }
 
     @AfterClass
     public static void dropDatabase() {
         try {
             manager.connect("", USER, PASSWORD);
-//            manager.dropDatabase(DATABASE);
+            manager.dropDatabase(DATABASE);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

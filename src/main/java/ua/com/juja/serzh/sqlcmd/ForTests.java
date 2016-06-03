@@ -17,7 +17,6 @@ public class ForTests {
         View view = new Console();
         DatabaseManager manager = new PostgresManager();
         manager.connect("sqlcmd5database","postgres", "postgres");
-
         view.write(manager.getTableNames().toString());
         view.write(manager.getDatabases().toString());
 

@@ -1,22 +1,25 @@
 package ua.com.juja.serzh.sqlcmd;
 
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
+import ua.com.juja.serzh.sqlcmd.model.DatabaseManager;
+import ua.com.juja.serzh.sqlcmd.model.PostgresManager;
+import ua.com.juja.serzh.sqlcmd.view.Console;
+import ua.com.juja.serzh.sqlcmd.view.View;
+
 /**
  * Created by serzh on 6/1/16.
  */
 public class ForTests {
     public static void main(String[] args) {
-        String s = String.format("%s,", "rt");
+        Logger.getRootLogger().setLevel(Level.OFF); //Disable log4j from text table formatter
 
-        s += String.format("%s,", "io");
-        s = s.substring(0, s.length() - 1);
-//        System.out.println(s);
+        View view = new Console();
+        DatabaseManager manager = new PostgresManager();
+        manager.connect("sqlcmd5database","postgres", "postgres");
 
-        StringBuffer stringBuffer = new StringBuffer("e");
-        stringBuffer.append("t");
-        stringBuffer.append(String.format("%s,", "io"));
-//        stringBuffer.substring(0, stringBuffer.length() - 2);
-        String s1 = stringBuffer.substring(0, stringBuffer.length() - 1);
+        view.write(manager.getTableNames().toString());
+        view.write(manager.getDatabases().toString());
 
-        System.out.println(s1);
     }
 }

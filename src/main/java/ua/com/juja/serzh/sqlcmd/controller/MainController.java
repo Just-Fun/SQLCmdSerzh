@@ -24,6 +24,7 @@ public class MainController {
                 new Help(view),
                 new Exit(view),
                 new IsConnected(manager, view),
+                new Databases(manager, view),
                 new Tables(manager, view),
                 new Clear(manager, view),
                 new CreateDatabase(manager, view),

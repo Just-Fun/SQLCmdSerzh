@@ -193,6 +193,11 @@ public class PostgresManager implements DatabaseManager {
     }
 
     @Override
+    public String getDatabaseName() {
+        return database;
+    }
+
+    @Override
     public String getUser() {
         return user;
     }
@@ -203,8 +208,20 @@ public class PostgresManager implements DatabaseManager {
     }
 
     @Override
-    public String getDatabase() {
-        return database;
+    public Set<String> getDatabases() {
+        Set<String> list = new LinkedHashSet<>();
+
+        try (PreparedStatement ps = connection.prepareStatement(
+                "SELECT datname FROM pg_database WHERE datistemplate = false;");
+             ResultSet rs = ps.executeQuery();) {
+            while (rs.next()) {
+                list.add(rs.getString(1));
+            }
+        } catch (Exception e) {
+            list = null;
+            e.printStackTrace();
+        }
+        return list;
     }
 
     @Override // TODO заготовка, может как-нибудь реализовать в userInerface, тест написан
@@ -236,22 +253,5 @@ public class PostgresManager implements DatabaseManager {
             e.printStackTrace();
             return 0;
         }
-    }
-
-    @Override // TODO Реализовать
-    public Set<String> getDatabases() {
-        Set<String> list = new LinkedHashSet<>();
-
-        try (PreparedStatement ps = connection.prepareStatement(
-                "SELECT datname FROM pg_database WHERE datistemplate = false;");
-             ResultSet rs = ps.executeQuery();) {
-            while (rs.next()) {
-                list.add(rs.getString(1));
-            }
-        } catch (Exception e) {
-            list = null;
-            e.printStackTrace();
-        }
-        return list;
     }
 }

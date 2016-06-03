@@ -170,7 +170,7 @@ public class DatabaseManagerTest {
 
     @Test
     public void getters() {
-        assertEquals(DATABASE, manager.getDatabase());
+        assertEquals(DATABASE, manager.getDatabaseName());
         assertEquals(USER, manager.getPassword());
         assertEquals(PASSWORD, manager.getUser());
 

@@ -18,7 +18,7 @@ public class DropDatabase extends Command {
         String databaseName = splitInput(input)[1];
         if (!dropConfirmation(databaseName)) return;
 
-        String databaseNameConnect = manager.getDatabase();
+        String databaseNameConnect = manager.getDatabaseName();
         if (databaseName.equals(databaseNameConnect)) {
             view.write("Нельзя удалять базу, к которой вы подключены.");
             view.write(String.format("Для удаления текущей базы '%s', подключитесь к другой базе.", databaseName));

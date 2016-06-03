@@ -6,27 +6,27 @@ import ua.com.juja.serzh.sqlcmd.view.View;
 import java.util.Set;
 
 /**
- * Created by serzh on 5/11/16.
+ * Created by serzh on 6/3/16.
  */
-public class Tables extends Command {
+public class Databases extends Command {
 
-    public Tables(DatabaseManager manager, View view) {
+    public Databases(DatabaseManager manager, View view) {
         super(manager, view);
     }
 
     @Override
     public void process(String input) {
-        Set<String> tables = manager.getTableNames();
-        view.write(tables.toString());
+        Set<String> bases = manager.getDatabases();
+        view.write(bases.toString());
     }
 
     @Override
     public String commandFormat() {
-        return "tables";
+        return "databases";
     }
 
     @Override
     public String description() {
-        return "для получения списка всех таблиц базы, к которой подключились";
+        return "для получения списка баз";
     }
 }

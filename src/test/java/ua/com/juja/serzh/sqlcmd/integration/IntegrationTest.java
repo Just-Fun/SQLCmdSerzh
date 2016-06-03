@@ -108,6 +108,8 @@ public class IntegrationTest {
                 "\t\tдля удаления таблицы\n" +
                 "\tinsert|tableName|column1|value1|column2|value2|...|columnN|valueN\n" +
                 "\t\tдля создания записи в существующей таблице\n" +
+                "\tdatabases\n" +
+                "\t\tдля получения списка баз\n" +
                 "\ttables\n" +
                 "\t\tдля получения списка всех таблиц базы, к которой подключились\n" +
                 "\tfind|tableName\n" +

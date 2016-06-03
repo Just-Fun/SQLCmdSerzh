@@ -11,6 +11,8 @@ public interface DatabaseManager {
 
     List<Map<String, Object>> getTableData(String tableName);
 
+    Set<String> getDatabases();
+
     Set<String> getTableNames();
 
     void connect(String database, String userName, String password);
@@ -37,9 +39,7 @@ public interface DatabaseManager {
 
     String getPassword();
 
-    String getDatabase();
-
-    Set<String> getDatabases();
+    String getDatabaseName();
 
     int getSize(String tableName);
 

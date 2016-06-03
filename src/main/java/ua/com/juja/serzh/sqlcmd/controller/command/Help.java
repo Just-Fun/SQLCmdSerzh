@@ -24,6 +24,7 @@ public class Help extends Command {
                 new Clear(manager, view),
                 new DropTable(manager, view),
                 new Insert(manager, view),
+                new Databases(manager, view),
                 new Tables(manager, view),
                 new Find(manager, view),
                 this,

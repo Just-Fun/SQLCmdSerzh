@@ -16,5 +16,6 @@ public class SomeLogik {
     public void fire() {
         view.write("someAction");
         view.write("введите:\n1 - для фейерверка\n2 - для душа\n3 - для выхода");
+
     }
 }

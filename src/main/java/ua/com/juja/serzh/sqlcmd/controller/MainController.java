@@ -1,6 +1,7 @@
 package ua.com.juja.serzh.sqlcmd.controller;
 
 import ua.com.juja.serzh.sqlcmd.controller.command.*;
+import ua.com.juja.serzh.sqlcmd.controller.underMenuForAndrey.ManagerForAndrey;
 import ua.com.juja.serzh.sqlcmd.model.DatabaseManager;
 import ua.com.juja.serzh.sqlcmd.view.View;
 
@@ -24,6 +25,7 @@ public class MainController {
                 new Help(view),
                 new Exit(view),
                 new IsConnected(manager, view),
+                new ManagerForAndrey(manager, view),
                 new Databases(manager, view),
                 new Tables(manager, view),
                 new Clear(manager, view),

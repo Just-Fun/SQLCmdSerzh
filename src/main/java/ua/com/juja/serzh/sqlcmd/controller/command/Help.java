@@ -1,5 +1,6 @@
 package ua.com.juja.serzh.sqlcmd.controller.command;
 
+import ua.com.juja.serzh.sqlcmd.controller.underMenuForAndrey.ManagerForAndrey;
 import ua.com.juja.serzh.sqlcmd.view.View;
 
 import java.util.ArrayList;
@@ -18,6 +19,7 @@ public class Help extends Command {
         this.view = view;
         commands = new ArrayList<>(Arrays.asList(
                 new Connect(manager, view),
+                new ManagerForAndrey(manager, view),
                 new Databases(manager, view),
                 new Tables(manager, view),
                 new CreateDatabase(manager, view),

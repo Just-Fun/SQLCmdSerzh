@@ -62,9 +62,9 @@ public abstract class Command {
         return input.split("\\|").length;
     }
 
+    public abstract void process(String input);
+
     public abstract String commandFormat();
 
     public abstract String description();
-
-    public abstract void process(String input);
 }

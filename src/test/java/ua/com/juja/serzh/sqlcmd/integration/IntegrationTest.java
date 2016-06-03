@@ -95,6 +95,10 @@ public class IntegrationTest {
                 "Существующие команды:\n" +
                 "\tconnect|databaseName|userName|password\n" +
                 "\t\tдля подключения к базе данных, с которой будем работать\n" +
+                "\tdatabases\n" +
+                "\t\tдля получения списка баз\n" +
+                "\ttables\n" +
+                "\t\tдля получения списка всех таблиц базы, к которой подключились\n" +
                 "\tcreateDB|databaseName\n" +
                 "\t\tдля создания новой Database. Имя базы должно начинаться с буквы.\n" +
                 "\tdropDB|databaseName\n" +
@@ -108,10 +112,6 @@ public class IntegrationTest {
                 "\t\tдля удаления таблицы\n" +
                 "\tinsert|tableName|column1|value1|column2|value2|...|columnN|valueN\n" +
                 "\t\tдля создания записи в существующей таблице\n" +
-                "\tdatabases\n" +
-                "\t\tдля получения списка баз\n" +
-                "\ttables\n" +
-                "\t\tдля получения списка всех таблиц базы, к которой подключились\n" +
                 "\tfind|tableName\n" +
                 "\t\tдля получения содержимого таблицы 'tableName'\n" +
                 "\thelp\n" +

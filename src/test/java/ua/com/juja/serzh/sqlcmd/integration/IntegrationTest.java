@@ -1,17 +1,15 @@
 package ua.com.juja.serzh.sqlcmd.integration;
 
 import org.junit.*;
+import ua.com.juja.serzh.sqlcmd.Support;
 import ua.com.juja.serzh.sqlcmd.BeforeTestsChangeNameAndPass;
 import ua.com.juja.serzh.sqlcmd.Main;
 import ua.com.juja.serzh.sqlcmd.model.DatabaseManager;
 import ua.com.juja.serzh.sqlcmd.model.PostgresManager;
 
 import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 import java.io.PrintStream;
 import java.io.UnsupportedEncodingException;
-import java.util.LinkedHashMap;
-import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
 
@@ -36,50 +34,20 @@ public class IntegrationTest {
     @BeforeClass
     public static void buildDatabase() {
         manager = new PostgresManager();
-        try {
-            manager.connect("", USER, PASSWORD);
-        } catch (RuntimeException e) {
-            throw new RuntimeException("Для работы тестов измените имя и пароль в классе BeforeTestsChangeNameAndPass."
-                    + "\n" + e.getCause());
-        }
-        try {
-            manager.dropDatabase(DATABASE);
-        } catch (Exception e) {
-            // do nothing
-        }
-        manager.createDatabase(DATABASE); // TODO  вынести в отдельный класс, также и в DatabaseManagerTest, или нет :)
-        manager.connect(DATABASE, USER, PASSWORD);
-        createTablesWithData();
-    }
-
-    private static void createTablesWithData() {
-        manager.createTable("users" +
-                " (name VARCHAR (50) UNIQUE NOT NULL, password VARCHAR (50) NOT NULL, id SERIAL PRIMARY KEY)");
-        manager.createTable("test1 (id SERIAL PRIMARY KEY)");
-        Map<String, Object> dataSet = new LinkedHashMap<>();
-        dataSet.put("name", "Vasia");
-        dataSet.put("password", "****");
-        dataSet.put("id", "22");
-        manager.insert("users", dataSet);
+        new Support().setupData(manager);
     }
 
     @Before
     public void setup() {
         out = new ByteArrayOutputStream();
         in = new ConfigurableInputStream();
-
         System.setIn(in);
         System.setOut(new PrintStream(out));
     }
 
     @AfterClass
     public static void dropDatabase() {
-        try {
-            manager.connect("", USER, PASSWORD);
-            manager.dropDatabase(DATABASE);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+        new Support().dropData(manager);
     }
 
     @Test

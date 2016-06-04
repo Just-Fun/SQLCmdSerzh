@@ -231,16 +231,15 @@ public class PostgresManager implements DatabaseManager {
             tableSize.next();
             return tableSize.getInt(1);
         } catch (SQLException e) {
-            e.printStackTrace();
-            return 0;
+            throw new DatabaseManagerException(e.getMessage(), e.getCause());
         }
     }
 
     @Override // TODO заготовка, может как-нибудь реализовать в userInerface, тест написан
     public void update(String tableName, int id, Map<String, Object> newValue) {
         String tableNames = getNameFormatted(newValue, "%s = ?,");
-
         String updateTable = "UPDATE public." + tableName + " SET " + tableNames + " WHERE id = ?";
+
         try (PreparedStatement ps = connection.prepareStatement(updateTable)) {
             int index = 1;
             for (Object value : newValue.values()) {

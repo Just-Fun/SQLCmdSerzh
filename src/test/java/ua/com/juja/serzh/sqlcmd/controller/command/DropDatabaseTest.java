@@ -82,4 +82,14 @@ public class DropDatabaseTest {
             assertEquals("Формат команды 'dropDB|databaseName', а ты ввел: dropDB|db|wrong", e.getMessage());
         }
     }
+
+    @Test
+    public void testDropatabaseNameConnect() throws Exception {
+        when(view.read()).thenReturn("Y");
+        when(manager.getDatabaseName()).thenReturn("currentDB");
+        command.process("dropDB|currentDB");
+        verify(view).write("Вы уверены, что хотите удалить currentDB? Y/N");
+        verify(view).write("Нельзя удалять базу, к которой вы подключены.");
+        verify(view).write("Для удаления текущей базы 'currentDB', подключитесь к другой базе.");
+    }
 }

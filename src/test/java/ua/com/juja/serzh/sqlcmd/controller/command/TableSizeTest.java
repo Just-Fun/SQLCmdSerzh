@@ -18,20 +18,6 @@ import static org.mockito.Mockito.when;
  */
 public class TableSizeTest {
 
-    @Test
-    public void testProcess() throws Exception {
-
-    }
-
-    @Test
-    public void testCommandFormat() throws Exception {
-
-    }
-
-    @Test
-    public void testDescription() throws Exception {
-
-    }
     private DatabaseManager manager;
     private View view;
     private Command command;

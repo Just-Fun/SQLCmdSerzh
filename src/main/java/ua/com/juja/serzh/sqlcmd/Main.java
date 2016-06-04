@@ -20,6 +20,7 @@ public class Main {
         DatabaseManager manager = new PostgresManager();
         MainController controller = new MainController(view, manager);
         controller.run();
+
     }
     // connect|postgres|postgres|postgres
 }

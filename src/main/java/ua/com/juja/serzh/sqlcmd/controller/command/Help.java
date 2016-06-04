@@ -1,5 +1,6 @@
 package ua.com.juja.serzh.sqlcmd.controller.command;
 
+import ua.com.juja.serzh.sqlcmd.model.DatabaseManager;
 import ua.com.juja.serzh.sqlcmd.view.View;
 
 import java.util.ArrayList;
@@ -23,6 +24,7 @@ public class Help extends Command {
                 new CreateDatabase(manager, view),
                 new DropDatabase(manager, view),
                 new CreateTable(manager, view),
+                new TableSize(manager, view),
                 new Clear(manager, view),
                 new DropTable(manager, view),
                 new Insert(manager, view),

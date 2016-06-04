@@ -224,6 +224,18 @@ public class PostgresManager implements DatabaseManager {
         return list;
     }
 
+    @Override
+    public int getTableSize(String tableName) {
+        try (Statement stmt = connection.createStatement();
+             ResultSet tableSize = stmt.executeQuery("SELECT COUNT(*) FROM public." + tableName)) {
+            tableSize.next();
+            return tableSize.getInt(1);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
+
     @Override // TODO заготовка, может как-нибудь реализовать в userInerface, тест написан
     public void update(String tableName, int id, Map<String, Object> newValue) {
         String tableNames = getNameFormatted(newValue, "%s = ?,");
@@ -239,19 +251,6 @@ public class PostgresManager implements DatabaseManager {
             ps.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e.getLocalizedMessage());
-        }
-    }
-
-    // TODO заготовка, может как-нибудь реализовать в userInerface
-    @Override
-    public int getSize(String tableName) {
-        try (Statement stmt = connection.createStatement();
-             ResultSet tableSize = stmt.executeQuery("SELECT COUNT(*) FROM public." + tableName)) {
-            tableSize.next();
-            return tableSize.getInt(1);
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return 0;
         }
     }
 }

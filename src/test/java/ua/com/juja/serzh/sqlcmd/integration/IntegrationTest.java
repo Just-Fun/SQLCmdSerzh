@@ -106,6 +106,8 @@ public class IntegrationTest {
                 "\tcreateTable|tableName(column1,column2,...,columnN)\n" +
                 "\t\tдля создания новой таблицы, в круглых скобках вставить опиание колонок в SQL формате, пример:\n" +
                 "\t\tcreateTable|user(id SERIAL NOT NULL PRIMARY KEY,username varchar(225) NOT NULL UNIQUE, password varchar(225))\n" +
+                "\tsize|tableName\n" +
+                "\t\tколичество строк в таблице\n" +
                 "\tclear|tableName\n" +
                 "\t\tдля очистки всей таблицы\n" +
                 "\tdropTable|tableName\n" +

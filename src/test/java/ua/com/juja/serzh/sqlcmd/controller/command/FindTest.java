@@ -151,7 +151,7 @@ public class FindTest {
         }
     }
 
-    @Test //
+    @Test
     public void testCanProcessFindWithOnlySlash() {
         try {
             command.process("find|");

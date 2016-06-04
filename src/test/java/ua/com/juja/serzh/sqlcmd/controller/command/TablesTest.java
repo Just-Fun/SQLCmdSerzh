@@ -41,19 +41,19 @@ public class TablesTest {
     }
 
     @Test
-    public void canProcessListWithRightParameter() {
+    public void canProcessWithRightParameter() {
         boolean canProcess = command.canProcess("tables");
         assertTrue(canProcess);
     }
 
     @Test
-    public void canProcessListWithWrongParameter() {
+    public void canProcessWithWrongParameter() {
         boolean canNotProcess = command.canProcess("ghkk");
         assertFalse(canNotProcess);
     }
 
     @Test
-    public void canProcessListWithoutParameter() {
+    public void canProcessWithoutParameter() {
         boolean canNotProcess = command.canProcess("");
         assertFalse(canNotProcess);
     }

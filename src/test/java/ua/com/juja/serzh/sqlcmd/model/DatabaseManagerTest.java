@@ -22,12 +22,12 @@ public class DatabaseManagerTest {
     @BeforeClass
     public static void setup() {
         manager = new PostgresManager();
-        new Support().setupData(manager);
+        Support.setupData(manager);
     }
 
     @AfterClass
     public static void dropDatabase() {
-        new Support().dropData(manager);
+        Support.dropData(manager);
     }
 
     @Test

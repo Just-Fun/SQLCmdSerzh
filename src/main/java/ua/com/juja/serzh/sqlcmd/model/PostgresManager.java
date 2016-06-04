@@ -177,7 +177,7 @@ public class PostgresManager implements DatabaseManager {
     }
 
     private String getNameFormatted(Map<String, Object> newValue, String format) {
-        StringBuffer strings = new StringBuffer("");
+        StringBuilder strings = new StringBuilder("");
         for (String name : newValue.keySet()) {
             strings.append(String.format(format, name));
         }
@@ -185,7 +185,7 @@ public class PostgresManager implements DatabaseManager {
     }
 
     private String getValuesFormatted(Map<String, Object> input, String format) {
-        StringBuffer values = new StringBuffer("");
+        StringBuilder values = new StringBuilder("");
         for (Object value : input.values()) {
             values.append(String.format(format, value));
         }
@@ -213,7 +213,7 @@ public class PostgresManager implements DatabaseManager {
 
         try (PreparedStatement ps = connection.prepareStatement(
                 "SELECT datname FROM pg_database WHERE datistemplate = false;");
-             ResultSet rs = ps.executeQuery();) {
+             ResultSet rs = ps.executeQuery()) {
             while (rs.next()) {
                 list.add(rs.getString(1));
             }
@@ -235,7 +235,7 @@ public class PostgresManager implements DatabaseManager {
         }
     }
 
-    @Override // TODO заготовка, может как-нибудь реализовать в userInerface, тест написан
+    @Override // TODO заготовка, может как-нибудь реализовать в userInerface, а может и нет :) тест написан
     public void update(String tableName, int id, Map<String, Object> newValue) {
         String tableNames = getNameFormatted(newValue, "%s = ?,");
         String updateTable = "UPDATE public." + tableName + " SET " + tableNames + " WHERE id = ?";

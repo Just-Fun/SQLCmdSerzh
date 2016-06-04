@@ -34,7 +34,7 @@ public class IntegrationTest {
     @BeforeClass
     public static void buildDatabase() {
         manager = new PostgresManager();
-        new Support().setupData(manager);
+        Support.setupData(manager);
     }
 
     @Before
@@ -47,7 +47,7 @@ public class IntegrationTest {
 
     @AfterClass
     public static void dropDatabase() {
-        new Support().dropData(manager);
+        Support.dropData(manager);
     }
 
     @Test

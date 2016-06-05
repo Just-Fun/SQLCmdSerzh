@@ -22,4 +22,4 @@ public class Main {
         controller.run();
     }
     // connect|postgres|postgres|postgres
-}
+} // TODO добавить куда-нибудь лямбд :)

@@ -8,10 +8,7 @@ import ua.com.juja.serzh.sqlcmd.view.Console;
 import ua.com.juja.serzh.sqlcmd.view.View;
 
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by serzh on 6/1/16.
@@ -20,9 +17,23 @@ public class ForTests {
 
     public static void main(String[] args) {
 
-        List<Integer> list = Arrays.asList(1, 2, 3, 4, 5, 6, 7);
+        List<Integer> list = new LinkedList<>();
+        for (int i = 0; i < 1000; i++) {
+            list.add(i);
+        }
+
+        long timeBefore = System.currentTimeMillis();
+        for (Integer integer : list) {
+            System.out.println(integer);
+        }
+//        list.forEach(integer -> System.out.println(integer));
+//        list.forEach(System.out::println);
+        long timeAfter = System.currentTimeMillis();
+        long time = timeAfter - timeBefore;
+        System.out.println(time);
+
 //        list.forEach(n -> System.out.println(n));
-        list.forEach(System.out::println);
+//        list.forEach(System.out::println);
 //        execute( () -> System.out.println("Worker вызван через Lambda") );
 //        System.out::println;
 

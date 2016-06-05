@@ -10,18 +10,21 @@ import ua.com.juja.serzh.sqlcmd.view.View;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
  * Created by serzh on 6/1/16.
  */
 public class ForTests {
+
     public static void main(String[] args) {
 
-
-        Set<String> bases = new LinkedHashSet<>(Arrays.asList("1st", "2nd"));
-        String s = bases.toString().substring(1, bases.toString().length() - 1);
-        System.out.println(s);
+        List<Integer> list = Arrays.asList(1, 2, 3, 4, 5, 6, 7);
+//        list.forEach(n -> System.out.println(n));
+        list.forEach(System.out::println);
+//        execute( () -> System.out.println("Worker вызван через Lambda") );
+//        System.out::println;
 
         /*Logger.getRootLogger().setLevel(Level.OFF); //Disable log4j from text table formatter
         View view = new Console();

@@ -38,10 +38,15 @@ public class Help extends Command {
     public void process(String input) {
         view.write("Существующие команды:");
 
-        for (Command command : commands) {
+        /*for (Command command : commands) {
             view.write("\t" + command.commandFormat());
             view.write("\t\t" + command.description());
-        }
+        }*/
+        commands.forEach(c -> {
+                    view.write("\t" + c.commandFormat());
+                    view.write("\t\t" + c.description());
+                }
+        );
     }
 
     @Override

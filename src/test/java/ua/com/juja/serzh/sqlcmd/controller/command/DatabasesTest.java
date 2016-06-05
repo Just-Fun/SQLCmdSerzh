@@ -32,7 +32,7 @@ public class DatabasesTest {
     public void testPrintGetTableNames() {
         when(manager.getDatabases()).thenReturn(new HashSet<>(Arrays.asList("db1", "db2")));
         command.process("databases");
-        shouldPrint("[[db1, db2]]");
+        shouldPrint("[Существующие databases: db1, db2]");
     }
 
     private void shouldPrint(String expected) {
@@ -63,6 +63,6 @@ public class DatabasesTest {
     public void testPrintEmptyTableData() {
         when(manager.getTableNames()).thenReturn(new HashSet<String>());
         command.process(("databases"));
-        shouldPrint("[[]]");
+        shouldPrint("[Databases отсутствуют]");
     }
 }

@@ -16,8 +16,14 @@ public class Tables extends Command {
 
     @Override
     public void process(String input) {
-        Set<String> tables = manager.getTableNames();
-        view.write(tables.toString());
+        Set<String> set = manager.getTableNames();
+        if (set.size() > 0) {
+            String tables = set.toString();
+            String result = tables.substring(1, tables.length() - 1);
+            view.write(String.format("Существующие таблицы: %s", result));
+        } else {
+            view.write("Таблицы отсутствуют");
+        }
     }
 
     @Override

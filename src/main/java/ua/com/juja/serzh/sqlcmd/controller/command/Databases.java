@@ -16,8 +16,14 @@ public class Databases extends Command {
 
     @Override
     public void process(String input) {
-        Set<String> bases = manager.getDatabases();
-        view.write(bases.toString());
+        Set<String> set = manager.getDatabases();
+        if (set.size() > 0) {
+            String bases = set.toString();
+            String result = bases.substring(1, bases.length() - 1);
+            view.write(String.format("Существующие databases: %s", result));
+        } else {
+            view.write("Databases отсутствуют");
+        }
     }
 
     @Override

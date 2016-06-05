@@ -31,7 +31,7 @@ public class TablesTest {
     public void testPrintGetTableNames() {
         when(manager.getTableNames()).thenReturn(new HashSet<>(Arrays.asList("user", "test")));
         command.process("tables");
-        shouldPrint("[[test, user]]");
+        shouldPrint("[Существующие таблицы: test, user]");
     }
 
     private void shouldPrint(String expected) {
@@ -62,6 +62,6 @@ public class TablesTest {
     public void testPrintEmptyTableData() {
         when(manager.getTableNames()).thenReturn(new HashSet<String>());
         command.process(("tables"));
-        shouldPrint("[[]]");
+        shouldPrint("[Таблицы отсутствуют]");
     }
 }

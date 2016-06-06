@@ -71,9 +71,11 @@ public class IntegrationTest {
                 "\t\tдля создания новой Database. Имя базы должно начинаться с буквы.\n" +
                 "\tdropDB|databaseName\n" +
                 "\t\tдля удаления Database. База должна быть свободна от любого конекшина.\n" +
-                "\tcreateTable|tableName(column1,column2,...,columnN)\n" +
-                "\t\tдля создания новой таблицы, в круглых скобках вставить опиание колонок в SQL формате, пример:\n" +
-                "\t\tcreateTable|user(id SERIAL NOT NULL PRIMARY KEY,username varchar(225) NOT NULL UNIQUE, password varchar(225))\n" +
+                "\tcreateTable\n" +
+                "\t\tдля создания новой таблицы пошагово\n" +
+                "\tcreateTableSQL|tableName(column1,column2,...,columnN)\n" +
+                "\t\tдля создания новой таблицы знающих SQL, в круглых скобках вставить опиание колонок в SQL формате, пример:\n" +
+                "\t\tcreateTableSQL|user(id SERIAL NOT NULL PRIMARY KEY,username varchar(225) NOT NULL UNIQUE, password varchar(225))\n" +
                 "\tsize|tableName\n" +
                 "\t\tколичество строк в таблице\n" +
                 "\tclear|tableName\n" +

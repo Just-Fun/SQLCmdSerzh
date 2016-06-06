@@ -10,9 +10,10 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
 /**
- * Created by serzh on 13.05.16.
+ * Created by serzh on 6/6/16.
  */
-public class CreateTableTest {
+public class CreateTableSimpleTest {
+
     private DatabaseManager manager;
     private View view;
     private Command command;
@@ -21,12 +22,12 @@ public class CreateTableTest {
     public void setup() {
         manager = mock(DatabaseManager.class);
         view = mock(View.class);
-        command = new CreateTable(manager, view);
+        command = new CreateTableSimple(manager, view);
     }
 
     @Test
     public void testCanProcess() throws Exception {
-        boolean canProcess = command.canProcess("createTableSQL|user");
+        boolean canProcess = command.canProcess("createTable");
         assertTrue(canProcess);
     }
 
@@ -36,36 +37,35 @@ public class CreateTableTest {
         assertFalse(canProcess);
     }
 
-    @Test
-    public void testCantProcessClearWithoutParametersString() {
-        boolean canProcess = command.canProcess("createTableSQL");
-        assertTrue(canProcess);
-    }
-
-    @Test
+   /* @Test
     public void testProcess() throws Exception {
-        command.process("createTableSQL|user(id SERIAL NOT NULL PRIMARY KEY,username varchar(225) NOT NULL UNIQUE, password varchar(225))");
+        command.process("createTable");
         verify(manager).createTable("user(id SERIAL NOT NULL PRIMARY KEY,username varchar(225) NOT NULL UNIQUE, password varchar(225))");
         verify(view).write("Таблица user была успешно создана.");
     }
-
-    @Test
+*/
+  /*  @Test
     public void testProcessWithoutParameters() throws Exception {
         try {
-            command.process("createTableSQL|user");
+            command.process("createTable|user");
             fail();
         } catch (IllegalArgumentException e) {
-            assertEquals("Формат команды 'createTableSQL|tableName(column1,column2,...,columnN)' в SQL!!! формате, а ты ввел: createTableSQL|user", e.getMessage());
+            assertEquals("Формат команды 'createTable|tableName(column1,column2,...,columnN)' в SQL!!! формате, а ты ввел: createTable|user", e.getMessage());
         }
+    }*/
+
+    @Test
+    public void testCheckNameStartWithLetter() throws Exception {
+
     }
 
     @Test
-    public void testProcessWrongFormat() throws Exception {
-        try {
-            command.process("createTable|tableName|wrong");
-            fail();
-        } catch (IllegalArgumentException e) {
-            assertEquals("Формат команды 'createTableSQL|tableName(column1,column2,...,columnN)', а ты ввел: createTable|tableName|wrong", e.getMessage());
-        }
+    public void testCommandFormat() throws Exception {
+
+    }
+
+    @Test
+    public void testDescription() throws Exception {
+
     }
 }

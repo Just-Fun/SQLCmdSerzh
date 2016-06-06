@@ -39,8 +39,7 @@ public class CreateTable extends Command {
     public void validationPresenceOfParentheses(String input) {
         int presenceOfParentheses = (input.split("\\(")).length;
         if (presenceOfParentheses < 2) {
-            throw new IllegalArgumentException(String.format("Формат команды 'createTable|tableName" +
-                    "(column1,column2,...,columnN)' в SQL!!! формате, а ты ввел: %s", input));
+            throw new IllegalArgumentException(String.format("Формат команды '" + commandFormat() + "' в SQL!!! формате, а ты ввел: %s", input));
         }
     }
 }

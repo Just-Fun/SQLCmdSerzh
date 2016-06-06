@@ -44,4 +44,9 @@ public class ExitTest {
         }
         Mockito.verify(view).write("До скорой встречи!");
     }
+
+    @Test(expected = ExitException.class)
+    public void classExitException() {
+        command.process("exit");
+    }
 }

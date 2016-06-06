@@ -40,7 +40,11 @@ public class TableConstructor {
     private void buildRows() {
         for (Map<String, Object> row : tableData) {
             for (Object value : row.values()) {
-                table.addCell(value.toString());
+                if (value != null) {
+                    table.addCell(value.toString());
+                } else {
+                    table.addCell("");
+                }
             }
         }
     }

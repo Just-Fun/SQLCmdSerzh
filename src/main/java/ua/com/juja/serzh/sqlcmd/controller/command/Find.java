@@ -21,10 +21,14 @@ public class Find extends Command {
 
         String tableName = splitInput(input)[1];
         Set<String> tableColumns = manager.getTableColumns(tableName);
+
+        if (tableColumns.size() > 0) {
         List<Map<String, Object>> tableData = manager.getTableData(tableName);
         TableConstructor constructor = new TableConstructor(tableColumns, tableData);
-
         view.write(constructor.getTableString());
+        } else {
+            view.write(String.format("Данные в таблице '%s' отсутствуют", tableName));
+        }
     }
 
     @Override

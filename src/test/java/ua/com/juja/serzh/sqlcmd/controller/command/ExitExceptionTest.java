@@ -18,4 +18,15 @@ public class ExitExceptionTest {
     public void testProcessExitCommand_thowsExitException() {
         command.process("exit");
     }
+
+   /* // arrange
+    ExitException exitException = new ExitException();
+
+    // act
+    Throwable throwable = exitException(exitException:: );
+
+    // assert
+    assertThat(throwable)
+    .isNotNull()
+    .hasMessage("My custom runtime exception");*/
 }

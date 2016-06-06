@@ -38,12 +38,12 @@ public class FindTest {
         // given
         setupTableColumns("user", "id", "name", "password");
 
-        Map<String, Object> user1 = new HashMap<>();
+        Map<String, Object> user1 = new LinkedHashMap<>();
         user1.put("id", 12);
         user1.put("name", "Stiven");
         user1.put("password", "*****");
 
-        Map<String, Object> user2 = new HashMap<>();
+        Map<String, Object> user2 = new LinkedHashMap<>();
         user2.put("id", 13);
         user2.put("name", "Eva");
         user2.put("password", "+++++");
@@ -56,13 +56,37 @@ public class FindTest {
         // when
         command.process("find|user");
         // then
-        shouldPrint("[+-----+------+--------+\n" +
-                    "|id   |name  |password|\n" +
-                    "+-----+------+--------+\n" +
-                    "|*****|Stiven|12      |\n" +
-                    "+-----+------+--------+\n" +
-                    "|+++++|Eva   |13      |\n" +
-                    "+-----+------+--------+]");
+        shouldPrint("[+--+------+--------+\n" +
+                "|id|name  |password|\n" +
+                "+--+------+--------+\n" +
+                "|12|Stiven|*****   |\n" +
+                "+--+------+--------+\n" +
+                "|13|Eva   |+++++   |\n" +
+                "+--+------+--------+]");
+    }
+
+    @Test
+    public void testPrintTableDataWithNullArgument() {
+        // given
+        setupTableColumns("user", "id", "name", "password");
+
+        Map<String, Object> user1 = new LinkedHashMap<>();
+        user1.put("id", 12);
+        user1.put("name", "Stiven");
+        user1.put("password", null);
+
+        List<Map<String, Object>> data = new LinkedList<>();
+        data.add(user1);
+
+        when(manager.getTableData("user")).thenReturn(data);
+        // when
+        command.process("find|user");
+        // then
+        shouldPrint("[+--+------+--------+\n" +
+                "|id|name  |password|\n" +
+                "+--+------+--------+\n" +
+                "|12|Stiven|        |\n" +
+                "+--+------+--------+]");
     }
 
     private void setupTableColumns(String tableName, String... columns) {
@@ -118,10 +142,10 @@ public class FindTest {
     public void testPrintTableDataWithOneColumn() {
         setupTableColumns("test", "id");
 
-        Map<String, Object> user1 = new HashMap<>();
+        Map<String, Object> user1 = new LinkedHashMap<>();
         user1.put("id", 12);
 
-        Map<String, Object> user2 = new HashMap<>();
+        Map<String, Object> user2 = new LinkedHashMap<>();
         user2.put("id", 13);
 
         List<Map<String, Object>> data = new LinkedList<>();

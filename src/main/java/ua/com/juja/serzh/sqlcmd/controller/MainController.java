@@ -29,6 +29,7 @@ public class MainController {
                 new Clear(manager, view),
                 new CreateDatabase(manager, view),
                 new DropDatabase(manager, view),
+                new CreateTableSimple(manager, view),
                 new CreateTable(manager, view),
                 new DropTable(manager, view),
                 new TableSize(manager, view),

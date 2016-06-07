@@ -582,6 +582,30 @@ public class IntegrationTest {
                 "До скорой встречи!\n", getData());
     }
 
+    @Test
+    public void testDropDatabaseException() {
+        // given
+        in.add(commandConnect);
+        in.add("dropDB|sqlcmd965823756925");
+        in.add("y");
+        in.add(commandDisconnect);
+        in.add("exit");
+        // when
+        Main.main(new String[0]);
+        // then
+
+        assertEquals(pleaseConnect +
+                // connect
+                "Успех!\n" +
+                "Введи команду (или help для помощи):\n" +
+                "Вы уверены, что хотите удалить sqlcmd965823756925? Y/N\n" +
+                "Неудача! по причине: ERROR: database \"sqlcmd965823756925\" does not exist\n" +
+                "Введи команду (или help для помощи):\n" +
+                "Успех!\n" +
+                "Введи команду (или help для помощи):\n" +
+                "До скорой встречи!\n", getData());
+    }
+
     @Ignore // тест занимает много времени, половина от всех вместе взятых...
     @Test
     public void testCreateDropDatabase() {

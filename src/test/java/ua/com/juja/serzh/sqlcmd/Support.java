@@ -16,7 +16,6 @@ public class Support {
 
     public static void setupData(DatabaseManager manager) {
         manager.connect("", USER, PASSWORD);
-//        manager.dropDatabase(DATABASE);
         manager.createDatabase(DATABASE);
         manager.connect(DATABASE, USER, PASSWORD);
         createTablesWithData(manager);

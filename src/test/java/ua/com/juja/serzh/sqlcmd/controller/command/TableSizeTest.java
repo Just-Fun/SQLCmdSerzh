@@ -77,7 +77,7 @@ public class TableSizeTest {
         }
     }
 
-    @Test //
+    @Test
     public void testCanProcessFindWithOnlySlash() {
         try {
             command.process("size|");

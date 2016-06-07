@@ -33,6 +33,7 @@ public class MainController {
                 new CreateTable(manager, view),
                 new DropTable(manager, view),
                 new TableSize(manager, view),
+                new InsertSimple(manager, view),
                 new Insert(manager, view),
                 new Find(manager, view),
                 new Unsupported(view)

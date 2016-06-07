@@ -158,14 +158,14 @@ public class PostgresManager implements DatabaseManager {
 
     @Override
     public Set<String> getTableColumns(String tableName) {
-        Set<String> tables = new LinkedHashSet<>();
+        Set<String> columns = new LinkedHashSet<>();
         try (Statement stmt = connection.createStatement();
              ResultSet tableColumns = stmt.executeQuery("SELECT * FROM information_schema.columns WHERE " +
                      "table_schema = 'public' AND table_name = '" + tableName + "'")) {
             while (tableColumns.next()) {
-                tables.add(tableColumns.getString("column_name"));
+                columns.add(tableColumns.getString("column_name"));
             }
-            return tables;
+            return columns;
         } catch (SQLException e) {
             throw new RuntimeException(e.getLocalizedMessage());
         }

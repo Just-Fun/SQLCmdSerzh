@@ -17,9 +17,10 @@ public class CreateTable extends Command {
         validationParameters(input);
         validationPresenceOfParentheses(input);
         String command = splitInput(input)[1];
-        manager.createTable(command);
-
         String tableName = command.split("\\(")[0];
+        checkNameStartWithLetter(tableName, "таблицы");
+
+        manager.createTable(command);
         view.write(String.format("Таблица %s была успешно создана.", tableName));
         Command find = new Find(manager, view);
         find.process("find|" + tableName); // красивый вывод новосозданной таблички

@@ -61,7 +61,7 @@ public class DatabasesTest {
 
     @Test
     public void testPrintEmptyTableData() {
-        when(manager.getTableNames()).thenReturn(new HashSet<String>());
+        when(manager.getTableNames()).thenReturn(new HashSet<>());
         command.process(("databases"));
         shouldPrint("[Databases отсутствуют]");
     }

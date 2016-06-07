@@ -27,6 +27,7 @@ public class Help extends Command {
                 new TableSize(manager, view),
                 new Clear(manager, view),
                 new DropTable(manager, view),
+                new InsertSimple(manager, view),
                 new Insert(manager, view),
                 new Find(manager, view),
                 this,

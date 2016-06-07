@@ -54,6 +54,14 @@ public abstract class Command {
         }
     }
 
+    public void checkNameStartWithLetter(String input, String name) {
+        char fistChar = input.charAt(0);
+        if (!(fistChar >= 'a' && fistChar <= 'z') && !(fistChar >= 'A' && fistChar <= 'Z')) {
+            throw new IllegalArgumentException(String.format(
+                    "Имя %s должно начинаться с буквы, а у тебя начинается с '%s'", name, fistChar));
+        }
+    }
+
     public String[] splitInput(String input) {
         return input.split("\\|");
     }

@@ -6,9 +6,6 @@ import org.mockito.ArgumentCaptor;
 import ua.com.juja.serzh.sqlcmd.model.DatabaseManager;
 import ua.com.juja.serzh.sqlcmd.view.View;
 
-import java.util.Arrays;
-import java.util.HashSet;
-
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 import static org.mockito.Mockito.when;

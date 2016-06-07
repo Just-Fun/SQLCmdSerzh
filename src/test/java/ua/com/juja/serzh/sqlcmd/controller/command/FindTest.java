@@ -129,7 +129,7 @@ public class FindTest {
     public void testPrintEmptyTableData() {
         // given
         setupTableColumns("user", "id", "name", "password");
-        when(manager.getTableData("user")).thenReturn(new LinkedList<Map<String, Object>>());
+        when(manager.getTableData("user")).thenReturn(new LinkedList<>());
         // when
         command.process("find|user");
         // then

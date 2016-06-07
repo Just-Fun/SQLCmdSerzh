@@ -16,6 +16,7 @@ public class Support {
 
     public static void setupData(DatabaseManager manager) {
         manager.connect("", USER, PASSWORD);
+//        manager.dropDatabase(DATABASE);
         manager.createDatabase(DATABASE);
         manager.connect(DATABASE, USER, PASSWORD);
         createTablesWithData(manager);
@@ -34,6 +35,8 @@ public class Support {
         manager.createTable("users" +
                 " (name VARCHAR (50) UNIQUE NOT NULL, password VARCHAR (50) NOT NULL, id SERIAL PRIMARY KEY)");
         manager.createTable("test1 (id SERIAL PRIMARY KEY)");
+        manager.createTable("users2" +
+                " (id SERIAL NOT NULL PRIMARY KEY,username varchar(225) NOT NULL UNIQUE, password varchar(225))");
         Map<String, Object> dataSet = new LinkedHashMap<>();
         dataSet.put("name", "Vasia");
         dataSet.put("password", "****");

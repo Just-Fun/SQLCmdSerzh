@@ -8,12 +8,8 @@ import ua.com.juja.serzh.sqlcmd.view.View;
  */
 public class CreateTableSimple extends Command {
 
-    protected DatabaseManager manager;
-    protected View view;
-
     public CreateTableSimple(DatabaseManager manager, View view) {
-        this.view = view;
-        this.manager = manager;
+            super(manager, view);
     }
 
     String orExit = " или '0' для выхода в основное меню";
@@ -64,7 +60,7 @@ public class CreateTableSimple extends Command {
             } else if (input.equals("")) {
                 view.write("Нужно ввести имя для создаваемой таблицы, а вы вели пустую строку");
             } else {
-                if (checkNameStartWithLetter(input)) {
+                if (checkNameStartWithLetterB(input)) {
                     query += input + "(";
                     view.write("Имя новой базы: " + input);
                     exit = true;
@@ -84,7 +80,7 @@ public class CreateTableSimple extends Command {
             } else if (input.equals("")) {
                 view.write("Нужно ввести имя для колонки PRIMARY KEY, а вы вели пустую строку");
             } else {
-                if (checkNameStartWithLetter(input)) {
+                if (checkNameStartWithLetterB(input)) {
                     view.write("Имя колонки PRIMARY KEY: " + input);
                     query += input + " SERIAL NOT NULL PRIMARY KEY";
                     exit = true;
@@ -107,7 +103,7 @@ public class CreateTableSimple extends Command {
             } else if (input.equals("")) {
                 view.write("Нужно ввести имя для колонки, а вы вели пустую строку");
             } else {
-                if (checkNameStartWithLetter(input)) {
+                if (checkNameStartWithLetterB(input)) {
                     query += "," + input + " varchar(225)";
                     view.write("Имя еще одной колонки: " + input);
                     createColumn();
@@ -117,7 +113,7 @@ public class CreateTableSimple extends Command {
         }
     }
 
-    public boolean checkNameStartWithLetter(String input) {
+    public boolean checkNameStartWithLetterB(String input) {
         char fistChar = input.charAt(0);
         if (!(fistChar >= 'a' && fistChar <= 'z') && !(fistChar >= 'A' && fistChar <= 'Z')) {
             view.write(String.format("Имя должно начинаться с буквы, а у тебя начинается с '%s'", fistChar));

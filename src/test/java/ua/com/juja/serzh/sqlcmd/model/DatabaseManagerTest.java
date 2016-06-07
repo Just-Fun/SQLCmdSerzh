@@ -33,7 +33,7 @@ public class DatabaseManagerTest {
     @Test
     public void testGetAllTableNames() {
         Set<String> tableNames = manager.getTableNames();
-        assertEquals("[users, test1]", tableNames.toString());
+        assertEquals("[users, users2, test1]", tableNames.toString());
     }
 
     @Test
@@ -145,14 +145,14 @@ public class DatabaseManagerTest {
     @Test
     public void tablesList() {
         Set<String> tables = manager.getTableNames();
-        assertEquals("[users, test1]", tables.toString());
+        assertEquals("[users, test1, users2]", tables.toString());
     }
 
     @Test
     public void dropTable() {
         manager.dropTable("test1");
         Set<String> tables = manager.getTableNames();
-        assertEquals("[users]", tables.toString());
+        assertEquals("[users, users2]", tables.toString());
         manager.createTable("test1(id SERIAL NOT NULL PRIMARY KEY,username varchar(225) NOT NULL UNIQUE, password varchar(225))");
     }
 

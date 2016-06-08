@@ -56,7 +56,7 @@ public class InsertSimple extends Command {
             view.write(String.format("Введите значение в поле '%s' или введите '0' для выхода в основное меню.", column));
             input = view.read();
             if (input.equals("")) {
-                view.write("Нужно ввести имя для колонки PRIMARY KEY, а вы вели пустую строку");
+                view.write("Нужно ввести имя для колонки PRIMARY KEY, а вы ввели пустую строку");
             } else {
                 exit = true;
             }

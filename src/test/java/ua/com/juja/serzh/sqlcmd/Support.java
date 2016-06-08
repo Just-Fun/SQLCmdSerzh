@@ -15,7 +15,12 @@ public class Support {
     private static final String PASSWORD = BeforeTestsChangeNameAndPass.PASSWORD;
 
     public static void setupData(DatabaseManager manager) {
-        manager.connect("", USER, PASSWORD);
+        try {
+            manager.connect("", USER, PASSWORD);
+        } catch (RuntimeException e) {
+            throw new RuntimeException("Для работы тестов измените имя и пароль в классе BeforeTestsChangeNameAndPass."
+                    + "\n" + e.getCause());
+        }
         manager.createDatabase(DATABASE);
         manager.connect(DATABASE, USER, PASSWORD);
         createTablesWithData(manager);

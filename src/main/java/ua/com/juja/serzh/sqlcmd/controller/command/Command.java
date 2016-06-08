@@ -23,6 +23,12 @@ public abstract class Command {
     public Command() {
     }
 
+    public abstract void process(String input);
+
+    public abstract String commandFormat();
+
+    public abstract String description();
+
     public boolean canProcess(String input) {
         String[] parametersCommandFormat = splitInput(commandFormat());
         String[] parametersInput = splitInput(input);
@@ -69,11 +75,4 @@ public abstract class Command {
     public int parametersLength(String input) {
         return input.split("\\|").length;
     }
-
-    public abstract void process(String input);
-
-    public abstract String commandFormat();
-
-    public abstract String description();
-
 }

@@ -19,8 +19,8 @@ public class IsConnected extends Command {
 
     @Override
     public void process(String input) {
-        view.write(String.format("Вы не можете пользоваться командами, пока не подключитесь " +
-                "с помощью комманды connect|databaseName|userName|password", input));
+        view.write("Вы не можете пользоваться командами, пока не подключитесь " +
+                "с помощью комманды connect|databaseName|userName|password");
     }
 
     @Override

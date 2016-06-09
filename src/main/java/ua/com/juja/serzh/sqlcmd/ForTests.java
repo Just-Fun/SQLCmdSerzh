@@ -18,6 +18,7 @@ public class ForTests {
             }
             list1.add(l);
         }
+
         System.out.println(list.toString());
         System.out.println(list1.toString());
     }

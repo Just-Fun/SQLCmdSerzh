@@ -58,7 +58,7 @@ public class CreateTableSimple extends Command {
                 exit = true;
                 exitMain = true;
             } else if (input.equals("")) {
-                view.write("Нужно ввести имя для создаваемой таблицы, а вы вели пустую строку");
+                view.write("Нужно ввести имя для создаваемой таблицы, а вы ввели пустую строку");
             } else {
                 if (checkNameStartWithLetterB(input)) {
                     query += input + "(";
@@ -78,7 +78,7 @@ public class CreateTableSimple extends Command {
                 exit = true;
                 exitMain = true;
             } else if (input.equals("")) {
-                view.write("Нужно ввести имя для колонки PRIMARY KEY, а вы вели пустую строку");
+                view.write("Нужно ввести имя для колонки PRIMARY KEY, а вы ввели пустую строку");
             } else {
                 if (checkNameStartWithLetterB(input)) {
                     view.write("Имя колонки PRIMARY KEY: " + input);
@@ -101,7 +101,7 @@ public class CreateTableSimple extends Command {
                 exit = true;
                 exitMain = true;
             } else if (input.equals("")) {
-                view.write("Нужно ввести имя для колонки, а вы вели пустую строку");
+                view.write("Нужно ввести имя для колонки, а вы ввели пустую строку");
             } else {
                 if (checkNameStartWithLetterB(input)) {
                     query += "," + input + " varchar(225)";

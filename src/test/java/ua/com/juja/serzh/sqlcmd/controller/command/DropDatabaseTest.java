@@ -5,10 +5,10 @@ import org.junit.Test;
 import ua.com.juja.serzh.sqlcmd.model.DatabaseManager;
 import ua.com.juja.serzh.sqlcmd.view.View;
 
+import java.sql.SQLException;
+
 import static org.junit.Assert.*;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 /**
  * Created by serzh on 13.05.16.
@@ -91,5 +91,15 @@ public class DropDatabaseTest {
         verify(view).write("Вы уверены, что хотите удалить currentDB? Y/N");
         verify(view).write("Нельзя удалять базу, к которой вы подключены.");
         verify(view).write("Для удаления текущей базы 'currentDB', подключитесь к другой базе.");
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void testProcessSQLException() throws SQLException {
+
+        when(view.read()).thenReturn("Y");
+        command.process("dropDB|db");
+
+        verify(view).write("Вы уверены, что хотите удалить db? Y/N");
+        doThrow(new SQLException()).when(manager).dropDatabase("db");
     }
 }

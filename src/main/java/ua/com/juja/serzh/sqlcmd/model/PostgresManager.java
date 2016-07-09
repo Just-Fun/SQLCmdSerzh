@@ -146,8 +146,6 @@ public class PostgresManager implements DatabaseManager {
                 tableNames.add(entry.getKey());
                 values.add(entry.getValue().toString());
             }
-//            input.entrySet().stream().forEach(x -> tableNames.add(x.getKey()));
-//            input.entrySet().stream().forEach(x -> values.add(x.getValue().toString()));
 
             stmt.executeUpdate(String.format("INSERT INTO public.%s (%s)VALUES (%s)", tableName, tableNames, values));
         } catch (SQLException e) {
@@ -241,7 +239,7 @@ public class PostgresManager implements DatabaseManager {
     @Override // TODO заготовка, может как-нибудь реализовать в userInerface, а может и нет :) тест написан
     public void update(String tableName, int id, Map<String, Object> newValue) {
         StringJoiner tableNames = new StringJoiner(" = ?,", "", " = ?");
-        newValue.entrySet().stream().forEach(x -> tableNames.add(x.getKey()));
+        newValue.entrySet().stream().forEach(x -> tableNames.add(x.getKey())); // медленнее, чем fori
 
         String updateTable = String.format("UPDATE public.%s SET %s WHERE id = ?", tableName, tableNames);
 

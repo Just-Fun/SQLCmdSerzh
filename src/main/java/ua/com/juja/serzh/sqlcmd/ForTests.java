@@ -1,9 +1,6 @@
 package ua.com.juja.serzh.sqlcmd;
 
-import java.math.BigDecimal;
 import java.util.*;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
 
 /**
  * Created by serzh on 6/9/16.
@@ -11,43 +8,51 @@ import java.util.stream.Collectors;
 public class ForTests {
     public static void main(String[] args) {
 
-        List<String> input = new ArrayList<>();
+     /*   List<String> input = new ArrayList<>();
         for (int i = 0; i < 3; i++) {
             input.add(String.valueOf(i));
-        }
+        }*/
+
         Map<Integer, String> integerMap = new LinkedHashMap<>();
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 4000000; i++) {
             integerMap.put(i, "s" + i);
         }
+        StringJoiner joiner = new StringJoiner(",");
+
+        fori(integerMap, joiner);
+//        lambda(integerMap, joiner);
+
+        // на 1.000 -> Fori: 6, Lambda: 231
+        // на 10.000 -> Fori: 16, Lambda: 250
+        // на 100.000 -> Fori: 53, Lambda: 300
+        // на 1.000.000 -> Fori: 100, Lambda: 307
+        // на 4.000.000 -> Fori: 500, Lambda: 1000
+
+    }
+
+    private static void lambda(Map<Integer, String> integerMap, StringJoiner joiner) {
+        long start2 = System.currentTimeMillis();
+
+        integerMap.entrySet().stream().forEach(x -> joiner.add(x.getValue()));
+//        return joiner.toString();
+//        String.valueOf(joiner);
+        long finish2 = System.currentTimeMillis();
+        long time2 = finish2 - start2;
+        System.out.println("Lambda: " + time2);
+    }
+
+    private static void fori(Map<Integer, String> integerMap, StringJoiner joiner) {
         long start = System.currentTimeMillis();
-
-
-
-        StringJoiner join = new StringJoiner("', '", "'", "'");
-        integerMap.entrySet().stream().forEach(m -> join.add(m.getValue()));
-
-        System.out.println(join.toString());
-
-        String result = input.stream().map(x -> x).collect(Collectors.joining(" | "));
-
-
-      /*  StringJoiner joiner = new StringJoiner(",", "'", "'");
-        String values = getJoiner2(input, joiner);
-        System.out.println(values);*/
-
-//        String result = input.stream().map(x -> x).collect(Collectors.joining(" | "));
-//        String result = input.stream().map(x -> x).collect(Collectors.joining(" | "));
-//        System.out.println(result);
-
-//        String values = getFormatted(input, "%s,");
-  /*      String values = getJoiner(input, ",");
+        for (Map.Entry<Integer, String> entry : integerMap.entrySet()) {
+            joiner.add(entry.getValue());
+        }
+//        joiner.toString();
+//        return String.valueOf(joiner);
         long finish = System.currentTimeMillis();
         long time = finish - start;
-        System.out.println(time);
-        System.out.println(values);
-        System.out.println(values.length());
-*/
+        System.out.println("Fori: " + time);
     }
+
 
     private static String getFormatted(List<String> input, String format) {
         StringBuilder values = new StringBuilder("");

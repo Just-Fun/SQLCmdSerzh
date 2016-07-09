@@ -23,7 +23,7 @@ public class ForTests {
 
 
 
-        StringJoiner join = new StringJoiner(",");
+        StringJoiner join = new StringJoiner("', '", "'", "'");
         integerMap.entrySet().stream().forEach(m -> join.add(m.getValue()));
 
         System.out.println(join.toString());

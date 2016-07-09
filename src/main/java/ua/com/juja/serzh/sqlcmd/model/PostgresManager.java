@@ -124,15 +124,32 @@ public class PostgresManager implements DatabaseManager {
         }
     }
 
-    @Override
+    /*@Override
     public void insert(String tableName, Map<String, Object> input) {
         try (Statement stmt = connection.createStatement()) {
 //            String tableNames = getNameJoined(input, ",");
             String tableNames = getNameJoined2(input, ",");
             String values = getValuesFormatted(input, "'%s',");
 
-            stmt.executeUpdate("INSERT INTO public." + tableName + " (" + tableNames + ")" +
-                    "VALUES (" + values + ")");
+            stmt.executeUpdate(String.format("INSERT INTO public.%s (%s)VALUES (%s)", tableName, tableNames, values));
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getLocalizedMessage());
+        }
+    }*/
+
+    @Override
+    public void insert(String tableName, Map<String, Object> input) {
+        try (Statement stmt = connection.createStatement()) {
+            StringJoiner tableNames = new StringJoiner(",");
+            StringJoiner values = new StringJoiner("','", "'", "'");
+            for (Map.Entry<String, Object> entry : input.entrySet()) {
+                tableNames.add(entry.getKey());
+                values.add(entry.getValue().toString());
+            }
+//            input.entrySet().stream().forEach(x -> tableNames.add(x.getKey()));
+//            input.entrySet().stream().forEach(x -> values.add(x.getValue().toString()));
+
+            stmt.executeUpdate(String.format("INSERT INTO public.%s (%s)VALUES (%s)", tableName, tableNames, values));
         } catch (SQLException e) {
             throw new RuntimeException(e.getLocalizedMessage());
         }
@@ -176,36 +193,6 @@ public class PostgresManager implements DatabaseManager {
     @Override
     public boolean isConnected() {
         return connection != null;
-    }
-
-    private String getNameFormatted(Map<String, Object> newValue, String format) {
-        StringBuilder strings = new StringBuilder("");
-        for (String name : newValue.keySet()) {
-            strings.append(String.format(format, name));
-        }
-        return strings.substring(0, strings.length() - 1);
-    }
-
-    private String getNameJoined(Map<String, Object> newValue, String format) {
-        StringJoiner joiner = new StringJoiner(format);
-        for (String name : newValue.keySet()) {
-            joiner.add(name);
-        }
-        return String.valueOf(joiner);
-    }
-
-    private String getNameJoined2(Map<String, Object> newValue, String format) {
-        StringJoiner joiner = new StringJoiner(format);
-        newValue.entrySet().stream().forEach(x -> joiner.add(x.getKey()));
-        return joiner.toString();
-    }
-
-    private String getValuesFormatted(Map<String, Object> input, String format) {
-        StringBuilder values = new StringBuilder("");
-        for (Object value : input.values()) {
-            values.append(String.format(format, value));
-        }
-        return values.substring(0, values.length() - 1);
     }
 
     @Override
@@ -253,8 +240,10 @@ public class PostgresManager implements DatabaseManager {
 
     @Override // TODO заготовка, может как-нибудь реализовать в userInerface, а может и нет :) тест написан
     public void update(String tableName, int id, Map<String, Object> newValue) {
-        String tableNames = getNameFormatted(newValue, "%s = ?,");
-        String updateTable = "UPDATE public." + tableName + " SET " + tableNames + " WHERE id = ?";
+        StringJoiner tableNames = new StringJoiner(" = ?,", "", " = ?");
+        newValue.entrySet().stream().forEach(x -> tableNames.add(x.getKey()));
+
+        String updateTable = String.format("UPDATE public.%s SET %s WHERE id = ?", tableName, tableNames);
 
         try (PreparedStatement ps = connection.prepareStatement(updateTable)) {
             int index = 1;

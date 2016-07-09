@@ -1,6 +1,7 @@
 package ua.com.juja.serzh.sqlcmd;
 
 import ua.com.juja.serzh.sqlcmd.model.DatabaseManager;
+import static ua.com.juja.serzh.sqlcmd.BeforeTestsChangeNameAndPass.*;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -10,9 +11,9 @@ import java.util.Map;
  */
 public class Support {
 
-    private static final String DATABASE = BeforeTestsChangeNameAndPass.DATABASE;
-    private static final String USER = BeforeTestsChangeNameAndPass.USER;
-    private static final String PASSWORD = BeforeTestsChangeNameAndPass.PASSWORD;
+    private static final String DATABASE = getDatabaseName();
+    private static final String USER = getUserName();
+    private static final String PASSWORD = getPassword();
 
     public static void setupData(DatabaseManager manager) {
         try {

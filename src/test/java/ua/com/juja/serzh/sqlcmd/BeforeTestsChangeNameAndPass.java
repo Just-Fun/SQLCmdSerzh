@@ -5,9 +5,22 @@ package ua.com.juja.serzh.sqlcmd;
  */
 public class BeforeTestsChangeNameAndPass {
 
-    public static String DATABASE = "sqlcmd5hope5never5exist"; // не менять имя базы!!! :)
+    private static String DATABASE = "sqlcmd5hope5never5exist"; // не менять имя базы!!! :)
 
     // Before use tests change USER(name) and PASSWORD of your database !!! Only next two lines!!!
-    public static String USER = "postgres";
-    public static String PASSWORD = "postgres";
+    private static String USER = "postgres";
+    private static String PASSWORD = "postgres";
+
+    public static String getDatabaseName() {
+        return DATABASE;
+    }
+
+    public static String getUserName() {
+        return USER;
+    }
+
+    public static String getPassword() {
+        return PASSWORD;
+    }
+
 }

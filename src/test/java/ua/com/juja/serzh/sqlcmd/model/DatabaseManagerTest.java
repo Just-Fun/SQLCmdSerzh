@@ -1,13 +1,13 @@
 package ua.com.juja.serzh.sqlcmd.model;
 
 import org.junit.*;
-import ua.com.juja.serzh.sqlcmd.BeforeTestsChangeNameAndPass;
 import ua.com.juja.serzh.sqlcmd.Support;
 
 import java.util.*;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static ua.com.juja.serzh.sqlcmd.BeforeTestsChangeNameAndPass.*;
 
 /**
  * Created by serzh on 5/11/16.
@@ -15,9 +15,10 @@ import static org.junit.Assert.assertTrue;
 public class DatabaseManagerTest {
 
     private static DatabaseManager manager;
-    private static final String DATABASE = BeforeTestsChangeNameAndPass.DATABASE;
-    private static final String USER = BeforeTestsChangeNameAndPass.USER;
-    private static final String PASSWORD = BeforeTestsChangeNameAndPass.PASSWORD;
+
+    private static final String DATABASE = getDatabaseName();
+    private static final String USER = getUserName();
+    private static final String PASSWORD = getPassword();
 
     @BeforeClass
     public static void setup() {

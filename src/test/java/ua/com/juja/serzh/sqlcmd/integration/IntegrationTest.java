@@ -2,7 +2,6 @@ package ua.com.juja.serzh.sqlcmd.integration;
 
 import org.junit.*;
 import ua.com.juja.serzh.sqlcmd.Support;
-import ua.com.juja.serzh.sqlcmd.BeforeTestsChangeNameAndPass;
 import ua.com.juja.serzh.sqlcmd.Main;
 import ua.com.juja.serzh.sqlcmd.model.DatabaseManager;
 import ua.com.juja.serzh.sqlcmd.model.PostgresManager;
@@ -12,15 +11,16 @@ import java.io.PrintStream;
 import java.io.UnsupportedEncodingException;
 
 import static org.junit.Assert.assertEquals;
+import static ua.com.juja.serzh.sqlcmd.BeforeTestsChangeNameAndPass.*;
 
 /**
  * Created by serzh on 5/11/16.
  */
 public class IntegrationTest {
 
-    private static final String DATABASE = BeforeTestsChangeNameAndPass.DATABASE;
-    private static final String USER = BeforeTestsChangeNameAndPass.USER;
-    private static final String PASSWORD = BeforeTestsChangeNameAndPass.PASSWORD;
+    private static final String DATABASE = getDatabaseName();
+    private static final String USER = getUserName();
+    private static final String PASSWORD = getPassword();
 
     private final String commandConnect = "connect|" + DATABASE + "|" + USER + "|" + PASSWORD;
     private final String commandDisconnect = "connect|" + "" + "|" + USER + "|" + PASSWORD;

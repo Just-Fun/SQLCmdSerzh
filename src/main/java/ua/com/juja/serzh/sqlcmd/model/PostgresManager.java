@@ -52,6 +52,7 @@ public class PostgresManager implements DatabaseManager {
         if (connection != null) {
             try {
                 connection.close();
+                connection = null;
             } catch (SQLException e) {
                 throw new DatabaseManagerException(ERROR, e);
             }

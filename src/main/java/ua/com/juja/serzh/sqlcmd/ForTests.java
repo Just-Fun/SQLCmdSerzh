@@ -2,6 +2,8 @@ package ua.com.juja.serzh.sqlcmd;
 
 import java.math.BigDecimal;
 import java.util.*;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 /**
  * Created by serzh on 6/9/16.
@@ -13,16 +15,38 @@ public class ForTests {
         for (int i = 0; i < 3; i++) {
             input.add(String.valueOf(i));
         }
+        Map<Integer, String> integerMap = new LinkedHashMap<>();
+        for (int i = 0; i < 3; i++) {
+            integerMap.put(i, "s" + i);
+        }
         long start = System.currentTimeMillis();
 
+
+
+        StringJoiner join = new StringJoiner(",");
+        integerMap.entrySet().stream().forEach(m -> join.add(m.getValue()));
+
+        System.out.println(join.toString());
+
+        String result = input.stream().map(x -> x).collect(Collectors.joining(" | "));
+
+
+      /*  StringJoiner joiner = new StringJoiner(",", "'", "'");
+        String values = getJoiner2(input, joiner);
+        System.out.println(values);*/
+
+//        String result = input.stream().map(x -> x).collect(Collectors.joining(" | "));
+//        String result = input.stream().map(x -> x).collect(Collectors.joining(" | "));
+//        System.out.println(result);
+
 //        String values = getFormatted(input, "%s,");
-        String values = getJoiner(input, ",");
+  /*      String values = getJoiner(input, ",");
         long finish = System.currentTimeMillis();
         long time = finish - start;
         System.out.println(time);
         System.out.println(values);
         System.out.println(values.length());
-
+*/
     }
 
     private static String getFormatted(List<String> input, String format) {
@@ -31,6 +55,13 @@ public class ForTests {
             values.append(String.format(format, value));
         }
         return values.substring(0, values.length() - 1);
+    }
+
+    private static String getJoiner2(List<String> input, StringJoiner format) {
+        for (String value : input) {
+            format.add(value);
+        }
+        return String.valueOf(format);
     }
 
     private static String getJoiner(List<String> input, String format) {

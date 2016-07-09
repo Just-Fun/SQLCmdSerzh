@@ -127,7 +127,8 @@ public class PostgresManager implements DatabaseManager {
     @Override
     public void insert(String tableName, Map<String, Object> input) {
         try (Statement stmt = connection.createStatement()) {
-            String tableNames = getNameJoined(input, ",");
+//            String tableNames = getNameJoined(input, ",");
+            String tableNames = getNameJoined2(input, ",");
             String values = getValuesFormatted(input, "'%s',");
 
             stmt.executeUpdate("INSERT INTO public." + tableName + " (" + tableNames + ")" +
@@ -191,6 +192,12 @@ public class PostgresManager implements DatabaseManager {
             joiner.add(name);
         }
         return String.valueOf(joiner);
+    }
+
+    private String getNameJoined2(Map<String, Object> newValue, String format) {
+        StringJoiner joiner = new StringJoiner(format);
+        newValue.entrySet().stream().forEach(x -> joiner.add(x.getKey()));
+        return joiner.toString();
     }
 
     private String getValuesFormatted(Map<String, Object> input, String format) {

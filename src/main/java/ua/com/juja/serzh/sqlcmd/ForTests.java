@@ -8,18 +8,24 @@ import java.util.*;
 public class ForTests {
     public static void main(String[] args) {
 
-     /*   List<String> input = new ArrayList<>();
-        for (int i = 0; i < 3; i++) {
+        List<String> input = new ArrayList<>();
+        for (int i = 0; i < 10000; i++) {
             input.add(String.valueOf(i));
-        }*/
+        }
 
+        listForI(input);
+//        listForEach(input);
+//        listForEachSimple(input);
+
+
+/*
         Map<Integer, String> integerMap = new LinkedHashMap<>();
         for (int i = 0; i < 4000000; i++) {
             integerMap.put(i, "s" + i);
         }
         StringJoiner joiner = new StringJoiner(",");
 
-        fori(integerMap, joiner);
+        fori(integerMap, joiner);*/
 //        lambda(integerMap, joiner);
 
         // на 1.000 -> Fori: 6, Lambda: 231
@@ -28,6 +34,32 @@ public class ForTests {
         // на 1.000.000 -> Fori: 100, Lambda: 307
         // на 4.000.000 -> Fori: 500, Lambda: 1000
 
+    }
+
+    private static void listForEachSimple(List<String> input) {
+        long start2 = System.currentTimeMillis();
+        input.forEach(System.out::println);
+        long finish2 = System.currentTimeMillis();
+        long time2 = finish2 - start2;
+        System.out.println("listForEachSimple: " + time2);
+    }
+
+    private static void listForEach(List<String> input) {
+        long start2 = System.currentTimeMillis();
+        input.stream().map(each -> each + "l");
+        long finish2 = System.currentTimeMillis();
+        long time2 = finish2 - start2;
+        System.out.println("listForEach: " + time2);
+    }
+
+    private static void listForI(List<String> input) {
+        long start2 = System.currentTimeMillis();
+        for (int i = 0; i < input.size(); i++) {
+            System.out.println(input.get(i));
+        }
+        long finish2 = System.currentTimeMillis();
+        long time2 = finish2 - start2;
+        System.out.println("listForI: " + time2);
     }
 
     private static void lambda(Map<Integer, String> integerMap, StringJoiner joiner) {

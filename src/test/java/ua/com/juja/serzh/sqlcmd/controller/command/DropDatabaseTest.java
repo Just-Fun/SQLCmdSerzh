@@ -38,14 +38,14 @@ public class DropDatabaseTest {
     }
 
     @Test
-    public void testCanProcessClearWithoutParametersString() {
+    public void testCanProcessWithoutParametersString() {
         boolean canProcess = command.canProcess("dropDB");
         assertTrue(canProcess);
     }
 
 
     @Test
-    public void testProcess() throws Exception {
+    public void testProcessLowerYes() throws Exception {
         when(view.read()).thenReturn("y");
         command.process("dropDB|db");
 
@@ -55,7 +55,7 @@ public class DropDatabaseTest {
     }
 
     @Test
-    public void testProcessUpperY() throws Exception {
+    public void testProcessUpperYes() throws Exception {
         when(view.read()).thenReturn("Y");
         command.process("dropDB|db");
 
@@ -84,7 +84,7 @@ public class DropDatabaseTest {
     }
 
     @Test
-    public void testDropatabaseNameConnect() throws Exception {
+    public void testDropConnectedDatabase() throws Exception {
         when(view.read()).thenReturn("Y");
         when(manager.getDatabaseName()).thenReturn("currentDB");
         command.process("dropDB|currentDB");
@@ -95,10 +95,8 @@ public class DropDatabaseTest {
 
     @Test(expected = RuntimeException.class)
     public void testProcessSQLException() throws SQLException {
-
         when(view.read()).thenReturn("Y");
         command.process("dropDB|db");
-
         verify(view).write("Вы уверены, что хотите удалить db? Y/N");
         doThrow(new SQLException()).when(manager).dropDatabase("db");
     }

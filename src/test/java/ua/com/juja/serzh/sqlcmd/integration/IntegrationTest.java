@@ -237,37 +237,6 @@ public class IntegrationTest {
     }
 
     @Test
-    public void testConnectAfterConnect() {
-        // given
-        in.add(commandConnect);
-        in.add("tables");
-        in.add("connect|test|" + USER + "|" + PASSWORD);
-        in.add("tables");
-        in.add(commandDisconnect);
-        in.add("exit");
-        // when
-        Main.main(new String[0]);
-        // then
-        assertEquals(pleaseConnect +
-                // connect
-                "Успех!\n" +
-                "Введи команду (или help для помощи):\n" +
-                // tables
-                "Существующие таблицы: users, test1, users2\n" +
-                "Введи команду (или help для помощи):\n" +
-                // connect test
-                "Успех!\n" +
-                "Введи команду (или help для помощи):\n" +
-                // tables
-                "Существующие таблицы: qwe\n" +
-                "Введи команду (или help для помощи):\n" +
-                "Успех!\n" +
-                "Введи команду (или help для помощи):\n" +
-                // exit
-                "До скорой встречи!\n", getData());
-    }
-
-    @Test
     public void testConnectWithError() {
         // given
         in.add("connect|" + DATABASE);

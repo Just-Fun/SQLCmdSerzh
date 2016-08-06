@@ -1,7 +1,7 @@
 package ua.com.juja.serzh.sqlcmd;
 
 import ua.com.juja.serzh.sqlcmd.model.DatabaseManager;
-import static ua.com.juja.serzh.sqlcmd.BeforeTestsChangeNameAndPass.*;
+import static ua.com.juja.serzh.sqlcmd.Configuration.*;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -11,15 +11,16 @@ import java.util.Map;
  */
 public class Support {
 
-    private static final String DATABASE = getDatabaseName();
-    private static final String USER = getUserName();
-    private static final String PASSWORD = getPassword();
+    private static Configuration configuration = new Configuration();
+    private static final String DATABASE = configuration.getDatabase();
+    private static final String USER = configuration.getUser();
+    private static final String PASSWORD = configuration.getPasswordnew();
 
     public static void setupData(DatabaseManager manager) {
         try {
             manager.connect("", USER, PASSWORD);
         } catch (RuntimeException e) {
-            throw new RuntimeException("Для работы тестов измените имя и пароль в классе BeforeTestsChangeNameAndPass."
+            throw new RuntimeException("Для работы тестов измените имя и пароль в файле config.properties."
                     + "\n" + e.getCause());
         }
         manager.createDatabase(DATABASE);

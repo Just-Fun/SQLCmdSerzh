@@ -29,17 +29,11 @@ public class ConfigurableInputStream extends InputStream {
         }
         return (int) ch;
     }
-    public void add(String line) {
+    void add(String line) {
         if (this.line == null) {
             this.line = line;
         } else {
             this.line += "\n" + line;
         }
-    }
-
-    @Override
-    public synchronized void reset() throws IOException {
-        line = null;
-        endLine = false;
     }
 }

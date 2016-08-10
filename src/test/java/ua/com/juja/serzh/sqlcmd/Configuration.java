@@ -39,7 +39,7 @@ public class Configuration {
         return user;
     }
 
-    public String getPasswordnew() {
+    public String getPassword() {
         return password;
     }
 }

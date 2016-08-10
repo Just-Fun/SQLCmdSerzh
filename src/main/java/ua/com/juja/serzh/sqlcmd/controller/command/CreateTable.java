@@ -34,7 +34,7 @@ public class CreateTable extends Command {
     @Override
     public String description() {
         return "для создания новой таблицы знающих SQL, в круглых скобках вставить опиание колонок в SQL формате, пример:\n"
-                + "\t\tcreateTableSQL|user(id SERIAL NOT NULL PRIMARY KEY,username varchar(225) NOT NULL UNIQUE, password varchar(225))";
+                + "\t\tcreateTableSQL|user1(id SERIAL NOT NULL PRIMARY KEY,username varchar(225) NOT NULL UNIQUE, password varchar(225))";
     }
 
     public void validationPresenceOfParentheses(String input) {

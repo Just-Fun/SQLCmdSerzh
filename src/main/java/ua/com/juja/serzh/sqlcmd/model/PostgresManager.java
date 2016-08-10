@@ -1,5 +1,7 @@
 package ua.com.juja.serzh.sqlcmd.model;
 
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.sql.*;
 import java.util.*;
 
@@ -14,16 +16,29 @@ public class PostgresManager implements DatabaseManager {
         } catch (ClassNotFoundException e) {
             throw new DriverException("Not installed PostgreSQL JDBC driver.", e);
         }
+        loadProperties();
     }
 
     private static final String ERROR = "It is impossible because: ";
-    private static final String HOST = "localhost";
-    private static final String PORT = "5432";
+    private static final String PROPERTIES_FILE = "src/resources/config.properties";
+    private static String host;
+    private static String port;
 
     private Connection connection;
     private String user;
     private String password;
     private String database;
+
+    private static void loadProperties() {
+        Properties property = new Properties();
+        try (FileInputStream fis = new FileInputStream(PROPERTIES_FILE)) {
+            property.load(fis);
+            host = property.getProperty("host");
+            port = property.getProperty("port");
+        } catch (IOException e) {
+            throw new RuntimeException("Properties не подгрузились. " + e.getCause());
+        }
+    }
 
     @Override
     public void connect(String database, String user, String password) {
@@ -39,7 +54,7 @@ public class PostgresManager implements DatabaseManager {
 
     private void getConnection() {
         try {
-            String url = String.format("jdbc:postgresql://%s:%s/%s", HOST, PORT, database);
+            String url = String.format("jdbc:postgresql://%s:%s/%s", host, port, database);
             connection = DriverManager.getConnection(url, user, password);
         } catch (SQLException e) {
             connection = null;
@@ -123,19 +138,6 @@ public class PostgresManager implements DatabaseManager {
             throw new RuntimeException(e.getLocalizedMessage());
         }
     }
-
-    /*@Override
-    public void insert(String tableName, Map<String, Object> input) {
-        try (Statement stmt = connection.createStatement()) {
-//            String tableNames = getNameJoined(input, ",");
-            String tableNames = getNameJoined2(input, ",");
-            String values = getValuesFormatted(input, "'%s',");
-
-            stmt.executeUpdate(String.format("INSERT INTO public.%s (%s)VALUES (%s)", tableName, tableNames, values));
-        } catch (SQLException e) {
-            throw new RuntimeException(e.getLocalizedMessage());
-        }
-    }*/
 
     @Override
     public void insert(String tableName, Map<String, Object> input) {
@@ -236,10 +238,10 @@ public class PostgresManager implements DatabaseManager {
         }
     }
 
-    @Override // TODO заготовка, может как-нибудь реализовать в userInerface, а может и нет :) тест написан
+    @Override // TODO заготовка, может как-нибудь реализовать в userInerface, тест написан
     public void update(String tableName, int id, Map<String, Object> newValue) {
         StringJoiner tableNames = new StringJoiner(" = ?,", "", " = ?");
-        newValue.entrySet().stream().forEach(x -> tableNames.add(x.getKey())); // медленнее, чем fori
+        newValue.entrySet().forEach(x -> tableNames.add(x.getKey()));
 
         String updateTable = String.format("UPDATE public.%s SET %s WHERE id = ?", tableName, tableNames);
 

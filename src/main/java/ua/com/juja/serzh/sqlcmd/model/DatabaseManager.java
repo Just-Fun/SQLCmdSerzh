@@ -42,5 +42,4 @@ public interface DatabaseManager {
     String getDatabaseName();
 
     int getTableSize(String tableName);
-
 }

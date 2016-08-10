@@ -9,7 +9,7 @@ import java.util.Properties;
  */
 public class Configuration {
 
-    private final static String PROPERTIES_FILE = "src/resources/config.properties";
+    private final static String PROPERTIES_FILE = "src/main/resources/config.properties";
 
     private String database;
     private String user;

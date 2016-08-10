@@ -20,7 +20,7 @@ public class PostgresManager implements DatabaseManager {
     }
 
     private static final String ERROR = "It is impossible because: ";
-    private static final String PROPERTIES_FILE = "src/resources/config.properties";
+    private static final String PROPERTIES_FILE = "src/main/resources/config.properties";
     private static String host;
     private static String port;
 

@@ -1,5 +1,6 @@
 package ua.com.juja.serzh.sqlcmd.controller.command;
 
+import ua.com.juja.serzh.sqlcmd.model.DatabaseManager;
 import ua.com.juja.serzh.sqlcmd.view.View;
 
 /**
@@ -7,9 +8,12 @@ import ua.com.juja.serzh.sqlcmd.view.View;
  */
 public class Exit extends Command {
 
-    public Exit(View view) {
-        super(view);
+    public Exit(DatabaseManager manager, View view) {
+        super(manager, view);
     }
+    //    public Exit(View view) {
+//        super(view);
+//    }
 
     @Override
     public void process(String command) {

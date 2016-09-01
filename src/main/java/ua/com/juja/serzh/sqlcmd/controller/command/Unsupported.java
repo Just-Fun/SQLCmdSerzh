@@ -1,5 +1,6 @@
 package ua.com.juja.serzh.sqlcmd.controller.command;
 
+import ua.com.juja.serzh.sqlcmd.model.DatabaseManager;
 import ua.com.juja.serzh.sqlcmd.view.View;
 
 /**
@@ -7,9 +8,13 @@ import ua.com.juja.serzh.sqlcmd.view.View;
  */
 public class Unsupported extends Command {
 
-    public Unsupported(View view) {
-        super(view);
+    public Unsupported(DatabaseManager manager, View view) {
+        super(manager, view);
     }
+
+//    public Unsupported(View view) {
+//        super(view);
+//    }
 
     @Override
     public boolean canProcess(String command) {

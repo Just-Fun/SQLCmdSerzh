@@ -1,5 +1,6 @@
 package ua.com.juja.serzh.sqlcmd.controller;
 
+import org.reflections.Reflections;
 import ua.com.juja.serzh.sqlcmd.controller.command.*;
 import ua.com.juja.serzh.sqlcmd.model.DatabaseManager;
 import ua.com.juja.serzh.sqlcmd.view.View;
@@ -7,6 +8,7 @@ import ua.com.juja.serzh.sqlcmd.view.View;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by indigo on 25.08.2015.
@@ -16,13 +18,29 @@ public class MainController {
     private List<Command> commands;
     private View view;
 
-
     public MainController(View view, DatabaseManager manager) {
         this.view = view;
-        this.commands = new ArrayList<>(Arrays.asList(
+
+        /*
+        Reflections reflections = new Reflections(Command.class.getPackage().getName());
+        Set<Class<? extends Command>> allCommands =
+        reflections.getSubTypesOf(Command.class);commands = new ArrayList<>();
+        commands.add(new IsConnected(manager, view));
+        allCommands.stream()
+                .filter(command -> !command.equals(Unsupported.class) && !command.equals(IsConnected.class))
+                .forEach(command -> {
+                    try {
+                        commands.add(command.getConstructor(DatabaseManager.class, View.class).newInstance(manager, view));
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                });
+        commands.add(new Unsupported(manager, view));*/
+
+        commands = new ArrayList<>(Arrays.asList(
                 new Connect(manager, view),
-                new Help(view),
-                new Exit(view),
+                new Help(manager, view),
+                new Exit(manager, view),
                 new IsConnected(manager, view),
                 new Databases(manager, view),
                 new Tables(manager, view),
@@ -36,7 +54,7 @@ public class MainController {
                 new InsertSimple(manager, view),
                 new Insert(manager, view),
                 new Find(manager, view),
-                new Unsupported(view)
+                new Unsupported(manager, view)
         ));
     }
 

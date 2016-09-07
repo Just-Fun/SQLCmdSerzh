@@ -21,10 +21,9 @@ public class MainController {
     public MainController(View view, DatabaseManager manager) {
         this.view = view;
 
-        /*
-        Reflections reflections = new Reflections(Command.class.getPackage().getName());
-        Set<Class<? extends Command>> allCommands =
-        reflections.getSubTypesOf(Command.class);commands = new ArrayList<>();
+        // How to get all classes using Reflections!
+        /*Reflections reflections = new Reflections(Command.class.getPackage().getName());
+        Set<Class<? extends Command>> allCommands = reflections.getSubTypesOf(Command.class);
         commands.add(new IsConnected(manager, view));
         allCommands.stream()
                 .filter(command -> !command.equals(Unsupported.class) && !command.equals(IsConnected.class))

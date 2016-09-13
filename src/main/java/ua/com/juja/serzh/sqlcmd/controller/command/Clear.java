@@ -17,7 +17,7 @@ public class Clear extends Command {
         validationParameters(input);
         String tableName = input.split("\\|")[1];
         manager.clear(tableName);
-        view.write(String.format("Таблица %s была успешно очищена.", tableName));
+        view.write(String.format("Table %s has been successfully cleared.", tableName));
     }
 
     @Override
@@ -27,6 +27,6 @@ public class Clear extends Command {
 
     @Override
     public String description() {
-        return "для очистки всей таблицы";
+        return "to clean up the entire table";
     }
 }

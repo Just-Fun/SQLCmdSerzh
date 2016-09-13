@@ -32,7 +32,7 @@ public class UnsupportedTest {
     @Test
     public void testProcess() throws Exception {
         command.process("ifDontMatchAnyCommand");
-        verify(view).write("Несуществующая команда: ifDontMatchAnyCommand");
+        verify(view).write("Nonexistent command: ifDontMatchAnyCommand");
     }
 
     @Test

@@ -21,7 +21,7 @@ public class Connect extends Command {
         String password = data[3];
 
         manager.connect(databaseName, userName, password);
-        view.write("Успех!");
+        view.write("Success!");
     }
 
     @Override
@@ -31,6 +31,6 @@ public class Connect extends Command {
 
     @Override
     public String description() {
-        return "для подключения к базе данных, с которой будем работать";
+        return "to connect to a database, which will work";
     }
 }

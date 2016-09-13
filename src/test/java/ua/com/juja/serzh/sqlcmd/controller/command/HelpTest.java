@@ -38,7 +38,7 @@ public class HelpTest {
     @Test
     public void testProcess() throws Exception {
         command.process("help");
-        verify(view).write("Существующие команды:");
+        verify(view).write("Current commands:");
     }
 
 }

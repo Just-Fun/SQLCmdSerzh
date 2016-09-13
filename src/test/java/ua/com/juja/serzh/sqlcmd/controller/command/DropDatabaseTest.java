@@ -49,9 +49,9 @@ public class DropDatabaseTest {
         when(view.read()).thenReturn("y");
         command.process("dropDB|db");
 
-        verify(view).write("Вы уверены, что хотите удалить db? Y/N");
+        verify(view).write("Are you sure you want to delete db? Y/N");
         verify(manager).dropDatabase("db");
-        verify(view).write("Database 'db' была успешно удалена.");
+        verify(view).write("Database 'db' has been successfully removed.");
     }
 
     @Test
@@ -59,9 +59,9 @@ public class DropDatabaseTest {
         when(view.read()).thenReturn("Y");
         command.process("dropDB|db");
 
-        verify(view).write("Вы уверены, что хотите удалить db? Y/N");
+        verify(view).write("Are you sure you want to delete db? Y/N");
         verify(manager).dropDatabase("db");
-        verify(view).write("Database 'db' была успешно удалена.");
+        verify(view).write("Database 'db' has been successfully removed.");
     }
 
     @Test
@@ -69,8 +69,8 @@ public class DropDatabaseTest {
         when(view.read()).thenReturn("N");
         command.process("dropDB|db");
 
-        verify(view).write("Вы уверены, что хотите удалить db? Y/N");
-        verify(view).write("Действие отменено!");
+        verify(view).write("Are you sure you want to delete db? Y/N");
+        verify(view).write("Action canceled!");
     }
 
     @Test
@@ -79,7 +79,7 @@ public class DropDatabaseTest {
             command.process("dropDB|db|wrong");
             fail();
         } catch (IllegalArgumentException e) {
-            assertEquals("Формат команды 'dropDB|databaseName', а ты ввел: dropDB|db|wrong", e.getMessage());
+            assertEquals("The command format is 'dropDB|databaseName', but you typed: dropDB|db|wrong", e.getMessage());
         }
     }
 
@@ -88,16 +88,16 @@ public class DropDatabaseTest {
         when(view.read()).thenReturn("Y");
         when(manager.getDatabaseName()).thenReturn("currentDB");
         command.process("dropDB|currentDB");
-        verify(view).write("Вы уверены, что хотите удалить currentDB? Y/N");
-        verify(view).write("Нельзя удалять базу, к которой вы подключены.");
-        verify(view).write("Для удаления текущей базы 'currentDB', подключитесь к другой базе.");
+        verify(view).write("Are you sure you want to delete currentDB? Y/N");
+        verify(view).write("You can not delete the base to which you are connected.");
+        verify(view).write("To delete the current database 'currentDB', connect to another database.");
     }
 
     @Test(expected = RuntimeException.class)
     public void testProcessSQLException() throws SQLException {
         when(view.read()).thenReturn("Y");
         command.process("dropDB|db");
-        verify(view).write("Вы уверены, что хотите удалить db? Y/N");
+        verify(view).write("Are you sure you want to delete db? Y/N");
         doThrow(new SQLException()).when(manager).dropDatabase("db");
     }
 }

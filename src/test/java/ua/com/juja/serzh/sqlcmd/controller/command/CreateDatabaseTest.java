@@ -47,7 +47,7 @@ public class CreateDatabaseTest {
     public void testProcess() throws Exception {
         command.process("createDB|databaseName");
         verify(manager).createDatabase("databaseName");
-        verify(view).write("Database databaseName была успешно создана.");
+        verify(view).write("Database databaseName was successfully created.");
     }
 
     @Test
@@ -56,7 +56,7 @@ public class CreateDatabaseTest {
             command.process("createDB|databaseName|wrong");
             fail();
         } catch (IllegalArgumentException e) {
-            assertEquals("Формат команды 'createDB|databaseName', а ты ввел: createDB|databaseName|wrong", e.getMessage());
+            assertEquals("The command format is 'createDB|databaseName', but you typed: createDB|databaseName|wrong", e.getMessage());
         }
     }
 
@@ -66,7 +66,7 @@ public class CreateDatabaseTest {
             command.process("createDB|12databaseName");
             fail();
         } catch (IllegalArgumentException e) {
-            assertEquals("Имя базы должно начинаться с буквы, а у тебя начинается с '1'", e.getMessage());
+            assertEquals("Database name must start with a letter, and you start with '1'", e.getMessage());
         }
     }
 }

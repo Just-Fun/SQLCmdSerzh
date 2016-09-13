@@ -20,9 +20,9 @@ public class Tables extends Command {
         if (set.size() > 0) {
             String tables = set.toString();
             String result = tables.substring(1, tables.length() - 1);
-            view.write(String.format("Существующие таблицы: %s", result));
+            view.write(String.format("Existing table: %s", result));
         } else {
-            view.write("Таблицы отсутствуют");
+            view.write("The tables are missing");
         }
     }
 
@@ -33,6 +33,6 @@ public class Tables extends Command {
 
     @Override
     public String description() {
-        return "для получения списка всех таблиц базы, к которой подключились";
+        return "for a list of all database tables, which are connected to the";
     }
 }

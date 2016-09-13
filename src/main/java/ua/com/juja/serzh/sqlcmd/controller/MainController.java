@@ -20,7 +20,7 @@ public class MainController {
     public MainController(View view, DatabaseManager manager) {
         this.view = view;
 
-        // How to get all classes using Reflections!
+        // How to get all classes using Reflections!!!
         /*Reflections reflections = new Reflections(Command.class.getPackage().getName());
         Set<Class<? extends Command>> allCommands = reflections.getSubTypesOf(Command.class);
         commands.add(new IsConnected(manager, view));
@@ -65,7 +65,7 @@ public class MainController {
     }
 
     private void doWork() {
-        view.write("Введите имя базы данных, с которой будем работать, имя пользователя и пароль в формате: " +
+        view.write("Enter the name of the database, which will work, a user name and password in the format: " +
                 "connect|database|userName|password");
 
         while (true) {
@@ -84,7 +84,7 @@ public class MainController {
                     break;
                 }
             }
-            view.write("Введи команду (или help для помощи):");
+            view.write("Enter the command (or help for assistance):");
         }
     }
 
@@ -94,6 +94,6 @@ public class MainController {
         if (cause != null) {
             message += " " + cause.getMessage();
         }
-        view.write("Неудача! по причине: " + message);
+        view.write("Failure! because of: " + message);
     }
 }

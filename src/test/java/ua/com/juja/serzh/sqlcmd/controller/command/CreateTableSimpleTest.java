@@ -45,7 +45,7 @@ public class CreateTableSimpleTest {
         when(view.read()).thenReturn("0");
         command.process("createTable");
 
-        verify(view).write(("Выход в основное меню"));
+        verify(view).write(("Exit to the main menu"));
     }
 
     @Test
@@ -55,11 +55,11 @@ public class CreateTableSimpleTest {
                 .thenReturn("5");
         command.process("createTable");
 
-        verify(view).write(("Введите имя для создаваемой таблицы(имя должно начинаться с буквы) или '0' для выхода в основное меню"));
-        verify(view).write(("Имя новой базы: users5"));
-        verify(view).write(("Введите имя для колонки PRIMARY KEY(имя должно начинаться с буквы) или '0' для выхода в основное меню"));
-        verify(view).write(("Имя колонки PRIMARY KEY: id"));
-        verify(view).write(("Введите имя для еще одной колонки(имя должно начинаться с буквы) или '5' для создания базы с введенными колонками или '0' для выхода в основное меню"));
-        verify(view).write(("Таблица users5 была успешно создана."));
+        verify(view).write(("Enter a name for the table(name must start with a letter) or '0' to exit to the main menu"));
+        verify(view).write(("Name the new database: users5"));
+        verify(view).write(("Enter a name for the column PRIMARY KEY(name must start with a letter) or '0' to exit to the main menu"));
+        verify(view).write(("Column name PRIMARY KEY: id"));
+        verify(view).write(("Enter the name of another column(name must start with a letter) or '5' to create a database with the introduction column or '0' to exit to the main menu"));
+        verify(view).write(("Table users5 was successfully created."));
     }
 }

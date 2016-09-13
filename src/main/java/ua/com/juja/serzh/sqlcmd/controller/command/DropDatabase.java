@@ -20,20 +20,20 @@ public class DropDatabase extends Command {
 
         String databaseNameConnect = manager.getDatabaseName();
         if (databaseName.equals(databaseNameConnect)) {
-            view.write("Нельзя удалять базу, к которой вы подключены.");
-            view.write(String.format("Для удаления текущей базы '%s', подключитесь к другой базе.", databaseName));
+            view.write("You can not delete the base to which you are connected.");
+            view.write(String.format("To delete the current database '%s', connect to another database.", databaseName));
             return;
         }
-        // Если вздумается таки реализовать удаление базы, к которой подключен
+        // implementation the removal of the base, to which it is connected
         /*if (databaseName.equals(databaseNameConnect)) {
             manager.connect("", Connect.userName,Connect.password);
-            view.write(String.format("Вы отключены от базы '%s'.", databaseNameConnect));
+            view.write(String.format("You are disconnected from the database '%s'.", databaseNameConnect));
             manager.dropDatabase(databaseName);
-            view.write(String.format("Database %s была успешно удалена.", databaseName));
+            view.write(String.format("Database %s has been successfully removed.", databaseName));
             return;
         }*/
         manager.dropDatabase(databaseName);
-        view.write(String.format("Database '%s' была успешно удалена.", databaseName));
+        view.write(String.format("Database '%s' has been successfully removed.", databaseName));
     }
 
     @Override
@@ -43,6 +43,6 @@ public class DropDatabase extends Command {
 
     @Override
     public String description() {
-        return "для удаления Database. База должна быть свободна от любого конекшина.";
+        return "to remove the database. The base must be free of any konekshina.";
     }
 }

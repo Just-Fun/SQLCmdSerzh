@@ -38,7 +38,7 @@ public class Help extends Command {
 
     @Override
     public void process(String input) {
-        view.write("Существующие команды:");
+        view.write("Current commands:");
 
         commands.forEach(command -> {
                     view.write("\t" + command.commandFormat());
@@ -54,6 +54,6 @@ public class Help extends Command {
 
     @Override
     public String description() {
-        return "для вывода этого списка на экран";
+        return "to display that list on the screen";
     }
 }

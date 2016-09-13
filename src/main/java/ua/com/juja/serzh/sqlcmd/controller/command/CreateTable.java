@@ -18,12 +18,12 @@ public class CreateTable extends Command {
         validationPresenceOfParentheses(input);
         String command = splitInput(input)[1];
         String tableName = command.split("\\(")[0];
-        checkNameStartWithLetter(tableName, "таблицы");
+        checkNameStartWithLetter(tableName, "Table");
 
         manager.createTable(command);
-        view.write(String.format("Таблица %s была успешно создана.", tableName));
+        view.write(String.format("Table %s was successfully created.", tableName));
         Command find = new Find(manager, view);
-        find.process("find|" + tableName); // красивый вывод новосозданной таблички
+        find.process("find|" + tableName);
     }
 
     @Override
@@ -33,14 +33,14 @@ public class CreateTable extends Command {
 
     @Override
     public String description() {
-        return "для создания новой таблицы знающих SQL, в круглых скобках вставить опиание колонок в SQL формате, пример:\n"
+        return "to create a new table for those who know SQL, parentheses opianie insert columns in SQL format example:\n"
                 + "\t\tcreateTableSQL|user1(id SERIAL NOT NULL PRIMARY KEY,username varchar(225) NOT NULL UNIQUE, password varchar(225))";
     }
 
     public void validationPresenceOfParentheses(String input) {
         int presenceOfParentheses = (input.split("\\(")).length;
         if (presenceOfParentheses < 2) {
-            throw new IllegalArgumentException(String.format("Формат команды '" + commandFormat() + "' в SQL!!! формате, а ты ввел: %s", input));
+            throw new IllegalArgumentException(String.format("The command format is '" + commandFormat() + "' in SQL !!! format, but you typed: %s", input));
         }
     }
 }

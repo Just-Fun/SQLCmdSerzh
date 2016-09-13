@@ -46,7 +46,7 @@ public class CreateTableTest {
     public void testProcess() throws Exception {
         command.process("createTableSQL|user(id SERIAL NOT NULL PRIMARY KEY,username varchar(225) NOT NULL UNIQUE, password varchar(225))");
         verify(manager).createTable("user(id SERIAL NOT NULL PRIMARY KEY,username varchar(225) NOT NULL UNIQUE, password varchar(225))");
-        verify(view).write("Таблица user была успешно создана.");
+        verify(view).write("Table user was successfully created.");
     }
 
     @Test
@@ -55,7 +55,7 @@ public class CreateTableTest {
             command.process("createTableSQL|user");
             fail();
         } catch (IllegalArgumentException e) {
-            assertEquals("Формат команды 'createTableSQL|tableName(column1,column2,...,columnN)' в SQL!!! формате, а ты ввел: createTableSQL|user", e.getMessage());
+            assertEquals("The command format is 'createTableSQL|tableName(column1,column2,...,columnN)' in SQL !!! format, but you typed: createTableSQL|user", e.getMessage());
         }
     }
 
@@ -65,7 +65,7 @@ public class CreateTableTest {
             command.process("createTable|tableName|wrong");
             fail();
         } catch (IllegalArgumentException e) {
-            assertEquals("Формат команды 'createTableSQL|tableName(column1,column2,...,columnN)', а ты ввел: createTable|tableName|wrong", e.getMessage());
+            assertEquals("The command format is 'createTableSQL|tableName(column1,column2,...,columnN)', but you typed: createTable|tableName|wrong", e.getMessage());
         }
     }
 }

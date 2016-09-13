@@ -36,7 +36,7 @@ public class PostgresManager implements DatabaseManager {
             host = property.getProperty("host");
             port = property.getProperty("port");
         } catch (IOException e) {
-            throw new RuntimeException("Properties не подгрузились. " + e.getCause());
+            throw new RuntimeException("Properties do not loaded. " + e.getCause());
         }
     }
 
@@ -238,7 +238,7 @@ public class PostgresManager implements DatabaseManager {
         }
     }
 
-    @Override // TODO заготовка, может как-нибудь реализовать в userInerface, тест написан
+    @Override // TODO billet may somehow implement, already written test
     public void update(String tableName, int id, Map<String, Object> newValue) {
         StringJoiner tableNames = new StringJoiner(" = ?,", "", " = ?");
         newValue.entrySet().forEach(x -> tableNames.add(x.getKey()));

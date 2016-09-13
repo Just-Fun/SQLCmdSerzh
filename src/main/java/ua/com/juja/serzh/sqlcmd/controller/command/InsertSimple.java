@@ -27,10 +27,10 @@ public class InsertSimple extends Command {
         columns = manager.getTableColumns(tableName);
         Map<String, Object> command = createQuery();
         if (exitMain) {
-            view.write("Выход в основное меню");
+            view.write("Exit to the main menu");
         } else {
             manager.insert(tableName, command);
-            view.write(String.format("В таблице '%s' была успешно добавлена запись:", tableName));
+            view.write(String.format("The table '%s' has been successfully added record:", tableName));
             view.write(getTableConstructor(command));
         }
     }
@@ -53,10 +53,10 @@ public class InsertSimple extends Command {
         boolean exit = false;
         Object input = "";
         while (!exit) {
-            view.write(String.format("Введите значение в поле '%s' или введите '0' для выхода в основное меню.", column));
+            view.write(String.format("Enter a value in the field  '%s' or enter '0' to exit to the main menu.", column));
             input = view.read();
             if (input.equals("")) {
-                view.write("Нужно ввести имя для колонки PRIMARY KEY, а вы ввели пустую строку");
+                view.write("You must enter a name for the column PRIMARY KEY, and you enter an empty string");
             } else {
                 exit = true;
             }
@@ -81,7 +81,7 @@ public class InsertSimple extends Command {
 
     @Override
     public String description() {
-        return "для пошагового создания записи в существующей таблице";
+        return "to step through the creation of records in the existing table";
     }
 
 }

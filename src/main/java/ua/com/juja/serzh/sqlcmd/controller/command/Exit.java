@@ -11,19 +11,16 @@ public class Exit extends Command {
     public Exit(DatabaseManager manager, View view) {
         super(manager, view);
     }
-    //    public Exit(View view) {
-//        super(view);
-//    }
 
     @Override
     public void process(String command) {
-        view.write("До скорой встречи!");
+        view.write("See you soon!");
         throw new ExitException();
     }
 
     @Override
     public String description() {
-        return "для выхода из программы";
+        return "to exit from the program";
     }
 
     @Override

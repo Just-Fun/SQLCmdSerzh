@@ -20,9 +20,9 @@ public class Databases extends Command {
         if (set.size() > 0) {
             String bases = set.toString();
             String result = bases.substring(1, bases.length() - 1);
-            view.write(String.format("Существующие databases: %s", result));
+            view.write(String.format("Existing databases: %s", result));
         } else {
-            view.write("Databases отсутствуют");
+            view.write("Databases are absent");
         }
     }
 
@@ -33,6 +33,6 @@ public class Databases extends Command {
 
     @Override
     public String description() {
-        return "для получения списка баз";
+        return "to obtain a list of databases";
     }
 }

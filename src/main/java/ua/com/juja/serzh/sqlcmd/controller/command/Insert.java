@@ -23,7 +23,7 @@ public class Insert extends Command {
         Map<String, Object> command = getDataSet(data);
 
         manager.insert(tableName, command);
-        view.write(String.format("В таблице '%s' была успешно добавлена запись:", tableName));
+        view.write(String.format("The table '%s' has been successfully added record:", tableName));
         view.write(getTableConstructor(command));
     }
 
@@ -34,7 +34,7 @@ public class Insert extends Command {
 
     @Override
     public String description() {
-        return "для создания записи в существующей таблице";
+        return "to create a record in the existing table";
     }
 
     private Map<String, Object> getDataSet(String[] data) {

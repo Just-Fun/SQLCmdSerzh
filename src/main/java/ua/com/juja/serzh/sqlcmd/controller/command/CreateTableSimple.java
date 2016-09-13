@@ -12,8 +12,8 @@ public class CreateTableSimple extends Command {
             super(manager, view);
     }
 
-    String orExit = " или '0' для выхода в основное меню";
-    String fromLetter = "(имя должно начинаться с буквы)";
+    String orExit = " or '0' to exit to the main menu";
+    String fromLetter = "(name must start with a letter)";
     private boolean exitMain;
     String query = "";
 
@@ -27,11 +27,11 @@ public class CreateTableSimple extends Command {
         if (!exitMain) {
             manager.createTable(query);
             String table = query.split("\\(")[0];
-            view.write(String.format("Таблица %s была успешно создана.", table));
+            view.write(String.format("Table %s was successfully created.", table));
             Command find = new Find(manager, view);
-            find.process("find|" + table); // красивый вывод новосозданной таблички
+            find.process("find|" + table);
         } else {
-            view.write("Выход в основное меню");
+            view.write("Exit to the main menu");
         }
 
     }
@@ -51,18 +51,18 @@ public class CreateTableSimple extends Command {
     private void createTableName() {
         boolean exit = false;
         while (!exit) {
-            view.write("Введите имя для создаваемой таблицы" + fromLetter + orExit);
+            view.write("Enter a name for the table" + fromLetter + orExit);
             String input = view.read();
 
             if (input.equals("0")) {
                 exit = true;
                 exitMain = true;
             } else if (input.equals("")) {
-                view.write("Нужно ввести имя для создаваемой таблицы, а вы ввели пустую строку");
+                view.write("You must enter a name for the table, and you enter an empty string");
             } else {
                 if (checkNameStartWithLetterB(input)) {
                     query += input + "(";
-                    view.write("Имя новой базы: " + input);
+                    view.write("Name the new database: " + input);
                     exit = true;
                 }
             }
@@ -72,16 +72,16 @@ public class CreateTableSimple extends Command {
     private void createColumnPrimaryKey() {
         boolean exit = false;
         while (!exit) {
-            view.write("Введите имя для колонки PRIMARY KEY" + fromLetter + orExit);
+            view.write("Enter a name for the column PRIMARY KEY" + fromLetter + orExit);
             String input = view.read();
             if (input.equals("0")) {
                 exit = true;
                 exitMain = true;
             } else if (input.equals("")) {
-                view.write("Нужно ввести имя для колонки PRIMARY KEY, а вы ввели пустую строку");
+                view.write("You must enter a name for the column PRIMARY KEY, and you enter an empty string");
             } else {
                 if (checkNameStartWithLetterB(input)) {
-                    view.write("Имя колонки PRIMARY KEY: " + input);
+                    view.write("Column name PRIMARY KEY: " + input);
                     query += input + " SERIAL NOT NULL PRIMARY KEY";
                     exit = true;
                 }
@@ -92,7 +92,8 @@ public class CreateTableSimple extends Command {
     private void createColumn() {
         boolean exit = false;
         while (!exit) {
-            view.write("Введите имя для еще одной колонки" + fromLetter + " или '5' для создания базы с введенными колонками" + orExit);
+            view.write("Enter the name of another column" + fromLetter
+                    + " or '5' to create a database with the introduction column" + orExit);
             String input = view.read();
             if (input.equals("5")) {
                 query += ")";
@@ -101,11 +102,11 @@ public class CreateTableSimple extends Command {
                 exit = true;
                 exitMain = true;
             } else if (input.equals("")) {
-                view.write("Нужно ввести имя для колонки, а вы ввели пустую строку");
+                view.write("You must enter a name for the column, and you enter an empty string");
             } else {
                 if (checkNameStartWithLetterB(input)) {
                     query += "," + input + " varchar(225)";
-                    view.write("Имя еще одной колонки: " + input);
+                    view.write("Name for another column: " + input);
                     createColumn();
                     exit = true;
                 }
@@ -116,7 +117,7 @@ public class CreateTableSimple extends Command {
     public boolean checkNameStartWithLetterB(String input) {
         char fistChar = input.charAt(0);
         if (!(fistChar >= 'a' && fistChar <= 'z') && !(fistChar >= 'A' && fistChar <= 'Z')) {
-            view.write(String.format("Имя должно начинаться с буквы, а у тебя начинается с '%s'", fistChar));
+            view.write(String.format("Name must start with a letter, and you start with '%s'", fistChar));
             return false;
         }
         return true;
@@ -129,6 +130,6 @@ public class CreateTableSimple extends Command {
 
     @Override
     public String description() {
-        return "для создания новой таблицы пошагово";
+        return "to create a new table in steps";
     }
 }

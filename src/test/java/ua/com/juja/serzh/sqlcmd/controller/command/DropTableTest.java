@@ -47,17 +47,17 @@ public class DropTableTest {
     public void testProcess() throws Exception {
         when(view.read()).thenReturn("y");
         command.process("dropTable|nameTable");
-        verify(view).write("Вы уверены, что хотите удалить nameTable? Y/N");
+        verify(view).write("Are you sure you want to delete nameTable? Y/N");
         verify(manager).dropTable("nameTable");
-        verify(view).write("Таблица nameTable была успешно удалена.");
+        verify(view).write("Table nameTable has been successfully removed.");
     }
 
     @Test
     public void testActionCanceled() throws Exception {
         when(view.read()).thenReturn("n");
         command.process("dropTable|nameTable");
-        verify(view).write("Вы уверены, что хотите удалить nameTable? Y/N");
-        verify(view).write("Действие отменено!");
+        verify(view).write("Are you sure you want to delete nameTable? Y/N");
+        verify(view).write("Action canceled!");
     }
 
     @Test
@@ -66,7 +66,7 @@ public class DropTableTest {
             command.process("createTable|tableName|wrong");
             fail();
         } catch (IllegalArgumentException e) {
-            assertEquals("Формат команды 'dropTable|tableName', а ты ввел: createTable|tableName|wrong", e.getMessage());
+            assertEquals("The command format is 'dropTable|tableName', but you typed: createTable|tableName|wrong", e.getMessage());
         }
     }
 }

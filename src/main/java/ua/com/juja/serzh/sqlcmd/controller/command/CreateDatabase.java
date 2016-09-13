@@ -16,10 +16,10 @@ public class CreateDatabase extends Command {
     public void process(String input) {
         validationParameters(input);
         String databaseName = input.split("\\|")[1];
-        checkNameStartWithLetter(databaseName, "базы");
+        checkNameStartWithLetter(databaseName, "Database");
 
         manager.createDatabase(databaseName);
-        view.write(String.format("Database %s была успешно создана.", databaseName));
+        view.write(String.format("Database %s was successfully created.", databaseName));
     }
 
     @Override
@@ -29,6 +29,6 @@ public class CreateDatabase extends Command {
 
     @Override
     public String description() {
-        return "для создания новой Database. Имя базы должно начинаться с буквы.";
+        return "to create a new Database. Database name must start with a letter.";
     }
 }

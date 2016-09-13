@@ -36,11 +36,11 @@ public abstract class Command {
     }
 
     public boolean dropConfirmation(String name) {
-        view.write(String.format("Вы уверены, что хотите удалить %s? Y/N", name));
+        view.write(String.format("Are you sure you want to delete %s? Y/N", name));
         if (view.read().toUpperCase().equals("Y")) {
             return true;
         }
-        view.write("Действие отменено!");
+        view.write("Action canceled!");
         return false;
     }
 
@@ -48,15 +48,15 @@ public abstract class Command {
         int formatLength = parametersLength(commandFormat());
         int inputLength = parametersLength(input);
         if (formatLength != inputLength) {
-            throw new IllegalArgumentException(String.format("Формат команды '%s', а ты ввел: %s", commandFormat(), input));
+            throw new IllegalArgumentException(String.format("The command format is '%s', but you typed: %s", commandFormat(), input));
         }
     }
 
     public void validationPairParameters(String input) {
         int inputLength = parametersLength(input);
         if (inputLength % 2 != 0) {
-            throw new IllegalArgumentException(String.format("Должно быть четное количество параметров " +
-                    "в формате '%s', а ты прислал: '%s'", commandFormat(), input));
+            throw new IllegalArgumentException(String.format("Must be an even number of parameters " +
+                    "in a format '%s', but you typed: '%s'", commandFormat(), input));
         }
     }
 
@@ -64,7 +64,7 @@ public abstract class Command {
         char fistChar = input.charAt(0);
         if (!(fistChar >= 'a' && fistChar <= 'z') && !(fistChar >= 'A' && fistChar <= 'Z')) {
             throw new IllegalArgumentException(String.format(
-                    "Имя %s должно начинаться с буквы, а у тебя начинается с '%s'", name, fistChar));
+                    "%s name must start with a letter, and you start with '%s'", name, fistChar));
         }
     }
 

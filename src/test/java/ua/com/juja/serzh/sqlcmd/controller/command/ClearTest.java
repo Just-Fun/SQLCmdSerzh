@@ -29,7 +29,7 @@ public class ClearTest {
     public void testClearTable() {
         command.process("clear|user");
         verify(manager).clear("user");
-        verify(view).write("Таблица user была успешно очищена.");
+        verify(view).write("Table user has been successfully cleared.");
     }
 
 
@@ -57,7 +57,7 @@ public class ClearTest {
             command.process("clear");
             fail();
         } catch (IllegalArgumentException e) {
-            assertEquals("Формат команды 'clear|tableName', а ты ввел: clear", e.getMessage());
+            assertEquals("The command format is 'clear|tableName', but you typed: clear", e.getMessage());
         }
     }
 
@@ -67,7 +67,7 @@ public class ClearTest {
             command.process("clear|table|qwe");
             fail();
         } catch (IllegalArgumentException e) {
-            assertEquals("Формат команды 'clear|tableName', а ты ввел: clear|table|qwe", e.getMessage());
+            assertEquals("The command format is 'clear|tableName', but you typed: clear|table|qwe", e.getMessage());
         }
     }
 }

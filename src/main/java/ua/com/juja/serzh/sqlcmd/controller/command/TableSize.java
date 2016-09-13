@@ -17,7 +17,7 @@ public class TableSize extends Command {
         validationParameters(input);
         String tableName = input.split("\\|")[1];
         int size = manager.getTableSize(tableName);
-        view.write(String.format("Количество строк в таблице '%s': %s.", tableName, size));
+        view.write(String.format("The number of rows in the table '%s': %s.", tableName, size));
     }
 
     @Override
@@ -27,6 +27,6 @@ public class TableSize extends Command {
 
     @Override
     public String description() {
-        return "количество строк в таблице";
+        return "The number of rows in the table";
     }
 }

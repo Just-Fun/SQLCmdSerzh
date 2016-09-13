@@ -27,7 +27,7 @@ public class Find extends Command {
         TableConstructor constructor = new TableConstructor(tableColumns, tableData);
         view.write(constructor.getTableString());
         } else {
-            view.write(String.format("Данные в таблице '%s' отсутствуют", tableName));
+            view.write(String.format("The data in the table '%s' are absent", tableName));
         }
     }
 
@@ -38,6 +38,6 @@ public class Find extends Command {
 
     @Override
     public String description() {
-        return "для получения содержимого таблицы 'tableName'";
+        return "to obtain the contents of the table 'tableName'";
     }
 }

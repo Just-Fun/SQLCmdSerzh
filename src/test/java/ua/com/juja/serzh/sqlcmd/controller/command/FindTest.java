@@ -96,7 +96,7 @@ public class FindTest {
 
     private void shouldPrint(String expected) {
         ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
-        verify(view, atLeastOnce()).write(captor.capture()); // все что на view при вызове write - записать в captor
+        verify(view, atLeastOnce()).write(captor.capture()); // everything on view when calling the write - write to captor
         assertEquals(expected, captor.getAllValues().toString());
     }
 
@@ -171,7 +171,7 @@ public class FindTest {
             command.process("find");
             fail();
         } catch (IllegalArgumentException e) {
-            assertEquals("Формат команды 'find|tableName', а ты ввел: find", e.getMessage());
+            assertEquals("The command format is 'find|tableName', but you typed: find", e.getMessage());
         }
     }
 
@@ -181,7 +181,7 @@ public class FindTest {
             command.process("find|");
             fail();
         } catch (IllegalArgumentException e) {
-            assertEquals("Формат команды 'find|tableName', а ты ввел: find|", e.getMessage());
+            assertEquals("The command format is 'find|tableName', but you typed: find|", e.getMessage());
         }
     }
 
@@ -191,7 +191,7 @@ public class FindTest {
             command.process("find|table|qwe");
             fail();
         } catch (IllegalArgumentException e) {
-            assertEquals("Формат команды 'find|tableName', а ты ввел: find|table|qwe", e.getMessage());
+            assertEquals("The command format is 'find|tableName', but you typed: find|table|qwe", e.getMessage());
         }
     }
 }

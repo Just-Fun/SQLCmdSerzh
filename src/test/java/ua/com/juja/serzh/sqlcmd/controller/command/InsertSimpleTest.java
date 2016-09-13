@@ -46,7 +46,7 @@ public class InsertSimpleTest {
             command.process("insertTable|");
             fail();
         } catch (IllegalArgumentException e) {
-            assertEquals("Формат команды 'insertTable|tableName', а ты ввел: insertTable|", e.getMessage());
+            assertEquals("The command format is 'insertTable|tableName', but you typed: insertTable|", e.getMessage());
         }
     }
 
@@ -56,7 +56,7 @@ public class InsertSimpleTest {
             command.process("insertTable|tableName|qwe");
             fail();
         } catch (IllegalArgumentException e) {
-            assertEquals("Формат команды 'insertTable|tableName', а ты ввел: insertTable|tableName|qwe", e.getMessage());
+            assertEquals("The command format is 'insertTable|tableName', but you typed: insertTable|tableName|qwe", e.getMessage());
         }
     }
 
@@ -66,7 +66,7 @@ public class InsertSimpleTest {
             command.process("insertTable");
             fail();
         } catch (IllegalArgumentException e) {
-            assertEquals("Формат команды 'insertTable|tableName', а ты ввел: insertTable", e.getMessage());
+            assertEquals("The command format is 'insertTable|tableName', but you typed: insertTable", e.getMessage());
         }
     }
 }

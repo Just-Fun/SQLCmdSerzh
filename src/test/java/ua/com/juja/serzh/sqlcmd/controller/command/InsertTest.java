@@ -46,7 +46,7 @@ public class InsertTest {
         command.process("insert|user|name|Vasia|password|****|id|22");
         ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
         verify(view, atLeastOnce()).write(captor.capture());
-        assertEquals("[В таблице 'user' была успешно добавлена запись:, " +
+        assertEquals("[The table 'user' has been successfully added record:, " +
                 "+-----+--------+--+\n" +
                 "|name |password|id|\n" +
                 "+-----+--------+--+\n" +
@@ -60,9 +60,9 @@ public class InsertTest {
             command.process("insert|user|name");
             fail("Expected IllegalArgumentException...");
         } catch (Exception e) {
-            assertEquals("Должно быть четное количество параметров в формате " +
+            assertEquals("Must be an even number of parameters in a format " +
                     "'insert|tableName|column1|value1|column2|value2|...|columnN|valueN', " +
-                    "а ты прислал: 'insert|user|name'", e.getMessage());
+                    "but you typed: 'insert|user|name'", e.getMessage());
         }
     }
 
@@ -72,9 +72,9 @@ public class InsertTest {
             command.process("insert|");
             fail("Expected IllegalArgumentException...");
         } catch (Exception e) {
-            assertEquals("Должно быть четное количество параметров в формате " +
+            assertEquals("Must be an even number of parameters in a format " +
                     "'insert|tableName|column1|value1|column2|value2|...|columnN|valueN', " +
-                    "а ты прислал: 'insert|'", e.getMessage());
+                    "but you typed: 'insert|'", e.getMessage());
         }
     }
 }

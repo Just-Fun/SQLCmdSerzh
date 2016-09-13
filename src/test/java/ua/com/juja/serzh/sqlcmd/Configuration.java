@@ -27,7 +27,7 @@ public class Configuration {
             user = property.getProperty("user");
             password = property.getProperty("password");
         } catch (IOException e) {
-            throw new RuntimeException("Properties не подгрузились. " + e.getCause());
+            throw new RuntimeException("Properties do not loaded. " + e.getCause());
         }
     }
 

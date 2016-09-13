@@ -19,7 +19,7 @@ public class Support {
         try {
             manager.connect("", USER, PASSWORD);
         } catch (RuntimeException e) {
-            throw new RuntimeException("Для работы тестов измените имя и пароль в файле config.properties."
+            throw new RuntimeException("For testing, change the name and password in a file config.properties."
                     + "\n" + e.getCause());
         }
         manager.createDatabase(DATABASE);

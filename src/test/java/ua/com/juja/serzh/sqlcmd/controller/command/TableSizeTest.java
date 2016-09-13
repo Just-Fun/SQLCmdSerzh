@@ -30,7 +30,7 @@ public class TableSizeTest {
     public void testPrintGetTableSize() {
         when(manager.getTableSize("user")).thenReturn(3);
         command.process("size|user");
-        shouldPrint("[Количество строк в таблице 'user': 3.]");
+        shouldPrint("[The number of rows in the table 'user': 3.]");
     }
 
     private void shouldPrint(String expected) {
@@ -63,7 +63,7 @@ public class TableSizeTest {
             command.process("size|table|qwe");
             fail();
         } catch (IllegalArgumentException e) {
-            assertEquals("Формат команды 'size|tableName', а ты ввел: size|table|qwe", e.getMessage());
+            assertEquals("The command format is 'size|tableName', but you typed: size|table|qwe", e.getMessage());
         }
     }
 
@@ -73,7 +73,7 @@ public class TableSizeTest {
             command.process("size");
             fail();
         } catch (IllegalArgumentException e) {
-            assertEquals("Формат команды 'size|tableName', а ты ввел: size", e.getMessage());
+            assertEquals("The command format is 'size|tableName', but you typed: size", e.getMessage());
         }
     }
 
@@ -83,7 +83,7 @@ public class TableSizeTest {
             command.process("size|");
             fail();
         } catch (IllegalArgumentException e) {
-            assertEquals("Формат команды 'size|tableName', а ты ввел: size|", e.getMessage());
+            assertEquals("The command format is 'size|tableName', but you typed: size|", e.getMessage());
         }
     }
 }

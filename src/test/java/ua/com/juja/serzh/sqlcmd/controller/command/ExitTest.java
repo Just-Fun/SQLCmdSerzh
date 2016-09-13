@@ -44,7 +44,7 @@ public class ExitTest {
         } catch (ExitException e) {
             // do nothing
         }
-        Mockito.verify(view).write("До скорой встречи!");
+        Mockito.verify(view).write("See you soon!");
     }
 
     @Test(expected = ExitException.class)

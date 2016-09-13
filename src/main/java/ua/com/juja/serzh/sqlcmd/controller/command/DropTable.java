@@ -19,7 +19,7 @@ public class DropTable extends Command {
 
         if (!dropConfirmation(tableName)) return;
         manager.dropTable(tableName);
-        view.write(String.format("Таблица %s была успешно удалена.", tableName));
+        view.write(String.format("Table %s has been successfully removed.", tableName));
     }
 
     @Override
@@ -29,6 +29,6 @@ public class DropTable extends Command {
 
     @Override
     public String description() {
-        return "для удаления таблицы";
+        return "to delete the table";
     }
 }

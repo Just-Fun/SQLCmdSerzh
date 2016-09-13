@@ -12,10 +12,6 @@ public class Unsupported extends Command {
         super(manager, view);
     }
 
-//    public Unsupported(View view) {
-//        super(view);
-//    }
-
     @Override
     public boolean canProcess(String command) {
         return true;
@@ -23,7 +19,7 @@ public class Unsupported extends Command {
 
     @Override
     public void process(String input) {
-        view.write("Несуществующая команда: " + input);
+        view.write("Nonexistent command: " + input);
     }
 
     @Override

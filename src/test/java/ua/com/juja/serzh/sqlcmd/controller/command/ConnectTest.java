@@ -39,7 +39,7 @@ public class ConnectTest {
     @Test
     public void testProcess() throws Exception {
         command.process("connect|databaseName|userName|password");
-        verify(view).write("Успех!");
+        verify(view).write("Success!");
     }
 
     @Test
@@ -48,7 +48,7 @@ public class ConnectTest {
             command.process("connect|databaseName|userName");
             fail("Expected IllegalArgumentException");
         } catch (IllegalArgumentException e) {
-            assertEquals("Формат команды 'connect|databaseName|userName|password', а ты ввел: connect|databaseName|userName", e.getMessage());
+            assertEquals("The command format is 'connect|databaseName|userName|password', but you typed: connect|databaseName|userName", e.getMessage());
         }
     }
 }

@@ -145,12 +145,6 @@ public class DatabaseManagerTest {
     }
 
     @Test
-    public void tablesList() {
-        Set<String> tables = manager.getTableNames();
-        assertEquals("[users, test1, users2]", tables.toString());
-    }
-
-    @Test
     public void dropTable() {
         manager.dropTable("test1");
         Set<String> tables = manager.getTableNames();

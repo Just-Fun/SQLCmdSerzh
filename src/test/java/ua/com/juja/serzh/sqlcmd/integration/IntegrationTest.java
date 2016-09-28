@@ -99,7 +99,7 @@ public class IntegrationTest {
                 "See you soon!\n", getData());
     }
 
-    public String getData() {
+    private String getData() {
         try {
             String result = new String(out.toByteArray(), "UTF-8").replaceAll("\r\n", "\n");
             out.reset();

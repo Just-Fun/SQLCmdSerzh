@@ -15,6 +15,7 @@ import static org.junit.Assert.assertTrue;
 public class DatabaseManagerTest {
 
     private static DatabaseManager manager;
+    private static Support support;
 
     private static Configuration configuration = new Configuration();
     private static final String DATABASE = configuration.getDatabase();
@@ -24,12 +25,13 @@ public class DatabaseManagerTest {
     @BeforeClass
     public static void setup() {
         manager = new PostgresManager();
-        Support.setupData(manager);
+        support = new Support();
+        support.setupData(manager);
     }
 
     @AfterClass
     public static void dropDatabase() {
-        Support.dropData(manager);
+        support.dropData(manager);
     }
 
     @Test

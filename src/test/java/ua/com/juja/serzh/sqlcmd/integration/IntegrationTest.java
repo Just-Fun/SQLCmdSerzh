@@ -28,6 +28,7 @@ public class IntegrationTest {
     private final String pleaseConnect = "Enter the name of the database, which will work, a user name and password in the format: " +
             "connect|database|userName|password\n";
 
+    private static Support support;
     private static DatabaseManager manager;
     private ConfigurableInputStream in;
     private ByteArrayOutputStream out;
@@ -35,7 +36,8 @@ public class IntegrationTest {
     @BeforeClass
     public static void buildDatabase() {
         manager = new PostgresManager();
-        Support.setupData(manager);
+        support = new Support();
+        support.setupData(manager);
     }
 
     @Before
@@ -48,7 +50,7 @@ public class IntegrationTest {
 
     @AfterClass
     public static void dropDatabase() {
-        Support.dropData(manager);
+        support.dropData(manager);
     }
 
     @Test

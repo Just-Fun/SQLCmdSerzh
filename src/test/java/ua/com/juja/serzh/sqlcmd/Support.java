@@ -10,12 +10,12 @@ import java.util.Map;
  */
 public class Support {
 
-    private static Configuration configuration = new Configuration();
-    private static final String DATABASE = configuration.getDatabase();
-    private static final String USER = configuration.getUser();
-    private static final String PASSWORD = configuration.getPassword();
+    private Configuration configuration = new Configuration();
+    private final String DATABASE = configuration.getDatabase();
+    private final String USER = configuration.getUser();
+    private final String PASSWORD = configuration.getPassword();
 
-    public static void setupData(DatabaseManager manager) {
+    public void setupData(DatabaseManager manager) {
         try {
             manager.connect("", USER, PASSWORD);
         } catch (RuntimeException e) {
@@ -27,7 +27,7 @@ public class Support {
         createTablesWithData(manager);
     }
 
-    public static void dropData(DatabaseManager manager) {
+    public void dropData(DatabaseManager manager) {
         try {
             manager.connect("", USER, PASSWORD);
             manager.dropDatabase(DATABASE);
@@ -36,7 +36,7 @@ public class Support {
         }
     }
 
-    private static void createTablesWithData(DatabaseManager manager) {
+    private void createTablesWithData(DatabaseManager manager) {
         manager.createTable("users" +
                 " (name VARCHAR (50) UNIQUE NOT NULL, password VARCHAR (50) NOT NULL, id SERIAL PRIMARY KEY)");
         manager.createTable("test1 (id SERIAL PRIMARY KEY)");

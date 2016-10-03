@@ -101,7 +101,8 @@ public class IntegrationTest {
 
     private String getData() {
         try {
-            String result = new String(out.toByteArray(), "UTF-8").replaceAll("\r\n", "\n");
+//            String result = new String(out.toByteArray(), "UTF-8").replaceAll("\r\n", "\n");
+            String result = new String(out.toByteArray(), "UTF-8").replaceAll(System.lineSeparator(), "\n");
             out.reset();
             return result;
         } catch (UnsupportedEncodingException e) {
